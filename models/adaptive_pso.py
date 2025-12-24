@@ -72,6 +72,18 @@ class AdaptivePSO:
             if verbose and (it % 10 == 0):
                 print(f"Iteration {it}/{max_iter}, Best Loss: {self.g_best_score:.6f} | w={w:.2f}, c1={c1:.2f}, c2={c2:.2f}")
 
+            # Early Stopping Check
+            if it > 10:
+                if self.g_best_score < (min(history[:-10]) - 1e-4):
+                    # Improved
+                    pass
+                else:
+                    # No improvement for 10 iterations
+                    # Check if strictly flat
+                    if history[-1] >= history[-10]:
+                        if verbose: print(f"⏹️ Early Stopping at iteration {it} (No improvement for 10 iters)")
+                        break
+
             # 3. Update Velocity and Position
             r1 = np.random.rand(self.num_particles, self.dimensions)
             r2 = np.random.rand(self.num_particles, self.dimensions)

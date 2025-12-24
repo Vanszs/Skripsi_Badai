@@ -92,7 +92,11 @@ class MLP:
         # We use advanced indexing to pick the prob corresponding to the true label
         correct_confidences = y_pred_probs[range(m), y_true_indices.astype(int)]
         
-        loss = -np.sum(np.log(correct_confidences)) / m
+        # L2 Regularization
+        l2_lambda = 0.001
+        l2_cost = (np.sum(np.square(self.W1)) + np.sum(np.square(self.W2))) * (l2_lambda / (2 * m))
+        
+        loss = -np.sum(np.log(correct_confidences)) / m + l2_cost
         return loss
 
     def predict(self, X):

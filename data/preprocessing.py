@@ -2,38 +2,40 @@ import pandas as pd
 import numpy as np
 from sklearn.preprocessing import MinMaxScaler, StandardScaler
 
-def label_anomalies(df, window_hours=1):
+def label_anomalies(df, window_hours=None):
     """
-    Generates 3-Class Labels based on Pressure Drop Rate (Meteorological Standard).
+    Generates 3-Class Labels based on WMO Saffir-Simpson Wind Scale.
     
-    Logic:
-    - Delta P (hourly drop) = P(t-1) - P(t)
-    - Class 0 (Normal): Drop < 1.0 hPa/hr
-    - Class 1 (Anomaly): 1.0 <= Drop < 3.0 hPa/hr (Rapid Descent)
-    - Class 2 (Storm): Drop >= 3.0 hPa/hr (Explosive Intensification)
+    Standard (WMO/BMKG):
+    - Tropical Depression: ~11-17 m/s (22-33 knots)
+    - Tropical Storm: >= 18 m/s (34+ knots)
     
+    Classes:
+    - 0 (Normal): Wind Speed < 11 m/s
+    - 1 (Anomaly/Depression): 11.0 <= Wind Speed < 18.0 m/s
+    - 2 (Tropical Storm): Wind Speed >= 18.0 m/s
+    
+    Args:
+        df: DataFrame with 'wind_speed' (m/s)
+        window_hours: Not used for wind threshold, kept for compatibility.
+        
     Returns:
         Series with labels {0, 1, 2}
     """
-    # Calculate hourly pressure change (negative diff means drop)
-    # We want positive value for drop magnitude
-    # diff = current - prev. If current < prev (drop), diff is negative.
-    # drop = prev - current = -diff
-    pressure_change = -df['pressure'].diff(periods=window_hours)
-    
-    # Initialize with 0 (Normal)
+    # 1. Initialize all as Normal (0)
     labels = np.zeros(len(df), dtype=int)
     
-    # Apply Thresholds
-    # Class 2: Storm
-    labels[pressure_change >= 3.0] = 2
+    # Adjusted for ERA5 Hourly Mean (Smoothed Data)
+    # Real-world TCs often show lower grid-cell averages than point gusts.
     
-    # Class 1: Anomaly (where not already Storm)
-    mask_anomaly = (pressure_change >= 1.0) & (pressure_change < 3.0)
+    # 2. Assign Class 2 (Storm / Near Gale)
+    # Lowered to 15.0 m/s (~30 knots) to capture ERA5 storm signals
+    labels[df['wind_speed'] >= 15.0] = 2
+    
+    # 3. Assign Class 1 (Anomaly / Depression)
+    # Lowered to 10.0 m/s (~20 knots)
+    mask_anomaly = (df['wind_speed'] >= 10.0) & (df['wind_speed'] < 15.0)
     labels[mask_anomaly] = 1
-    
-    # Fill NaN at start (due to diff) with 0
-    labels = np.nan_to_num(labels, 0)
     
     return labels
 
@@ -49,8 +51,10 @@ def add_derived_features(df):
     df['pressure_std24'] = df['pressure'].rolling(window=24).std().fillna(0)
     
     # 2. Wind Kinetics
-    # Kinetic Energy ~ 0.5 * mass * velocity^2 -> Proportional to speed squared
-    df['wind_kinetic'] = df['wind_speed'] ** 2
+    # Kinetic Energy = 0.5 * density * velocity^2
+    # Standard Air Density at Sea Level = 1.225 kg/m^3
+    AIR_DENSITY = 1.225
+    df['wind_kinetic'] = 0.5 * AIR_DENSITY * (df['wind_speed'] ** 2)
     
     # Gust Factor (Gustiness)
     # Avoid division by zero
@@ -65,6 +69,29 @@ def add_derived_features(df):
         df['hour_cos'] = np.cos(2 * np.pi * df['dt'].dt.hour / 24)
     
     return df
+
+def validate_dataset(X, y):
+    """
+    Validates dataset quality before training.
+    """
+    # Check completeness
+    if np.isnan(X).sum() > 0:
+        raise ValueError("❌ Missing values found in dataset")
+        
+    # Check temporal continuity (heuristic: size check)
+    if len(X) < 100:
+        raise ValueError("❌ Dataset too small for training")
+    
+    # Check label distribution
+    unique, counts = np.unique(y, return_counts=True)
+    dist = dict(zip(unique, counts))
+    print(f"✅ Data Validation Passed. Class Distribution: {dist}")
+    
+    # Check for severe imbalance
+    total = len(y)
+    for label, count in dist.items():
+        if (count / total) < 0.05:
+            print(f"⚠️ WARNING: Class {label} is severely underrepresented (<5%)")
 
 def normalize_features(train_df, test_df, feature_cols):
     """
