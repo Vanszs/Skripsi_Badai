@@ -1,9 +1,0 @@
-numpy
-pandas
-matplotlib
-seaborn
-requests
-python-dotenv
-ipykernel
-xgboost
-scikit-learn
