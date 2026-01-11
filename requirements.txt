@@ -1,0 +1,15 @@
+torch>=2.0.0
+torch-geometric>=2.3.0
+numpy
+pandas
+xarray
+openmeteo-requests
+requests-cache
+retry-requests
+faiss-cpu
+diffusers
+transformers
+scikit-learn
+matplotlib
+cartopy
+tqdm

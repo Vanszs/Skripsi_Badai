@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.ipynb_checkpoints/
+.env
+.venv
+env/
+venv/
+
+# Data & Models (Too large for git)
+data/raw/
+data/processed/
+models/*.pth
+models/*.pt
+
+# IDE
+.vscode/
+.idea/
+
+# System
+Thumbs.db
+Desktop.ini
+
+# Logs
+*.log
