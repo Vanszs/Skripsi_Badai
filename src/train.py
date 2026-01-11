@@ -1,13 +1,19 @@
 """
 Complete Training Pipeline with FULL Spatio-Temporal Graph Conditioning
 
+CRITICAL: Implements STRICT TEMPORAL SPLIT to prevent data leakage!
+- Training:   2005-2018 (14 years)
+- Validation: 2019-2021 (3 years)
+- Test:       2022-2025 (4 years)
+
 This script implements the COMPLETE thesis pipeline:
 1. Load ERA5 data with all features
-2. Create Temporal Graph Sequences (sliding window)
-3. Build Graph structure with SpatialGNN (GAT)
-4. Apply TemporalAttention for sequence modeling
-5. Condition Diffusion Model on graph embeddings
-6. Save checkpoint with all configs
+2. TEMPORAL SPLIT (no random shuffle!)
+3. Create Temporal Graph Sequences (sliding window)
+4. Build Graph structure with SpatialGNN (GAT)
+5. Apply TemporalAttention for sequence modeling
+6. Condition Diffusion Model on graph embeddings
+7. Save checkpoint with all configs
 
 This fully satisfies the thesis title:
 "Retrieval-Augmented Diffusion Model dengan Spatio-Temporal Graph Conditioning"
@@ -30,10 +36,85 @@ from src.models.gnn import SpatioTemporalGNN
 from src.retrieval.base import RetrievalDatabase
 
 
+# ==============================================================================
+# TEMPORAL SPLIT FUNCTION - CRITICAL FOR PREVENTING DATA LEAKAGE
+# ==============================================================================
+def temporal_split(df, train_end='2018-12-31', val_end='2021-12-31'):
+    """
+    Split DataFrame berdasarkan waktu, BUKAN random.
+    
+    PENTING: Random shuffle pada time series menyebabkan data leakage!
+    Model akan "melihat" masa depan saat training → evaluasi tidak valid.
+    
+    Args:
+        df: DataFrame dengan kolom 'date'
+        train_end: Tanggal terakhir training (inclusive)
+        val_end: Tanggal terakhir validation (inclusive)
+    
+    Returns:
+        train_df, val_df, test_df
+    
+    Split yang digunakan:
+        Training:   2005-01-01 s/d 2018-12-31 (14 tahun, 67%)
+        Validation: 2019-01-01 s/d 2021-12-31 (3 tahun, 14%)
+        Test:       2022-01-01 s/d 2025-12-31 (4 tahun, 19%)
+    """
+    df = df.copy()
+    df['date'] = pd.to_datetime(df['date'])
+    
+    train_end_dt = pd.to_datetime(train_end)
+    val_end_dt = pd.to_datetime(val_end)
+    
+    train_mask = df['date'] <= train_end_dt
+    val_mask = (df['date'] > train_end_dt) & (df['date'] <= val_end_dt)
+    test_mask = df['date'] > val_end_dt
+    
+    train_df = df[train_mask].copy()
+    val_df = df[val_mask].copy()
+    test_df = df[test_mask].copy()
+    
+    return train_df, val_df, test_df
+
+
+def compute_stats_from_train(train_df, feature_cols, target_col='precipitation'):
+    """
+    Compute normalization stats ONLY from training data.
+    
+    CRITICAL: Stats harus dari training set saja untuk mencegah data leakage!
+    Validation dan test set dinormalisasi dengan stats yang sama dari training.
+    
+    Args:
+        train_df: DataFrame training SAJA
+        feature_cols: List of feature column names
+        target_col: Target column name
+    
+    Returns:
+        dict with t_mean, t_std, c_mean, c_std
+    """
+    # Target stats (with log transform)
+    target_values = train_df[target_col].values
+    target_log = np.log1p(target_values)
+    t_mean = torch.tensor(target_log.mean(), dtype=torch.float32)
+    t_std = torch.tensor(target_log.std(), dtype=torch.float32)
+    
+    # Feature stats
+    feature_values = train_df[feature_cols].values
+    c_mean = torch.tensor(feature_values.mean(axis=0), dtype=torch.float32)
+    c_std = torch.tensor(feature_values.std(axis=0), dtype=torch.float32)
+    
+    return {
+        't_mean': t_mean,
+        't_std': t_std,
+        'c_mean': c_mean,
+        'c_std': c_std
+    }
+
+
 def train_pipeline():
     print("=" * 70)
     print("FULL SPATIO-TEMPORAL GRAPH CONDITIONED DIFFUSION MODEL TRAINING")
     print("=" * 70)
+    print("\n⚠️  IMPORTANT: Using STRICT TEMPORAL SPLIT to prevent data leakage!")
     
     # ===================================================================
     # STEP 1: Configuration
@@ -45,22 +126,29 @@ def train_pipeline():
     GRAPH_DIM = 64      # Graph embedding dimension
     K_NEIGHBORS = 3     # FAISS neighbors
     
+    # Temporal split boundaries
+    TRAIN_END = '2018-12-31'
+    VAL_END = '2021-12-31'
+    
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"\n[Config]")
     print(f"   Device: {device}")
     print(f"   Sequence Length: {SEQ_LEN}")
     print(f"   Batch Size: {BATCH_SIZE}")
+    print(f"   Train Period: 2005-01-01 to {TRAIN_END}")
+    print(f"   Val Period: {TRAIN_END[:-2]}01 to {VAL_END}")
+    print(f"   Test Period: {VAL_END[:-2]}01 to 2025-12-31")
     
     # ===================================================================
     # STEP 2: Load Data
     # ===================================================================
-    print("\n[1/7] Loading Data...")
+    print("\n[1/8] Loading Data...")
     
     data_path = 'data/raw/sitaro_era5_2005_2025.parquet'
     try:
         df = pd.read_parquet(data_path)
         print(f"   Loaded from {data_path}")
-        print(f"   Shape: {df.shape}")
+        print(f"   Total Shape: {df.shape}")
     except FileNotFoundError:
         print("   Data not found. Running ingestion first...")
         df = fetch_era5_data()
@@ -83,64 +171,94 @@ def train_pipeline():
     print(f"   Using {len(feature_cols)} features: {feature_cols}")
     
     # ===================================================================
-    # STEP 3: Compute Normalization Stats
+    # STEP 3: TEMPORAL SPLIT - CRITICAL!
     # ===================================================================
-    print("\n[2/7] Computing Normalization Stats...")
+    print("\n[2/8] Applying TEMPORAL SPLIT (No Random Shuffle!)...")
     
-    # Target stats
-    target_series = df['precipitation'].values
-    target_log = np.log1p(target_series)
-    t_mean = torch.tensor(target_log.mean(), dtype=torch.float32)
-    t_std = torch.tensor(target_log.std(), dtype=torch.float32)
+    train_df, val_df, test_df = temporal_split(df, TRAIN_END, VAL_END)
     
-    # Context stats
-    context_data = df[feature_cols].values
-    c_mean = torch.tensor(context_data.mean(axis=0), dtype=torch.float32)
-    c_std = torch.tensor(context_data.std(axis=0), dtype=torch.float32)
+    print(f"   Training:   {len(train_df):,} rows ({len(train_df)/len(df)*100:.1f}%)")
+    print(f"   Validation: {len(val_df):,} rows ({len(val_df)/len(df)*100:.1f}%)")
+    print(f"   Test:       {len(test_df):,} rows ({len(test_df)/len(df)*100:.1f}%)")
     
-    stats = {'t_mean': t_mean, 't_std': t_std, 'c_mean': c_mean, 'c_std': c_std}
-    print(f"   Target mean (log): {t_mean:.4f}, std: {t_std:.4f}")
+    # Verify no overlap
+    train_max = train_df['date'].max()
+    val_min = val_df['date'].min()
+    print(f"   ✓ Train ends: {train_max}")
+    print(f"   ✓ Val starts: {val_min}")
+    print(f"   ✓ Gap verified: {val_min > train_max}")
     
     # ===================================================================
-    # STEP 4: Create Temporal Graph Dataset
+    # STEP 4: Compute Normalization Stats FROM TRAINING ONLY
     # ===================================================================
-    print("\n[3/7] Creating Temporal Graph Dataset...")
+    print("\n[3/8] Computing Normalization Stats (from TRAINING only)...")
     
-    dataset = TemporalGraphDataset(
-        df=df,
+    stats = compute_stats_from_train(train_df, feature_cols)
+    print(f"   Target mean (log): {stats['t_mean']:.4f}")
+    print(f"   Target std (log):  {stats['t_std']:.4f}")
+    print(f"   ⚠️  These stats computed ONLY from training data!")
+    
+    # ===================================================================
+    # STEP 5: Create Temporal Graph Datasets
+    # ===================================================================
+    print("\n[4/8] Creating Temporal Graph Datasets...")
+    
+    # Training dataset
+    train_dataset = TemporalGraphDataset(
+        df=train_df,
         feature_cols=feature_cols,
         seq_len=SEQ_LEN,
-        stats=stats
+        stats=stats  # Stats from training
     )
     
-    dataloader = torch.utils.data.DataLoader(
-        dataset,
+    # Validation dataset (using training stats!)
+    val_dataset = TemporalGraphDataset(
+        df=val_df,
+        feature_cols=feature_cols,
+        seq_len=SEQ_LEN,
+        stats=stats  # SAME stats from training
+    )
+    
+    # DataLoaders
+    train_loader = torch.utils.data.DataLoader(
+        train_dataset,
         batch_size=BATCH_SIZE,
-        shuffle=True,
+        shuffle=True,  # Shuffle WITHIN training set is OK
         collate_fn=collate_temporal_graphs
     )
     
-    print(f"   Dataset size: {len(dataset)}")
-    print(f"   Batches per epoch: {len(dataloader)}")
+    val_loader = torch.utils.data.DataLoader(
+        val_dataset,
+        batch_size=BATCH_SIZE,
+        shuffle=False,  # NO shuffle for validation!
+        collate_fn=collate_temporal_graphs
+    )
+    
+    print(f"   Training samples: {len(train_dataset)}")
+    print(f"   Validation samples: {len(val_dataset)}")
+    print(f"   Training batches/epoch: {len(train_loader)}")
     
     # ===================================================================
-    # STEP 5: Build Retrieval Database
+    # STEP 6: Build Retrieval Database FROM TRAINING ONLY
     # ===================================================================
-    print("\n[4/7] Building Retrieval Database (FAISS)...")
+    print("\n[5/8] Building Retrieval Database (from TRAINING only)...")
     
     CONTEXT_DIM = len(feature_cols)
     
-    # Normalize context for retrieval
-    context_norm = (context_data - c_mean.numpy()) / (c_std.numpy() + 1e-5)
+    # Get training features and normalize with training stats
+    train_features = train_df[feature_cols].values
+    train_features_norm = (train_features - stats['c_mean'].numpy()) / (stats['c_std'].numpy() + 1e-5)
     
+    # Index ONLY training data
     retrieval_db = RetrievalDatabase(embedding_dim=CONTEXT_DIM)
-    retrieval_db.add_items(context_norm, context_norm)
-    print(f"   Indexed {len(context_norm)} historical states")
+    retrieval_db.add_items(train_features_norm, train_features_norm)
+    print(f"   Indexed {len(train_features_norm):,} training samples")
+    print(f"   ⚠️  Retrieval database contains ONLY training data!")
     
     # ===================================================================
-    # STEP 6: Initialize Models
+    # STEP 7: Initialize Models
     # ===================================================================
-    print("\n[5/7] Initializing Models...")
+    print("\n[6/8] Initializing Models...")
     
     NUM_NODES = len(SITARO_NODES)
     RETRIEVAL_DIM = CONTEXT_DIM * K_NEIGHBORS
@@ -155,7 +273,7 @@ def train_pipeline():
         seq_len=SEQ_LEN
     ).to(device)
     
-    print(f"   SpatioTemporalGNN: {sum(p.numel() for p in st_gnn.parameters())} params")
+    print(f"   SpatioTemporalGNN: {sum(p.numel() for p in st_gnn.parameters()):,} params")
     
     # Conditional Diffusion Model
     diff_model = ConditionalDiffusionModel(
@@ -167,24 +285,27 @@ def train_pipeline():
     )
     
     forecaster = RainForecaster(diff_model, device=device)
-    print(f"   DiffusionModel: {sum(p.numel() for p in diff_model.parameters())} params")
+    print(f"   DiffusionModel: {sum(p.numel() for p in diff_model.parameters()):,} params")
     
     # Combined optimizer
     all_params = list(st_gnn.parameters()) + list(diff_model.parameters())
     optimizer = torch.optim.AdamW(all_params, lr=1e-3, weight_decay=1e-4)
     
     # ===================================================================
-    # STEP 7: Training Loop
+    # STEP 8: Training Loop with Validation
     # ===================================================================
-    print("\n[6/7] Training...")
+    print("\n[7/8] Training with Validation...")
     print(f"   Epochs: {EPOCHS}")
     
+    best_val_loss = float('inf')
+    
     for epoch in range(EPOCHS):
+        # --- Training Phase ---
         st_gnn.train()
         forecaster.model.train()
         
-        total_loss = 0
-        progress_bar = tqdm(dataloader, desc=f"Epoch {epoch+1}/{EPOCHS}")
+        train_loss = 0
+        progress_bar = tqdm(train_loader, desc=f"Epoch {epoch+1}/{EPOCHS} [Train]")
         
         for batched_graphs, targets, contexts in progress_bar:
             # Move to device
@@ -193,15 +314,15 @@ def train_pipeline():
             contexts = contexts.to(device)
             
             # 1. Get Spatio-Temporal Graph Embedding
-            graph_emb = st_gnn(batched_graphs)  # [B, GRAPH_DIM]
+            graph_emb = st_gnn(batched_graphs)
             
-            # 2. Get Retrieval (using context features)
+            # 2. Get Retrieval (from TRAINING database)
             with torch.no_grad():
                 context_np = contexts.cpu().numpy()
                 retrieved = retrieval_db.query(context_np, k=K_NEIGHBORS)
                 retrieved = retrieved.to(device)
             
-            # 3. Diffusion training step (manual to include graph_emb)
+            # 3. Diffusion training step
             optimizer.zero_grad()
             
             noise = torch.randn_like(targets).to(device)
@@ -214,50 +335,88 @@ def train_pipeline():
                 timesteps, 
                 contexts, 
                 retrieved,
-                graph_emb  # FULL Spatio-Temporal Graph Conditioning!
+                graph_emb
             )
             
             loss = forecaster.criterion(noise_pred, noise)
             loss.backward()
             optimizer.step()
             
-            total_loss += loss.item()
+            train_loss += loss.item()
             progress_bar.set_postfix(loss=f"{loss.item():.4f}")
         
-        avg_loss = total_loss / len(dataloader)
-        print(f"   Epoch {epoch+1}/{EPOCHS} | Avg Loss: {avg_loss:.4f}")
+        avg_train_loss = train_loss / len(train_loader)
+        
+        # --- Validation Phase ---
+        st_gnn.eval()
+        forecaster.model.eval()
+        
+        val_loss = 0
+        with torch.no_grad():
+            for batched_graphs, targets, contexts in val_loader:
+                batched_graphs = [g.to(device) for g in batched_graphs]
+                targets = targets.to(device)
+                contexts = contexts.to(device)
+                
+                graph_emb = st_gnn(batched_graphs)
+                
+                context_np = contexts.cpu().numpy()
+                retrieved = retrieval_db.query(context_np, k=K_NEIGHBORS)
+                retrieved = retrieved.to(device)
+                
+                noise = torch.randn_like(targets).to(device)
+                timesteps = torch.randint(0, 1000, (targets.shape[0],), device=device).long()
+                noisy_target = forecaster.scheduler.add_noise(targets, noise, timesteps)
+                
+                noise_pred = forecaster.model(
+                    noisy_target, timesteps, contexts, retrieved, graph_emb
+                )
+                
+                val_loss += forecaster.criterion(noise_pred, noise).item()
+        
+        avg_val_loss = val_loss / len(val_loader)
+        
+        print(f"   Epoch {epoch+1}/{EPOCHS} | Train Loss: {avg_train_loss:.4f} | Val Loss: {avg_val_loss:.4f}")
+        
+        # Save best model
+        if avg_val_loss < best_val_loss:
+            best_val_loss = avg_val_loss
+            print(f"   ✓ New best validation loss! Saving checkpoint...")
+            
+            os.makedirs("models", exist_ok=True)
+            checkpoint = {
+                'diffusion_state': forecaster.model.state_dict(),
+                'st_gnn_state': st_gnn.state_dict(),
+                'stats': stats,
+                'config': {
+                    'context_dim': CONTEXT_DIM,
+                    'retrieval_dim': RETRIEVAL_DIM,
+                    'graph_dim': GRAPH_DIM,
+                    'hidden_dim': HIDDEN_DIM,
+                    'k_neighbors': K_NEIGHBORS,
+                    'seq_len': SEQ_LEN,
+                    'num_nodes': NUM_NODES,
+                    'feature_cols': feature_cols,
+                    'train_end': TRAIN_END,
+                    'val_end': VAL_END
+                }
+            }
+            torch.save(checkpoint, "models/diffusion_chkpt.pth")
     
     # ===================================================================
-    # STEP 8: Save Checkpoint
+    # STEP 9: Final Summary
     # ===================================================================
-    print("\n[7/7] Saving Checkpoint...")
-    
-    os.makedirs("models", exist_ok=True)
-    
-    checkpoint = {
-        'diffusion_state': forecaster.model.state_dict(),
-        'st_gnn_state': st_gnn.state_dict(),
-        'stats': stats,
-        'config': {
-            'context_dim': CONTEXT_DIM,
-            'retrieval_dim': RETRIEVAL_DIM,
-            'graph_dim': GRAPH_DIM,
-            'hidden_dim': HIDDEN_DIM,
-            'k_neighbors': K_NEIGHBORS,
-            'seq_len': SEQ_LEN,
-            'num_nodes': NUM_NODES,
-            'feature_cols': feature_cols
-        }
-    }
-    
-    torch.save(checkpoint, "models/diffusion_chkpt.pth")
-    
+    print("\n[8/8] Training Complete!")
     print("\n" + "=" * 70)
-    print("✅ TRAINING COMPLETE!")
-    print("   Checkpoint: models/diffusion_chkpt.pth")
-    print("   Components saved:")
-    print("     - ConditionalDiffusionModel (with graph conditioning)")
-    print("     - SpatioTemporalGNN (GAT + TemporalAttention)")
+    print("✅ TRAINING COMPLETE WITH PROPER TEMPORAL SPLIT!")
+    print("=" * 70)
+    print(f"   Best Validation Loss: {best_val_loss:.4f}")
+    print(f"   Checkpoint: models/diffusion_chkpt.pth")
+    print(f"\n   TEMPORAL SPLIT VERIFIED:")
+    print(f"   ├── Training:   2005-2018 ({len(train_df):,} rows)")
+    print(f"   ├── Validation: 2019-2021 ({len(val_df):,} rows)")
+    print(f"   └── Test:       2022-2025 ({len(test_df):,} rows, NOT USED in training)")
+    print(f"\n   ⚠️  Stats & Retrieval: computed from TRAINING only")
     print("=" * 70)
 
 
