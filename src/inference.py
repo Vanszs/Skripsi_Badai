@@ -1,17 +1,5 @@
-"""
-Inference Pipeline for FULL Spatio-Temporal Graph Conditioned Nowcasting
 
-This script demonstrates:
-1. Loading trained SpatioTemporalGNN + DiffusionModel
-2. Creating graph sequences for inference
-3. Running probabilistic inference with all conditioning
-4. Generating uncertainty quantification
-"""
-
-import sys
 import os
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-
 import torch
 import pandas as pd
 import numpy as np
@@ -21,23 +9,68 @@ from src.models.diffusion import ConditionalDiffusionModel, RainForecaster
 from src.models.gnn import SpatioTemporalGNN
 from src.retrieval.base import RetrievalDatabase
 
-
-def load_models(checkpoint_path="models/diffusion_chkpt.pth"):
+def create_inference_graphs(condition_sequence, config, num_nodes=3, device='cpu'):
     """
-    Load trained SpatioTemporalGNN and DiffusionModel.
+    Create graph sequence for inference.
+    """
+    seq_len = config['seq_len']
+    # Build edge index (fully connected)
+    sources, targets = [], []
+    for i in range(num_nodes):
+        for j in range(num_nodes):
+            if i != j:
+                sources.append(i)
+                targets.append(j)
+    edge_index = torch.tensor([sources, targets], dtype=torch.long, device=device)
+    
+    # Create graph sequence
+    graphs_sequence = []
+    for t in range(seq_len):
+        node_features = condition_sequence[t].unsqueeze(0).repeat(num_nodes, 1)
+        graph = Data(x=node_features, edge_index=edge_index)
+        batch = Batch.from_data_list([graph])
+        graphs_sequence.append(batch.to(device))
+    
+    return graphs_sequence
+
+class InferenceModelWrapper:
+    """Wrapper to hold both GNN and Diffusion model for easy passing around."""
+    def __init__(self, st_gnn, forecaster, config):
+        self.st_gnn = st_gnn
+        self.forecaster = forecaster
+        self.config = config
+        self.device = 'cpu'
+    
+    def eval(self):
+        self.st_gnn.eval()
+        self.forecaster.model.eval()
+        
+    def to(self, device):
+        self.device = device
+        self.st_gnn.to(device)
+        self.forecaster.model.to(device)
+        self.forecaster.device = device  # Update forecaster's device attribute
+        return self
+
+def load_model_and_stats(checkpoint_path="models/diffusion_chkpt.pth"):
+    """
+    Load trained models and statistics.
+    Returns: (InferenceModelWrapper, stats, retrieval_db)
     """
     if not os.path.exists(checkpoint_path):
-        raise FileNotFoundError(f"Checkpoint not found: {checkpoint_path}")
-    
-    print("Loading checkpoint...")
+        # Fallback to absolute path if needed, or raise error
+        if os.path.exists(os.path.join("..", checkpoint_path)):
+            checkpoint_path = os.path.join("..", checkpoint_path)
+        else:
+            raise FileNotFoundError(f"Checkpoint not found: {checkpoint_path}")
+            
+    print(f"Loading checkpoint from {checkpoint_path}...")
     checkpoint = torch.load(checkpoint_path, map_location='cpu')
     
     stats = checkpoint['stats']
     config = checkpoint['config']
     
-    print(f"   Config: seq_len={config['seq_len']}, graph_dim={config['graph_dim']}")
-    
-    # Initialize SpatioTemporalGNN
+    # Initialize GNN
     st_gnn = SpatioTemporalGNN(
         node_features=config['context_dim'],
         hidden_dim=config['hidden_dim'] // 2,
@@ -46,11 +79,12 @@ def load_models(checkpoint_path="models/diffusion_chkpt.pth"):
         num_attn_heads=4,
         seq_len=config['seq_len']
     )
-    st_gnn.load_state_dict(checkpoint['st_gnn_state'])
-    st_gnn.eval()
-    print("   SpatioTemporalGNN loaded.")
+    if 'st_gnn_state' in checkpoint:
+        st_gnn.load_state_dict(checkpoint['st_gnn_state'])
+    else:
+        print("Warning: st_gnn_state not found in checkpoint. GNN might be uninitialized.")
     
-    # Initialize Diffusion Model
+    # Initialize Diffusion
     diff_model = ConditionalDiffusionModel(
         input_dim=1,
         context_dim=config['context_dim'],
@@ -59,178 +93,140 @@ def load_models(checkpoint_path="models/diffusion_chkpt.pth"):
         hidden_dim=config['hidden_dim']
     )
     diff_model.load_state_dict(checkpoint['diffusion_state'])
-    print("   DiffusionModel loaded.")
     
-    # Rebuild retrieval database
-    print("   Rebuilding retrieval database...")
-    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    data_path = os.path.join(base_dir, 'data', 'raw', 'sitaro_era5_2005_2025.parquet')
+    forecaster = RainForecaster(diff_model)
+    model_wrapper = InferenceModelWrapper(st_gnn, forecaster, config)
     
-    if not os.path.exists(data_path):
-        data_path = 'data/raw/sitaro_era5_2005_2025.parquet'
-    
-    df = pd.read_parquet(data_path)
-    feature_cols = config['feature_cols']
-    available_cols = [c for c in feature_cols if c in df.columns]
-    
-    context_data = df[available_cols].values
-    c_mean = stats['c_mean'].numpy()
-    c_std = stats['c_std'].numpy()
-    context_norm = (context_data - c_mean) / (c_std + 1e-5)
-    
-    retrieval_db = RetrievalDatabase(embedding_dim=len(available_cols))
-    retrieval_db.add_items(context_norm, context_norm)
-    print(f"   Retrieval index ready ({len(context_norm)} items).")
-    
-    return st_gnn, diff_model, stats, config, retrieval_db
-
-
-def create_inference_graphs(condition_sequence, config, num_nodes=3):
-    """
-    Create graph sequence for inference.
-    
-    Args:
-        condition_sequence: Tensor [seq_len, features] - sequence of weather conditions
-        config: Model config
-        num_nodes: Number of graph nodes (3 for Sitaro)
-    
-    Returns:
-        List of PyG Batch objects (each batch has 1 sample)
-    """
-    seq_len = config['seq_len']
-    
-    # Build edge index (fully connected)
-    sources, targets = [], []
-    for i in range(num_nodes):
-        for j in range(num_nodes):
-            if i != j:
-                sources.append(i)
-                targets.append(j)
-    edge_index = torch.tensor([sources, targets], dtype=torch.long)
-    
-    # Create graph sequence
-    graphs_sequence = []
-    for t in range(seq_len):
-        # Replicate condition for each node (simplified - in practice each node has own features)
-        node_features = condition_sequence[t].unsqueeze(0).repeat(num_nodes, 1)
-        
-        graph = Data(x=node_features, edge_index=edge_index)
-        batch = Batch.from_data_list([graph])  # Single sample batch
-        graphs_sequence.append(batch)
-    
-    return graphs_sequence
-
-
-def run_inference(condition_sequence, st_gnn, diff_model, stats, config, retrieval_db,
-                  num_samples=50, device='cpu'):
-    """
-    Run probabilistic inference with FULL Spatio-Temporal conditioning.
-    
-    Args:
-        condition_sequence: Tensor [seq_len, features] - normalized weather sequence
-        st_gnn: Trained SpatioTemporalGNN
-        diff_model: Trained DiffusionModel
-        stats: Normalization stats
-        config: Model config
-        retrieval_db: FAISS database
-        num_samples: Number of probabilistic samples
-        device: 'cpu' or 'cuda'
-    
-    Returns:
-        np.ndarray: Predicted rainfall samples in mm
-    """
-    st_gnn.to(device)
-    diff_model.to(device)
-    
-    forecaster = RainForecaster(diff_model, device=device)
-    
-    # 1. Create graph sequence
-    graphs_sequence = create_inference_graphs(condition_sequence, config)
-    graphs_sequence = [g.to(device) for g in graphs_sequence]
-    
-    # 2. Get Spatio-Temporal Graph Embedding
-    with torch.no_grad():
-        graph_emb = st_gnn(graphs_sequence)  # [1, graph_dim]
-    
-    # 3. Get retrieval context (use last timestep)
-    context_last = condition_sequence[-1].unsqueeze(0)  # [1, features]
-    retrieved = retrieval_db.query(context_last.numpy(), k=config['k_neighbors'])
-    
-    # 4. Generate samples
-    samples = forecaster.sample(
-        condition=context_last.to(device),
-        retrieved=retrieved.to(device),
-        graph_emb=graph_emb.to(device),
-        num_samples=num_samples
-    )
-    
-    # 5. Denormalize
-    t_mean = stats['t_mean']
-    t_std = stats['t_std']
-    
-    samples_log = samples * t_std + t_mean
-    samples_mm = torch.expm1(samples_log)
-    samples_mm = torch.clamp(samples_mm, min=0.0)
-    
-    return samples_mm.cpu().numpy().flatten()
-
-
-def analyze_predictions(samples, thresholds=[50, 100, 150]):
-    """
-    Analyze probabilistic predictions.
-    """
-    results = {
-        'mean': float(np.mean(samples)),
-        'std': float(np.std(samples)),
-        'min': float(np.min(samples)),
-        'max': float(np.max(samples)),
-        'p10': float(np.percentile(samples, 10)),
-        'p50': float(np.percentile(samples, 50)),
-        'p90': float(np.percentile(samples, 90)),
-    }
-    
-    for t in thresholds:
-        results[f'P(>{t}mm)'] = float(np.mean(samples > t))
-    
-    return results
-
-
-if __name__ == "__main__":
-    print("=" * 70)
-    print("FULL SPATIO-TEMPORAL PROBABILISTIC RAIN NOWCASTING INFERENCE")
-    print("=" * 70)
-    
+    # Rebuild Retrieval DB
+    # Note: In a production env, this should be loaded from a file, but here we rebuild from raw data
+    print("Rebuilding retrieval database from Training data...")
     try:
-        st_gnn, diff_model, stats, config, retrieval_db = load_models()
+        # Try finding data in common locations
+        possible_paths = [
+            'data/raw/sitaro_era5_2005_2025.parquet',
+            '../data/raw/sitaro_era5_2005_2025.parquet',
+            os.path.join(os.path.dirname(checkpoint_path), '../data/raw/sitaro_era5_2005_2025.parquet')
+        ]
+        data_path = None
+        for p in possible_paths:
+            if os.path.exists(p):
+                data_path = p
+                break
         
-        # Create mock condition sequence (seq_len timesteps)
-        seq_len = config['seq_len']
-        context_dim = config['context_dim']
+        if data_path:
+            df = pd.read_parquet(data_path)
+            # Filter for training data only to avoid leakage
+            df['date'] = pd.to_datetime(df['date'])
+            if df['date'].dt.tz is not None:
+                df['date'] = df['date'].dt.tz_localize(None)
+            
+            # Using config train_end if available, else default
+            train_end = config.get('train_end', '2018-12-31')
+            train_df = df[df['date'] <= pd.to_datetime(train_end)].copy()
+            
+            feature_cols = config.get('feature_cols', ['temperature_2m', 'relative_humidity_2m', 'surface_pressure', 'wind_speed_10m', 'wind_direction_10m'])
+            
+            train_features = train_df[feature_cols].values
+            c_mean = stats['c_mean'].numpy()
+            c_std = stats['c_std'].numpy()
+            train_features_norm = (train_features - c_mean) / (c_std + 1e-5)
+            
+            retrieval_db = RetrievalDatabase(embedding_dim=len(feature_cols))
+            retrieval_db.add_items(train_features_norm, train_features_norm)
+            print(f"Retrieval index rebuilt with {len(train_features_norm)} vectors.")
+        else:
+            print("Warning: Data file not found. Retrieval DB will be empty.")
+            retrieval_db = RetrievalDatabase(embedding_dim=config['context_dim'])
+            
+    except Exception as e:
+        print(f"Error rebuilding retrieval DB: {e}")
+        retrieval_db = RetrievalDatabase(embedding_dim=config['context_dim'])
+
+    return model_wrapper, stats, retrieval_db
+
+def run_inference_real(features_norm, model_wrapper, stats, retrieval_db, num_samples=50, device='cpu'):
+    """
+    Run inference on a single sequence of normalized features.
+    
+    Args:
+        features_norm: tensor [seq_len, features] or [1, seq_len, features]
+        model_wrapper: InferenceModelWrapper
+        stats: dictionary of stats
+        retrieval_db: RetrievalDatabase
+        num_samples: int
+    """
+    if isinstance(device, str):
+        device = torch.device(device)
         
-        mock_sequence = torch.randn(seq_len, context_dim)
+    model_wrapper.to(device)
+    model_wrapper.eval()
+    
+    # Ensure input is tensor and move to device
+    if not torch.is_tensor(features_norm):
+        features_norm = torch.tensor(features_norm, dtype=torch.float32)
+    features_norm = features_norm.to(device)
+    
+    # Handle batch dim
+    if features_norm.dim() == 2:
+        features_norm = features_norm.unsqueeze(0) # [1, seq_len, feat]
         
-        print(f"\nRunning inference with {seq_len}-step sequence...")
-        predictions = run_inference(
-            condition_sequence=mock_sequence,
-            st_gnn=st_gnn,
-            diff_model=diff_model,
-            stats=stats,
-            config=config,
-            retrieval_db=retrieval_db,
-            num_samples=50
+    # Check sequence length
+    seq_len = features_norm.shape[1]
+    cfg_seq_len = model_wrapper.config['seq_len']
+    
+    # Pad if necessary (simple repeat padding if short, or slice if long)
+    if seq_len < cfg_seq_len:
+        # Repeat last frame
+        last_frame = features_norm[:, -1:, :]
+        repeats = cfg_seq_len - seq_len
+        features_norm = torch.cat([features_norm, last_frame.repeat(1, repeats, 1)], dim=1)
+    elif seq_len > cfg_seq_len:
+        features_norm = features_norm[:, -cfg_seq_len:, :]
+        
+    # Access inner models
+    st_gnn = model_wrapper.st_gnn
+    forecaster = model_wrapper.forecaster
+    config = model_wrapper.config
+    
+    with torch.no_grad():
+        # 1. Graph Embedding
+        # Need to create graph objects on the fly
+        condition_seq = features_norm[0] # [seq_len, feat] - already on device
+        graphs_sequence = create_inference_graphs(condition_seq, config, device=device)
+        
+        graph_emb = st_gnn(graphs_sequence) # [1, graph_dim]
+        
+        # 2. Retrieval
+        context_last = condition_seq[-1].unsqueeze(0) # [1, feat]
+        context_np = context_last.cpu().numpy()
+        retrieved = retrieval_db.query(context_np, k=config['k_neighbors'])
+        retrieved = retrieved.to(device) # [1, k, feat]
+        
+        # 3. Sampling
+        # Forecaster sample() expects [B, ...]
+        # We want multiple samples for this single input.
+        # We can replicate inputs to batch size = num_samples for parallel sampling
+        
+        # Replicate conditioning - everything must be on device
+        context_batch = context_last.to(device)
+        retrieved_batch = retrieved.to(device)
+        graph_emb_batch = graph_emb.to(device)
+        
+        # Sample
+        samples = forecaster.sample(
+            condition=context_batch,
+            retrieved=retrieved_batch,
+            graph_emb=graph_emb_batch,
+            num_samples=num_samples
         )
+        # samples is [num_samples, 1]
         
-        print("\n" + "=" * 70)
-        print("PREDICTION RESULTS (50 probabilistic samples)")
-        print("=" * 70)
+        # 4. Denormalize
+        t_mean = stats['t_mean'].to(device)
+        t_std = stats['t_std'].to(device)
         
-        analysis = analyze_predictions(predictions)
-        for key, value in analysis.items():
-            if 'P(' in key:
-                print(f"   {key}: {value*100:.1f}%")
-            else:
-                print(f"   {key}: {value:.2f} mm")
+        samples_log = samples * t_std + t_mean
+        samples_mm = torch.expm1(samples_log)
+        samples_mm = torch.clamp(samples_mm, min=0.0)
         
-    except FileNotFoundError as e:
-        print(f"\n❌ Error: {e}")
-        print("   Please run 'python src/train.py' first to train the model.")
+        return samples_mm.cpu().numpy().flatten()

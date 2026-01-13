@@ -173,7 +173,22 @@ class RainForecaster:
             batch_graph_emb  # [NEW] Graph conditioning
         )
         
-        loss = self.criterion(noise_pred, noise)
+        # Weighted MSE Loss
+        # Penalize errors more on extreme rainfall events
+        # We use the original target magnitude as a heuristic for importance
+        error = (noise_pred - noise) ** 2
+        
+        # Weighting scheme:
+        # Base weight = 1.0
+        # Extreme weight multiplier = 5.0 for values > 1.0 std dev
+        # Heavy extreme multiplier = 10.0 for values > 3.0 std dev
+        weights = torch.ones_like(error)
+        weights[batch_rain_target.abs() > 1.0] = 5.0
+        weights[batch_rain_target.abs() > 3.0] = 10.0
+        
+        loss = (error * weights).mean()
+        
+        self.optimizer.zero_grad()
         loss.backward()
         self.optimizer.step()
         
@@ -198,10 +213,10 @@ class RainForecaster:
         # Start from random noise
         x = torch.randn((num_samples, 1)).to(self.device)
         
-        # Expand conditioning to match num_samples
-        cond_expanded = condition.repeat(num_samples, 1)
-        retr_expanded = retrieved.repeat(num_samples, 1, 1) if retrieved is not None else None
-        graph_expanded = graph_emb.repeat(num_samples, 1) if graph_emb is not None else None
+        # Expand conditioning to match num_samples and move to device
+        cond_expanded = condition.repeat(num_samples, 1).to(self.device)
+        retr_expanded = retrieved.repeat(num_samples, 1, 1).to(self.device) if retrieved is not None else None
+        graph_expanded = graph_emb.repeat(num_samples, 1).to(self.device) if graph_emb is not None else None
         
         # Reverse diffusion (denoising)
         for t in self.scheduler.timesteps:

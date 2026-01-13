@@ -62,6 +62,10 @@ def temporal_split(df, train_end='2018-12-31', val_end='2021-12-31'):
     df = df.copy()
     df['date'] = pd.to_datetime(df['date'])
     
+    # Remove timezone if present (to avoid tz-naive vs tz-aware comparison)
+    if df['date'].dt.tz is not None:
+        df['date'] = df['date'].dt.tz_localize(None)
+    
     train_end_dt = pd.to_datetime(train_end)
     val_end_dt = pd.to_datetime(val_end)
     
@@ -120,10 +124,10 @@ def train_pipeline():
     # STEP 1: Configuration
     # ===================================================================
     SEQ_LEN = 6         # 6 timesteps in each sequence
-    BATCH_SIZE = 32     # Batch size
-    EPOCHS = 10         # Training epochs
-    HIDDEN_DIM = 128    # Hidden dimension
-    GRAPH_DIM = 64      # Graph embedding dimension
+    BATCH_SIZE = 128    # Increased for speed (was 32)
+    EPOCHS = 50         # Training epochs (Phase 2)
+    HIDDEN_DIM = 128    # Hidden dimension (Phase 2)
+    GRAPH_DIM = 64      # Graph embedding dimension (Phase 2)
     K_NEIGHBORS = 3     # FAISS neighbors
     
     # Temporal split boundaries
@@ -134,10 +138,16 @@ def train_pipeline():
     print(f"\n[Config]")
     print(f"   Device: {device}")
     print(f"   Sequence Length: {SEQ_LEN}")
-    print(f"   Batch Size: {BATCH_SIZE}")
+    print(f"   Batch Size: {BATCH_SIZE} (Optimized)")
+    print(f"   Epochs: {EPOCHS} (Phase 2)")
+    print(f"   Hidden Dim: {HIDDEN_DIM} (Phase 2)")
     print(f"   Train Period: 2005-01-01 to {TRAIN_END}")
     print(f"   Val Period: {TRAIN_END[:-2]}01 to {VAL_END}")
     print(f"   Test Period: {VAL_END[:-2]}01 to 2025-12-31")
+    
+    # Check for AMP availability
+    use_amp = torch.cuda.is_available()
+    print(f"   Mixed Precision (AMP): {'Enabled' if use_amp else 'Disabled'}")
     
     # ===================================================================
     # STEP 2: Load Data
@@ -219,19 +229,30 @@ def train_pipeline():
         stats=stats  # SAME stats from training
     )
     
+    # Optimizing DataLoaders
+    cnt_cpu = os.cpu_count()
+    num_workers = min(4, cnt_cpu) if cnt_cpu else 0
+    print(f"   DataLoader Workers: {num_workers}")
+
     # DataLoaders
     train_loader = torch.utils.data.DataLoader(
         train_dataset,
         batch_size=BATCH_SIZE,
         shuffle=True,  # Shuffle WITHIN training set is OK
-        collate_fn=collate_temporal_graphs
+        collate_fn=collate_temporal_graphs,
+        num_workers=num_workers,
+        pin_memory=True,
+        persistent_workers=(num_workers > 0)
     )
     
     val_loader = torch.utils.data.DataLoader(
         val_dataset,
         batch_size=BATCH_SIZE,
         shuffle=False,  # NO shuffle for validation!
-        collate_fn=collate_temporal_graphs
+        collate_fn=collate_temporal_graphs,
+        num_workers=num_workers,
+        pin_memory=True,
+        persistent_workers=(num_workers > 0)
     )
     
     print(f"   Training samples: {len(train_dataset)}")
@@ -290,6 +311,7 @@ def train_pipeline():
     # Combined optimizer
     all_params = list(st_gnn.parameters()) + list(diff_model.parameters())
     optimizer = torch.optim.AdamW(all_params, lr=1e-3, weight_decay=1e-4)
+    scaler = torch.cuda.amp.GradScaler(enabled=use_amp)
     
     # ===================================================================
     # STEP 8: Training Loop with Validation
@@ -313,34 +335,47 @@ def train_pipeline():
             targets = targets.to(device)
             contexts = contexts.to(device)
             
-            # 1. Get Spatio-Temporal Graph Embedding
-            graph_emb = st_gnn(batched_graphs)
+            # AMP Context
+            with torch.amp.autocast('cuda', enabled=use_amp):
+                # 1. Get Spatio-Temporal Graph Embedding
+                graph_emb = st_gnn(batched_graphs)
+                
+                # 2. Get Retrieval (from TRAINING database)
+                # Retrieval is usually fast on CPU or GPU index, but logic here assumes retrieval_db is outside AMP
+                with torch.no_grad():
+                    context_np = contexts.cpu().float().numpy() # Ensure float32 for FAISS
+                    retrieved = retrieval_db.query(context_np, k=K_NEIGHBORS)
+                    retrieved = retrieved.to(device)
+                
+                # 3. Diffusion training step
+                noise = torch.randn_like(targets).to(device)
+                timesteps = torch.randint(0, 1000, (targets.shape[0],), device=device).long()
+                
+                noisy_target = forecaster.scheduler.add_noise(targets, noise, timesteps)
+                
+                noise_pred = forecaster.model(
+                    noisy_target, 
+                    timesteps, 
+                    contexts, 
+                    retrieved,
+                    graph_emb
+                )
+                
+                # Weighted MSE Loss Implementation
+                error = (noise_pred - noise) ** 2
+                
+                # Weighting scheme for extreme events
+                weights = torch.ones_like(error)
+                weights[targets.abs() > 1.0] = 5.0
+                weights[targets.abs() > 3.0] = 10.0
+                
+                loss = (error * weights).mean()
             
-            # 2. Get Retrieval (from TRAINING database)
-            with torch.no_grad():
-                context_np = contexts.cpu().numpy()
-                retrieved = retrieval_db.query(context_np, k=K_NEIGHBORS)
-                retrieved = retrieved.to(device)
-            
-            # 3. Diffusion training step
+            # Scaler Step
             optimizer.zero_grad()
-            
-            noise = torch.randn_like(targets).to(device)
-            timesteps = torch.randint(0, 1000, (targets.shape[0],), device=device).long()
-            
-            noisy_target = forecaster.scheduler.add_noise(targets, noise, timesteps)
-            
-            noise_pred = forecaster.model(
-                noisy_target, 
-                timesteps, 
-                contexts, 
-                retrieved,
-                graph_emb
-            )
-            
-            loss = forecaster.criterion(noise_pred, noise)
-            loss.backward()
-            optimizer.step()
+            scaler.scale(loss).backward()
+            scaler.step(optimizer)
+            scaler.update()
             
             train_loss += loss.item()
             progress_bar.set_postfix(loss=f"{loss.item():.4f}")
