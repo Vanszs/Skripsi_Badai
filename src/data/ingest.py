@@ -12,19 +12,24 @@ cache_session = requests_cache.CachedSession('.cache', expire_after = 3600)
 retry_session = retry(cache_session, retries = 5, backoff_factor = 0.2)
 openmeteo = openmeteo_requests.Client(session = retry_session)
 
-SITARO_COORDS = {
-    "lat_min": 2.0,
-    "lat_max": 3.0,
-    "lon_min": 125.0,
-    "lon_max": 126.0
+PANGRANGO_COORDS = {
+    "lat_min": -6.85,
+    "lat_max": -6.70,
+    "lon_min": 106.90,
+    "lon_max": 107.20
 }
 
-# Node definitions for Sitaro islands
-SITARO_NODES = pd.DataFrame({
-    'name': ['Siau', 'Tagulandang', 'Biaro'],
-    'lat': [2.75, 2.33, 2.10],
-    'lon': [125.40, 125.42, 125.37]
+# Node definitions for Gunung Gede-Pangrango
+# Sesuai judul skripsi: "Nowcasting Probabilistik Hujan Lebat untuk Keselamatan Pendaki"
+PANGRANGO_NODES = pd.DataFrame({
+    'name': ['Puncak', 'Lereng_Cibodas', 'Hilir_Cianjur'],
+    'lat': [-6.769797, -6.751722, -6.816000],
+    'lon': [106.963583, 106.987160, 107.133000]
 })
+
+# Alias for backward compatibility
+SITARO_NODES = PANGRANGO_NODES
+
 
 
 def fetch_elevation(nodes_df):
@@ -134,7 +139,7 @@ def fetch_era5_data(start_year=2005, end_year=2025, interval="hourly"):
         hourly_data["cloudcover"] = hourly.Variables(7).ValuesAsNumpy()
         
         # Add node identifier
-        hourly_data["node_id"] = node['name']
+        hourly_data["node"] = node['name']
         
         # --- STEP 3: Add Static Features ---
         elev = elevation_dict.get(node['name'], 0)
@@ -148,13 +153,13 @@ def fetch_era5_data(start_year=2005, end_year=2025, interval="hourly"):
     
     # --- STEP 4: Create Lag Features (per node) ---
     print("Creating lag features...")
-    combined_df = combined_df.sort_values(['node_id', 'date']).reset_index(drop=True)
+    combined_df = combined_df.sort_values(['node', 'date']).reset_index(drop=True)
     
     # Lag-1: Previous hour's precipitation
-    combined_df['precipitation_lag1'] = combined_df.groupby('node_id')['precipitation'].shift(1)
+    combined_df['precipitation_lag1'] = combined_df.groupby('node')['precipitation'].shift(1)
     
     # Lag-3: 3 hours ago (for short-term pattern)
-    combined_df['precipitation_lag3'] = combined_df.groupby('node_id')['precipitation'].shift(3)
+    combined_df['precipitation_lag3'] = combined_df.groupby('node')['precipitation'].shift(3)
     
     # Fill NaN from shift with 0 (first few hours have no history)
     combined_df['precipitation_lag1'] = combined_df['precipitation_lag1'].fillna(0)

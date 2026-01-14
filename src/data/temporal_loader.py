@@ -30,12 +30,12 @@ class TemporalGraphDataset(Dataset):
                  feature_cols: List[str],
                  target_col: str = 'precipitation',
                  seq_len: int = 6,
-                 node_names: List[str] = ['Siau', 'Tagulandang', 'Biaro'],
+                 node_names: List[str] = ['Puncak', 'Lereng_Cibodas', 'Hilir_Cianjur'],
                  edge_index: Optional[torch.Tensor] = None,
                  stats: Optional[dict] = None):
         """
         Args:
-            df: DataFrame with columns [date, node_id, features..., target]
+            df: DataFrame with columns [date, node, features..., target]
             feature_cols: List of feature column names
             target_col: Name of target column
             seq_len: Number of timesteps in each sequence
@@ -74,7 +74,7 @@ class TemporalGraphDataset(Dataset):
     def _prepare_data(self):
         """Pivot DataFrame and create normalized tensors."""
         # Sort by date and node
-        self.df = self.df.sort_values(['date', 'node_id']).reset_index(drop=True)
+        self.df = self.df.sort_values(['date', 'node']).reset_index(drop=True)
         
         # Get unique timestamps
         self.timestamps = self.df['date'].unique()
@@ -91,7 +91,7 @@ class TemporalGraphDataset(Dataset):
             node_features = []
             node_targets = []
             for node in self.node_names:
-                node_row = ts_df[ts_df['node_id'] == node]
+                node_row = ts_df[ts_df['node'] == node]
                 if len(node_row) > 0:
                     features = node_row[self.feature_cols].values[0]
                     target = node_row[self.target_col].values[0]
@@ -269,14 +269,14 @@ def crosscheck_temporal_loader():
     
     # Create dummy data
     dates = pd.date_range('2024-01-01', periods=100, freq='H')
-    nodes = ['Siau', 'Tagulandang', 'Biaro']
+    nodes = ['Puncak', 'Lereng_Cibodas', 'Hilir_Cianjur']
     
     data = []
     for date in dates:
         for node in nodes:
             data.append({
                 'date': date,
-                'node_id': node,
+                'node': node,
                 'temperature_2m': np.random.randn(),
                 'relative_humidity_2m': np.random.randn(),
                 'surface_pressure': np.random.randn(),

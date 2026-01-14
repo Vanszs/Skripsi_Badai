@@ -56,30 +56,24 @@ class RetrievalDatabase:
         """
         distances, indices = self.index.search(query_embedding, k)
         
-        # Reconstruct batch results
-        # stored_data is a list of blocks, or a big array. 
-        # Ideally we concat stored_data into one big array for fast lookup.
-        # Ensure stored_data is a single array (check add_items usage)
-        if isinstance(self.stored_data, list):
-             # cache it to avoid repeated concats if possible, or just concat
-             # Since we add all at once in train.py, it's likely one item in list or we just concat
-             all_data = np.concatenate(self.stored_data, axis=0)
-        else:
-             all_data = self.stored_data
+        # Cache concatenated data to avoid repeated memory allocation
+        if not hasattr(self, '_cached_data') or self._cached_data is None:
+            if isinstance(self.stored_data, list) and len(self.stored_data) > 0:
+                # Concatenate once and cache as float32 to save memory
+                self._cached_data = np.concatenate(self.stored_data, axis=0).astype(np.float32)
+            else:
+                self._cached_data = np.array(self.stored_data, dtype=np.float32)
+        
+        all_data = self._cached_data
         
         batch_size = query_embedding.shape[0]
-        data_dim = all_data.shape[1]
+        data_dim = all_data.shape[1] if len(all_data.shape) > 1 else 1
         
-        # Handle indices
-        # indices shape: [Batch, k]
-        # We clamp -1 to 0 (or safe index) to avoid crash, then mask out later if needed
-        # But for this use-case, we assume we always find neighbors.
+        # Handle indices - clamp -1 to 0 for safety
         valid_indices = indices.copy()
-        valid_indices[valid_indices == -1] = 0 # Safety
+        valid_indices[valid_indices == -1] = 0
         
         # Vectorized lookup
-        # all_data[indices] works directly in numpy if indices is int array
-        # output shape: [Batch, k, data_dim]
         retrieved_values = all_data[valid_indices]
             
-        return torch.tensor(retrieved_values, dtype=torch.float)
+        return torch.tensor(retrieved_values, dtype=torch.float32)

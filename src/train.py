@@ -101,6 +101,12 @@ def compute_stats_from_train(train_df, feature_cols, target_col='precipitation')
     t_mean = torch.tensor(target_log.mean(), dtype=torch.float32)
     t_std = torch.tensor(target_log.std(), dtype=torch.float32)
     
+    # CRITICAL: Multiply t_std to expand model output range
+    # Original t_std ~0.36 limits diffusion output to 0-0.8mm
+    # Multiplier allows model to predict higher values
+    T_STD_MULTIPLIER = 5.0  # Expand to ~1.8, allowing range 0-10mm+
+    t_std = t_std * T_STD_MULTIPLIER
+    
     # Feature stats
     feature_values = train_df[feature_cols].values
     c_mean = torch.tensor(feature_values.mean(axis=0), dtype=torch.float32)
@@ -124,8 +130,8 @@ def train_pipeline():
     # STEP 1: Configuration
     # ===================================================================
     SEQ_LEN = 6         # 6 timesteps in each sequence
-    BATCH_SIZE = 128    # Increased for speed (was 32)
-    EPOCHS = 50         # Training epochs (Phase 2)
+    BATCH_SIZE = 256    # Increased for maximum speed
+    EPOCHS = 20         # Training epochs (reduced for faster iteration)
     HIDDEN_DIM = 128    # Hidden dimension (Phase 2)
     GRAPH_DIM = 64      # Graph embedding dimension (Phase 2)
     K_NEIGHBORS = 3     # FAISS neighbors
@@ -154,7 +160,7 @@ def train_pipeline():
     # ===================================================================
     print("\n[1/8] Loading Data...")
     
-    data_path = 'data/raw/sitaro_era5_2005_2025.parquet'
+    data_path = 'data/raw/pangrango_era5_2005_2025.parquet'
     try:
         df = pd.read_parquet(data_path)
         print(f"   Loaded from {data_path}")
