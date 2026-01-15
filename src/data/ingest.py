@@ -27,7 +27,7 @@ PANGRANGO_NODES = pd.DataFrame({
     'lon': [106.963583, 106.987160, 107.133000]
 })
 
-# Alias for backward compatibility
+# Alias for backward compatibility (Deprecated)
 SITARO_NODES = PANGRANGO_NODES
 
 
@@ -85,7 +85,7 @@ def fetch_era5_data(start_year=2005, end_year=2025, interval="hourly"):
     """
     url = "https://archive-api.open-meteo.com/v1/archive"
     
-    nodes = SITARO_NODES.copy()
+    nodes = PANGRANGO_NODES.copy()
     
     # --- STEP 1: Fetch Static Features (Elevation) ---
     elevation_dict = fetch_elevation(nodes)
@@ -180,9 +180,9 @@ def fetch_era5_data(start_year=2005, end_year=2025, interval="hourly"):
 
 def get_node_metadata():
     """Return node metadata including static features for graph construction."""
-    elevation_dict = fetch_elevation(SITARO_NODES)
+    elevation_dict = fetch_elevation(PANGRANGO_NODES)
     
-    nodes = SITARO_NODES.copy()
+    nodes = PANGRANGO_NODES.copy()
     nodes['elevation'] = nodes['name'].map(elevation_dict)
     nodes['land_sea_mask'] = nodes['elevation'].apply(derive_land_sea_mask)
     

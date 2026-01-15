@@ -1,5 +1,5 @@
 # 📚 DOKUMENTASI LENGKAP PROJECT
-## Nowcasting Probabilistik Hujan Lebat untuk Keselamatan Pendaki di Gunung Gede-Pangrango
+## Nowcasting Probabilistik Hujan, Angin, Kelembapan untuk Mitigasi Risiko Pendakian
 
 **Versi:** 1.0  
 **Tanggal:** 2026-01-14  
@@ -11,7 +11,7 @@
 
 ## 1.1 Judul Lengkap Skripsi
 
-> **"Nowcasting Probabilistik Hujan Lebat untuk Keselamatan Pendaki di Gunung Gede–Pangrango Menggunakan Retrieval-Augmented Diffusion Model dengan Spatio-Temporal Graph Conditioning"**
+> **"Nowcasting Probabilistik Hujan, Angin, Kelembapan untuk Mitigasi Risiko Pendakian di Gunung Gede–Pangrango Menggunakan Retrieval-Augmented Diffusion Model dengan Spatio-Temporal Graph Conditioning"**
 
 ## 1.2 Breakdown Judul
 
@@ -19,20 +19,23 @@
 |----------|------------|
 | **Nowcasting** | Prediksi cuaca jangka pendek (0-6 jam ke depan) |
 | **Probabilistik** | Output berupa distribusi probabilitas, bukan single value |
-| **Hujan Lebat** | Fokus pada curah hujan >2mm/jam yang berbahaya |
-| **Keselamatan Pendaki** | Use case aplikasi untuk peringatan dini |
-| **Gunung Gede-Pangrango** | Lokasi studi kasus di Jawa Barat |
+| **Dinamika Cuaca Mikro** | Prediksi simultan 3 variabel: Hujan, Angin, Kelembapan |
+| **Mitigasi Risiko** | Fokus pada kombinasi faktor penyebab hipotermia & badai |
+| **Gunung Gede-Pangrango** | Lokasi studi kasus di Jawa Barat (Puncak, Cibodas, Cianjur) |
 | **Retrieval-Augmented** | Model mencari analog historis untuk prediksi |
-| **Diffusion Model** | Arsitektur generatif berbasis denoising |
+| **Diffusion Model** | Arsitektur generatif berbasis denoising (3 Variabel Output) |
 | **Spatio-Temporal Graph** | Graph neural network untuk relasi antar lokasi |
 
 ## 1.3 Tujuan Project
 
 ### Tujuan Utama:
-Mengembangkan sistem **nowcasting probabilistik** untuk memprediksi curah hujan jam-an di kawasan Gunung Gede-Pangrango, dengan fokus pada:
-1. **Keluaran probabilistik** - distribusi prediksi, bukan single point
-2. **Deteksi hujan lebat** - P(R > 2mm), P(R > 5mm)
-3. **Aplikasi keselamatan** - peringatan untuk pendaki
+Mengembangkan sistem **nowcasting probabilistik multi-variabel** untuk memprediksi dinamika cuaca mikro (Hujan, Angin, Kelembapan) di kawasan Gunung Gede-Pangrango, dengan fokus pada:
+1. **Prediksi Multi-Variabel** - Menghasilkan distribusi probabilitas untuk Hujan, Kecepatan Angin, dan Kelembapan secara bersamaan.
+2. **Deteksi Dinamika Cuaca** - Memprediksi perubahan kondisi mikro (misal: cerah ke gerimis, angin tenang ke badai, lembab dingin).
+
+**Batasan Masalah (Scope):**
+- **Output:** Algoritma prediksi & Evaluasi Metrik
+- **Non-Output:** Tidak membangun Aplikasi Mobile/Web (GUI)
 
 ### Tujuan Teknis:
 1. Implementasi **Retrieval-Augmented Diffusion Model**
@@ -61,15 +64,18 @@ Mengembangkan sistem **nowcasting probabilistik** untuk memprediksi curah hujan 
 | Node | Nama | Latitude | Longitude | Elevasi |
 |------|------|----------|-----------|---------|
 | **Puncak** | Puncak Gede-Pangrango | -6.7698 | 106.9636 | 3,019 m |
-| **Lereng** | Cibodas | -6.7308 | 107.0026 | ~1,300 m |
+| **Lereng** | Cibodas | -6.7308 | 107.0026 | ~1,800 m |
 | **Hilir** | Cianjur | -6.8160 | 107.1330 | ~500 m |
 
 ## 2.2 Variabel yang Diambil dari ERA5
 
-### Variabel Target:
+### Variabel Target (3 Output):
 | Variabel | Unit | Deskripsi |
 |----------|------|-----------|
 | `precipitation` | mm/jam | Curah hujan total per jam |
+| `wind_speed_10m` | m/s | Kecepatan angin permukaan |
+| `relative_humidity_2m` | % | Kelembapan relatif permukaan |
+*(Note: Temperature dihapus dari target karena isu mode collapse)*
 
 ### Variabel Fitur (Dynamic):
 | Variabel | Unit | Deskripsi | Mengapa Penting |
@@ -447,10 +453,15 @@ pred = 0.4 × precip_lag + 0.6 × model_P90 × 3
 | 0.4 | **0.87** | **0.91** | ✅ Best balance |
 | 0.7 | 0.92 | 1.17 | Over-predict dry hours |
 
-**w=0.4 dipilih karena:**
-- RMSE terbaik (0.87mm, 11% improvement)
-- Spike detection +57% (0.58 → 0.91mm)
-- Tidak terlalu over-predict saat kering
+**Optimized Hybrid Weights (Final):**
+- **Precipitation:** w_lag = **0.90** (Maximized spike detection >60%)
+- **Wind Speed:** w_lag = **0.90** (Correlation ~0.81)
+- **Humidity:** w_lag = **0.70** (Correlation ~0.83)
+
+**w=0.90 (Precip) dipilih karena:**
+- Correlation maximal: **0.387**
+- Spike detection rate: **>63%** (vs 33% pada weight rendah)
+- Trade-off terbaik antar akurasi dan safety.
 
 ---
 
@@ -505,22 +516,21 @@ t_std = original_std * T_STD_MULTIPLIER  # 0.36 → 1.80
 
 # BAGIAN 6: HASIL AKHIR
 
-## 6.1 Metrics Summary
+## 6.1 Metrics Summary (Final 3-Variable Model)
 
-| Eksperimen | RMSE | Avg Pred (R>2mm) | Status |
-|------------|------|------------------|--------|
-| Model Original | 0.98mm | 0.58mm | Under-predict |
-| Persistence Only | 0.90mm | 1.00mm | Over-predict |
-| **Hybrid (w=0.4)** | **0.87mm** | **0.91mm** | ✅ Optimal |
-| MLP Baseline | 0.97mm | 0.42mm | Also fails |
+| Variabel | Configuration | Correlation | Status |
+|----------|---------------|-------------|--------|
+| **Precipitation** | Hybrid (w=0.90) | **0.387** | ✅ READY (High Spike Det.) |
+| **Wind Speed** | Hybrid (w=0.90) | **0.814** | ✅ READY (High Corr) |
+| **Humidity** | Hybrid (w=0.70) | **0.827** | ✅ READY (High Corr) |
 
 ## 6.2 Key Achievements
 
-1. **✅ Arsitektur lengkap:** Diffusion + GNN + Retrieval
-2. **✅ Pipeline end-to-end:** Data → Training → Inference → Eval
-3. **✅ Probabilistic output:** N=50-100 samples per prediction
-4. **✅ Spike improvement:** +57% pada high precipitation
-5. **✅ Documented trade-off:** Model vs Persistence
+1.  **✅ Arsitektur lengkap:** Diffusion + GNN + Retrieval (3 Outputs)
+2.  **✅ Pipeline end-to-end:** Data → Training → Inference → Eval
+3.  **✅ Probabilistic output:** N=50 samples per prediction
+4.  **✅ Optimized Weights:** Menemukan sweet spot untuk setiap variabel
+5.  **✅ Documented trade-off:** Model vs Persistence secara transparan
 
 ## 6.3 Framing untuk Thesis
 

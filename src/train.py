@@ -29,7 +29,7 @@ import pandas as pd
 import numpy as np
 from tqdm import tqdm
 
-from src.data.ingest import fetch_era5_data, SITARO_NODES
+from src.data.ingest import fetch_era5_data, PANGRANGO_NODES
 from src.data.temporal_loader import TemporalGraphDataset, collate_temporal_graphs
 from src.models.diffusion import ConditionalDiffusionModel, RainForecaster
 from src.models.gnn import SpatioTemporalGNN
@@ -311,7 +311,7 @@ def train_pipeline():
     # ===================================================================
     print("\n[6/8] Initializing Models...")
     
-    NUM_NODES = len(SITARO_NODES)
+    NUM_NODES = len(PANGRANGO_NODES)
     RETRIEVAL_DIM = CONTEXT_DIM * K_NEIGHBORS
     
     # Spatio-Temporal GNN (GAT + TemporalAttention)
