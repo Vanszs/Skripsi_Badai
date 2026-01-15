@@ -21,14 +21,17 @@ class TemporalGraphDataset(Dataset):
     
     Each sample: (graph_sequence, target, retrieval_context)
     - graph_sequence: List[Data] of length seq_len
-    - target: precipitation value to predict
+    - target: [4] tensor with (precipitation, temperature, wind_speed, humidity)
     - retrieval_context: flattened features for FAISS query
     """
+    
+    # Multi-output target columns
+    TARGET_COLS = ['precipitation', 'wind_speed_10m', 'relative_humidity_2m']  # 3 vars, excluded temperature
     
     def __init__(self, 
                  df: pd.DataFrame,
                  feature_cols: List[str],
-                 target_col: str = 'precipitation',
+                 target_cols: List[str] = None,  # Now multi-output
                  seq_len: int = 6,
                  node_names: List[str] = ['Puncak', 'Lereng_Cibodas', 'Hilir_Cianjur'],
                  edge_index: Optional[torch.Tensor] = None,
@@ -45,7 +48,8 @@ class TemporalGraphDataset(Dataset):
         """
         self.df = df.copy()
         self.feature_cols = feature_cols
-        self.target_col = target_col
+        self.target_cols = target_cols if target_cols else self.TARGET_COLS
+        self.num_targets = len(self.target_cols)
         self.seq_len = seq_len
         self.node_names = node_names
         self.num_nodes = len(node_names)
@@ -89,18 +93,19 @@ class TemporalGraphDataset(Dataset):
             
             # Ensure correct node order
             node_features = []
-            node_targets = []
+            node_targets = []  # Now [Nodes, num_targets]
             for node in self.node_names:
                 node_row = ts_df[ts_df['node'] == node]
                 if len(node_row) > 0:
                     features = node_row[self.feature_cols].values[0]
-                    target = node_row[self.target_col].values[0]
+                    # Multi-output: get all target columns
+                    targets = [node_row[col].values[0] for col in self.target_cols]
                 else:
                     # Missing node: use zeros
                     features = np.zeros(len(self.feature_cols))
-                    target = 0.0
+                    targets = [0.0] * self.num_targets
                 node_features.append(features)
-                node_targets.append(target)
+                node_targets.append(targets)
             
             feature_data.append(node_features)
             target_data.append(node_targets)
@@ -110,7 +115,7 @@ class TemporalGraphDataset(Dataset):
         # Shape: [Timestamps, Nodes, Features]
         
         self.targets = torch.tensor(np.array(target_data), dtype=torch.float32)
-        # Shape: [Timestamps, Nodes]
+        # Shape: [Timestamps, Nodes, num_targets] for multi-output
         
         # Apply normalization if stats provided
         if self.stats:
@@ -123,19 +128,25 @@ class TemporalGraphDataset(Dataset):
         print(f"   Timestamps: {self.num_timestamps}")
         print(f"   Nodes: {self.num_nodes}")
         print(f"   Features: {len(self.feature_cols)}")
+        print(f"   Targets: {self.num_targets} ({self.target_cols})")
         print(f"   Valid samples: {len(self.valid_indices)}")
         
     def _normalize(self):
-        """Apply log transform and z-score normalization."""
-        # Log transform targets
-        self.targets_log = torch.log1p(self.targets)
+        """Apply appropriate transform and z-score normalization for multi-output."""
+        # targets shape: [Timestamps, Nodes, num_targets]
+        # Apply log1p only to precipitation (index 0), not to other variables
+        self.targets_transformed = self.targets.clone()
+        self.targets_transformed[:, :, 0] = torch.log1p(self.targets[:, :, 0])  # precip
+        # Other variables (temp, wind, humidity) - no log transform
         
-        t_mean = self.stats.get('t_mean', self.targets_log.mean())
-        t_std = self.stats.get('t_std', self.targets_log.std())
+        # Get stats - now should be [num_targets] tensors
+        t_mean = self.stats.get('t_mean', self.targets_transformed.mean(dim=(0, 1)))
+        t_std = self.stats.get('t_std', self.targets_transformed.std(dim=(0, 1)))
         c_mean = self.stats.get('c_mean', self.features.mean(dim=(0, 1)))
         c_std = self.stats.get('c_std', self.features.std(dim=(0, 1)))
         
-        self.targets_norm = (self.targets_log - t_mean) / (t_std + 1e-5)
+        # Normalize each target variable
+        self.targets_norm = (self.targets_transformed - t_mean) / (t_std + 1e-5)
         self.features_norm = (self.features - c_mean) / (c_std + 1e-5)
         
     def __len__(self) -> int:
@@ -145,7 +156,7 @@ class TemporalGraphDataset(Dataset):
         """
         Returns:
             graphs: List of PyG Data objects for the sequence
-            target: Target precipitation [Nodes] or [1] (mean over nodes)
+            target: [num_targets] tensor (mean over nodes)
             context: Flattened features for retrieval [Features]
         """
         # Get the actual timestamp index
@@ -169,11 +180,12 @@ class TemporalGraphDataset(Dataset):
             )
             graphs.append(graph)
         
-        # Target: precipitation at time t (mean over nodes for simplicity)
+        # Target: multi-output at time t (mean over nodes)
+        # Shape: [num_targets]
         if hasattr(self, 'targets_norm'):
-            target = self.targets_norm[t].mean()  # Scalar
+            target = self.targets_norm[t].mean(dim=0)  # [num_targets]
         else:
-            target = self.targets[t].mean()
+            target = self.targets[t].mean(dim=0)
             
         # Context for retrieval: use last timestep features (flattened)
         if hasattr(self, 'features_norm'):
@@ -181,7 +193,7 @@ class TemporalGraphDataset(Dataset):
         else:
             context = self.features[t-1].mean(dim=0)
             
-        return graphs, target.unsqueeze(0), context
+        return graphs, target, context  # target is now [num_targets]
 
 
 def collate_temporal_graphs(batch: List[Tuple]) -> Tuple[List[Batch], torch.Tensor, torch.Tensor]:
@@ -193,7 +205,7 @@ def collate_temporal_graphs(batch: List[Tuple]) -> Tuple[List[Batch], torch.Tens
         
     Returns:
         batched_graphs: List[Batch] of length seq_len, each Batch contains all samples
-        targets: [Batch_Size, 1]
+        targets: [Batch_Size, num_targets]  # Multi-output
         contexts: [Batch_Size, Features]
     """
     seq_len = len(batch[0][0])

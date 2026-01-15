@@ -25,14 +25,25 @@ class ConditionalDiffusionModel(nn.Module):
     - Retrieval conditioning (FAISS neighbors)
     - Graph conditioning (Spatio-Temporal GNN output) [NEW]
     
+    MULTI-OUTPUT: Predicts 4 variables:
+    - precipitation (mm/jam)
+    - temperature_2m (°C)
+    - wind_speed_10m (m/s)
+    - relative_humidity_2m (%)
+    
     This satisfies the thesis requirement:
     "Retrieval-Augmented Diffusion Model dengan Spatio-Temporal Graph Conditioning"
     """
-    def __init__(self, input_dim=1, context_dim=64, retrieval_dim=32, 
+    
+    # Multi-output configuration
+    NUM_TARGETS = 3
+    TARGET_NAMES = ['precipitation', 'wind_speed_10m', 'relative_humidity_2m']
+    
+    def __init__(self, input_dim=3, context_dim=64, retrieval_dim=32, 
                  graph_dim=64, hidden_dim=64):
         """
         Args:
-            input_dim: Dimension of target (1 for precipitation)
+            input_dim: Dimension of target (4 for multi-output)
             context_dim: Dimension of current weather features
             retrieval_dim: Dimension of retrieved historical features (k * features)
             graph_dim: Dimension of graph embedding from SpatioTemporalGNN [NEW]
@@ -82,14 +93,14 @@ class ConditionalDiffusionModel(nn.Module):
     def forward(self, x, t, context, retrieved=None, graph_emb=None):
         """
         Args:
-            x: Noisy target [Batch, 1]
+            x: Noisy target [Batch, 4] for multi-output
             t: Timestep [Batch]
             context: Current weather features [Batch, Context_Dim]
             retrieved: Retrieved historical analogs [Batch, k, Features] or [Batch, k*Features]
             graph_emb: Spatio-Temporal graph embedding [Batch, Graph_Dim] [NEW]
         
         Returns:
-            Predicted noise [Batch, 1]
+            Predicted noise [Batch, 4] for multi-output
         """
         # Embeddings
         t_emb = self.time_mlp(t)
@@ -146,7 +157,7 @@ class RainForecaster:
         Single training step with DDPM loss.
         
         Args:
-            batch_rain_target: [B, 1] Actual rainfall (normalized)
+            batch_rain_target: [B, 4] Actual targets (normalized) - multi-output
             batch_condition: [B, C] Context features
             batch_retrieved: [B, k, F] Retrieved historical analogs
             batch_graph_emb: [B, G] Spatio-Temporal graph embedding [NEW]
@@ -197,7 +208,8 @@ class RainForecaster:
     @torch.no_grad()
     def sample(self, condition, retrieved=None, graph_emb=None, num_samples=1):
         """
-        Generate probabilistic rain predictions using reverse diffusion.
+        Generate probabilistic predictions using reverse diffusion.
+        MULTI-OUTPUT: Generates all 4 weather variables.
         
         Args:
             condition: [1, C] Current weather features
@@ -206,12 +218,13 @@ class RainForecaster:
             num_samples: Number of samples to generate (for probabilistic output)
         
         Returns:
-            Tensor [num_samples, 1]: Sampled rainfall values
+            Tensor [num_samples, 4]: Sampled values for 4 variables
         """
         self.model.eval()
         
-        # Start from random noise
-        x = torch.randn((num_samples, 1)).to(self.device)
+        # Start from random noise - MULTI-OUTPUT: 4 dimensions
+        num_targets = self.model.input_dim  # Should be 4
+        x = torch.randn((num_samples, num_targets)).to(self.device)
         
         # Expand conditioning to match num_samples and move to device
         cond_expanded = condition.repeat(num_samples, 1).to(self.device)

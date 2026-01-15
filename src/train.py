@@ -80,43 +80,67 @@ def temporal_split(df, train_end='2018-12-31', val_end='2021-12-31'):
     return train_df, val_df, test_df
 
 
-def compute_stats_from_train(train_df, feature_cols, target_col='precipitation'):
+def compute_stats_from_training(train_df, feature_cols, target_col='precipitation'):
     """
     Compute normalization stats ONLY from training data.
     
     CRITICAL: Stats harus dari training set saja untuk mencegah data leakage!
     Validation dan test set dinormalisasi dengan stats yang sama dari training.
     
+    Now supports MULTI-OUTPUT: 4 target variables.
+    
     Args:
         train_df: DataFrame training SAJA
         feature_cols: List of feature column names
-        target_col: Target column name
+        target_col: Not used anymore, kept for compatibility
     
     Returns:
-        dict with t_mean, t_std, c_mean, c_std
+        dict with t_mean, t_std (both [4] tensors), c_mean, c_std
     """
-    # Target stats (with log transform)
-    target_values = train_df[target_col].values
-    target_log = np.log1p(target_values)
-    t_mean = torch.tensor(target_log.mean(), dtype=torch.float32)
-    t_std = torch.tensor(target_log.std(), dtype=torch.float32)
+    # MULTI-OUTPUT: 4 target variables
+    TARGET_COLS = ['precipitation', 'wind_speed_10m', 'relative_humidity_2m']  # 3 vars, excluded temperature
     
-    # CRITICAL: Multiply t_std to expand model output range
-    # Original t_std ~0.36 limits diffusion output to 0-0.8mm
-    # Multiplier allows model to predict higher values
-    T_STD_MULTIPLIER = 5.0  # Expand to ~1.8, allowing range 0-10mm+
-    t_std = t_std * T_STD_MULTIPLIER
+    # Compute stats per target variable
+    t_means = []
+    t_stds = []
     
-    # Feature stats
+    for i, col in enumerate(TARGET_COLS):
+        values = train_df[col].values
+        
+        if col == 'precipitation':
+            # Log transform for precipitation only
+            values_transformed = np.log1p(values)
+            mean_val = values_transformed.mean()
+            std_val = values_transformed.std()
+            # Apply T_STD_MULTIPLIER only to precipitation
+            T_STD_MULTIPLIER = 5.0
+            std_val = std_val * T_STD_MULTIPLIER
+        else:
+            # No log transform for temp, wind, humidity
+            mean_val = values.mean()
+            std_val = values.std()
+        
+        t_means.append(mean_val)
+        t_stds.append(std_val)
+    
+    t_mean = torch.tensor(t_means, dtype=torch.float32)  # [4]
+    t_std = torch.tensor(t_stds, dtype=torch.float32)    # [4]
+    
+    # Feature stats (unchanged)
     feature_values = train_df[feature_cols].values
     c_mean = torch.tensor(feature_values.mean(axis=0), dtype=torch.float32)
     c_std = torch.tensor(feature_values.std(axis=0), dtype=torch.float32)
+    
+    print(f"[Multi-Output Stats] Target variables: {TARGET_COLS}")
+    print(f"   t_mean: {t_mean.tolist()}")
+    print(f"   t_std:  {t_std.tolist()}")
     
     return {
         't_mean': t_mean,
         't_std': t_std,
         'c_mean': c_mean,
-        'c_std': c_std
+        'c_std': c_std,
+        'target_cols': TARGET_COLS  # Save for reference
     }
 
 
@@ -209,9 +233,9 @@ def train_pipeline():
     # ===================================================================
     print("\n[3/8] Computing Normalization Stats (from TRAINING only)...")
     
-    stats = compute_stats_from_train(train_df, feature_cols)
-    print(f"   Target mean (log): {stats['t_mean']:.4f}")
-    print(f"   Target std (log):  {stats['t_std']:.4f}")
+    stats = compute_stats_from_training(train_df, feature_cols)
+    print(f"   Target means: {stats['t_mean'].tolist()}")
+    print(f"   Target stds:  {stats['t_std'].tolist()}")
     print(f"   ⚠️  These stats computed ONLY from training data!")
     
     # ===================================================================
@@ -302,9 +326,10 @@ def train_pipeline():
     
     print(f"   SpatioTemporalGNN: {sum(p.numel() for p in st_gnn.parameters()):,} params")
     
-    # Conditional Diffusion Model
+    # Conditional Diffusion Model - MULTI-OUTPUT (4 targets)
+    NUM_TARGETS = 3  # precipitation, wind, humidity (excluded temperature)
     diff_model = ConditionalDiffusionModel(
-        input_dim=1,
+        input_dim=NUM_TARGETS,  # MULTI-OUTPUT
         context_dim=CONTEXT_DIM,
         retrieval_dim=RETRIEVAL_DIM,
         graph_dim=GRAPH_DIM,
@@ -439,7 +464,10 @@ def train_pipeline():
                     'num_nodes': NUM_NODES,
                     'feature_cols': feature_cols,
                     'train_end': TRAIN_END,
-                    'val_end': VAL_END
+                    'val_end': VAL_END,
+                    # MULTI-OUTPUT config
+                    'num_targets': NUM_TARGETS,
+                    'target_cols': ['precipitation', 'wind_speed_10m', 'relative_humidity_2m']
                 }
             }
             torch.save(checkpoint, "models/diffusion_chkpt.pth")
