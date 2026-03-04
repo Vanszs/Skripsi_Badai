@@ -27,9 +27,6 @@ PANGRANGO_NODES = pd.DataFrame({
     'lon': [106.963583, 106.987160, 107.133000]
 })
 
-# Alias for backward compatibility (Deprecated)
-SITARO_NODES = PANGRANGO_NODES
-
 
 
 def fetch_elevation(nodes_df):
@@ -37,8 +34,8 @@ def fetch_elevation(nodes_df):
     Fetch elevation data from Open-Meteo Elevation API.
     Returns dict: {node_name: elevation_meters}
     
-    Note: For volcanic Sitaro islands, elevation > 0 indicates land.
-    This is scientifically valid for steep volcanic terrain without deltas.
+    Note: Untuk kawasan Gunung Gede-Pangrango, elevation > 0 menandakan daratan.
+    Valid untuk topografi vulkanik pegunungan.
     """
     lats = ",".join([str(lat) for lat in nodes_df['lat']])
     lons = ",".join([str(lon) for lon in nodes_df['lon']])
@@ -63,18 +60,18 @@ def fetch_elevation(nodes_df):
 def derive_land_sea_mask(elevation):
     """
     Derive land-sea mask from elevation.
-    For volcanic Sitaro islands with steep coastlines:
+    Untuk kawasan Gunung Gede-Pangrango:
       elevation > 0  →  1 (land)
       elevation <= 0 →  0 (sea)
     
-    This is valid for volcanic island topography without deltas or estuaries.
+    Valid untuk topografi vulkanik pegunungan.
     """
     return 1 if elevation > 0 else 0
 
 
 def fetch_era5_data(start_year=2005, end_year=2025, interval="hourly"):
     """
-    Fetch ERA5 Reanalysis data for Sitaro Region.
+    Fetch ERA5 Reanalysis data for kawasan Gunung Gede-Pangrango.
     
     Features added:
     - elevation (static, from Elevation API)
@@ -167,7 +164,7 @@ def fetch_era5_data(start_year=2005, end_year=2025, interval="hourly"):
     
     # --- STEP 5: Save ---
     os.makedirs('data/raw', exist_ok=True)
-    output_path = f'data/raw/sitaro_era5_{start_year}_{end_year}.parquet'
+    output_path = f'data/raw/pangrango_era5_{start_year}_{end_year}.parquet'
     combined_df.to_parquet(output_path)
     
     print(f"\n✅ Data saved to {output_path}")

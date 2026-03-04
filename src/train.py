@@ -35,6 +35,10 @@ from src.models.diffusion import ConditionalDiffusionModel, RainForecaster
 from src.models.gnn import SpatioTemporalGNN
 from src.retrieval.base import RetrievalDatabase
 
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+
 
 # ==============================================================================
 # TEMPORAL SPLIT FUNCTION - CRITICAL FOR PREVENTING DATA LEAKAGE
@@ -201,9 +205,8 @@ def train_pipeline():
         'surface_pressure',
         'wind_speed_10m',
         'wind_direction_10m',
-        'cloudcover',
+        'cloud_cover',
         'precipitation_lag1',
-        'precipitation_lag3',
         'elevation',
     ]
     
@@ -351,6 +354,8 @@ def train_pipeline():
     print(f"   Epochs: {EPOCHS}")
     
     best_val_loss = float('inf')
+    train_losses = []
+    val_losses = []
     
     for epoch in range(EPOCHS):
         # --- Training Phase ---
@@ -412,6 +417,7 @@ def train_pipeline():
             progress_bar.set_postfix(loss=f"{loss.item():.4f}")
         
         avg_train_loss = train_loss / len(train_loader)
+        train_losses.append(avg_train_loss)
         
         # --- Validation Phase ---
         st_gnn.eval()
@@ -441,6 +447,7 @@ def train_pipeline():
                 val_loss += forecaster.criterion(noise_pred, noise).item()
         
         avg_val_loss = val_loss / len(val_loader)
+        val_losses.append(avg_val_loss)
         
         print(f"   Epoch {epoch+1}/{EPOCHS} | Train Loss: {avg_train_loss:.4f} | Val Loss: {avg_val_loss:.4f}")
         
@@ -473,7 +480,44 @@ def train_pipeline():
             torch.save(checkpoint, "models/diffusion_chkpt.pth")
     
     # ===================================================================
-    # STEP 9: Final Summary
+    # STEP 9: Save Loss Curves
+    # ===================================================================
+    os.makedirs("results/training_logs", exist_ok=True)
+    
+    fig, axes = plt.subplots(1, 2, figsize=(12, 5))
+    axes[0].plot(range(1, len(train_losses)+1), train_losses, 'b-', label='Train Loss')
+    axes[0].set_title('Diffusion Model - Training Loss')
+    axes[0].set_xlabel('Epoch')
+    axes[0].set_ylabel('Loss')
+    axes[0].legend()
+    axes[0].grid(True)
+    
+    axes[1].plot(range(1, len(val_losses)+1), val_losses, 'r-', label='Validation Loss')
+    axes[1].set_title('Diffusion Model - Validation Loss')
+    axes[1].set_xlabel('Epoch')
+    axes[1].set_ylabel('Loss')
+    axes[1].legend()
+    axes[1].grid(True)
+    
+    plt.tight_layout()
+    plt.savefig("results/training_logs/training_loss_curve.png", dpi=150, bbox_inches='tight')
+    plt.close()
+    
+    # Also save combined loss curve
+    fig, ax = plt.subplots(figsize=(10, 6))
+    ax.plot(range(1, len(train_losses)+1), train_losses, 'b-', label='Train Loss')
+    ax.plot(range(1, len(val_losses)+1), val_losses, 'r-', label='Validation Loss')
+    ax.set_title('Diffusion Model - Training & Validation Loss')
+    ax.set_xlabel('Epoch')
+    ax.set_ylabel('Loss')
+    ax.legend()
+    ax.grid(True)
+    plt.tight_layout()
+    plt.savefig("results/training_logs/validation_loss_curve.png", dpi=150, bbox_inches='tight')
+    plt.close()
+    
+    # ===================================================================
+    # STEP 10: Final Summary
     # ===================================================================
     print("\n[8/8] Training Complete!")
     print("\n" + "=" * 70)

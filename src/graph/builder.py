@@ -2,7 +2,7 @@ import torch
 from torch_geometric.data import Data, Batch
 import numpy as np
 
-class SitaroGraphBuilder:
+class PangrangoGraphBuilder:
     def __init__(self, nodes_meta):
         """
         nodes_meta: DataFrame or list of dicts with 'lat', 'lon'

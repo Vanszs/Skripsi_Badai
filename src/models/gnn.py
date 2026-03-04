@@ -6,7 +6,7 @@ This module implements:
 2. TemporalAttention - Self-attention for temporal sequences
 
 Scientific Justification:
-- Sitaro is an archipelago (3 islands), requiring graph representation
+- Gunung Gede-Pangrango memiliki 3 node observasi (Puncak, Lereng, Hilir)
 - Weather patterns propagate via wind (directed edges)
 - Temporal patterns are crucial for nowcasting
 """
@@ -49,7 +49,7 @@ class TemporalAttention(nn.Module):
 
 class SpatialGNN(nn.Module):
     """
-    Graph Attention Network for spatial dependencies across Sitaro islands.
+    Graph Attention Network for spatial dependencies across Gunung Gede-Pangrango nodes.
     Uses GAT to learn weighted message passing based on node features.
     """
     def __init__(self, input_dim, hidden_dim, output_dim, num_heads=4):
@@ -181,9 +181,9 @@ class SimpleGraphEncoder(nn.Module):
 
 
 # Helper function to create graph from node features
-def create_sitaro_graph(node_features, edge_index, edge_attr=None):
+def create_pangrango_graph(node_features, edge_index, edge_attr=None):
     """
-    Create a PyG Data object for Sitaro islands.
+    Create a PyG Data object for Gunung Gede-Pangrango nodes.
     
     node_features: Tensor [Num_Nodes, Features]
     edge_index: Tensor [2, Num_Edges]
