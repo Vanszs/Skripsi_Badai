@@ -158,10 +158,10 @@ def train_pipeline():
     # STEP 1: Configuration
     # ===================================================================
     SEQ_LEN = 6         # 6 timesteps in each sequence
-    BATCH_SIZE = 256    # Increased for maximum speed
-    EPOCHS = 20         # Training epochs (reduced for faster iteration)
-    HIDDEN_DIM = 128    # Hidden dimension (Phase 2)
-    GRAPH_DIM = 64      # Graph embedding dimension (Phase 2)
+    BATCH_SIZE = 512    # Maximized for RTX 3050 4GB
+    EPOCHS = 20         # Training epochs
+    HIDDEN_DIM = 128    # Hidden dimension
+    GRAPH_DIM = 64      # Graph embedding dimension
     K_NEIGHBORS = 3     # FAISS neighbors
     
     # Temporal split boundaries
@@ -169,12 +169,18 @@ def train_pipeline():
     VAL_END = '2021-12-31'
     
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    
+    # GPU optimizations
+    if torch.cuda.is_available():
+        torch.backends.cudnn.benchmark = True
+        torch.backends.cuda.matmul.allow_tf32 = True
+        torch.backends.cudnn.allow_tf32 = True
     print(f"\n[Config]")
     print(f"   Device: {device}")
     print(f"   Sequence Length: {SEQ_LEN}")
-    print(f"   Batch Size: {BATCH_SIZE} (Optimized)")
-    print(f"   Epochs: {EPOCHS} (Phase 2)")
-    print(f"   Hidden Dim: {HIDDEN_DIM} (Phase 2)")
+    print(f"   Batch Size: {BATCH_SIZE}")
+    print(f"   Epochs: {EPOCHS}")
+    print(f"   Hidden Dim: {HIDDEN_DIM}")
     print(f"   Train Period: 2005-01-01 to {TRAIN_END}")
     print(f"   Val Period: {TRAIN_END[:-2]}01 to {VAL_END}")
     print(f"   Test Period: {VAL_END[:-2]}01 to 2025-12-31")
@@ -262,30 +268,29 @@ def train_pipeline():
         stats=stats  # SAME stats from training
     )
     
-    # Optimizing DataLoaders
-    cnt_cpu = os.cpu_count()
-    num_workers = min(4, cnt_cpu) if cnt_cpu else 0
-    print(f"   DataLoader Workers: {num_workers}")
+    # On Windows, num_workers > 0 with custom collate + multiprocessing overhead is slow
+    num_workers = 0
+    print(f"   DataLoader Workers: {num_workers} (Windows optimized)")
 
-    # DataLoaders
+    # DataLoaders with drop_last for consistent batch sizes
     train_loader = torch.utils.data.DataLoader(
         train_dataset,
         batch_size=BATCH_SIZE,
-        shuffle=True,  # Shuffle WITHIN training set is OK
+        shuffle=True,
         collate_fn=collate_temporal_graphs,
         num_workers=num_workers,
         pin_memory=True,
-        persistent_workers=(num_workers > 0)
+        drop_last=True
     )
     
     val_loader = torch.utils.data.DataLoader(
         val_dataset,
         batch_size=BATCH_SIZE,
-        shuffle=False,  # NO shuffle for validation!
+        shuffle=False,
         collate_fn=collate_temporal_graphs,
         num_workers=num_workers,
         pin_memory=True,
-        persistent_workers=(num_workers > 0)
+        drop_last=False
     )
     
     print(f"   Training samples: {len(train_dataset)}")
@@ -293,7 +298,7 @@ def train_pipeline():
     print(f"   Training batches/epoch: {len(train_loader)}")
     
     # ===================================================================
-    # STEP 6: Build Retrieval Database FROM TRAINING ONLY
+    # STEP 6: Build Retrieval Database & PRE-COMPUTE all queries
     # ===================================================================
     print("\n[5/8] Building Retrieval Database (from TRAINING only)...")
     
@@ -302,12 +307,63 @@ def train_pipeline():
     # Get training features and normalize with training stats
     train_features = train_df[feature_cols].values
     train_features_norm = (train_features - stats['c_mean'].numpy()) / (stats['c_std'].numpy() + 1e-5)
+    train_features_norm = train_features_norm.astype(np.float32)
     
-    # Index ONLY training data
+    # Build FAST IVF index for pre-computation (approximate but ~100x faster)
+    import faiss
+    nlist = 256  # number of Voronoi cells
+    quantizer = faiss.IndexFlatL2(CONTEXT_DIM)
+    fast_index = faiss.IndexIVFFlat(quantizer, CONTEXT_DIM, nlist, faiss.METRIC_L2)
+    fast_index.train(train_features_norm)
+    fast_index.add(train_features_norm)
+    fast_index.nprobe = 16  # search 16 cells (speed/accuracy tradeoff)
+    print(f"   Built IVF index: {fast_index.ntotal:,} items, {nlist} cells")
+    
+    # Store the data for retrieval lookup
+    stored_data = train_features_norm.copy()
+    
+    # PRE-COMPUTE all FAISS queries (eliminates GPU<->CPU sync during training)
+    print("   Pre-computing retrieval for all train/val samples...")
+    
+    def precompute_retrieval_fast(dataset, index, data, k, chunk_size=16384):
+        """Extract contexts and batch-query fast IVF index."""
+        valid_indices = dataset.valid_indices
+        t_minus_1 = np.array(valid_indices) - 1
+        if hasattr(dataset, 'features_norm'):
+            all_contexts = dataset.features_norm[t_minus_1].mean(dim=1)
+        else:
+            all_contexts = dataset.features[t_minus_1].mean(dim=1)
+        
+        contexts_np = all_contexts.numpy().astype(np.float32)
+        n = len(contexts_np)
+        
+        all_retrieved = []
+        for start in range(0, n, chunk_size):
+            end = min(start + chunk_size, n)
+            chunk = contexts_np[start:end]
+            _, indices = index.search(chunk, k)
+            # Clamp invalid indices
+            indices = np.clip(indices, 0, len(data) - 1)
+            retrieved_chunk = data[indices]  # [chunk, k, dim]
+            all_retrieved.append(torch.tensor(retrieved_chunk, dtype=torch.float32))
+        
+        retrieved = torch.cat(all_retrieved, dim=0)
+        if retrieved.ndim == 3:
+            retrieved = retrieved.view(retrieved.shape[0], -1)
+        return retrieved
+    
+    train_retrieved = precompute_retrieval_fast(train_dataset, fast_index, stored_data, K_NEIGHBORS)
+    train_dataset.set_precomputed_retrieval(train_retrieved)
+    print(f"   Train retrieval: {train_retrieved.shape}")
+    
+    val_retrieved = precompute_retrieval_fast(val_dataset, fast_index, stored_data, K_NEIGHBORS)
+    val_dataset.set_precomputed_retrieval(val_retrieved)
+    print(f"   Val retrieval: {val_retrieved.shape}")
+    print(f"   FAISS queries eliminated from training loop!")
+    
+    # Also keep a small retrieval_db for inference compatibility
     retrieval_db = RetrievalDatabase(embedding_dim=CONTEXT_DIM)
     retrieval_db.add_items(train_features_norm, train_features_norm)
-    print(f"   Indexed {len(train_features_norm):,} training samples")
-    print(f"   ⚠️  Retrieval database contains ONLY training data!")
     
     # ===================================================================
     # STEP 7: Initialize Models
@@ -345,7 +401,7 @@ def train_pipeline():
     # Combined optimizer
     all_params = list(st_gnn.parameters()) + list(diff_model.parameters())
     optimizer = torch.optim.AdamW(all_params, lr=1e-3, weight_decay=1e-4)
-    scaler = torch.cuda.amp.GradScaler(enabled=use_amp)
+    scaler = torch.amp.GradScaler('cuda', enabled=use_amp)
     
     # ===================================================================
     # STEP 8: Training Loop with Validation
@@ -365,26 +421,22 @@ def train_pipeline():
         train_loss = 0
         progress_bar = tqdm(train_loader, desc=f"Epoch {epoch+1}/{EPOCHS} [Train]")
         
-        for batched_graphs, targets, contexts in progress_bar:
-            # Move to device
-            batched_graphs = [g.to(device) for g in batched_graphs]
-            targets = targets.to(device)
-            contexts = contexts.to(device)
+        for batched_graphs, targets, contexts, retrieved in progress_bar:
+            # Move to device (non_blocking for async CPU->GPU)
+            batched_graphs = [g.to(device, non_blocking=True) for g in batched_graphs]
+            targets = targets.to(device, non_blocking=True)
+            contexts = contexts.to(device, non_blocking=True)
+            retrieved = retrieved.to(device, non_blocking=True)
             
             # AMP Context
             with torch.amp.autocast('cuda', enabled=use_amp):
                 # 1. Get Spatio-Temporal Graph Embedding
                 graph_emb = st_gnn(batched_graphs)
                 
-                # 2. Get Retrieval (from TRAINING database)
-                # Retrieval is usually fast on CPU or GPU index, but logic here assumes retrieval_db is outside AMP
-                with torch.no_grad():
-                    context_np = contexts.cpu().float().numpy() # Ensure float32 for FAISS
-                    retrieved = retrieval_db.query(context_np, k=K_NEIGHBORS)
-                    retrieved = retrieved.to(device)
+                # 2. Retrieved neighbors already pre-computed (no FAISS call!)
                 
                 # 3. Diffusion training step
-                noise = torch.randn_like(targets).to(device)
+                noise = torch.randn_like(targets)
                 timesteps = torch.randint(0, 1000, (targets.shape[0],), device=device).long()
                 
                 noisy_target = forecaster.scheduler.add_noise(targets, noise, timesteps)
@@ -408,7 +460,7 @@ def train_pipeline():
                 loss = (error * weights).mean()
             
             # Scaler Step
-            optimizer.zero_grad()
+            optimizer.zero_grad(set_to_none=True)
             scaler.scale(loss).backward()
             scaler.step(optimizer)
             scaler.update()
@@ -425,18 +477,15 @@ def train_pipeline():
         
         val_loss = 0
         with torch.no_grad():
-            for batched_graphs, targets, contexts in val_loader:
-                batched_graphs = [g.to(device) for g in batched_graphs]
-                targets = targets.to(device)
-                contexts = contexts.to(device)
+            for batched_graphs, targets, contexts, retrieved in val_loader:
+                batched_graphs = [g.to(device, non_blocking=True) for g in batched_graphs]
+                targets = targets.to(device, non_blocking=True)
+                contexts = contexts.to(device, non_blocking=True)
+                retrieved = retrieved.to(device, non_blocking=True)
                 
                 graph_emb = st_gnn(batched_graphs)
                 
-                context_np = contexts.cpu().numpy()
-                retrieved = retrieval_db.query(context_np, k=K_NEIGHBORS)
-                retrieved = retrieved.to(device)
-                
-                noise = torch.randn_like(targets).to(device)
+                noise = torch.randn_like(targets)
                 timesteps = torch.randint(0, 1000, (targets.shape[0],), device=device).long()
                 noisy_target = forecaster.scheduler.add_noise(targets, noise, timesteps)
                 

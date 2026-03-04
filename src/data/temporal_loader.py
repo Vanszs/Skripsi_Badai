@@ -84,37 +84,43 @@ class TemporalGraphDataset(Dataset):
         self.timestamps = self.df['date'].unique()
         self.num_timestamps = len(self.timestamps)
         
-        # Create 3D tensor: [Timestamps, Nodes, Features]
-        feature_data = []
-        target_data = []
+        # ===== VECTORIZED 3D TENSOR CREATION =====
+        # Create node-to-index mapping for correct ordering
+        node_to_idx = {name: i for i, name in enumerate(self.node_names)}
+        self.df['_node_idx'] = self.df['node'].map(node_to_idx)
         
-        for ts in self.timestamps:
-            ts_df = self.df[self.df['date'] == ts]
-            
-            # Ensure correct node order
-            node_features = []
-            node_targets = []  # Now [Nodes, num_targets]
-            for node in self.node_names:
-                node_row = ts_df[ts_df['node'] == node]
-                if len(node_row) > 0:
-                    features = node_row[self.feature_cols].values[0]
-                    # Multi-output: get all target columns
-                    targets = [node_row[col].values[0] for col in self.target_cols]
-                else:
-                    # Missing node: use zeros
-                    features = np.zeros(len(self.feature_cols))
-                    targets = [0.0] * self.num_targets
-                node_features.append(features)
-                node_targets.append(targets)
-            
-            feature_data.append(node_features)
-            target_data.append(node_targets)
+        # Filter out rows with unmapped nodes
+        valid_df = self.df.dropna(subset=['_node_idx']).copy()
+        valid_df['_node_idx'] = valid_df['_node_idx'].astype(int)
+        
+        # Create timestamp-to-index mapping
+        ts_sorted = np.sort(self.timestamps)
+        self.timestamps = ts_sorted
+        ts_to_idx = {ts: i for i, ts in enumerate(ts_sorted)}
+        valid_df['_ts_idx'] = valid_df['date'].map(ts_to_idx)
+        
+        # Pre-allocate arrays
+        num_features = len(self.feature_cols)
+        feature_data = np.zeros((self.num_timestamps, self.num_nodes, num_features), dtype=np.float32)
+        target_data = np.zeros((self.num_timestamps, self.num_nodes, self.num_targets), dtype=np.float32)
+        
+        # Vectorized fill using advanced indexing
+        ts_indices = valid_df['_ts_idx'].values
+        node_indices = valid_df['_node_idx'].values
+        feature_data[ts_indices, node_indices] = valid_df[self.feature_cols].values.astype(np.float32)
+        
+        for k, col in enumerate(self.target_cols):
+            if col in valid_df.columns:
+                target_data[ts_indices, node_indices, k] = valid_df[col].values.astype(np.float32)
+        
+        # Clean up temporary columns
+        self.df.drop(columns=['_node_idx'], inplace=True, errors='ignore')
         
         # Convert to tensors
-        self.features = torch.tensor(np.array(feature_data), dtype=torch.float32)
+        self.features = torch.tensor(feature_data, dtype=torch.float32)
         # Shape: [Timestamps, Nodes, Features]
         
-        self.targets = torch.tensor(np.array(target_data), dtype=torch.float32)
+        self.targets = torch.tensor(target_data, dtype=torch.float32)
         # Shape: [Timestamps, Nodes, num_targets] for multi-output
         
         # Apply normalization if stats provided
@@ -149,15 +155,30 @@ class TemporalGraphDataset(Dataset):
         self.targets_norm = (self.targets_transformed - t_mean) / (t_std + 1e-5)
         self.features_norm = (self.features - c_mean) / (c_std + 1e-5)
         
+    def set_precomputed_retrieval(self, retrieved_tensor: torch.Tensor):
+        """
+        Store pre-computed FAISS retrieval results.
+        This eliminates the need for FAISS queries during training.
+        
+        Args:
+            retrieved_tensor: [num_samples, k*data_dim] or [num_samples, k, data_dim]
+        """
+        if retrieved_tensor.ndim == 3:
+            # Flatten k neighbors: [N, k, dim] -> [N, k*dim]
+            retrieved_tensor = retrieved_tensor.view(retrieved_tensor.shape[0], -1)
+        self.precomputed_retrieval = retrieved_tensor
+        print(f"   Pre-computed retrieval set: {retrieved_tensor.shape}")
+
     def __len__(self) -> int:
         return len(self.valid_indices)
     
-    def __getitem__(self, idx: int) -> Tuple[List[Data], torch.Tensor, torch.Tensor]:
+    def __getitem__(self, idx: int):
         """
         Returns:
             graphs: List of PyG Data objects for the sequence
             target: [num_targets] tensor (mean over nodes)
             context: Flattened features for retrieval [Features]
+            retrieved: (optional) pre-computed retrieval [k*data_dim]
         """
         # Get the actual timestamp index
         t = self.valid_indices[idx]
@@ -192,35 +213,44 @@ class TemporalGraphDataset(Dataset):
             context = self.features_norm[t-1].mean(dim=0)  # [Features]
         else:
             context = self.features[t-1].mean(dim=0)
+        
+        # Return pre-computed retrieval if available
+        if hasattr(self, 'precomputed_retrieval') and self.precomputed_retrieval is not None:
+            retrieved = self.precomputed_retrieval[idx]
+            return graphs, target, context, retrieved
             
-        return graphs, target, context  # target is now [num_targets]
+        return graphs, target, context
 
 
-def collate_temporal_graphs(batch: List[Tuple]) -> Tuple[List[Batch], torch.Tensor, torch.Tensor]:
+def collate_temporal_graphs(batch: List[Tuple]):
     """
     Custom collate function for batching temporal graph sequences.
+    Supports both 3-tuple (graphs, target, context) and 4-tuple 
+    (graphs, target, context, retrieved) formats.
     
-    Args:
-        batch: List of (graphs, target, context) tuples
-        
     Returns:
-        batched_graphs: List[Batch] of length seq_len, each Batch contains all samples
-        targets: [Batch_Size, num_targets]  # Multi-output
+        batched_graphs: List[Batch] of length seq_len
+        targets: [Batch_Size, num_targets]
         contexts: [Batch_Size, Features]
+        retrieved: [Batch_Size, k*data_dim] (optional, only if pre-computed)
     """
+    has_retrieval = len(batch[0]) == 4
     seq_len = len(batch[0][0])
-    batch_size = len(batch)
     
     # Initialize lists for each timestep
     timestep_graphs = [[] for _ in range(seq_len)]
     targets = []
     contexts = []
+    retrievals = [] if has_retrieval else None
     
-    for graphs, target, context in batch:
+    for sample in batch:
+        graphs = sample[0]
+        targets.append(sample[1])
+        contexts.append(sample[2])
         for t, g in enumerate(graphs):
             timestep_graphs[t].append(g)
-        targets.append(target)
-        contexts.append(context)
+        if has_retrieval:
+            retrievals.append(sample[3])
     
     # Batch graphs per timestep
     batched_graphs = [Batch.from_data_list(graphs) for graphs in timestep_graphs]
@@ -228,6 +258,10 @@ def collate_temporal_graphs(batch: List[Tuple]) -> Tuple[List[Batch], torch.Tens
     # Stack targets and contexts
     targets = torch.stack(targets)
     contexts = torch.stack(contexts)
+    
+    if has_retrieval:
+        retrievals = torch.stack(retrievals)
+        return batched_graphs, targets, contexts, retrievals
     
     return batched_graphs, targets, contexts
 
