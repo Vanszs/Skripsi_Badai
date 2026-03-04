@@ -491,7 +491,7 @@ t_std = original_std * T_STD_MULTIPLIER  # 0.36 → 1.80
 ## 5.3 Masalah #3: Lokasi Data Salah (Historical)
 
 ### Gejala:
-- Awalnya menggunakan data Sitaro (bukan Pangrango)
+- Awalnya menggunakan data lokasi lain (bukan Pangrango)
 
 ### Solusi:
 - Re-fetch data untuk koordinat Gede-Pangrango yang benar

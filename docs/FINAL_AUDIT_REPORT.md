@@ -71,7 +71,7 @@
 
 | Check | Status | Details |
 |-------|--------|---------|
-| "Sitaro" in code | ✅ None | Old location removed |
+| Location references | ✅ Clean | Only Pangrango references |
 | "Pangrango" consistent | ✅ Yes | Correct location |
 | Coordinates match | ✅ Yes | 3 nodes with correct lat/lon |
 

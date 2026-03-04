@@ -90,7 +90,7 @@ def load_model_and_stats(checkpoint_path="models/diffusion_chkpt.pth"):
     if num_targets is None:
         num_targets = config.get('input_dim', 4)
     
-    print(f"DEBUG: Initializing model with input_dim={num_targets}")
+    print(f"DEBUG: Initializing model with input_dim={num_targets}", flush=True)
     
     diff_model = ConditionalDiffusionModel(
         input_dim=num_targets,
@@ -219,15 +219,13 @@ def run_inference_real(features_norm, model_wrapper, stats, retrieval_db, num_sa
         retrieved_batch = retrieved.to(device)
         graph_emb_batch = graph_emb.to(device)
         
-        # Sample
-        # DEBUG: Print shapes
-        print(f"DEBUG: num_samples={num_samples}, input_dim={forecaster.model.input_dim}")
-        
-        samples = forecaster.sample(
+        # Sample (fast: 20 DDIM steps instead of 1000 DDPM steps)
+        samples = forecaster.sample_fast(
             condition=context_batch,
             retrieved=retrieved_batch,
             graph_emb=graph_emb_batch,
-            num_samples=num_samples
+            num_samples=num_samples,
+            num_inference_steps=20
         )
         # samples is [num_samples, 4] for multi-output
         # Columns: [precipitation, temperature, wind_speed, humidity]

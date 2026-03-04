@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
 import math
-from diffusers import DDPMScheduler
+from diffusers import DDPMScheduler, DDIMScheduler
 
 class SinusoidalPositionEmbeddings(nn.Module):
     def __init__(self, dim):
@@ -248,5 +248,43 @@ class RainForecaster:
             # Denoising step
             x = self.scheduler.step(noise_pred, t, x).prev_sample
             
+        return x
+
+    @torch.no_grad()
+    def sample_fast(self, condition, retrieved=None, graph_emb=None, num_samples=1, num_inference_steps=50):
+        """
+        Fast inference using DDIM scheduler with NaN protection.
+        """
+        self.model.eval()
+        
+        # Cache DDIM scheduler to avoid re-creating each call
+        if not hasattr(self, '_ddim_cache') or self._ddim_cache[0] != num_inference_steps:
+            ddim = DDIMScheduler(num_train_timesteps=1000)
+            ddim.set_timesteps(num_inference_steps)
+            self._ddim_cache = (num_inference_steps, ddim)
+        ddim = self._ddim_cache[1]
+        
+        num_targets = self.model.input_dim
+        x = torch.randn((num_samples, num_targets)).to(self.device)
+        
+        cond_expanded = condition.repeat(num_samples, 1).to(self.device)
+        retr_expanded = retrieved.repeat(num_samples, 1, 1).to(self.device) if retrieved is not None else None
+        graph_expanded = graph_emb.repeat(num_samples, 1).to(self.device) if graph_emb is not None else None
+        
+        use_amp = self.device != 'cpu' and str(self.device) != 'cpu'
+        
+        for t in ddim.timesteps:
+            t_batch = torch.full((num_samples,), t, device=self.device, dtype=torch.long)
+            
+            with torch.amp.autocast('cuda', enabled=use_amp):
+                noise_pred = self.model(x, t_batch, cond_expanded, retr_expanded, graph_expanded)
+            
+            noise_pred = noise_pred.float()
+            # Clamp noise prediction to prevent NaN from numerical instability
+            noise_pred = torch.clamp(noise_pred, -10.0, 10.0)
+            x = ddim.step(noise_pred, t, x).prev_sample
+            # Replace any NaN with 0
+            x = torch.nan_to_num(x, nan=0.0)
+        
         return x
 

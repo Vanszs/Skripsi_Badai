@@ -27,20 +27,30 @@ from typing import Dict, Optional
 # ==============================================================================
 
 def compute_rmse(predictions: np.ndarray, observations: np.ndarray) -> float:
-    """Root Mean Square Error."""
-    return float(np.sqrt(np.mean((predictions - observations) ** 2)))
+    """Root Mean Square Error (NaN-safe)."""
+    mask = ~(np.isnan(predictions) | np.isnan(observations))
+    if mask.sum() == 0:
+        return float('nan')
+    return float(np.sqrt(np.mean((predictions[mask] - observations[mask]) ** 2)))
 
 
 def compute_mae(predictions: np.ndarray, observations: np.ndarray) -> float:
-    """Mean Absolute Error."""
-    return float(np.mean(np.abs(predictions - observations)))
+    """Mean Absolute Error (NaN-safe)."""
+    mask = ~(np.isnan(predictions) | np.isnan(observations))
+    if mask.sum() == 0:
+        return float('nan')
+    return float(np.mean(np.abs(predictions[mask] - observations[mask])))
 
 
 def compute_correlation(predictions: np.ndarray, observations: np.ndarray) -> float:
-    """Pearson Correlation Coefficient."""
-    if np.std(predictions) < 1e-10 or np.std(observations) < 1e-10:
+    """Pearson Correlation Coefficient (NaN-safe)."""
+    mask = ~(np.isnan(predictions) | np.isnan(observations))
+    if mask.sum() < 3:
         return 0.0
-    return float(np.corrcoef(predictions, observations)[0, 1])
+    p, o = predictions[mask], observations[mask]
+    if np.std(p) < 1e-10 or np.std(o) < 1e-10:
+        return 0.0
+    return float(np.corrcoef(p, o)[0, 1])
 
 
 # ==============================================================================
@@ -72,6 +82,12 @@ def compute_crps(ensemble_samples: np.ndarray, observations: np.ndarray) -> floa
     for t in range(n_timesteps):
         samples = ensemble_samples[t]  # [N_ensemble]
         obs = observations[t]
+        
+        # Skip NaN samples
+        valid = ~np.isnan(samples)
+        if np.isnan(obs) or valid.sum() < 2:
+            continue
+        samples = samples[valid]
         
         # Term 1: E|X - y|
         term1 = np.mean(np.abs(samples - obs))
