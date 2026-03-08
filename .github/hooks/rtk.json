@@ -1,9 +1,19 @@
 {
 	"hooks": {
-		"UserPromptSubmit": [
+		"SessionStart": [
 			{
 				"type": "command",
-				"command": ""
+				"windows": "powershell -NoProfile -File .github\\hooks\\rtk-session.ps1",
+				"command": "echo '{\"hookSpecificOutput\":{\"hookEventName\":\"SessionStart\",\"additionalContext\":\"RTK active. Use rtk prefix: git→rtk git, cat→rtk read, grep→rtk grep, pytest→rtk pytest (60-90% token savings).\"}}'",
+				"timeout": 5
+			}
+		],
+		"PreToolUse": [
+			{
+				"type": "command",
+				"windows": "powershell -NoProfile -File .github\\hooks\\rtk-hook.ps1",
+				"command": "echo '{\"continue\":true}'",
+				"timeout": 10
 			}
 		]
 	}
