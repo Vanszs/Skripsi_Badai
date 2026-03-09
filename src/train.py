@@ -116,9 +116,7 @@ def compute_stats_from_training(train_df, feature_cols, target_col='precipitatio
             values_transformed = np.log1p(values)
             mean_val = values_transformed.mean()
             std_val = values_transformed.std()
-            # Apply T_STD_MULTIPLIER only to precipitation
-            T_STD_MULTIPLIER = 5.0
-            std_val = std_val * T_STD_MULTIPLIER
+            # Standard z-score — DDPM requires target ~ N(0,1)
         else:
             # No log transform for temp, wind, humidity
             mean_val = values.mean()
@@ -449,15 +447,8 @@ def train_pipeline():
                     graph_emb
                 )
                 
-                # Weighted MSE Loss Implementation
-                error = (noise_pred - noise) ** 2
-                
-                # Weighting scheme for extreme events
-                weights = torch.ones_like(error)
-                weights[targets.abs() > 1.0] = 5.0
-                weights[targets.abs() > 3.0] = 10.0
-                
-                loss = (error * weights).mean()
+                # Standard DDPM noise prediction loss: L = E[||ε - ε_θ(x_t, t)||²]
+                loss = torch.nn.functional.mse_loss(noise_pred, noise)
             
             # Scaler Step
             optimizer.zero_grad(set_to_none=True)

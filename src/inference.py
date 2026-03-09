@@ -26,8 +26,13 @@ def create_inference_graphs(condition_sequence, config, num_nodes=3, device='cpu
     # Create graph sequence
     graphs_sequence = []
     for t in range(seq_len):
-        node_features = condition_sequence[t].unsqueeze(0).repeat(num_nodes, 1)
-        graph = Data(x=node_features, edge_index=edge_index)
+        if condition_sequence.dim() == 3:
+            # Per-node data: [seq_len, num_nodes, features] — matches training
+            node_features = condition_sequence[t]  # [num_nodes, features]
+        else:
+            # Fallback: broadcast single vector to all nodes
+            node_features = condition_sequence[t].unsqueeze(0).expand(num_nodes, -1)
+        graph = Data(x=node_features.to(device), edge_index=edge_index)
         batch = Batch.from_data_list([graph])
         graphs_sequence.append(batch.to(device))
     

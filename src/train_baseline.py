@@ -110,9 +110,10 @@ def train_mlp_baseline():
     # ===================================================================
     SEQ_LEN = 6
     BATCH_SIZE = 256
-    EPOCHS = 50
+    EPOCHS = 100
     HIDDEN_DIM = 128
     LR = 1e-3
+    PATIENCE = 10
     
     TRAIN_END = '2018-12-31'
     VAL_END = '2021-12-31'
@@ -171,15 +172,17 @@ def train_mlp_baseline():
     NUM_TARGETS = 3
     
     model = MLPBaseline(input_dim=INPUT_DIM, hidden_dim=HIDDEN_DIM, num_targets=NUM_TARGETS).to(device)
-    optimizer = torch.optim.Adam(model.parameters(), lr=LR)
+    optimizer = torch.optim.AdamW(model.parameters(), lr=LR, weight_decay=1e-4)
+    scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=EPOCHS, eta_min=1e-5)
     criterion = nn.MSELoss()
     
     print(f"\n[4/5] Training MLP Baseline ({sum(p.numel() for p in model.parameters()):,} params)...")
     
     # ===================================================================
-    # Training Loop
+    # Training Loop (with Early Stopping)
     # ===================================================================
     best_val_loss = float('inf')
+    patience_counter = 0
     train_losses = []
     val_losses = []
     
@@ -216,6 +219,7 @@ def train_mlp_baseline():
         
         if avg_val < best_val_loss:
             best_val_loss = avg_val
+            patience_counter = 0
             os.makedirs("models", exist_ok=True)
             torch.save({
                 'model_state': model.state_dict(),
@@ -228,6 +232,13 @@ def train_mlp_baseline():
                 },
                 'stats': stats
             }, "models/mlp_baseline_chkpt.pth")
+        else:
+            patience_counter += 1
+            if patience_counter >= PATIENCE:
+                print(f"   Early stopping at epoch {epoch+1} (patience={PATIENCE})")
+                break
+        
+        scheduler.step()
     
     # ===================================================================
     # Evaluate on Test Set

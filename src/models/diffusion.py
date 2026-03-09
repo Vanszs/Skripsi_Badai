@@ -147,7 +147,8 @@ class RainForecaster:
     def __init__(self, model, device='cpu'):
         self.model = model.to(device)
         self.device = device
-        self.scheduler = DDPMScheduler(num_train_timesteps=1000)
+        # clip_sample=False: weather z-scores range [-4, +8], not [-1, 1] like images
+        self.scheduler = DDPMScheduler(num_train_timesteps=1000, clip_sample=False)
         self.optimizer = torch.optim.Adam(model.parameters(), lr=1e-3)
         self.criterion = nn.MSELoss()
 
@@ -259,7 +260,8 @@ class RainForecaster:
         
         # Cache DDIM scheduler to avoid re-creating each call
         if not hasattr(self, '_ddim_cache') or self._ddim_cache[0] != num_inference_steps:
-            ddim = DDIMScheduler(num_train_timesteps=1000)
+            # clip_sample=False: weather z-scores range [-4, +8], not [-1, 1] like images
+            ddim = DDIMScheduler(num_train_timesteps=1000, clip_sample=False)
             ddim.set_timesteps(num_inference_steps)
             self._ddim_cache = (num_inference_steps, ddim)
         ddim = self._ddim_cache[1]

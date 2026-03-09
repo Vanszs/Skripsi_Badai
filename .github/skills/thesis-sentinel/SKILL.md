@@ -1,6 +1,6 @@
 ---
 name: thesis-sentinel
-description: "Specialized guardian for the Gede-Pangrango Thesis Project. Use this skill to validate model integrity (3 variables), verify hybrid weights (0.9/0.9/0.7), and ensure documentation consistency."
+description: "Specialized guardian for the Gede-Pangrango Thesis Project. Use this skill to validate model integrity (3 variables) and ensure documentation consistency. Hybrid persistence has been REMOVED from thesis scope."
 ---
 
 # Thesis Sentinel Skill
@@ -16,13 +16,12 @@ The system MUST always adhere to the **3-Variable Configuration**:
 - **Exclusion:** `temperature_2m` MUST be a *feature* only, NEVER a *target*.
 - **Nodes:** `PANGRANGO_NODES` (Puncak, Cibodas, Cianjur) - verify coordinates if suspicious.
 
-### 2. Hybrid Weight Calibration
-The inference logic (`src/inference.py`) MUST use the **Final Optimized Weights**:
-- **Precipitation:** `0.90` (High priority for spike detection)
-- **Wind Speed:** `0.90` (High correlation)
-- **Humidity:** `0.70` (Balanced)
+### 2. ~~Hybrid Weight Calibration~~ — DIHAPUS
+Hybrid persistence telah di-drop dari thesis. Thesis fokus pada **pure diffusion**
+(Retrieval-Augmented Diffusion + Spatio-Temporal Graph Conditioning vs MLP Baseline).
+`run_inference_hybrid()` di inference.py masih ada secara kode tetapi TIDAK digunakan.
 
-*If you see old weights (like 0.4 or 0.5), ALERT the user immediately.*
+*Jika user menyebut hybrid, ingatkan bahwa hybrid sudah dihapus dari scope thesis.*
 
 ### 3. Documentation Alignment
 Ensure `docs/COMPREHENSIVE_DOCUMENTATION.md` matches the code:

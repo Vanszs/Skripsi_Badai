@@ -1,6 +1,6 @@
 # Diagram dan Tabel Skripsi
 ## Retrieval-Augmented Diffusion Model dengan Spatio-Temporal Graph Conditioning
-### Nowcasting Probabilistik Hujan Lebat Gunung Gede-Pangrango
+### Nowcasting Probabilistik Cuaca Multi-Variabel Gunung Gede-Pangrango
 
 ---
 
@@ -65,13 +65,13 @@ Conditional Diffusion Model (DDPM)
 - Retrieval conditioning (FAISS)
 - Graph conditioning (ST-GNN)
 Optimizer: AdamW (lr=1e-3, wd=1e-4)
-Loss: Weighted MSE pada noise;
+Loss: Standard MSE pada noise;
 
 :=== **Inferensi** ===
 - DDIM Sampling (20 steps)
 - Ensemble 30 sampel
-- Hybrid Persistence Post-Processing
-  (w: 0.90 / 0.90 / 0.70);
+- Denormalisasi (clip_sample=False)
+- Clamp (precip>=0, humidity 0-100);
 
 :=== **Evaluasi** ===
 - Deterministik: RMSE, MAE, Correlation
@@ -342,12 +342,11 @@ OUT --> NOISE_PRED
 
 note right of NOISE_PRED
   **Loss:**
-  Weighted MSE(ε̂, ε)
+  Standard MSE(ε̂, ε)
   
-  Bobot lebih tinggi untuk
-  kejadian ekstrem:
-  - |target| > 1.0 → w = 5×
-  - |target| > 3.0 → w = 10×
+  F.mse_loss(noise_pred, noise)
+  tanpa weighting — sesuai
+  formulasi DDPM standar.
 end note
 
 note bottom of UNET
@@ -369,11 +368,10 @@ skinparam backgroundColor #FEFEFE
 skinparam shadowing false
 skinparam defaultFontName Arial
 
-title Proses Pembangkitan Ensemble pada Inferensi\n(DDIM Sampling + Hybrid Persistence)
+title Proses Pembangkitan Ensemble pada Inferensi\n(DDIM Sampling → Denormalisasi → Output)
 
 rectangle "**Input Kondisi**" as INPUT #E8F4FD {
   rectangle "Sequence Fitur\n[seq_len=6, features]\n(ternormalisasi)" as SEQ
-  rectangle "Lag Values\n(nilai t-1 aktual)" as LAG
 }
 
 rectangle "**Conditioning Pipeline**" as PIPE #BBDEFB {
@@ -387,7 +385,7 @@ SEQ --> FAISS
 SEQ --> CTX
 
 rectangle "**DDIM Reverse Sampling**\n(20 denoising steps)" as DDIM #FFF9C4 {
-  rectangle "x_T ~ N(0, I)\n[30 × 3]\n(30 sampel independen)" as NOISE
+  rectangle "x_T ~ N(0, I)\n[30 x 3]\n(30 sampel independen)" as NOISE
   rectangle "Iterasi t = T → 0:\nx_{t-1} = denoise(x_t, t, cond)" as LOOP
   rectangle "x₀: Raw Predictions\n[30 × 3]" as RAW
   
@@ -407,22 +405,15 @@ rectangle "**Denormalisasi**" as DENORM #C8E6C9 {
 RAW --> INV
 INV --> CLAMP
 
-rectangle "**Hybrid Persistence**" as HYBRID #FFCCBC {
-  rectangle "hybrid = (1-w)·model + w·lag\n\nprecip:   w = 0.90\nwind:     w = 0.90\nhumidity: w = 0.70" as COMBINE
-}
-
-CLAMP --> COMBINE
-LAG --> COMBINE
-
 rectangle "**Output Ensemble**\n[30 sampel per variabel]" as OUTPUT #E1BEE7 {
   rectangle "Median → Prediksi Deterministik" as MEDIAN
   rectangle "Spread → Interval Ketidakpastian\n(P10–P90)" as SPREAD
   rectangle "Distribusi → CRPS, Brier Score" as DIST
 }
 
-COMBINE --> MEDIAN
-COMBINE --> SPREAD
-COMBINE --> DIST
+CLAMP --> MEDIAN
+CLAMP --> SPREAD
+CLAMP --> DIST
 
 @enduml
 ```
@@ -469,14 +460,12 @@ OBS --> THRESH
 
 rectangle "**Analisis Trade-Off**" as TRADE #FFCCBC {
   rectangle "Akurasi Rata-Rata\nvs\nSensitivitas Kejadian Ekstrem" as TRADEOFF
-  rectangle "Pengaruh Hybrid Weight:\nw tinggi → akurasi rata-rata tinggi\n  (didominasi persistence)\nw rendah → lebih responsif ke model\n  (potensi deteksi spike lebih baik)" as HW
   rectangle "Perbandingan dengan\nMLP Baseline (deterministik)\n→ menunjukkan added value\n  pendekatan probabilistik" as BASELINE
 }
 
 DET --> TRADEOFF
 PROB --> TRADEOFF
 THRESH --> TRADEOFF
-TRADEOFF --> HW
 TRADEOFF --> BASELINE
 
 note bottom of THRESH
@@ -556,7 +545,7 @@ end note
 | Transformasi | `precipitation` | Log1p | $x' = \log(1 + x)$ — mengurangi skewness distribusi presipitasi |
 | Transformasi | `wind_speed_10m` | Tidak ada | Nilai asli digunakan langsung |
 | Transformasi | `relative_humidity_2m` | Tidak ada | Nilai asli digunakan langsung |
-| Normalisasi Target | `precipitation` | Z-score + multiplier | $z = \frac{x' - \mu}{\sigma \times 5.0}$, $\sigma$ dikalikan `T_STD_MULTIPLIER = 5.0` |
+| Normalisasi Target | `precipitation` | Z-score standar | $z = \frac{x' - \mu}{\sigma}$ — tanpa multiplier, target range N(0,1) |
 | Normalisasi Target | `wind_speed_10m`, `relative_humidity_2m` | Z-score standar | $z = \frac{x - \mu}{\sigma}$ |
 | Normalisasi Fitur | Semua fitur input | Z-score standar | $z = \frac{x - \mu_c}{\sigma_c + 10^{-5}}$ |
 | Lag Features | `precipitation_lag1` | Shift(1) per node | Presipitasi 1 jam sebelumnya, NaN diisi 0 |
@@ -613,37 +602,19 @@ end note
 | Learning rate | 1 × 10⁻³ | Untuk seluruh parameter (GNN + Diffusion) |
 | Weight decay | 1 × 10⁻⁴ | Regularisasi L2 |
 | Batch size | 512 | Dioptimalkan untuk RTX 3050 4GB VRAM |
-| Epochs | 20 | Dengan validasi per epoch |
+| Epochs (Diffusion) | 20 | Dengan validasi per epoch |
+| Epochs (MLP) | 51 | Early stopped (patience=10) |
 | Sequence length | 6 | 6 timestep per sliding window |
 | Mixed precision | AMP (FP16) | Otomatis jika GPU tersedia |
 | Gradient scaling | GradScaler | Untuk stabilitas AMP |
-| Loss function | Weighted MSE | Bobot lebih tinggi untuk kejadian ekstrem |
-| └ Bobot normal | 1.0× | \|target\| ≤ 1.0 |
-| └ Bobot ekstrem | 5.0× | \|target\| > 1.0 |
-| └ Bobot sangat ekstrem | 10.0× | \|target\| > 3.0 |
-| Early stopping | Berdasarkan val_loss | Simpan model terbaik |
+| Loss function | Standard MSE | `F.mse_loss(noise_pred, noise)` — DDPM standar |
+| Scheduler (MLP) | CosineAnnealingLR | Untuk MLP baseline |
+| Early stopping (MLP) | patience=10 | + best checkpoint selection |
+| Best val_loss (Diff) | 0.1210 | Checkpoint terbaik disimpan |
 
 ---
 
-### Tabel 7 — Parameter Hybrid Persistence
-
-| Variabel Target | Bobot Lag ($w$) | Bobot Model ($1-w$) | Formula | Justifikasi |
-|-----------------|-----------------|----------------------|---------|-------------|
-| `precipitation` | 0.90 | 0.10 | $\hat{y} = 0.10 \cdot f(x) + 0.90 \cdot y_{t-1}$ | Autokorelasi presipitasi >0.95 pada skala 1 jam; persistence sangat kuat untuk curah hujan |
-| `wind_speed_10m` | 0.90 | 0.10 | $\hat{y} = 0.10 \cdot f(x) + 0.90 \cdot y_{t-1}$ | Kecepatan angin memiliki persistensi tinggi pada resolusi per jam |
-| `relative_humidity_2m` | 0.70 | 0.30 | $\hat{y} = 0.30 \cdot f(x) + 0.70 \cdot y_{t-1}$ | Kelembapan lebih variabel; bobot model lebih besar untuk menangkap perubahan |
-
-**Catatan:**
-- Formula hybrid: $\hat{y}_{hybrid} = (1-w) \cdot \hat{y}_{model} + w \cdot y_{t-1}$
-- $f(x)$ adalah prediksi dari ensemble diffusion model (median)
-- $y_{t-1}$ adalah nilai observasi pada timestep sebelumnya
-- Bobot ditentukan secara empiris untuk mengoptimalkan deteksi spike events
-- Hybrid diterapkan pada **setiap sampel** dari ensemble, bukan hanya pada median
-- Setelah hybrid, nilai di-clamp: presipitasi ≥ 0, kelembapan ∈ [0, 100]
-
----
-
-### Tabel 8 — Metrik Evaluasi Model
+### Tabel 7 — Metrik Evaluasi Model
 
 | Kategori | Metrik | Formula | Tujuan |
 |----------|--------|---------|--------|
@@ -666,7 +637,7 @@ end note
 
 ---
 
-### Tabel 9 — Ambang Intensitas untuk Evaluasi Threshold
+### Tabel 8 — Ambang Intensitas untuk Evaluasi Threshold
 
 | Variabel | Ambang | Satuan | Kategori | Keterangan |
 |----------|--------|--------|----------|------------|

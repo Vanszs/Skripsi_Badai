@@ -20,7 +20,7 @@ jika anda membuat test file, setelah test langsung hapus saja.
 
 | Field | Nilai |
 |-------|-------|
-| **Judul Skripsi** | Nowcasting Probabilistik Hujan Lebat untuk Keselamatan Pendaki di Gunung Gede–Pangrango Menggunakan Retrieval-Augmented Diffusion Model dengan Spatio-Temporal Graph Conditioning |
+| **Judul Skripsi** | Nowcasting Probabilistik Cuaca Multi-Variabel untuk Mitigasi Risiko Pendakian di Gunung Gede–Pangrango Menggunakan Retrieval-Augmented Diffusion Model dengan Spatio-Temporal Graph Conditioning |
 | **Mahasiswa** | Bevantyo Satria Pinandhita (NPM 22081010153) |
 | **Pembimbing** | Faisal Muttaqin, S.Kom, M.T. & Andreas Nugroho Sihananto, S.Kom., M.Kom. |
 | **Universitas** | UPN Veteran Jawa Timur — Program Studi Informatika |
@@ -54,7 +54,7 @@ D:\SKRIPSI\Skripsi_Bevan\
 ├── src/
 │   ├── train.py                    ← Training diffusion + GNN
 │   ├── train_baseline.py           ← Training MLP baseline
-│   ├── inference.py                ← Hybrid inference engine
+│   ├── inference.py                ← Inference engine (pure diffusion)
 │   ├── data/
 │   │   ├── ingest.py               ← Download ERA5 via Open-Meteo
 │   │   └── temporal_loader.py      ← DataLoader + normalisasi + graph
@@ -196,7 +196,7 @@ ERA5 Data → Sliding Window (seq_len=6) → Feature Normalization (z-score)
         30 ensemble samples → median = point prediction
             │
             ▼
-        Hybrid Blending: pred = (1-w)·model + w·lag₂₄ₕ
+        Denormalisasi + Clamping
             │
             ▼
         Output: 3 variabel × distribusi probabilistik
@@ -259,29 +259,25 @@ Linear(input, 128) → ReLU → Linear(128, 128) → ReLU → Linear(128, 3)
 
 ---
 
-## 6. Inference — Hybrid Blending (KOMPONEN KRITIS)
+## 6. Inference — Pure Diffusion (TANPA Hybrid)
 
-### 6.1 Formula
+> **CATATAN:** Hybrid persistence telah DIHAPUS dari thesis. Fokus sesuai judul:
+> Retrieval-Augmented Diffusion Model dengan Spatio-Temporal Graph Conditioning.
 
-```
-prediction = (1 - w) × model_ensemble_median + w × lag_24h
-```
+### 6.1 Pipeline Inferensi
 
-### 6.2 Hybrid Weights (w = bobot lag, 1-w = bobot model)
+1. Input sequence → Conditioning (context + retrieval + GNN graph)
+2. DDIM reverse sampling (20 steps) × 30 ensemble members
+3. Denormalisasi + clamping
+4. Output ensemble → metrik deterministik (median) + probabilistik (distribusi)
 
-| Variabel | w (lag) | 1-w (model) |
-|----------|---------|-------------|
-| Precipitation | 0.90 | 0.10 |
-| Wind Speed | 0.90 | 0.10 |
-| Humidity | 0.70 | 0.30 |
-
-### 6.3 Denormalisasi
+### 6.2 Denormalisasi
 
 1. `samples_denorm = samples × t_std + t_mean`
 2. Precipitation (idx 0): `torch.expm1()` (inverse log1p)
 3. Clamping: precipitation ≥ 0, humidity ∈ [0, 100], wind_speed unclamped
 
-### 6.4 Inference Config (Evaluasi Final)
+### 6.3 Inference Config (Evaluasi Final)
 
 | Parameter | Nilai |
 |-----------|-------|
@@ -368,14 +364,14 @@ prediction = (1 - w) × model_ensemble_median + w × lag_24h
 ### Limitations
 1. **Precipitation extreme** — POD≈0 pada 10 mm/jam (class imbalance 0.151%), POD=0.42 pada 2 mm/jam (meaningful)
 2. **ERA5 resolusi** (~25 km) — Puncak & Lereng_Cibodas di grid cell yang sama
-3. **Hybrid weight tinggi** (w=0.90) — Model precipitation hanya berkontribusi 10% ke prediksi akhir
+3. ~~**Hybrid weight tinggi**~~ — DIHAPUS dari thesis, fokus pure diffusion
 4. **Precipitation RMSE > persistence** — Konsekuensi dari distribusi 64% zero; persistence "menang" dengan prediksi "tetap 0"
 
 ### Rekomendasi Perbaikan (untuk Future Work)
 1. Data observasi BMKG AWS (resolusi tinggi)
 2. Cost-sensitive / focal loss untuk heavy rain
 3. Downscaling ERA5 + koreksi topografi
-4. Tuning hybrid weight lebih rendah (e.g., w=0.50)
+4. Fine-tuning diffusion model (epoch, loss, T_STD_MULTIPLIER)
 
 ---
 
@@ -409,7 +405,7 @@ prediction = (1 - w) × model_ensemble_median + w × lag_24h
 | `src/retrieval/base.py` | RetrievalDatabase (FAISS) | Dipanggil oleh train.py & inference.py |
 | `src/train.py` | Training loop utama | `python -m src.train` |
 | `src/train_baseline.py` | Training MLP baseline | `python -m src.train_baseline` |
-| `src/inference.py` | Hybrid inference engine | Dipanggil oleh evaluasi scripts |
+| `src/inference.py` | Inference engine (pure diffusion) | Dipanggil oleh evaluasi scripts |
 | `src/evaluation/probabilistic_metrics.py` | Semua metrik evaluasi | Dipanggil oleh evaluasi scripts |
 
 ---
@@ -419,7 +415,7 @@ prediction = (1 - w) × model_ensemble_median + w × lag_24h
 1. **Jangan ubah arsitektur tanpa konfirmasi** — model sudah trained dan evaluated, checkpoint sudah final
 2. **Jika user minta evaluasi ulang** — gunakan pola di `_archive/generate_plots.py` sebagai referensi pipeline inference
 3. **Jika user minta re-training** — config ada di `src/train.py`, jalankan `python -m src.train`
-4. **Precipitation RMSE tinggi bukan bug** — ini konsekuensi distribusi data (64% zero) dan hybrid blending, sudah dianalisis dan didokumentasi
+4. **Precipitation RMSE tinggi bukan bug** — ini konsekuensi distribusi data (64% zero), sudah dianalisis dan didokumentasi
 5. **Puncak & Lereng_Cibodas identik** — karena grid ERA5 sama, bukan bug
 6. **Notebook evaluasi** sudah ada di `notebooks/evaluasi_model.ipynb` — berisi semua plot, metrik, dan interpretasi dalam Bahasa Indonesia
 7. **`WeatherStateEncoder`** di `retrieval/base.py` ada tapi **tidak dipakai** — FAISS langsung pakai raw normalized features
