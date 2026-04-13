@@ -16,6 +16,8 @@ Input → Linear → ReLU → Linear → ReLU → Linear → Output
 import torch
 import torch.nn as nn
 
+from src.config import FINAL_TARGET_COLS
+
 
 class MLPBaseline(nn.Module):
     """
@@ -25,7 +27,7 @@ class MLPBaseline(nn.Module):
     (Diffusion + Retrieval + GNN).
     """
     
-    TARGET_COLS = ['precipitation', 'wind_speed_10m', 'relative_humidity_2m']
+    TARGET_COLS = FINAL_TARGET_COLS
     
     def __init__(self, input_dim, hidden_dim=128, num_targets=3):
         """

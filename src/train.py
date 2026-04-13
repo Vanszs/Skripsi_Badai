@@ -29,6 +29,13 @@ import pandas as pd
 import numpy as np
 from tqdm import tqdm
 
+from src.config import (
+    FINAL_FEATURE_COLS,
+    FINAL_TARGET_COLS,
+    harmonize_weather_columns,
+    validate_feature_schema,
+    validate_feature_values,
+)
 from src.data.ingest import fetch_era5_data, PANGRANGO_NODES
 from src.data.temporal_loader import TemporalGraphDataset, collate_temporal_graphs
 from src.models.diffusion import ConditionalDiffusionModel, RainForecaster
@@ -91,7 +98,7 @@ def compute_stats_from_training(train_df, feature_cols, target_col='precipitatio
     CRITICAL: Stats harus dari training set saja untuk mencegah data leakage!
     Validation dan test set dinormalisasi dengan stats yang sama dari training.
     
-    Now supports MULTI-OUTPUT: 4 target variables.
+    Now supports MULTI-OUTPUT target variables.
     
     Args:
         train_df: DataFrame training SAJA
@@ -99,16 +106,15 @@ def compute_stats_from_training(train_df, feature_cols, target_col='precipitatio
         target_col: Not used anymore, kept for compatibility
     
     Returns:
-        dict with t_mean, t_std (both [4] tensors), c_mean, c_std
+        dict with t_mean, t_std, c_mean, c_std
     """
-    # MULTI-OUTPUT: 4 target variables
-    TARGET_COLS = ['precipitation', 'wind_speed_10m', 'relative_humidity_2m']  # 3 vars, excluded temperature
+    target_cols = FINAL_TARGET_COLS
     
     # Compute stats per target variable
     t_means = []
     t_stds = []
     
-    for i, col in enumerate(TARGET_COLS):
+    for col in target_cols:
         values = train_df[col].values
         
         if col == 'precipitation':
@@ -125,15 +131,15 @@ def compute_stats_from_training(train_df, feature_cols, target_col='precipitatio
         t_means.append(mean_val)
         t_stds.append(std_val)
     
-    t_mean = torch.tensor(t_means, dtype=torch.float32)  # [4]
-    t_std = torch.tensor(t_stds, dtype=torch.float32)    # [4]
+    t_mean = torch.tensor(t_means, dtype=torch.float32)
+    t_std = torch.tensor(t_stds, dtype=torch.float32)
     
     # Feature stats (unchanged)
     feature_values = train_df[feature_cols].values
     c_mean = torch.tensor(feature_values.mean(axis=0), dtype=torch.float32)
     c_std = torch.tensor(feature_values.std(axis=0), dtype=torch.float32)
     
-    print(f"[Multi-Output Stats] Target variables: {TARGET_COLS}")
+    print(f"[Multi-Output Stats] Target variables: {target_cols}")
     print(f"   t_mean: {t_mean.tolist()}")
     print(f"   t_std:  {t_std.tolist()}")
     
@@ -142,7 +148,7 @@ def compute_stats_from_training(train_df, feature_cols, target_col='precipitatio
         't_std': t_std,
         'c_mean': c_mean,
         'c_std': c_std,
-        'target_cols': TARGET_COLS  # Save for reference
+        'target_cols': target_cols
     }
 
 
@@ -195,26 +201,17 @@ def train_pipeline():
     data_path = 'data/raw/pangrango_era5_2005_2025.parquet'
     try:
         df = pd.read_parquet(data_path)
+        df = harmonize_weather_columns(df)
         print(f"   Loaded from {data_path}")
         print(f"   Total Shape: {df.shape}")
     except FileNotFoundError:
         print("   Data not found. Running ingestion first...")
         df = fetch_era5_data()
-    
-    # Feature columns (use available ones)
-    all_feature_cols = [
-        'temperature_2m',
-        'relative_humidity_2m', 
-        'dewpoint_2m',
-        'surface_pressure',
-        'wind_speed_10m',
-        'wind_direction_10m',
-        'cloud_cover',
-        'precipitation_lag1',
-        'elevation',
-    ]
-    
-    feature_cols = [c for c in all_feature_cols if c in df.columns]
+        df = harmonize_weather_columns(df)
+
+    validate_feature_schema(df, FINAL_FEATURE_COLS, FINAL_TARGET_COLS)
+    validate_feature_values(df, FINAL_FEATURE_COLS)
+    feature_cols = list(FINAL_FEATURE_COLS)
     print(f"   Using {len(feature_cols)} features: {feature_cols}")
     
     # ===================================================================
@@ -384,7 +381,7 @@ def train_pipeline():
     print(f"   SpatioTemporalGNN: {sum(p.numel() for p in st_gnn.parameters()):,} params")
     
     # Conditional Diffusion Model - MULTI-OUTPUT (4 targets)
-    NUM_TARGETS = 3  # precipitation, wind, humidity (excluded temperature)
+    NUM_TARGETS = len(FINAL_TARGET_COLS)
     diff_model = ConditionalDiffusionModel(
         input_dim=NUM_TARGETS,  # MULTI-OUTPUT
         context_dim=CONTEXT_DIM,
@@ -514,7 +511,7 @@ def train_pipeline():
                     'val_end': VAL_END,
                     # MULTI-OUTPUT config
                     'num_targets': NUM_TARGETS,
-                    'target_cols': ['precipitation', 'wind_speed_10m', 'relative_humidity_2m']
+                    'target_cols': FINAL_TARGET_COLS
                 }
             }
             torch.save(checkpoint, "models/diffusion_chkpt.pth")

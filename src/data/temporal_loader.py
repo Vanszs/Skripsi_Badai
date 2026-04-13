@@ -14,6 +14,8 @@ import pandas as pd
 import numpy as np
 from typing import List, Tuple, Optional
 
+from src.config import FINAL_TARGET_COLS
+
 
 class TemporalGraphDataset(Dataset):
     """
@@ -26,7 +28,7 @@ class TemporalGraphDataset(Dataset):
     """
     
     # Multi-output target columns
-    TARGET_COLS = ['precipitation', 'wind_speed_10m', 'relative_humidity_2m']  # 3 vars, excluded temperature
+    TARGET_COLS = FINAL_TARGET_COLS
     
     def __init__(self, 
                  df: pd.DataFrame,

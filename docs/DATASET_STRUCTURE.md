@@ -6,7 +6,7 @@
 |-------|--------|
 | **File** | `pangrango_era5_2005_2025.parquet` |
 | **Total Baris** | ~526,032 |
-| **Total Kolom** | 13 |
+| **Total Kolom** | 13 kolom inti + kolom tambahan jika ada artefak ingest lama |
 | **Struktur** | **ALL-IN-ONE** (gabungan 3 lokasi dalam 1 file) |
 | **Pembeda Lokasi** | Kolom `node` dengan nilai: `Puncak`, `Lereng_Cibodas`, `Hilir_Cianjur` |
 | **Baris per Lokasi** | ~175,344 (21 tahun x 365.25 hari x 24 jam) |

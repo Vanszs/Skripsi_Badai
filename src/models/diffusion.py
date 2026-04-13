@@ -3,6 +3,8 @@ import torch.nn as nn
 import math
 from diffusers import DDPMScheduler, DDIMScheduler
 
+from src.config import FINAL_TARGET_COLS
+
 class SinusoidalPositionEmbeddings(nn.Module):
     def __init__(self, dim):
         super().__init__()
@@ -37,7 +39,7 @@ class ConditionalDiffusionModel(nn.Module):
     
     # Multi-output configuration
     NUM_TARGETS = 3
-    TARGET_NAMES = ['precipitation', 'wind_speed_10m', 'relative_humidity_2m']
+    TARGET_NAMES = FINAL_TARGET_COLS
     
     def __init__(self, input_dim=3, context_dim=64, retrieval_dim=32, 
                  graph_dim=64, hidden_dim=64):

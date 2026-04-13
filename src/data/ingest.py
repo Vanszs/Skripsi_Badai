@@ -7,6 +7,8 @@ import os
 from datetime import datetime
 import numpy as np
 
+from src.config import FINAL_FEATURE_COLS
+
 # Setup the Open-Meteo API client with cache and retry on error
 cache_session = requests_cache.CachedSession('.cache', expire_after = 3600)
 retry_session = retry(cache_session, retries = 5, backoff_factor = 0.2)
@@ -77,7 +79,7 @@ def fetch_era5_data(start_year=2005, end_year=2025, interval="hourly"):
     - elevation (static, from Elevation API)
     - land_sea_mask (derived from elevation)
     - dewpoint_2m (humidity proxy)
-    - cloudcover (convective proxy)
+    - cloud_cover (convective proxy)
     - precipitation_lag1 (autoregressive feature)
     """
     url = "https://archive-api.open-meteo.com/v1/archive"
@@ -89,30 +91,28 @@ def fetch_era5_data(start_year=2005, end_year=2025, interval="hourly"):
     
     all_data = []
 
-    for _, node in nodes.iterrows():
-        # --- STEP 2: Fetch Dynamic Features ---
-        params = {
-            "latitude": node['lat'],
-            "longitude": node['lon'],
-            "start_date": f"{start_year}-01-01",
-            "end_date": f"{end_year}-12-31",
-            "hourly": [
-                "precipitation",           # Target
-                "temperature_2m",           # Dynamic feature
-                "relative_humidity_2m",     # Dynamic feature
-                "dewpoint_2m",              # NEW: Humidity proxy
-                "surface_pressure",         # Dynamic feature
-                "wind_speed_10m",           # Dynamic feature
-                "wind_direction_10m",       # Dynamic feature
-                "cloudcover",               # NEW: Convective proxy
-            ],
-            "timezone": "Asia/Singapore"  # WITA
-        }
-        
-        print(f"Fetching weather data for {node['name']}...")
-        responses = openmeteo.weather_api(url, params=params)
-        response = responses[0]
-        
+    params = {
+        "latitude": ",".join(str(lat) for lat in nodes['lat']),
+        "longitude": ",".join(str(lon) for lon in nodes['lon']),
+        "start_date": f"{start_year}-01-01",
+        "end_date": f"{end_year}-12-31",
+        "hourly": [
+            "precipitation",
+            "temperature_2m",
+            "relative_humidity_2m",
+            "dewpoint_2m",
+            "surface_pressure",
+            "wind_speed_10m",
+            "wind_direction_10m",
+            "cloud_cover",
+        ],
+        "timezone": "Asia/Singapore"
+    }
+
+    print(f"Fetching weather data for {len(nodes)} nodes in one batch request...")
+    responses = openmeteo.weather_api(url, params=params)
+
+    for (_, node), response in zip(nodes.iterrows(), responses):
         # Process hourly data
         hourly = response.Hourly()
         
@@ -133,7 +133,7 @@ def fetch_era5_data(start_year=2005, end_year=2025, interval="hourly"):
         hourly_data["surface_pressure"] = hourly.Variables(4).ValuesAsNumpy()
         hourly_data["wind_speed_10m"] = hourly.Variables(5).ValuesAsNumpy()
         hourly_data["wind_direction_10m"] = hourly.Variables(6).ValuesAsNumpy()
-        hourly_data["cloudcover"] = hourly.Variables(7).ValuesAsNumpy()
+        hourly_data["cloud_cover"] = hourly.Variables(7).ValuesAsNumpy()
         
         # Add node identifier
         hourly_data["node"] = node['name']
@@ -155,12 +155,14 @@ def fetch_era5_data(start_year=2005, end_year=2025, interval="hourly"):
     # Lag-1: Previous hour's precipitation
     combined_df['precipitation_lag1'] = combined_df.groupby('node')['precipitation'].shift(1)
     
-    # Lag-3: 3 hours ago (for short-term pattern)
-    combined_df['precipitation_lag3'] = combined_df.groupby('node')['precipitation'].shift(3)
-    
     # Fill NaN from shift with 0 (first few hours have no history)
     combined_df['precipitation_lag1'] = combined_df['precipitation_lag1'].fillna(0)
-    combined_df['precipitation_lag3'] = combined_df['precipitation_lag3'].fillna(0)
+
+    # Enforce the final column contract order for downstream reproducibility.
+    ordered_cols = ['date', *FINAL_FEATURE_COLS, 'node', 'land_sea_mask', 'precipitation']
+    existing = [col for col in ordered_cols if col in combined_df.columns]
+    remaining = [col for col in combined_df.columns if col not in existing]
+    combined_df = combined_df[existing + remaining]
     
     # --- STEP 5: Save ---
     os.makedirs('data/raw', exist_ok=True)

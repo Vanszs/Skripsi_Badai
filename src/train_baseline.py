@@ -27,6 +27,13 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from tqdm import tqdm
 
+from src.config import (
+    FINAL_FEATURE_COLS,
+    FINAL_TARGET_COLS,
+    harmonize_weather_columns,
+    validate_feature_schema,
+    validate_feature_values,
+)
 from src.models.mlp_baseline import MLPBaseline
 from src.train import temporal_split, compute_stats_from_training
 
@@ -37,7 +44,7 @@ class MLPDataset(torch.utils.data.Dataset):
     Mengambil sliding window features dan target multi-output.
     """
     
-    TARGET_COLS = ['precipitation', 'wind_speed_10m', 'relative_humidity_2m']
+    TARGET_COLS = FINAL_TARGET_COLS
     
     def __init__(self, df, feature_cols, seq_len=6, stats=None):
         self.feature_cols = feature_cols
@@ -127,14 +134,12 @@ def train_mlp_baseline():
     print("\n[1/5] Loading Data...")
     data_path = 'data/raw/pangrango_era5_2005_2025.parquet'
     df = pd.read_parquet(data_path)
+    df = harmonize_weather_columns(df)
+    validate_feature_schema(df, FINAL_FEATURE_COLS, FINAL_TARGET_COLS)
+    validate_feature_values(df, FINAL_FEATURE_COLS)
     print(f"   Loaded: {df.shape}")
     
-    feature_cols = [
-        'temperature_2m', 'relative_humidity_2m', 'dewpoint_2m',
-        'surface_pressure', 'wind_speed_10m', 'wind_direction_10m',
-        'cloud_cover', 'precipitation_lag1', 'elevation'
-    ]
-    feature_cols = [c for c in feature_cols if c in df.columns]
+    feature_cols = list(FINAL_FEATURE_COLS)
     print(f"   Features: {len(feature_cols)}")
     
     # ===================================================================
@@ -169,7 +174,7 @@ def train_mlp_baseline():
     # Initialize Model
     # ===================================================================
     INPUT_DIM = SEQ_LEN * len(feature_cols)
-    NUM_TARGETS = 3
+    NUM_TARGETS = len(FINAL_TARGET_COLS)
     
     model = MLPBaseline(input_dim=INPUT_DIM, hidden_dim=HIDDEN_DIM, num_targets=NUM_TARGETS).to(device)
     optimizer = torch.optim.AdamW(model.parameters(), lr=LR, weight_decay=1e-4)

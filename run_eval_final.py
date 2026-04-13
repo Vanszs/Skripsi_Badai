@@ -25,6 +25,13 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from tqdm import tqdm
 
+from src.config import (
+    FINAL_FEATURE_COLS,
+    FINAL_TARGET_COLS,
+    harmonize_weather_columns,
+    validate_feature_schema,
+    validate_feature_values,
+)
 from src.train import temporal_split, compute_stats_from_training
 from src.models.mlp_baseline import MLPBaseline
 from src.inference import load_model_and_stats, create_inference_graphs
@@ -40,7 +47,7 @@ from src.evaluation.probabilistic_metrics import (
 EVAL_STEP = 24          # sample every 24 hours (daily)
 NUM_ENSEMBLE = 30       # diffusion ensemble samples
 SEQ_LEN = 6
-TARGET_COLS = ['precipitation', 'wind_speed_10m', 'relative_humidity_2m']
+TARGET_COLS = FINAL_TARGET_COLS
 VAR_NAMES = ['precipitation', 'wind_speed', 'humidity']
 THRESHOLDS_PRECIP = [2.0, 5.0, 10.0]  # mm thresholds for POD/FAR/CSI
 
@@ -59,15 +66,13 @@ def load_test_data():
     """Load and prepare test data."""
     data_path = 'data/raw/pangrango_era5_2005_2025.parquet'
     df = pd.read_parquet(data_path)
+    df = harmonize_weather_columns(df)
+    validate_feature_schema(df, FINAL_FEATURE_COLS, FINAL_TARGET_COLS)
+    validate_feature_values(df, FINAL_FEATURE_COLS)
     
     # Use same feature_cols as training (from checkpoint config)
     ckpt = torch.load('models/diffusion_chkpt.pth', map_location='cpu', weights_only=False)
-    feature_cols = ckpt['config'].get('feature_cols', [
-        'temperature_2m', 'relative_humidity_2m', 'dewpoint_2m',
-        'surface_pressure', 'wind_speed_10m', 'wind_direction_10m',
-        'cloud_cover', 'precipitation_lag1', 'elevation'
-    ])
-    feature_cols = [c for c in feature_cols if c in df.columns]
+    feature_cols = ckpt['config'].get('feature_cols', FINAL_FEATURE_COLS)
     
     train_df, val_df, test_df = temporal_split(df, '2018-12-31', '2021-12-31')
     stats = compute_stats_from_training(train_df, feature_cols)

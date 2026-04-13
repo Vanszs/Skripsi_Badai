@@ -5,6 +5,13 @@ import pandas as pd
 import numpy as np
 from torch_geometric.data import Data, Batch
 
+from src.config import (
+    FINAL_FEATURE_COLS,
+    FINAL_TARGET_COLS,
+    harmonize_weather_columns,
+    validate_feature_schema,
+    validate_feature_values,
+)
 from src.models.diffusion import ConditionalDiffusionModel, RainForecaster
 from src.models.gnn import SpatioTemporalGNN
 from src.retrieval.base import RetrievalDatabase
@@ -127,6 +134,9 @@ def load_model_and_stats(checkpoint_path="models/diffusion_chkpt.pth"):
         
         if data_path:
             df = pd.read_parquet(data_path)
+            df = harmonize_weather_columns(df)
+            validate_feature_schema(df, FINAL_FEATURE_COLS, FINAL_TARGET_COLS)
+            validate_feature_values(df, FINAL_FEATURE_COLS)
             # Filter for training data only to avoid leakage
             df['date'] = pd.to_datetime(df['date'])
             if df['date'].dt.tz is not None:
@@ -136,7 +146,7 @@ def load_model_and_stats(checkpoint_path="models/diffusion_chkpt.pth"):
             train_end = config.get('train_end', '2018-12-31')
             train_df = df[df['date'] <= pd.to_datetime(train_end)].copy()
             
-            feature_cols = config.get('feature_cols', ['temperature_2m', 'relative_humidity_2m', 'surface_pressure', 'wind_speed_10m', 'wind_direction_10m'])
+            feature_cols = config.get('feature_cols', FINAL_FEATURE_COLS)
             
             train_features = train_df[feature_cols].values
             c_mean = stats['c_mean'].numpy()
@@ -232,12 +242,11 @@ def run_inference_real(features_norm, model_wrapper, stats, retrieval_db, num_sa
             num_samples=num_samples,
             num_inference_steps=20
         )
-        # samples is [num_samples, 4] for multi-output
-        # Columns: [precipitation, temperature, wind_speed, humidity]
+        # samples is [num_samples, 3] for multi-output targets
         
         # 4. Denormalize - MULTI-OUTPUT
-        t_mean = stats['t_mean'].to(device)  # [4]
-        t_std = stats['t_std'].to(device)    # [4]
+        t_mean = stats['t_mean'].to(device)
+        t_std = stats['t_std'].to(device)
         
         # Denormalize all: samples * std + mean
         samples_denorm = samples * t_std + t_mean

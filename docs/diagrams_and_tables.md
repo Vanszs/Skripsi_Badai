@@ -156,7 +156,7 @@ note bottom of N1
   temperature_2m, relative_humidity_2m,
   dewpoint_2m, surface_pressure,
   wind_speed_10m, wind_direction_10m,
-  cloudcover, precipitation_lag1,
+  cloud_cover, precipitation_lag1,
   elevation
 end note
 
@@ -507,11 +507,10 @@ end note
 | 5 | `surface_pressure` | hPa | ERA5 Reanalysis | Dinamis |
 | 6 | `wind_speed_10m` | m/s | ERA5 Reanalysis | Dinamis |
 | 7 | `wind_direction_10m` | ° (derajat) | ERA5 Reanalysis | Dinamis |
-| 8 | `cloudcover` | % | ERA5 Reanalysis | Dinamis |
+| 8 | `cloud_cover` | % | ERA5 Reanalysis | Dinamis |
 | 9 | `elevation` | m | Open-Meteo Elevation API | Statis |
 | 10 | `land_sea_mask` | biner (0/1) | Turunan dari elevasi | Statis |
 | 11 | `precipitation_lag1` | mm/jam | Lag-1 dari presipitasi | Autoregresif |
-| 12 | `precipitation_lag3` | mm/jam | Lag-3 dari presipitasi | Autoregresif |
 
 **Catatan:** Data diambil melalui Open-Meteo Archive API untuk periode 2005–2025 dengan resolusi temporal per jam. Variabel lag dihitung per node setelah pengambilan data.
 
@@ -527,7 +526,7 @@ end note
 | | `surface_pressure` | Tekanan permukaan |
 | | `wind_speed_10m` | Kecepatan angin 10m |
 | | `wind_direction_10m` | Arah angin 10m |
-| | `cloudcover` | Tutupan awan (convective proxy) |
+| | `cloud_cover` | Tutupan awan (convective proxy) |
 | | `precipitation_lag1` | Presipitasi 1 jam sebelumnya |
 | | `elevation` | Ketinggian node (statis) |
 | **Variabel Target** | `precipitation` | Presipitasi (mm/jam) |
@@ -549,7 +548,6 @@ end note
 | Normalisasi Target | `wind_speed_10m`, `relative_humidity_2m` | Z-score standar | $z = \frac{x - \mu}{\sigma}$ |
 | Normalisasi Fitur | Semua fitur input | Z-score standar | $z = \frac{x - \mu_c}{\sigma_c + 10^{-5}}$ |
 | Lag Features | `precipitation_lag1` | Shift(1) per node | Presipitasi 1 jam sebelumnya, NaN diisi 0 |
-| Lag Features | `precipitation_lag3` | Shift(3) per node | Presipitasi 3 jam sebelumnya, NaN diisi 0 |
 
 **PENTING:** Statistik normalisasi ($\mu$, $\sigma$) dihitung **hanya dari data training (2005–2018)** untuk mencegah kebocoran informasi. Data validasi dan test dinormalisasi dengan statistik yang sama.
 
