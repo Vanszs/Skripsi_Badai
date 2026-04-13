@@ -169,7 +169,7 @@ def fetch_era5_data(start_year=2005, end_year=2025, interval="hourly"):
     output_path = f'data/raw/pangrango_era5_{start_year}_{end_year}.parquet'
     combined_df.to_parquet(output_path)
     
-    print(f"\n✅ Data saved to {output_path}")
+    print(f"\nData saved to {output_path}")
     print(f"   Shape: {combined_df.shape}")
     print(f"   Columns: {list(combined_df.columns)}")
     print(f"   Date range: {combined_df['date'].min()} to {combined_df['date'].max()}")

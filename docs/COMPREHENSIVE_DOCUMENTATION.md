@@ -54,10 +54,10 @@
 |-------|--------|
 | **Provider** | Open-Meteo API (wrapper untuk ERA5) |
 | **Dataset** | ERA5 Reanalysis |
-| **Temporal Range** | 2005-01-01 hingga 2025-01-01 |
+| **Temporal Range** | 2005-01-01 hingga 2025-12-31 |
 | **Temporal Resolution** | Hourly (per jam) |
 | **Spatial Resolution** | ~25 km grid |
-| **Total Records** | ~526,032 titik data (3 nodes x 20 tahun x ~8760 jam) |
+| **Total Records** | ~552,240 titik data (3 nodes x 21 tahun x hourly) |
 
 ### Koordinat Lokasi (3 Nodes)
 
@@ -66,6 +66,12 @@
 | **Puncak** | Puncak Gede-Pangrango | -6.7698 | 106.9636 | ~3,019 m |
 | **Lereng** | Cibodas | -6.7308 | 107.0026 | ~1,800 m |
 | **Hilir** | Cianjur | -6.8160 | 107.1330 | ~500 m |
+
+### Catatan Keterbatasan Spasial
+
+Audit metadata respons Open-Meteo menunjukkan bahwa titik `Puncak` dan `Lereng_Cibodas` dipetakan ke grid atmosfer yang sama untuk source reanalysis yang dipakai. Temuan ini konsisten dengan resolusi spasial ERA5 yang relatif kasar untuk dua titik yang hanya berjarak beberapa kilometer.
+
+Implikasinya, penelitian ini tetap valid untuk nowcasting probabilistik multi-variabel, tetapi interpretasi manfaat komponen graph harus dibatasi. Komponen graph diperlakukan sebagai struktur topografis dan eksperimen arsitektur, bukan bukti kuat heterogenitas spasial penuh antar-node.
 
 ## 2.2 Variabel
 

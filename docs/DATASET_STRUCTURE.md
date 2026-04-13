@@ -5,11 +5,11 @@
 | Aspek | Detail |
 |-------|--------|
 | **File** | `pangrango_era5_2005_2025.parquet` |
-| **Total Baris** | ~526,032 |
-| **Total Kolom** | 13 kolom inti + kolom tambahan jika ada artefak ingest lama |
+| **Total Baris** | ~552,240 |
+| **Total Kolom** | 13 |
 | **Struktur** | **ALL-IN-ONE** (gabungan 3 lokasi dalam 1 file) |
 | **Pembeda Lokasi** | Kolom `node` dengan nilai: `Puncak`, `Lereng_Cibodas`, `Hilir_Cianjur` |
-| **Baris per Lokasi** | ~175,344 (21 tahun x 365.25 hari x 24 jam) |
+| **Baris per Lokasi** | ~184,080 (21 tahun x hourly, termasuk tahun kabisat) |
 
 ---
 
@@ -79,7 +79,8 @@
 | 9 | `cloud_cover` | float32 | Tutupan awan (%) |
 | 10 | `precipitation_lag1` | float32 | Curah hujan 1 jam sebelumnya |
 | 11 | `elevation` | float32 | Elevasi lokasi (m) |
-| 12 | `node` | string | Pembeda lokasi |
+| 12 | `land_sea_mask` | int64 | Penanda darat/laut turunan dari elevasi |
+| 13 | `node` | string | Pembeda lokasi |
 
 ### 2.2 Cara Akses Data per Lokasi
 
@@ -103,6 +104,12 @@ df_hilir  = df[df['node'] == 'Hilir_Cianjur']
 | **Test** | 2022-2025 | 4 tahun | Evaluasi final |
 
 > Normalisasi mean/std dihitung **hanya dari training set**.
+
+## 3.1 Catatan Keterbatasan Spasial
+
+Audit terhadap metadata respons Open-Meteo menunjukkan bahwa `Puncak` dan `Lereng_Cibodas` dapat dipetakan ke grid atmosfer yang sama pada source reanalysis yang dipakai. Karena resolusi spasial sumber data berada pada orde puluhan kilometer, dua titik yang berdekatan tidak selalu menghasilkan sinyal atmosfer yang benar-benar independen untuk semua variabel.
+
+Konsekuensinya, dataset ini tetap layak untuk studi nowcasting probabilistik, tetapi hasil komponen graph harus dibaca dengan hati-hati. Kekuatan sinyal spasial pada sebagian variabel dibatasi oleh resolusi data reanalysis, bukan hanya oleh arsitektur model.
 
 ---
 
