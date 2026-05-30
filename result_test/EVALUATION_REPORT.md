@@ -1,119 +1,85 @@
-# Evaluation Report — 6-Scenario Comprehensive
+# Evaluation Report - Main Node Only
 
-**Date**: 2026-03-09
-**Eval Step**: 24 (daily sampling)
-**Ensemble Size**: 30
-**Test Period**: 2022–2025
+- **main_node_name**: `MAIN`
+- **main_node_identifier**: `(-6.75, 107.0)`
+- **node_order**: `['MAIN', 'UP', 'DOWN', 'LEFT', 'RIGHT']`
+- **graph_topology**: `star`
+- **target_node_policy**: `main_node_only`
+- **context_policy**: `main_node_context`
+- **model_mode**: `era5`
+- **data_path**: `data/raw/pangrango_era5_5node_2005_2025.parquet`
+- **eval_step**: `24`
+- **num_ensemble**: `30`
+- **seq_len**: `6`
+- **rain_specialization_enabled**: `True`
+- **rain_occurrence_threshold_mm**: `0.1`
+- **rain_probability_threshold**: `0.550000011920929`
 
 ## PRECIPITATION
 
 | Scenario | RMSE | MAE | Corr | CRPS |
-|----------|------|-----|------|------|
-| persistence | 1.6305 | 0.8307 | 0.5811 | 0.8307 |
-| mlp_baseline | 1.5906 | 0.8561 | 0.5433 | 0.8183 |
-| diff_only | 1.9234 | 0.9683 | 0.4506 | 3.5396 |
-| diff_retrieval | 1.9288 | 0.9788 | 0.3603 | 0.9222 |
-| diff_gnn | 1.8840 | 0.9404 | 0.4665 | 0.8874 |
-| full_model | 1.8556 | 0.9260 | 0.4179 | 0.8899 |
+|---|---:|---:|---:|---:|
+| persistence | 1.3777 | 0.7344 | 0.5990 | nan |
+| mlp_baseline | 1.3038 | 0.7662 | 0.4223 | 0.7348 |
+| diff_only | 1.5116 | 0.7847 | 0.3112 | 0.7740 |
+| diff_retrieval | 1.5176 | 0.7876 | 0.2936 | 0.7796 |
+| diff_gnn | 1.7388 | 1.3226 | 0.4115 | 1.5169 |
+| full_model | 1.6903 | 1.2893 | 0.4292 | 1.5896 |
 
 ## WIND_SPEED
 
 | Scenario | RMSE | MAE | Corr | CRPS |
-|----------|------|-----|------|------|
-| persistence | 1.4705 | 1.1439 | 0.8550 | 1.1439 |
-| mlp_baseline | 1.3344 | 1.0293 | 0.8793 | 0.9754 |
-| diff_only | 1.4828 | 1.1419 | 0.8478 | 1.1136 |
-| diff_retrieval | 1.5015 | 1.1684 | 0.8449 | 1.1389 |
-| diff_gnn | 1.4471 | 1.1222 | 0.8578 | 1.1541 |
-| full_model | 1.4328 | 1.1120 | 0.8578 | 1.1464 |
+|---|---:|---:|---:|---:|
+| persistence | 1.4424 | 1.0924 | 0.8378 | nan |
+| mlp_baseline | 1.2971 | 1.0211 | 0.8482 | 0.9618 |
+| diff_only | 1.2434 | 0.9341 | 0.8571 | 0.9424 |
+| diff_retrieval | 1.2522 | 0.9374 | 0.8567 | 0.9470 |
+| diff_gnn | 1.3091 | 0.9904 | 0.8471 | 1.0910 |
+| full_model | 1.3051 | 0.9853 | 0.8494 | 1.0947 |
 
 ## HUMIDITY
 
 | Scenario | RMSE | MAE | Corr | CRPS |
-|----------|------|-----|------|------|
-| persistence | 4.5727 | 3.4189 | 0.9556 | 3.4189 |
-| mlp_baseline | 3.8927 | 2.9362 | 0.9542 | 2.8765 |
-| diff_only | 5.9380 | 4.6789 | 0.9456 | 4.3416 |
-| diff_retrieval | 6.7495 | 5.5297 | 0.9451 | 5.1507 |
-| diff_gnn | 4.1321 | 3.1880 | 0.9498 | 3.1042 |
-| full_model | 4.0063 | 3.0230 | 0.9515 | 2.9590 |
+|---|---:|---:|---:|---:|
+| persistence | 5.2005 | 4.1665 | 0.9357 | nan |
+| mlp_baseline | 4.2661 | 3.4671 | 0.9362 | 3.4067 |
+| diff_only | 3.9944 | 3.4042 | 0.9599 | 3.3000 |
+| diff_retrieval | 4.0265 | 3.4208 | 0.9598 | 3.3277 |
+| diff_gnn | 3.1156 | 2.4979 | 0.9595 | 2.6745 |
+| full_model | 3.1387 | 2.5234 | 0.9591 | 2.7192 |
 
 ## Precipitation Threshold Metrics
 
-### Threshold: 2.0mm
+### Threshold 2.0 mm
 
 | Scenario | POD | FAR | CSI | Brier |
-|----------|-----|-----|-----|-------|
-| persistence | 0.5663 | 0.4973 | 0.3629 | 0.1503 |
-| mlp_baseline | 0.3690 | 0.4651 | 0.2794 | 0.1358 |
-| diff_only | 0.0214 | 0.3333 | 0.0212 | 0.1438 |
-| diff_retrieval | 0.0802 | 0.4444 | 0.0754 | 0.1452 |
-| diff_gnn | 0.0588 | 0.3889 | 0.0567 | 0.1355 |
-| full_model | 0.0856 | 0.4667 | 0.0796 | 0.1332 |
+|---|---:|---:|---:|---:|
+| persistence | 0.4877 | 0.3767 | 0.3767 | 0.1573 |
+| mlp_baseline | 0.0673 | 0.5455 | 0.0622 | 0.1462 |
+| diff_only | 0.0448 | 0.5000 | 0.0429 | 0.1255 |
+| diff_retrieval | 0.0448 | 0.6000 | 0.0420 | 0.1278 |
+| diff_gnn | 0.8610 | 0.7500 | 0.2403 | 0.2275 |
+| full_model | 0.8206 | 0.7493 | 0.2377 | 0.2223 |
 
-### Threshold: 5.0mm
-
-| Scenario | POD | FAR | CSI | Brier |
-|----------|-----|-----|-----|-------|
-| persistence | 0.5000 | 0.6140 | 0.2785 | 0.0519 |
-| mlp_baseline | 0.0000 | nan | 0.0000 | 0.0512 |
-| diff_only | 0.0000 | nan | 0.0000 | 0.0515 |
-| diff_retrieval | 0.0000 | 1.0000 | 0.0000 | 0.0520 |
-| diff_gnn | 0.0000 | nan | 0.0000 | 0.0514 |
-| full_model | 0.0000 | 1.0000 | 0.0000 | 0.0499 |
-
-### Threshold: 10.0mm
+### Threshold 5.0 mm
 
 | Scenario | POD | FAR | CSI | Brier |
-|----------|-----|-----|-----|-------|
-| persistence | 0.0000 | 1.0000 | 0.0000 | 0.0118 |
-| mlp_baseline | 0.0000 | nan | 0.0000 | 0.0073 |
-| diff_only | 0.0000 | nan | 0.0000 | 0.0073 |
-| diff_retrieval | 0.0000 | nan | 0.0000 | 0.0075 |
-| diff_gnn | 0.0000 | nan | 0.0000 | 0.0073 |
-| full_model | 0.0000 | nan | 0.0000 | 0.0073 |
+|---|---:|---:|---:|---:|
+| persistence | 0.1356 | 0.7714 | 0.0930 | 0.0534 |
+| mlp_baseline | 0.0000 | nan | 0.0000 | 0.0239 |
+| diff_only | 0.0000 | nan | 0.0000 | 0.0242 |
+| diff_retrieval | 0.0000 | nan | 0.0000 | 0.0240 |
+| diff_gnn | 0.0286 | 0.8750 | 0.0238 | 0.0469 |
+| full_model | 0.0286 | 0.9000 | 0.0227 | 0.0462 |
 
----
+### Threshold 10.0 mm
 
-## Hourly Nowcasting Analysis (EVAL_STEP=1, 336 points, 2-week window)
-
-This section evaluates the model at its designed resolution: 1-hour ahead nowcasting.
-
-### Skill Scores vs Persistence
-
-| Variable | RMSE Diff | RMSE Pers | Skill Score |
-|----------|-----------|-----------|-------------|
-| Precipitation | 1.301 | 1.233 | -5.5% |
-| Wind Speed | 1.539 | 1.478 | -4.1% |
-| Humidity | 2.917 | 3.481 | **+16.2%** |
-
-### Probabilistic Metrics (CRPS vs MAE Persistence)
-
-| Variable | CRPS Diff | MAE Pers | CRPS Advantage |
-|----------|-----------|----------|----------------|
-| Precipitation | 0.544 | 0.645 | **-16%** (CRPS wins) |
-| Wind Speed | 0.886 | 1.146 | **-23%** (CRPS wins) |
-| Humidity | 1.450 | 2.175 | **-33%** (CRPS wins) |
-
-**Key finding**: CRPS of diffusion ensemble beats MAE of persistence for ALL 3 variables, proving the model's probabilistic predictions add genuine value.
-
-### Delta-Correlation (Change Detection)
-
-| Variable | Delta-Corr Diff | Delta-Corr MLP |
-|----------|-----------------|----------------|
-| Precipitation | 0.472 | 0.479 |
-| Wind Speed | 0.097 | 0.340 |
-| Humidity | 0.552 | 0.518 |
-
-### Uncertainty Calibration
-
-| Variable | Coverage P10-P90 | Spread-Error Corr |
-|----------|------------------|-------------------|
-| Precipitation | 54.5% | 0.308 |
-| Wind Speed | 56.5% | 0.138 |
-| Humidity | 53.3% | 0.455 |
-
-### Evidence Scorecard: 13/15 tests passed (87%)
-
-The model is confirmed to genuinely learn — not producing random noise.
+| Scenario | POD | FAR | CSI | Brier |
+|---|---:|---:|---:|---:|
+| persistence | nan | nan | nan | 0.0000 |
+| mlp_baseline | nan | nan | nan | 0.0000 |
+| diff_only | nan | nan | nan | 0.0000 |
+| diff_retrieval | nan | nan | nan | 0.0001 |
+| diff_gnn | nan | nan | nan | 0.0012 |
+| full_model | nan | nan | nan | 0.0011 |
 

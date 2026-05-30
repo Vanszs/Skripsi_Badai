@@ -1,0 +1,36 @@
+Bedanya sekarang vs “khusus hujan”:
+
+Sekarang: satu model multi-output umum.
+Khusus hujan: tambahkan jalur/event-aware untuk hujan.
+Sekarang: loss umum noise.
+Khusus hujan: loss fokus event hujan (mis. klasifikasi hujan/tidak + regresi intensitas saat hujan).
+Sekarang: prediksi langsung median ensemble.
+Khusus hujan: kalibrasi threshold hujan + bisa blend dengan persistence untuk nowcasting 1 jam.
+Sekarang: retrieval umum.
+Khusus hujan: retrieval diprioritaskan ke analog kondisi hujan.
+
+=====================
+Saya sudah kumpulkan referensi primer yang relevan untuk kasus hujan zero-inflated dan event skill (mis. arXiv:2307.10843, 2310.02676, 2504.11058, 2509.10501). Rencana implementasi: tambah head probabilitas hujan (rain occurrence) + loss gabungan diffusion-noise dan BCE berbobot kelas, kalibrasi threshold di validation (berbasis CSI), lalu apply gate hujan saat inference/eval; setelah itu saya jalankan train+uji robust melawan persistence di beberapa jendela waktu.
+
+=====================
+
+Baseline persistence itu prediksi paling sederhana:
+
+Prediksi jam berikut = nilai hujan jam sekarang.
+Contoh:
+
+Jam 10:00 hujan 2.5 mm/jam
+Maka prediksi jam 11:00 oleh persistence = 2.5 mm/jam
+Ini dijadikan baseline
+
+======================
+
+Pendeknya: bukan murni karena algoritmanya mentok, tapi karena kombinasi setup saat ini.
+
+Penyebab utamanya:
+
+Baseline persistence sangat kuat untuk hujan 1 jam (di data ini lag-1 hujan tinggi, ~0.67, dan banyak nilai 0).
+Input ERA5 hourly relatif kasar untuk kejadian hujan lokal/konvektif, jadi sinyal “event tiba-tiba” kurang tajam.
+Objektif training saat ini masih dominan diffusion noise + multi-target, jadi tidak sepenuhnya mengoptimalkan error hujan (RMSE/MAE) secara langsung.
+Rain gate (wet/dry) membantu event tertentu, tapi bisa menambah bias intensitas di minggu lain.
+Jadi: algoritma masih bisa ditingkatkan, tapi pada konfigurasi/data sekarang performa hujan belum konsisten mengalahkan persistence.

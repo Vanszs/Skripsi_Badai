@@ -27,10 +27,9 @@ class ConditionalDiffusionModel(nn.Module):
     - Retrieval conditioning (FAISS neighbors)
     - Graph conditioning (Spatio-Temporal GNN output) [NEW]
     
-    MULTI-OUTPUT: Predicts 4 variables:
+    MULTI-OUTPUT: Predicts 3 variables:
     - precipitation (mm/jam)
-    - temperature_2m (°C)
-    - wind_speed_10m (m/s)
+        - wind_speed_10m (m/s)
     - relative_humidity_2m (%)
     
     This satisfies the thesis requirement:
@@ -45,7 +44,7 @@ class ConditionalDiffusionModel(nn.Module):
                  graph_dim=64, hidden_dim=64):
         """
         Args:
-            input_dim: Dimension of target (4 for multi-output)
+            input_dim: Dimension of target (3 for multi-output)
             context_dim: Dimension of current weather features
             retrieval_dim: Dimension of retrieved historical features (k * features)
             graph_dim: Dimension of graph embedding from SpatioTemporalGNN [NEW]
@@ -82,6 +81,12 @@ class ConditionalDiffusionModel(nn.Module):
             nn.SiLU(),
             nn.Linear(hidden_dim, hidden_dim)
         )
+        # Auxiliary rain-occurrence head (wet/dry) for zero-inflated precipitation.
+        self.wet_head = nn.Sequential(
+            nn.Linear(hidden_dim, hidden_dim),
+            nn.SiLU(),
+            nn.Linear(hidden_dim, 1),
+        )
 
         # U-Net like backbone
         self.down1 = nn.Sequential(nn.Linear(input_dim, hidden_dim), nn.SiLU())
@@ -92,40 +97,52 @@ class ConditionalDiffusionModel(nn.Module):
         self.up1 = nn.Sequential(nn.Linear(hidden_dim * 4, hidden_dim), nn.SiLU())
         self.out = nn.Linear(hidden_dim, input_dim)
 
-    def forward(self, x, t, context, retrieved=None, graph_emb=None):
+    def _encode_condition(self, context, retrieved=None, graph_emb=None):
+        """
+        Build conditioning embedding without timestep.
+        Used by both diffusion and rain-occurrence auxiliary head.
+        """
+        cond_emb = self.cond_mlp(context)
+
+        if retrieved is not None:
+            # Flatten neighbors if needed: [B, k, F] -> [B, k*F]
+            if retrieved.dim() == 3:
+                r_flat = retrieved.reshape(retrieved.shape[0], -1)
+            else:
+                r_flat = retrieved
+            r_emb = self.retrieval_mlp(r_flat)
+            cond_emb = cond_emb + r_emb
+
+        if graph_emb is not None:
+            g_emb = self.graph_mlp(graph_emb)
+            cond_emb = cond_emb + g_emb
+
+        return cond_emb
+
+    def compute_wet_logit(self, context, retrieved=None, graph_emb=None):
+        cond_emb = self._encode_condition(context, retrieved, graph_emb)
+        return self.wet_head(cond_emb)
+
+    def compute_wet_probability(self, context, retrieved=None, graph_emb=None):
+        return torch.sigmoid(self.compute_wet_logit(context, retrieved, graph_emb))
+
+    def forward(self, x, t, context, retrieved=None, graph_emb=None, return_wet_logit=False):
         """
         Args:
-            x: Noisy target [Batch, 4] for multi-output
+            x: Noisy target [Batch, 3] for multi-output
             t: Timestep [Batch]
             context: Current weather features [Batch, Context_Dim]
             retrieved: Retrieved historical analogs [Batch, k, Features] or [Batch, k*Features]
             graph_emb: Spatio-Temporal graph embedding [Batch, Graph_Dim] [NEW]
         
         Returns:
-            Predicted noise [Batch, 4] for multi-output
+            Predicted noise [Batch, 3] for multi-output
         """
         # Embeddings
         t_emb = self.time_mlp(t)
-        c_emb = self.cond_mlp(context)
-        
-        # Start with time + context
-        emb = t_emb + c_emb
-        
-        # Add Retrieval conditioning
-        if retrieved is not None:
-            # Flatten neighbors if needed: [B, k, F] -> [B, k*F]
-            if retrieved.dim() == 3:
-                r_flat = retrieved.view(retrieved.shape[0], -1)
-            else:
-                r_flat = retrieved
-            r_emb = self.retrieval_mlp(r_flat)
-            emb = emb + r_emb
-        
-        # [NEW] Add Graph conditioning (Spatio-Temporal)
-        if graph_emb is not None:
-            g_emb = self.graph_mlp(graph_emb)
-            emb = emb + g_emb
-        
+        cond_emb = self._encode_condition(context, retrieved, graph_emb)
+        emb = t_emb + cond_emb
+
         # Network
         h1 = self.down1(x) + emb
         h2 = self.down2(h1)
@@ -134,8 +151,12 @@ class ConditionalDiffusionModel(nn.Module):
         
         h_up = torch.cat([h_mid, h2], dim=-1)  # Skip connection
         output = self.up1(h_up)
-        
-        return self.out(output)
+        noise_pred = self.out(output)
+
+        if return_wet_logit:
+            wet_logit = self.wet_head(cond_emb)
+            return noise_pred, wet_logit
+        return noise_pred
 
 class RainForecaster:
     """
@@ -154,13 +175,25 @@ class RainForecaster:
         self.optimizer = torch.optim.Adam(model.parameters(), lr=1e-3)
         self.criterion = nn.MSELoss()
 
+    @staticmethod
+    def weighted_noise_loss(noise_pred, noise, target_reference):
+        """
+        Weighted MSE on predicted noise.
+        target_reference is the normalized target tensor used to scale loss.
+        """
+        error = (noise_pred - noise) ** 2
+        weights = torch.ones_like(error)
+        weights[target_reference.abs() > 1.0] = 5.0
+        weights[target_reference.abs() > 3.0] = 10.0
+        return (error * weights).mean()
+
     def train_step(self, batch_rain_target, batch_condition, 
                    batch_retrieved=None, batch_graph_emb=None):
         """
         Single training step with DDPM loss.
         
         Args:
-            batch_rain_target: [B, 4] Actual targets (normalized) - multi-output
+            batch_rain_target: [B, 3] Actual targets (normalized) - multi-output
             batch_condition: [B, C] Context features
             batch_retrieved: [B, k, F] Retrieved historical analogs
             batch_graph_emb: [B, G] Spatio-Temporal graph embedding [NEW]
@@ -187,20 +220,8 @@ class RainForecaster:
             batch_graph_emb  # [NEW] Graph conditioning
         )
         
-        # Weighted MSE Loss
-        # Penalize errors more on extreme rainfall events
-        # We use the original target magnitude as a heuristic for importance
-        error = (noise_pred - noise) ** 2
-        
-        # Weighting scheme:
-        # Base weight = 1.0
-        # Extreme weight multiplier = 5.0 for values > 1.0 std dev
-        # Heavy extreme multiplier = 10.0 for values > 3.0 std dev
-        weights = torch.ones_like(error)
-        weights[batch_rain_target.abs() > 1.0] = 5.0
-        weights[batch_rain_target.abs() > 3.0] = 10.0
-        
-        loss = (error * weights).mean()
+        # Weighted loss is shared with the main train loop for consistency.
+        loss = self.weighted_noise_loss(noise_pred, noise, batch_rain_target)
         
         self.optimizer.zero_grad()
         loss.backward()
@@ -212,7 +233,7 @@ class RainForecaster:
     def sample(self, condition, retrieved=None, graph_emb=None, num_samples=1):
         """
         Generate probabilistic predictions using reverse diffusion.
-        MULTI-OUTPUT: Generates all 4 weather variables.
+        MULTI-OUTPUT: Generates all 3 weather variables.
         
         Args:
             condition: [1, C] Current weather features
@@ -221,12 +242,12 @@ class RainForecaster:
             num_samples: Number of samples to generate (for probabilistic output)
         
         Returns:
-            Tensor [num_samples, 4]: Sampled values for 4 variables
+            Tensor [num_samples, 3]: Sampled values for 3 variables
         """
         self.model.eval()
         
-        # Start from random noise - MULTI-OUTPUT: 4 dimensions
-        num_targets = self.model.input_dim  # Should be 4
+        # Start from random noise in target dimensionality (3 variables by contract).
+        num_targets = self.model.input_dim
         x = torch.randn((num_samples, num_targets)).to(self.device)
         
         # Expand conditioning to match num_samples and move to device

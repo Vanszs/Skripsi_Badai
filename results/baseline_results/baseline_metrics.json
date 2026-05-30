@@ -1,0 +1,30 @@
+{
+  "metadata": {
+    "main_node_name": "MAIN",
+    "main_node_identifier": [
+      -6.75,
+      107.0
+    ],
+    "target_node_policy": "main_node_only",
+    "context_policy": "main_node_context",
+    "graph_topology": "star",
+    "model_mode": "era5"
+  },
+  "metrics": {
+    "precipitation": {
+      "rmse": 0.9449226260185242,
+      "mae": 0.4381377100944519,
+      "correlation": 0.5196064266852963
+    },
+    "wind_speed": {
+      "rmse": 1.2506545782089233,
+      "mae": 0.9568595290184021,
+      "correlation": 0.8607917600018773
+    },
+    "humidity": {
+      "rmse": 3.302969455718994,
+      "mae": 2.5262160301208496,
+      "correlation": 0.948266095401987
+    }
+  }
+}

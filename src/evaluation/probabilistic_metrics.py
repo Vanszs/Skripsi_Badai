@@ -106,6 +106,8 @@ def compute_crps(ensemble_samples: np.ndarray, observations: np.ndarray) -> floa
         crps = term1 - 0.5 * abs(term2)
         crps_values.append(crps)
     
+    if not crps_values:
+        return float("nan")
     return float(np.mean(crps_values))
 
 

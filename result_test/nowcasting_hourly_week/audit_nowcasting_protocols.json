@@ -1,0 +1,114 @@
+{
+  "window": {
+    "start": "2025-12-24 17:00:00",
+    "end": "2025-12-31 16:00:00",
+    "n": 168
+  },
+  "rain_specialization": {
+    "enabled": true,
+    "wet_threshold": 0.550000011920929,
+    "wet_prob_min": 0.22107309103012085,
+    "wet_prob_max": 0.30566859245300293,
+    "wet_prob_below_threshold_count": 168
+  },
+  "one_step_with_actual_update": {
+    "precipitation": {
+      "full_model": {
+        "rmse": 1.0900080937350582,
+        "mae": 0.588532655211609,
+        "corr": 0.5040938761222431,
+        "n_unique_pred": 83,
+        "n_changes_pred": 93
+      },
+      "baseline_persistence": {
+        "rmse": 0.822778404563221,
+        "mae": 0.29464285882810753,
+        "corr": 0.5631977295342477,
+        "n_unique_pred": 19,
+        "n_changes_pred": 67
+      }
+    },
+    "wind_speed_10m": {
+      "full_model": {
+        "rmse": 1.0810769624961507,
+        "mae": 0.7908821182236785,
+        "corr": 0.8485697632843967,
+        "n_unique_pred": 168,
+        "n_changes_pred": 167
+      },
+      "baseline_persistence": {
+        "rmse": 0.9939023781368123,
+        "mae": 0.724236090623197,
+        "corr": 0.8399475484486432,
+        "n_unique_pred": 137,
+        "n_changes_pred": 164
+      }
+    },
+    "relative_humidity_2m": {
+      "full_model": {
+        "rmse": 2.9739786994205826,
+        "mae": 2.176608131045387,
+        "corr": 0.9597735323932411,
+        "n_unique_pred": 167,
+        "n_changes_pred": 166
+      },
+      "baseline_persistence": {
+        "rmse": 4.0754517790925515,
+        "mae": 3.01779910496303,
+        "corr": 0.9247058292977645,
+        "n_unique_pred": 163,
+        "n_changes_pred": 167
+      }
+    }
+  },
+  "recursive_closed_loop": {
+    "precipitation": {
+      "full_model": {
+        "rmse": 0.9421669581082067,
+        "mae": 0.3363095254504255,
+        "corr": NaN,
+        "n_unique_pred": 1,
+        "n_changes_pred": 0
+      },
+      "baseline_persistence": {
+        "rmse": 0.9421669581082067,
+        "mae": 0.3363095254504255,
+        "corr": NaN,
+        "n_unique_pred": 1,
+        "n_changes_pred": 0
+      }
+    },
+    "wind_speed_10m": {
+      "full_model": {
+        "rmse": 3.5799989698035035,
+        "mae": 3.1533887285207,
+        "corr": -0.008132579268546315,
+        "n_unique_pred": 168,
+        "n_changes_pred": 167
+      },
+      "baseline_persistence": {
+        "rmse": 2.77561106116387,
+        "mae": 2.3184789814764546,
+        "corr": NaN,
+        "n_unique_pred": 1,
+        "n_changes_pred": 0
+      }
+    },
+    "relative_humidity_2m": {
+      "full_model": {
+        "rmse": 14.649020351349574,
+        "mae": 10.558946473257881,
+        "corr": 0.05431942838545238,
+        "n_unique_pred": 168,
+        "n_changes_pred": 167
+      },
+      "baseline_persistence": {
+        "rmse": 13.800515282458505,
+        "mae": 9.706501415797643,
+        "corr": NaN,
+        "n_unique_pred": 1,
+        "n_changes_pred": 0
+      }
+    }
+  }
+}

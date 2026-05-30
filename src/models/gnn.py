@@ -1,14 +1,9 @@
 """
-Spatio-Temporal Graph Neural Network Module
+Spatio-Temporal Graph Neural Network Module.
 
-This module implements:
-1. SpatioTemporalGNN - Graph Attention for spatial dependencies
-2. TemporalAttention - Self-attention for temporal sequences
-
-Scientific Justification:
-- Gunung Gede-Pangrango memiliki 3 node observasi (Puncak, Lereng, Hilir)
-- Weather patterns propagate via wind (directed edges)
-- Temporal patterns are crucial for nowcasting
+Canonical context:
+- 5-node star graph (MAIN, UP, DOWN, LEFT, RIGHT)
+- Temporal sequence conditioning for diffusion forecasting
 """
 
 import torch
@@ -23,8 +18,10 @@ class TemporalAttention(nn.Module):
     Self-attention layer for temporal sequence modeling.
     Learns which past timesteps are most relevant for prediction.
     """
-    def __init__(self, hidden_dim, num_heads=4, dropout=0.1):
+    def __init__(self, hidden_dim, num_heads=4, dropout=0.1, max_len=64, causal=True):
         super().__init__()
+        self.max_len = int(max_len)
+        self.causal = bool(causal)
         self.attention = nn.MultiheadAttention(
             embed_dim=hidden_dim,
             num_heads=num_heads,
@@ -33,18 +30,37 @@ class TemporalAttention(nn.Module):
         )
         self.norm = nn.LayerNorm(hidden_dim)
         self.dropout = nn.Dropout(dropout)
+        self.pos_embedding = nn.Parameter(torch.zeros(1, self.max_len, hidden_dim))
+        nn.init.normal_(self.pos_embedding, mean=0.0, std=0.02)
         
     def forward(self, x):
         """
         x: [Batch, Seq_Len, Hidden_Dim]
-        Returns: [Batch, Hidden_Dim] (aggregated temporal representation)
+        Returns: [Batch, Hidden_Dim] (last-step temporal representation)
         """
+        seq_len = x.shape[1]
+        if seq_len > self.max_len:
+            raise ValueError(
+                f"TemporalAttention sequence length {seq_len} exceeds max_len={self.max_len}"
+            )
+
+        # Add positional encoding to keep timestep order identifiable.
+        x = x + self.pos_embedding[:, :seq_len, :]
+
+        # Causal mask ensures timestep t cannot attend to future timesteps > t.
+        attn_mask = None
+        if self.causal:
+            attn_mask = torch.triu(
+                torch.ones(seq_len, seq_len, device=x.device, dtype=torch.bool),
+                diagonal=1,
+            )
+
         # Self-attention
-        attn_out, _ = self.attention(x, x, x)
+        attn_out, _ = self.attention(x, x, x, attn_mask=attn_mask)
         x = self.norm(x + self.dropout(attn_out))
-        
-        # Aggregate: take mean over sequence (or last timestep)
-        return x.mean(dim=1)  # [Batch, Hidden_Dim]
+
+        # Use last timestep representation for one-step-ahead conditioning.
+        return x[:, -1, :]  # [Batch, Hidden_Dim]
 
 
 class SpatialGNN(nn.Module):
@@ -110,7 +126,9 @@ class SpatioTemporalGNN(nn.Module):
         # Temporal component
         self.temporal_attn = TemporalAttention(
             hidden_dim=hidden_dim,
-            num_heads=num_attn_heads
+            num_heads=num_attn_heads,
+            max_len=seq_len,
+            causal=True,
         )
         
         # Output projection

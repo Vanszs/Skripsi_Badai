@@ -1,32 +1,59 @@
 {
-  "precipitation": {
-    "rmse": 1.9287960529327393,
-    "mae": 0.9787937998771667,
-    "correlation": 0.3602993994509664,
-    "crps": 0.9222383170933466,
-    "brier_2mm": 0.14522869864399918,
-    "pod_2mm": 0.08021390374331551,
-    "far_2mm": 0.4444444444444444,
-    "csi_2mm": 0.07537688442211055,
-    "brier_5mm": 0.05203197733252378,
-    "pod_5mm": 0.0,
-    "far_5mm": 1.0,
-    "csi_5mm": 0.0,
-    "brier_10mm": 0.0075379477838494234,
-    "pod_10mm": 0.0,
-    "far_10mm": NaN,
-    "csi_10mm": 0.0
+  "metadata": {
+    "main_node_name": "MAIN",
+    "main_node_identifier": [
+      -6.75,
+      107.0
+    ],
+    "node_order": [
+      "MAIN",
+      "UP",
+      "DOWN",
+      "LEFT",
+      "RIGHT"
+    ],
+    "graph_topology": "star",
+    "target_node_policy": "main_node_only",
+    "context_policy": "main_node_context",
+    "model_mode": "era5",
+    "data_path": "data/raw/pangrango_era5_5node_2005_2025.parquet",
+    "eval_step": 24,
+    "num_ensemble": 30,
+    "seq_len": 6,
+    "rain_specialization_enabled": true,
+    "rain_occurrence_threshold_mm": 0.1,
+    "rain_probability_threshold": 0.550000011920929
   },
-  "wind_speed": {
-    "rmse": 1.50153386592865,
-    "mae": 1.1684271097183228,
-    "correlation": 0.8449060827542101,
-    "crps": 1.1389136888813909
-  },
-  "humidity": {
-    "rmse": 6.749453544616699,
-    "mae": 5.529663562774658,
-    "correlation": 0.9450792320554914,
-    "crps": 5.150685277956021
+  "metrics": {
+    "precipitation": {
+      "rmse": 1.5176199674606323,
+      "mae": 0.7875964641571045,
+      "correlation": 0.2936340015082031,
+      "crps": 0.7796230678260073,
+      "brier_2mm": 0.12781349749202006,
+      "pod_2mm": 0.04484304932735426,
+      "far_2mm": 0.6,
+      "csi_2mm": 0.04201680672268908,
+      "brier_5mm": 0.024002127982976136,
+      "pod_5mm": 0.0,
+      "far_5mm": NaN,
+      "csi_5mm": 0.0,
+      "brier_10mm": 5.4719562243502063e-05,
+      "pod_10mm": NaN,
+      "far_10mm": NaN,
+      "csi_10mm": NaN
+    },
+    "wind_speed": {
+      "rmse": 1.252151370048523,
+      "mae": 0.9374005794525146,
+      "correlation": 0.8566530524200323,
+      "crps": 0.9470161166002112
+    },
+    "humidity": {
+      "rmse": 4.026482582092285,
+      "mae": 3.420832395553589,
+      "correlation": 0.9598375282535756,
+      "crps": 3.327730344588098
+    }
   }
 }
