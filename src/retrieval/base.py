@@ -1,27 +1,6 @@
 import torch
-import torch.nn as nn
 import faiss
 import numpy as np
-
-class WeatherStateEncoder(nn.Module):
-    """
-    Compresses the weather state of the entire graph (Nodes x Features) 
-    into a single embedding vector.
-    """
-    def __init__(self, input_dim, hidden_dim=64, embedding_dim=32):
-        super().__init__()
-        self.flatten = nn.Flatten()
-        self.encoder = nn.Sequential(
-            nn.Linear(input_dim, hidden_dim),
-            nn.ReLU(),
-            nn.Linear(hidden_dim, embedding_dim),
-            nn.Tanh() # Normalize to [-1, 1] roughly
-        )
-        
-    def forward(self, x):
-        # x shape: [Batch, Num_Nodes, Features]
-        flat = self.flatten(x)
-        return self.encoder(flat)
 
 class RetrievalDatabase:
     """

@@ -27,6 +27,7 @@ from src.config import (  # noqa: E402
     NODE_COORDINATES,
     NODE_NAMES,
     OPEN_METEO_MODEL,
+    PRECIP_PHYSICAL_MAX_MM,
     TARGET_NODE_POLICY,
     harmonize_weather_columns,
     validate_feature_schema,
@@ -118,10 +119,21 @@ def get_per_node_sequence(per_node_data, idx, seq_len, feature_cols, stats):
     return torch.tensor(seq_norm, dtype=torch.float32)
 
 
-def run_persistence(main_df, eval_step, seq_len):
+def _eval_indices(main_df, seq_len, eval_step, max_eval_samples=0):
+    """
+    Single source of evaluation indices so every scenario uses identical samples.
+    idx-1 (persistence) and idx-seq_len (windows) are always valid since idx>=seq_len>=1.
+    """
+    idxs = list(range(seq_len, len(main_df), eval_step))
+    if max_eval_samples and max_eval_samples > 0:
+        idxs = idxs[:max_eval_samples]
+    return idxs
+
+
+def run_persistence(main_df, eval_step, seq_len, max_eval_samples=0):
     targets_all = []
     preds_all = []
-    for idx in range(seq_len + 1, len(main_df), eval_step):
+    for idx in _eval_indices(main_df, seq_len, eval_step, max_eval_samples):
         target = np.array([main_df.iloc[idx][c] for c in TARGET_COLS], dtype=np.float32)
         pred = np.array([main_df.iloc[idx - 1][c] for c in TARGET_COLS], dtype=np.float32)
         targets_all.append(target)
@@ -132,7 +144,7 @@ def run_persistence(main_df, eval_step, seq_len):
     return targets, preds, ensemble
 
 
-def run_mlp_baseline(main_df, feature_cols, stats, eval_step, seq_len, num_ensemble):
+def run_mlp_baseline(main_df, feature_cols, stats, eval_step, seq_len, num_ensemble, max_eval_samples=0):
     ckpt = torch.load("models/mlp_baseline_chkpt.pth", map_location=DEVICE, weights_only=False)
     cfg = ckpt["config"]
     model = MLPBaseline(
@@ -152,23 +164,21 @@ def run_mlp_baseline(main_df, feature_cols, stats, eval_step, seq_len, num_ensem
     targets_raw = main_df[TARGET_COLS].values.astype(np.float32)
 
     targets_all, preds_all, ensemble_all = [], [], []
-    for idx in range(seq_len, len(main_df), eval_step):
+    # MLP baseline is a DETERMINISTIC regressor: single eval() forward pass.
+    # Ensemble size = 1 so CRPS reduces to MAE (fair vs persistence; no MC-dropout spread).
+    model.eval()
+    for idx in _eval_indices(main_df, seq_len, eval_step, max_eval_samples):
         x = features_norm[idx - seq_len : idx].flatten()
         x_t = torch.tensor(x, dtype=torch.float32).unsqueeze(0).to(DEVICE)
         target = targets_raw[idx]
-        model.train()
-        mc_preds = []
         with torch.no_grad():
-            for _ in range(num_ensemble):
-                mc_preds.append(model(x_t).cpu().numpy()[0])
-        mc_preds = np.stack(mc_preds)
-        mc_denorm = mc_preds * t_std + t_mean
-        mc_denorm[:, 0] = np.clip(np.expm1(np.clip(mc_denorm[:, 0], a_min=None, a_max=20.0)), 0, None)
-        mc_denorm[:, 2] = np.clip(mc_denorm[:, 2], 0, 100)
+            pred = model(x_t).cpu().numpy()[0]
+        pred_denorm = pred * t_std + t_mean
+        pred_denorm[0] = np.clip(np.expm1(np.clip(pred_denorm[0], a_min=None, a_max=20.0)), 0, PRECIP_PHYSICAL_MAX_MM)
+        pred_denorm[2] = np.clip(pred_denorm[2], 0, 100)
         targets_all.append(target)
-        preds_all.append(np.median(mc_denorm, axis=0))
-        ensemble_all.append(mc_denorm)
-    model.eval()
+        preds_all.append(pred_denorm)
+        ensemble_all.append(pred_denorm[None, :])  # ensemble size = 1
     return np.stack(targets_all), np.stack(preds_all), np.stack(ensemble_all)
 
 
@@ -182,6 +192,7 @@ def run_diffusion_scenario(
     num_ensemble,
     use_retrieval=True,
     use_gnn=True,
+    max_eval_samples=0,
 ):
     model_wrapper, _, retrieval_db = load_model_and_stats("models/diffusion_chkpt.pth")
     model_wrapper.to(DEVICE)
@@ -201,7 +212,12 @@ def run_diffusion_scenario(
     targets_raw = main_df[TARGET_COLS].values.astype(np.float32)
 
     targets_all, preds_all, ensemble_all = [], [], []
-    for idx in tqdm(range(seq_len, len(main_df), eval_step), desc=f"Diff(R={use_retrieval},G={use_gnn})"):
+    wet_probs_all = []
+    rain_cfg = config.get("rain_specialization", {})
+    rain_enabled = bool(rain_cfg.get("enabled", False))
+    wet_threshold = float(rain_cfg.get("wet_probability_threshold", 0.5))
+    eval_idxs = _eval_indices(main_df, seq_len, eval_step, max_eval_samples)
+    for idx in tqdm(eval_idxs, desc=f"Diff(R={use_retrieval},G={use_gnn})"):
         target = targets_raw[idx]
         main_ctx_seq = torch.tensor(features_norm[idx - seq_len : idx], dtype=torch.float32).to(DEVICE)
         context_last = main_ctx_seq[-1].unsqueeze(0)
@@ -228,25 +244,41 @@ def run_diffusion_scenario(
                 num_inference_steps=20,
             )
             samples_denorm = samples * t_std_t + t_mean_t
-            samples_denorm[:, 0] = torch.clamp(torch.expm1(torch.clamp(samples_denorm[:, 0], max=20.0)), min=0.0)
+            samples_denorm[:, 0] = torch.clamp(torch.expm1(torch.clamp(samples_denorm[:, 0], max=20.0)), min=0.0, max=PRECIP_PHYSICAL_MAX_MM)
             samples_denorm[:, 2] = torch.clamp(samples_denorm[:, 2], min=0.0, max=100.0)
-            rain_cfg = config.get("rain_specialization", {})
-            if rain_cfg.get("enabled", False):
+            if rain_enabled:
                 wet_prob = forecaster.model.compute_wet_probability(
                     context=context_last,
                     retrieved=retrieved,
                     graph_emb=graph_emb,
                 )
-                wet_threshold = float(rain_cfg.get("wet_probability_threshold", 0.5))
-                if float(wet_prob.squeeze().item()) < wet_threshold:
-                    samples_denorm[:, 0] = 0.0
+                wet_probs_all.append(float(wet_prob.squeeze().item()))
             samples_np = samples_denorm.cpu().numpy()
 
         targets_all.append(target)
         preds_all.append(np.median(samples_np, axis=0))
         ensemble_all.append(samples_np)
 
-    return np.stack(targets_all), np.stack(preds_all), np.stack(ensemble_all)
+    targets = np.stack(targets_all)
+    preds = np.stack(preds_all)
+    ensemble = np.stack(ensemble_all)
+
+    # FIX #5: apply rain gate AFTER the loop with an anti-degenerate guard.
+    # If every window is below threshold, skip gating entirely (transparent) instead of
+    # silently zeroing all precipitation.
+    if rain_enabled and wet_probs_all:
+        wet_arr = np.asarray(wet_probs_all, dtype=np.float32)
+        if float(wet_arr.max()) < wet_threshold:
+            print(
+                f"  [rain-gate guard] All {len(wet_arr)} windows have wet_prob < {wet_threshold:.3f} "
+                f"(max={wet_arr.max():.3f}); skipping gate to avoid degenerate all-dry output."
+            )
+        else:
+            gate_mask = wet_arr < wet_threshold
+            preds[gate_mask, 0] = 0.0
+            ensemble[gate_mask, :, 0] = 0.0
+
+    return targets, preds, ensemble
 
 
 def compute_scenario_metrics(targets, preds, ensemble):
@@ -399,7 +431,7 @@ def plot_ablation(all_results, save_dir):
     plt.close()
 
 
-def main(eval_step=24, num_ensemble=30, seq_len=6, data_path=CANONICAL_DATA_PATH):
+def main(eval_step=1, num_ensemble=30, seq_len=6, data_path=CANONICAL_DATA_PATH, max_eval_samples=0):
     print("=" * 70)
     print("COMPREHENSIVE 6-SCENARIO EVALUATION (MAIN NODE ONLY)")
     print("=" * 70)
@@ -413,48 +445,58 @@ def main(eval_step=24, num_ensemble=30, seq_len=6, data_path=CANONICAL_DATA_PATH
     rain_cfg = ckpt.get("config", {}).get("rain_specialization", {})
     if not isinstance(rain_cfg, dict):
         rain_cfg = {}
-    print(f"Main-node test rows: {len(main_df)}")
+    expected_n = len(_eval_indices(main_df, seq_len, eval_step, max_eval_samples))
+    print(f"Main-node test rows: {len(main_df)} | eval_step={eval_step} | expected samples/scenario: {expected_n}")
 
     all_results: Dict[str, Dict[str, Dict[str, float]]] = {}
     all_data: Dict[str, Tuple[np.ndarray, np.ndarray, np.ndarray]] = {}
 
     print("\n[2/8] Scenario 1: Persistence...")
-    t, p, e = run_persistence(main_df, eval_step, seq_len)
+    t, p, e = run_persistence(main_df, eval_step, seq_len, max_eval_samples)
     all_results["persistence"] = compute_scenario_metrics(t, p, e)
     all_data["persistence"] = (t, p, e)
 
     print("\n[3/8] Scenario 2: MLP baseline...")
-    t, p, e = run_mlp_baseline(main_df, feature_cols, stats, eval_step, seq_len, num_ensemble)
+    t, p, e = run_mlp_baseline(main_df, feature_cols, stats, eval_step, seq_len, num_ensemble, max_eval_samples)
     all_results["mlp_baseline"] = compute_scenario_metrics(t, p, e)
     all_data["mlp_baseline"] = (t, p, e)
 
     print("\n[4/8] Scenario 3: Diffusion only...")
     t, p, e = run_diffusion_scenario(
-        main_df, per_node_data, feature_cols, stats, eval_step, seq_len, num_ensemble, False, False
+        main_df, per_node_data, feature_cols, stats, eval_step, seq_len, num_ensemble, False, False, max_eval_samples
     )
     all_results["diff_only"] = compute_scenario_metrics(t, p, e)
     all_data["diff_only"] = (t, p, e)
 
     print("\n[5/8] Scenario 4: Diffusion + Retrieval...")
     t, p, e = run_diffusion_scenario(
-        main_df, per_node_data, feature_cols, stats, eval_step, seq_len, num_ensemble, True, False
+        main_df, per_node_data, feature_cols, stats, eval_step, seq_len, num_ensemble, True, False, max_eval_samples
     )
     all_results["diff_retrieval"] = compute_scenario_metrics(t, p, e)
     all_data["diff_retrieval"] = (t, p, e)
 
     print("\n[6/8] Scenario 5: Diffusion + GNN...")
     t, p, e = run_diffusion_scenario(
-        main_df, per_node_data, feature_cols, stats, eval_step, seq_len, num_ensemble, False, True
+        main_df, per_node_data, feature_cols, stats, eval_step, seq_len, num_ensemble, False, True, max_eval_samples
     )
     all_results["diff_gnn"] = compute_scenario_metrics(t, p, e)
     all_data["diff_gnn"] = (t, p, e)
 
     print("\n[7/8] Scenario 6: Full model...")
     t, p, e = run_diffusion_scenario(
-        main_df, per_node_data, feature_cols, stats, eval_step, seq_len, num_ensemble, True, True
+        main_df, per_node_data, feature_cols, stats, eval_step, seq_len, num_ensemble, True, True, max_eval_samples
     )
     all_results["full_model"] = compute_scenario_metrics(t, p, e)
     all_data["full_model"] = (t, p, e)
+
+    # FIX #3: fail-fast if any scenario produced a different number of samples.
+    sample_counts = {name: int(data[0].shape[0]) for name, data in all_data.items()}
+    unique_counts = set(sample_counts.values())
+    if len(unique_counts) != 1:
+        raise AssertionError(
+            f"Scenario sample-count mismatch (alignment broken): {sample_counts}"
+        )
+    print(f"  Sample-count alignment OK: all scenarios = {unique_counts.pop()} samples")
 
     metadata = {
         "main_node_name": MAIN_NODE_NAME,
@@ -466,8 +508,12 @@ def main(eval_step=24, num_ensemble=30, seq_len=6, data_path=CANONICAL_DATA_PATH
         "model_mode": OPEN_METEO_MODEL,
         "data_path": data_path,
         "eval_step": eval_step,
+        "max_eval_samples": int(max_eval_samples),
+        "samples_per_scenario": int(next(iter(sample_counts.values()))),
         "num_ensemble": num_ensemble,
         "seq_len": seq_len,
+        "crps_estimator": "fair_unbiased",
+        "mlp_crps_type": "deterministic_single_pass",
         "rain_specialization_enabled": bool(rain_cfg.get("enabled", False)),
         "rain_occurrence_threshold_mm": rain_cfg.get("rain_occurrence_threshold_mm"),
         "rain_probability_threshold": rain_cfg.get("wet_probability_threshold"),
@@ -548,9 +594,12 @@ def main(eval_step=24, num_ensemble=30, seq_len=6, data_path=CANONICAL_DATA_PATH
 
 def parse_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--eval-step", type=int, default=24)
+    parser.add_argument("--eval-step", type=int, default=1,
+                        help="Hourly nowcasting uses 1 (every hour). Higher values subsample.")
     parser.add_argument("--num-ensemble", type=int, default=30)
     parser.add_argument("--seq-len", type=int, default=6)
+    parser.add_argument("--max-eval-samples", type=int, default=0,
+                        help="Optional cap on number of eval samples per scenario (0 = no cap).")
     parser.add_argument("--data-path", type=str, default=CANONICAL_DATA_PATH)
     return parser.parse_args()
 
@@ -562,4 +611,5 @@ if __name__ == "__main__":
         num_ensemble=args.num_ensemble,
         seq_len=args.seq_len,
         data_path=args.data_path,
+        max_eval_samples=args.max_eval_samples,
     )

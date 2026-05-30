@@ -26,3 +26,8 @@ class CheckpointContractTest(unittest.TestCase):
         self.assertEqual(cfg["graph_topology"], "star")
         self.assertEqual(cfg["num_nodes"], 5)
         self.assertEqual(cfg["target_node_policy"], "main_node_only")
+
+        # FIX #1: retrieval values are outcomes (num_targets each), so
+        # retrieval_dim must equal num_targets * k_neighbors.
+        num_targets = cfg.get("num_targets", len(cfg.get("target_cols", [])))
+        self.assertEqual(cfg["retrieval_dim"], num_targets * cfg["k_neighbors"])

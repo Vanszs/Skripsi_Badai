@@ -10,6 +10,16 @@ jika anda membuat test file, setelah test langsung hapus saja.
 
 # Context Bridge — Skripsi RA-Diffusion Gede–Pangrango
 
+> ⚠️ **USANG / OUTDATED (per 2026-05-30).** Bagian di bawah mendeskripsikan arsitektur **3-node legacy**
+> dan angka lama (mis. "val loss 0.0966", path `pangrango_era5_2005_2025.parquet`, topologi
+> fully-connected 3-node). Itu **tidak lagi berlaku**. Sumber kebenaran aktif:
+> - Arsitektur: **5-node star, main-node-only** — lihat `docs/METODE_PENELITIAN_PROYEK.md` & `docs/ACTIVE_5NODE_STAR_MAIN.md`.
+> - Dataset aktif: `data/raw/pangrango_era5_5node_2005_2025.parquet` (920,400 baris).
+> - Checkpoint aktif terbaru: **best val loss ≈ 0.6197** (weighted-noise-MSE + wet-BCE, `wet_loss_weight=0.7`),
+>   `retrieval_dim = num_targets × k = 9`, `GATConv(edge_dim=1)`.
+> - Retrieval menyimpan **outcome target \(\tau+1\)** sebagai value (bukan fitur).
+> Gunakan dokumen aktif tersebut; jangan mengutip angka di bawah ini.
+
 > **Dokumen ini adalah sumber kebenaran tunggal (single source of truth)** untuk setiap sesi AI baru.
 > Semua angka, arsitektur, dan path di bawah ini **mencerminkan implementasi aktual** di workspace, bukan rencana awal.
 > **Terakhir diverifikasi:** 4 Maret 2026.

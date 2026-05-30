@@ -17,43 +17,47 @@
     "context_policy": "main_node_context",
     "model_mode": "era5",
     "data_path": "data/raw/pangrango_era5_5node_2005_2025.parquet",
-    "eval_step": 24,
+    "eval_step": 11,
+    "max_eval_samples": 0,
+    "samples_per_scenario": 3189,
     "num_ensemble": 30,
     "seq_len": 6,
+    "crps_estimator": "fair_unbiased",
+    "mlp_crps_type": "deterministic_single_pass",
     "rain_specialization_enabled": true,
     "rain_occurrence_threshold_mm": 0.1,
-    "rain_probability_threshold": 0.550000011920929
+    "rain_probability_threshold": 0.5
   },
   "metrics": {
     "precipitation": {
-      "rmse": 1.377732276916504,
-      "mae": 0.7344048619270325,
-      "correlation": 0.5989943153873422,
-      "crps": NaN,
-      "brier_2mm": 0.1573187414500684,
-      "pod_2mm": 0.48771929824561405,
-      "far_2mm": 0.37668161434977576,
-      "csi_2mm": 0.37669376693766937,
-      "brier_5mm": 0.0533515731874145,
-      "pod_5mm": 0.13559322033898305,
-      "far_5mm": 0.7714285714285715,
-      "csi_5mm": 0.09302325581395349,
-      "brier_10mm": 0.0,
-      "pod_10mm": NaN,
-      "far_10mm": NaN,
-      "csi_10mm": NaN
+      "rmse": 0.6847324967384338,
+      "mae": 0.21865788102149963,
+      "correlation": 0.6855735256550738,
+      "crps": 0.21865788102149963,
+      "brier_2mm": 0.038883662590153655,
+      "pod_2mm": 0.4959349593495935,
+      "far_2mm": 0.5040650406504065,
+      "csi_2mm": 0.32972972972972975,
+      "brier_5mm": 0.008780181875195987,
+      "pod_5mm": 0.38095238095238093,
+      "far_5mm": 0.6521739130434783,
+      "csi_5mm": 0.2222222222222222,
+      "brier_10mm": 0.00031357792411414236,
+      "pod_10mm": 0.5,
+      "far_10mm": 0.0,
+      "csi_10mm": 0.5
     },
     "wind_speed": {
-      "rmse": 1.4423842430114746,
-      "mae": 1.0924205780029297,
-      "correlation": 0.8377986945769987,
-      "crps": NaN
+      "rmse": 1.1152578592300415,
+      "mae": 0.8368354439735413,
+      "correlation": 0.8489278119944845,
+      "crps": 0.8368354439735413
     },
     "humidity": {
-      "rmse": 5.2005462646484375,
-      "mae": 4.166507244110107,
-      "correlation": 0.9357354954719349,
-      "crps": NaN
+      "rmse": 4.494227409362793,
+      "mae": 2.906115770339966,
+      "correlation": 0.9380132213723715,
+      "crps": 2.906115770339966
     }
   }
 }

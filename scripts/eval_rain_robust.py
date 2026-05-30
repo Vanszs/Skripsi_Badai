@@ -1,22 +1,22 @@
 """
-Robust precipitation-only crosscheck on weekly windows.
+Reproducible weekly one-step nowcasting crosscheck (3 variables).
 
-Compares:
-- Rain-specialized ST-Graph + Retrieval-Diffusion model
-- Persistence baseline
+Single source for the weekly artifacts under result_test/nowcasting_hourly_week/.
+- Variables: precipitation, wind_speed_10m, relative_humidity_2m
+- Models compared: full RA-Diffusion model, persistence, MLP baseline
+- Windows: driest / median / wettest week (chosen on test split)
+- Protocol: one-step hourly with actual update (no recursive closed loop)
 
-Windows:
-- driest week
-- median-rain week
-- wettest week
+Deterministic: fixed seeds; outputs CSV + JSON only.
 """
 
 from __future__ import annotations
 
 import argparse
+import json
 import os
 import sys
-from dataclasses import dataclass
+from dataclasses import dataclass, asdict
 from typing import Dict, List
 
 import numpy as np
@@ -30,17 +30,22 @@ from src.config import (  # noqa: E402
     FINAL_TARGET_COLS,
     MAIN_NODE_NAME,
     NODE_NAMES,
+    PRECIP_PHYSICAL_MAX_MM,
     harmonize_weather_columns,
     validate_feature_schema,
     validate_feature_values,
 )
 from src.data.ingest import CANONICAL_DATA_PATH  # noqa: E402
 from src.inference import create_inference_graphs, load_model_and_stats  # noqa: E402
+from src.models.mlp_baseline import MLPBaseline  # noqa: E402
 from src.train import compute_stats_from_training, temporal_split  # noqa: E402
 
 
 WINDOW_HOURS = 24 * 7
 EVENT_THRESHOLDS = (0.1, 1.0)
+VAR_NAMES = ["precipitation", "wind_speed_10m", "relative_humidity_2m"]
+SEED = 1234
+OUT_DIR = "result_test/nowcasting_hourly_week"
 
 
 @dataclass
@@ -49,6 +54,13 @@ class WeekWindow:
     start_idx: int
     end_idx: int
     precip_sum: float
+
+
+def _seed_everything(seed: int = SEED) -> None:
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    if torch.cuda.is_available():
+        torch.cuda.manual_seed_all(seed)
 
 
 def _corr(a: np.ndarray, b: np.ndarray) -> float:
@@ -91,13 +103,11 @@ def _pick_week_windows(main_df: pd.DataFrame) -> List[WeekWindow]:
     wet = candidates_sorted[-1]
     median_precip = np.median([x[2] for x in candidates_sorted])
     med = min(candidates_sorted, key=lambda x: abs(x[2] - median_precip))
-
-    picked = [
+    return [
         WeekWindow("driest_week", dry[0], dry[1], dry[2]),
         WeekWindow("median_week", med[0], med[1], med[2]),
         WeekWindow("wettest_week", wet[0], wet[1], wet[2]),
     ]
-    return picked
 
 
 def _build_test_frames(data_path: str):
@@ -139,21 +149,14 @@ def _build_test_frames(data_path: str):
     return main_df, per_node_data, feature_cols, stats
 
 
-def _get_per_node_sequence(
-    per_node_data: Dict[str, pd.DataFrame],
-    idx: int,
-    seq_len: int,
-    feature_cols: List[str],
-    stats: Dict[str, torch.Tensor],
-) -> torch.Tensor:
+def _get_per_node_sequence(per_node_data, idx, seq_len, feature_cols, stats) -> torch.Tensor:
     c_mean = stats["c_mean"].numpy()
     c_std = stats["c_std"].numpy()
     sequences = []
     for t in range(idx - seq_len, idx):
         node_feats = []
         for node in NODE_NAMES:
-            ndf = per_node_data[node]
-            row = ndf.iloc[t]
+            row = per_node_data[node].iloc[t]
             feat = np.array([row[c] if c in row.index else 0.0 for c in feature_cols], dtype=np.float32)
             node_feats.append(feat)
         sequences.append(np.stack(node_feats))
@@ -162,24 +165,37 @@ def _get_per_node_sequence(
     return torch.tensor(seq_norm, dtype=torch.float32)
 
 
-def run_crosscheck(
-    data_path: str,
-    num_ensemble: int,
-    num_inference_steps: int,
-    device: str,
-):
-    os.makedirs("result_test/nowcasting_hourly_week", exist_ok=True)
+def _load_mlp(device):
+    path = "models/mlp_baseline_chkpt.pth"
+    if not os.path.exists(path):
+        return None
+    ckpt = torch.load(path, map_location=device, weights_only=False)
+    cfg = ckpt["config"]
+    model = MLPBaseline(
+        input_dim=cfg["input_dim"], hidden_dim=cfg["hidden_dim"], num_targets=cfg["num_targets"]
+    ).to(device)
+    model.load_state_dict(ckpt["model_state"])
+    model.eval()
+    return model
 
-    model_wrapper, stats_ckpt, retrieval_db = load_model_and_stats("models/diffusion_chkpt.pth")
+
+def run_crosscheck(data_path: str, num_ensemble: int, num_inference_steps: int, device: str):
+    _seed_everything()
+    os.makedirs(OUT_DIR, exist_ok=True)
+
+    model_wrapper, _, retrieval_db = load_model_and_stats("models/diffusion_chkpt.pth")
     model_wrapper.to(device)
     model_wrapper.eval()
     config = model_wrapper.config
     st_gnn = model_wrapper.st_gnn
     forecaster = model_wrapper.forecaster
+    mlp = _load_mlp(device)
 
     main_df, per_node_data, feature_cols, stats = _build_test_frames(data_path)
     c_mean = stats["c_mean"].numpy()
     c_std = stats["c_std"].numpy()
+    t_mean = stats["t_mean"].numpy()
+    t_std = stats["t_std"].numpy()
     t_mean_t = stats["t_mean"].to(device)
     t_std_t = stats["t_std"].to(device)
     seq_len = int(config["seq_len"])
@@ -187,25 +203,29 @@ def run_crosscheck(
     features_raw = main_df[feature_cols].values.astype(np.float32)
     features_norm = (features_raw - c_mean) / (c_std + 1e-5)
     timestamps = pd.to_datetime(main_df["date"]).reset_index(drop=True)
-    actual_precip = main_df["precipitation"].values.astype(np.float32)
+    targets_raw = main_df[VAR_NAMES].values.astype(np.float32)
+
+    rain_cfg = config.get("rain_specialization", {})
+    rain_enabled = bool(rain_cfg.get("enabled", False))
+    wet_threshold = float(rain_cfg.get("wet_probability_threshold", 0.5))
 
     windows = _pick_week_windows(main_df)
     summary_rows = []
+    metrics_payload: Dict[str, Dict] = {}
 
     for window in windows:
-        start_idx = window.start_idx
-        end_idx = window.end_idx
-        eval_start = max(start_idx + seq_len, seq_len)
-        eval_range = range(eval_start, end_idx)
+        eval_start = max(window.start_idx + seq_len, seq_len)
+        eval_range = list(range(eval_start, window.end_idx))
 
-        rows = []
-        model_preds = []
-        baseline_preds = []
-        actuals = []
+        actuals = np.zeros((len(eval_range), 3), dtype=np.float32)
+        model_preds = np.zeros((len(eval_range), 3), dtype=np.float32)
+        persist_preds = np.zeros((len(eval_range), 3), dtype=np.float32)
+        mlp_preds = np.full((len(eval_range), 3), np.nan, dtype=np.float32)
+        wet_probs = np.full(len(eval_range), np.nan, dtype=np.float32)
 
-        for idx in eval_range:
-            target = float(actual_precip[idx])
-            baseline = float(actual_precip[idx - 1])
+        for j, idx in enumerate(eval_range):
+            actuals[j] = targets_raw[idx]
+            persist_preds[j] = targets_raw[idx - 1]
 
             main_ctx_seq = torch.tensor(features_norm[idx - seq_len : idx], dtype=torch.float32, device=device)
             context_last = main_ctx_seq[-1].unsqueeze(0)
@@ -222,114 +242,110 @@ def run_crosscheck(
                     num_samples=num_ensemble,
                     num_inference_steps=num_inference_steps,
                 )
-                samples_denorm = samples * t_std_t + t_mean_t
-                samples_denorm[:, 0] = torch.clamp(
-                    torch.expm1(torch.clamp(samples_denorm[:, 0], max=20.0)),
-                    min=0.0,
-                )
+                sd = samples * t_std_t + t_mean_t
+                sd[:, 0] = torch.clamp(torch.expm1(torch.clamp(sd[:, 0], max=20.0)), min=0.0, max=PRECIP_PHYSICAL_MAX_MM)
+                sd[:, 2] = torch.clamp(sd[:, 2], min=0.0, max=100.0)
+                model_preds[j] = torch.median(sd, dim=0).values.cpu().numpy()
 
-                rain_cfg = config.get("rain_specialization", {})
-                if rain_cfg.get("enabled", False):
+                if rain_enabled:
                     wet_prob = forecaster.model.compute_wet_probability(
-                        context=context_last,
-                        retrieved=retrieved,
-                        graph_emb=graph_emb,
+                        context=context_last, retrieved=retrieved, graph_emb=graph_emb
                     )
-                    wet_threshold = float(rain_cfg.get("wet_probability_threshold", 0.5))
-                    if float(wet_prob.squeeze().item()) < wet_threshold:
-                        samples_denorm[:, 0] = 0.0
+                    wet_probs[j] = float(wet_prob.squeeze().item())
 
-                pred = float(torch.median(samples_denorm[:, 0]).item())
+                if mlp is not None:
+                    x = features_norm[idx - seq_len : idx].flatten()
+                    x_t = torch.tensor(x, dtype=torch.float32, device=device).unsqueeze(0)
+                    out = mlp(x_t).cpu().numpy()[0] * t_std + t_mean
+                    out[0] = np.clip(np.expm1(min(out[0], 20.0)), 0.0, None)
+                    out[2] = np.clip(out[2], 0.0, 100.0)
+                    mlp_preds[j] = out
 
-            rows.append(
-                {
-                    "timestamp": timestamps.iloc[idx],
-                    "actual_precipitation": target,
-                    "pred_model_precipitation": pred,
-                    "pred_persistence_precipitation": baseline,
-                }
-            )
-            actuals.append(target)
-            model_preds.append(pred)
-            baseline_preds.append(baseline)
+        # FIX #5: rain gate with anti-degenerate guard (applied per window, post-loop).
+        gated = False
+        if rain_enabled and np.isfinite(wet_probs).any():
+            if float(np.nanmax(wet_probs)) < wet_threshold:
+                print(
+                    f"  [rain-gate guard] {window.name}: all wet_prob < {wet_threshold:.3f} "
+                    f"(max={np.nanmax(wet_probs):.3f}); gate skipped to avoid all-dry collapse."
+                )
+            else:
+                mask = wet_probs < wet_threshold
+                model_preds[mask, 0] = 0.0
+                gated = True
 
-        week_df = pd.DataFrame(rows)
-        week_df.to_csv(
-            f"result_test/nowcasting_hourly_week/{window.name}_actual_vs_pred.csv",
-            index=False,
+        week_df = pd.DataFrame(
+            {
+                "timestamp": [timestamps.iloc[i] for i in eval_range],
+                "actual_precipitation": actuals[:, 0],
+                "actual_wind_speed_10m": actuals[:, 1],
+                "actual_relative_humidity_2m": actuals[:, 2],
+                "pred_model_precipitation": model_preds[:, 0],
+                "pred_model_wind_speed_10m": model_preds[:, 1],
+                "pred_model_relative_humidity_2m": model_preds[:, 2],
+                "pred_persistence_precipitation": persist_preds[:, 0],
+                "pred_persistence_wind_speed_10m": persist_preds[:, 1],
+                "pred_persistence_relative_humidity_2m": persist_preds[:, 2],
+                "pred_mlp_precipitation": mlp_preds[:, 0],
+                "pred_mlp_wind_speed_10m": mlp_preds[:, 1],
+                "pred_mlp_relative_humidity_2m": mlp_preds[:, 2],
+                "wet_probability": wet_probs,
+            }
         )
+        week_df.to_csv(os.path.join(OUT_DIR, f"{window.name}_actual_vs_pred.csv"), index=False)
 
-        actual_arr = np.array(actuals, dtype=np.float32)
-        model_arr = np.array(model_preds, dtype=np.float32)
-        base_arr = np.array(baseline_preds, dtype=np.float32)
-
-        model_rmse = float(np.sqrt(np.mean((model_arr - actual_arr) ** 2)))
-        base_rmse = float(np.sqrt(np.mean((base_arr - actual_arr) ** 2)))
-        model_mae = float(np.mean(np.abs(model_arr - actual_arr)))
-        base_mae = float(np.mean(np.abs(base_arr - actual_arr)))
-        model_corr = _corr(model_arr, actual_arr)
-        base_corr = _corr(base_arr, actual_arr)
-
-        row = {
-            "window": window.name,
-            "precip_sum_mm": float(window.precip_sum),
-            "n_samples": int(len(actual_arr)),
-            "model_rmse": model_rmse,
-            "persistence_rmse": base_rmse,
-            "rmse_delta_model_minus_persistence": model_rmse - base_rmse,
-            "model_mae": model_mae,
-            "persistence_mae": base_mae,
-            "mae_delta_model_minus_persistence": model_mae - base_mae,
-            "model_corr": model_corr,
-            "persistence_corr": base_corr,
-            "corr_delta_model_minus_persistence": model_corr - base_corr,
-        }
-        for thr in EVENT_THRESHOLDS:
-            model_ev = _event_metrics(actual_arr, model_arr, threshold=thr)
-            base_ev = _event_metrics(actual_arr, base_arr, threshold=thr)
-            key = str(thr).replace(".", "p")
-            row[f"model_csi_thr_{key}"] = model_ev["csi"]
-            row[f"persistence_csi_thr_{key}"] = base_ev["csi"]
-            row[f"csi_delta_thr_{key}"] = model_ev["csi"] - base_ev["csi"]
-            row[f"model_pod_thr_{key}"] = model_ev["pod"]
-            row[f"persistence_pod_thr_{key}"] = base_ev["pod"]
-            row[f"model_far_thr_{key}"] = model_ev["far"]
-            row[f"persistence_far_thr_{key}"] = base_ev["far"]
+        window_metrics = {"n_samples": int(len(eval_range)), "rain_gated": bool(gated)}
+        row = {"window": window.name, "precip_sum_mm": float(window.precip_sum), "n_samples": int(len(eval_range))}
+        for vi, var in enumerate(VAR_NAMES):
+            act = actuals[:, vi]
+            preds_by_model = {"model": model_preds[:, vi], "persistence": persist_preds[:, vi]}
+            if mlp is not None:
+                preds_by_model["mlp"] = mlp_preds[:, vi]
+            var_metrics = {}
+            for mname, pr in preds_by_model.items():
+                rmse = float(np.sqrt(np.mean((pr - act) ** 2)))
+                mae = float(np.mean(np.abs(pr - act)))
+                corr = _corr(pr, act)
+                var_metrics[mname] = {"rmse": rmse, "mae": mae, "corr": corr}
+                row[f"{mname}_{var}_rmse"] = rmse
+                row[f"{mname}_{var}_mae"] = mae
+                row[f"{mname}_{var}_corr"] = corr
+            if var == "precipitation":
+                for thr in EVENT_THRESHOLDS:
+                    key = str(thr).replace(".", "p")
+                    for mname, pr in preds_by_model.items():
+                        ev = _event_metrics(act, pr, threshold=thr)
+                        var_metrics[mname][f"csi_thr_{key}"] = ev["csi"]
+                        var_metrics[mname][f"pod_thr_{key}"] = ev["pod"]
+                        var_metrics[mname][f"far_thr_{key}"] = ev["far"]
+                        row[f"{mname}_csi_thr_{key}"] = ev["csi"]
+            window_metrics[var] = var_metrics
+        metrics_payload[window.name] = window_metrics
         summary_rows.append(row)
 
     summary_df = pd.DataFrame(summary_rows)
-    summary_path = "result_test/nowcasting_hourly_week/weekly_crosscheck_rain_specialized.csv"
+    summary_path = os.path.join(OUT_DIR, "weekly_crosscheck_3var.csv")
     summary_df.to_csv(summary_path, index=False)
-    print(f"Saved robust weekly crosscheck to: {summary_path}")
-    print(summary_df)
+    print(f"Saved weekly crosscheck summary: {summary_path}")
 
-    # Backward-compatible alias for quick inspection.
-    median_row = summary_df[summary_df["window"] == "median_week"]
-    if not median_row.empty:
-        median_csv = "result_test/nowcasting_hourly_week/actual_vs_pred_hourly_1week.csv"
-        src_csv = "result_test/nowcasting_hourly_week/median_week_actual_vs_pred.csv"
-        pd.read_csv(src_csv).to_csv(median_csv, index=False)
-        print(f"Updated 1-week alias CSV: {median_csv}")
-
-    # Persist run metadata.
     meta = {
         "data_path": data_path,
         "checkpoint_path": "models/diffusion_chkpt.pth",
+        "seed": SEED,
         "num_ensemble": int(num_ensemble),
         "num_inference_steps": int(num_inference_steps),
         "device": str(device),
-        "windows": [w.__dict__ for w in windows],
-        "target": "precipitation",
-        "comparison": "model_vs_persistence",
+        "variables": VAR_NAMES,
+        "models_compared": ["model", "persistence"] + (["mlp"] if mlp is not None else []),
+        "protocol": "one_step_hourly_with_actual_update",
+        "rain_specialization_enabled": rain_enabled,
+        "wet_probability_threshold": wet_threshold,
+        "windows": [asdict(w) for w in windows],
+        "metrics": metrics_payload,
     }
-    with open(
-        "result_test/nowcasting_hourly_week/weekly_crosscheck_rain_specialized_meta.json",
-        "w",
-        encoding="utf-8",
-    ) as f:
-        import json
-
-        json.dump(meta, f, indent=2)
+    with open(os.path.join(OUT_DIR, "weekly_crosscheck_3var_meta.json"), "w", encoding="utf-8") as f:
+        json.dump(meta, f, indent=2, default=float)
+    print(f"Saved metadata + metrics JSON: {os.path.join(OUT_DIR, 'weekly_crosscheck_3var_meta.json')}")
 
 
 def parse_args():

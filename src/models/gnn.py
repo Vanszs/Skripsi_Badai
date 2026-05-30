@@ -9,8 +9,6 @@ Canonical context:
 import torch
 import torch.nn as nn
 from torch_geometric.nn import GATConv, global_mean_pool
-from torch_geometric.data import Data, Batch
-import math
 
 
 class TemporalAttention(nn.Module):
@@ -71,9 +69,9 @@ class SpatialGNN(nn.Module):
     def __init__(self, input_dim, hidden_dim, output_dim, num_heads=4):
         super().__init__()
         
-        # Two-layer GAT
-        self.conv1 = GATConv(input_dim, hidden_dim, heads=num_heads, concat=True, dropout=0.1)
-        self.conv2 = GATConv(hidden_dim * num_heads, output_dim, heads=1, concat=False, dropout=0.1)
+        # Two-layer GAT with edge attributes (static star distances).
+        self.conv1 = GATConv(input_dim, hidden_dim, heads=num_heads, concat=True, dropout=0.1, edge_dim=1)
+        self.conv2 = GATConv(hidden_dim * num_heads, output_dim, heads=1, concat=False, dropout=0.1, edge_dim=1)
         
         self.relu = nn.ReLU()
         
@@ -81,14 +79,15 @@ class SpatialGNN(nn.Module):
         """
         x: [Num_Nodes, Input_Dim]
         edge_index: [2, Num_Edges]
+        edge_attr: [Num_Edges, 1] - per-edge distance weights
         batch: [Num_Nodes] - batch assignment for pooling
         """
         # Layer 1
-        h = self.conv1(x, edge_index)
+        h = self.conv1(x, edge_index, edge_attr=edge_attr)
         h = self.relu(h)
         
         # Layer 2
-        h = self.conv2(h, edge_index)
+        h = self.conv2(h, edge_index, edge_attr=edge_attr)
         
         # Global pooling to get graph-level representation
         if batch is not None:
@@ -146,8 +145,10 @@ class SpatioTemporalGNN(nn.Module):
         for graph in graphs_sequence:
             # graph.x: [Total_Nodes_In_Batch, Features]
             # graph.edge_index: [2, Total_Edges]
+            # graph.edge_attr: [Total_Edges, 1] - per-edge distance weights
             # graph.batch: [Total_Nodes] - identifies which sample each node belongs to
-            h = self.spatial_gnn(graph.x, graph.edge_index, batch=graph.batch)
+            edge_attr = getattr(graph, "edge_attr", None)
+            h = self.spatial_gnn(graph.x, graph.edge_index, edge_attr=edge_attr, batch=graph.batch)
             spatial_outputs.append(h)
         
         # Stack temporal: [Batch, Seq_Len, Hidden_Dim]
@@ -158,57 +159,3 @@ class SpatioTemporalGNN(nn.Module):
         
         # Project to output dim
         return self.output_proj(output)  # [Batch, Output_Dim]
-
-
-class SimpleGraphEncoder(nn.Module):
-    """
-    Simplified graph encoder for when full temporal sequence is not available.
-    Processes a single graph snapshot and outputs embedding.
-    
-    Use this during inference when only current timestep is available.
-    """
-    def __init__(self, node_features, hidden_dim=64, output_dim=64):
-        super().__init__()
-        
-        self.node_encoder = nn.Sequential(
-            nn.Linear(node_features, hidden_dim),
-            nn.ReLU(),
-            nn.Linear(hidden_dim, hidden_dim)
-        )
-        
-        self.graph_pool = nn.Sequential(
-            nn.Linear(hidden_dim, output_dim),
-            nn.Tanh()
-        )
-        
-    def forward(self, node_features):
-        """
-        node_features: [Batch, Num_Nodes, Features] or [Num_Nodes, Features]
-        Returns: [Batch, Output_Dim]
-        """
-        if node_features.dim() == 2:
-            node_features = node_features.unsqueeze(0)
-        
-        # Encode nodes
-        h = self.node_encoder(node_features)  # [B, N, H]
-        
-        # Mean pooling across nodes
-        h = h.mean(dim=1)  # [B, H]
-        
-        return self.graph_pool(h)
-
-
-# Helper function to create graph from node features
-def create_pangrango_graph(node_features, edge_index, edge_attr=None):
-    """
-    Create a PyG Data object for Gunung Gede-Pangrango nodes.
-    
-    node_features: Tensor [Num_Nodes, Features]
-    edge_index: Tensor [2, Num_Edges]
-    edge_attr: Optional Tensor [Num_Edges, Edge_Features]
-    """
-    return Data(
-        x=node_features,
-        edge_index=edge_index,
-        edge_attr=edge_attr
-    )

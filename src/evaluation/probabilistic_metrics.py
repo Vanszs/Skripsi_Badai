@@ -85,25 +85,26 @@ def compute_crps(ensemble_samples: np.ndarray, observations: np.ndarray) -> floa
         
         # Skip NaN samples
         valid = ~np.isnan(samples)
-        if np.isnan(obs) or valid.sum() < 2:
+        if np.isnan(obs) or valid.sum() < 1:
             continue
         samples = samples[valid]
         
         # Term 1: E|X - y|
         term1 = np.mean(np.abs(samples - obs))
         
-        # Term 2: 0.5 * E|X - X'|
+        # Term 2: 0.5 * E|X - X'| using the fair (unbiased) estimator.
         n = len(samples)
         if n > 1:
-            # Efficient computation using sorted samples
             sorted_samples = np.sort(samples)
-            # E|X - X'| = (2/n^2) * sum_i (2i - n - 1) * x_(i)
+            # Fair (unbiased) estimator of E|X - X'|:
+            #   E|X-X'| = (2 / (n(n-1))) * sum_i (2i - n - 1) * x_(i)
             indices = np.arange(1, n + 1)
-            term2 = np.sum((2 * indices - n - 1) * sorted_samples) / (n * n)
+            half_exx = np.sum((2 * indices - n - 1) * sorted_samples) / (n * (n - 1))
+            # half_exx already equals 0.5 * E|X-X'|, so CRPS = term1 - half_exx.
+            crps = term1 - half_exx
         else:
-            term2 = 0.0
-        
-        crps = term1 - 0.5 * abs(term2)
+            # Single-member (deterministic) forecast: CRPS reduces to MAE.
+            crps = term1
         crps_values.append(crps)
     
     if not crps_values:

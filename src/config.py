@@ -26,6 +26,7 @@ NODE_DEFINITIONS: List[Dict[str, object]] = [
         "alias": "Puncak",
         "lat": -6.75,
         "lon": 107.00,
+        "elevation_m": 1529.0,
     },
     {
         "name": "UP",
@@ -33,6 +34,7 @@ NODE_DEFINITIONS: List[Dict[str, object]] = [
         "alias": "Up",
         "lat": -6.50,
         "lon": 107.00,
+        "elevation_m": 162.0,
     },
     {
         "name": "DOWN",
@@ -40,6 +42,7 @@ NODE_DEFINITIONS: List[Dict[str, object]] = [
         "alias": "Down",
         "lat": -7.00,
         "lon": 107.00,
+        "elevation_m": 0.0,
     },
     {
         "name": "LEFT",
@@ -47,6 +50,7 @@ NODE_DEFINITIONS: List[Dict[str, object]] = [
         "alias": "Left",
         "lat": -6.75,
         "lon": 106.75,
+        "elevation_m": 823.0,
     },
     {
         "name": "RIGHT",
@@ -54,12 +58,14 @@ NODE_DEFINITIONS: List[Dict[str, object]] = [
         "alias": "Right",
         "lat": -6.75,
         "lon": 107.25,
+        "elevation_m": 288.0,
     },
 ]
 
 NODE_NAMES = [node["name"] for node in NODE_DEFINITIONS]
 NODE_ROLES = {node["name"]: node["role"] for node in NODE_DEFINITIONS}
 NODE_COORDINATES = {node["name"]: (float(node["lat"]), float(node["lon"])) for node in NODE_DEFINITIONS}
+NODE_ELEVATIONS = {node["name"]: float(node["elevation_m"]) for node in NODE_DEFINITIONS}
 NUM_NODES = len(NODE_DEFINITIONS)
 
 MAIN_NODE_NAME = "MAIN"
@@ -82,6 +88,11 @@ FINAL_TARGET_COLS = [
     "wind_speed_10m",
     "relative_humidity_2m",
 ]
+
+# Physical upper bound for hourly precipitation (mm/h). Dataset max ~21.5; this generous
+# cap is numerical hygiene only (prevents expm1 blow-up on out-of-distribution inputs),
+# well above any real value so it never distorts healthy predictions.
+PRECIP_PHYSICAL_MAX_MM = 60.0
 
 FINAL_FEATURE_COLS = [
     "temperature_2m",
@@ -164,6 +175,34 @@ def build_star_edge_index(node_names: List[str] | None = None) -> torch.Tensor:
             f"Star edge count mismatch. Expected {STAR_EDGE_COUNT}, got {edge_index.shape[1]}"
         )
     return edge_index
+
+
+def build_star_edge_attr(node_names: List[str] | None = None) -> torch.Tensor:
+    """
+    Build static per-edge attribute for the star graph. Shape: [num_edges, 1].
+    Feature: euclidean lat/lon distance (degrees).
+
+    NOTE (honest limitation): on the canonical 0.25-deg grid every surrounding node is
+    exactly 0.25 deg from MAIN, so this distance is constant across edges and therefore
+    non-informative; spatial signal comes from the topology (edge_index) and node features,
+    not from edge weights. An elevation-difference edge feature was tested but empirically
+    degraded training convergence, so it was reverted. Elevation context is retained per
+    node (NODE_ELEVATIONS) and documented rather than injected as an edge weight.
+    """
+    names = node_names or NODE_NAMES
+    distances = []
+    for src, dst in STAR_EDGES:
+        if src not in NODE_COORDINATES or dst not in NODE_COORDINATES:
+            raise ValueError(f"Cannot build edge attr. Missing coordinates for edge {(src, dst)}")
+        (slat, slon) = NODE_COORDINATES[src]
+        (dlat, dlon) = NODE_COORDINATES[dst]
+        distances.append(((dlat - slat) ** 2 + (dlon - slon) ** 2) ** 0.5)
+    edge_attr = torch.tensor(distances, dtype=torch.float32).unsqueeze(1)
+    if edge_attr.shape[0] != STAR_EDGE_COUNT:
+        raise ValueError(
+            f"Star edge attr count mismatch. Expected {STAR_EDGE_COUNT}, got {edge_attr.shape[0]}"
+        )
+    return edge_attr
 
 
 def get_checkpoint_node_metadata() -> Dict[str, object]:

@@ -11,8 +11,10 @@ from src.config import (
     FINAL_TARGET_COLS,
     MAIN_NODE_NAME,
     NODE_NAMES,
+    PRECIP_PHYSICAL_MAX_MM,
     STAR_EDGE_COUNT,
     TARGET_NODE_POLICY,
+    build_star_edge_attr,
     build_star_edge_index,
     harmonize_weather_columns,
     validate_feature_schema,
@@ -51,6 +53,7 @@ def create_inference_graphs(condition_sequence, config, device="cpu"):
     node_names = list(config.get("node_names", NODE_NAMES))
     num_nodes = int(config.get("num_nodes", len(node_names)))
     edge_index = _build_edge_index_from_config(config, device)
+    edge_attr = build_star_edge_attr(node_names).to(device)
 
     graphs_sequence = []
     for t in range(seq_len):
@@ -67,7 +70,7 @@ def create_inference_graphs(condition_sequence, config, device="cpu"):
             feat = condition_sequence[t].to(device)
             node_features = torch.zeros((num_nodes, feat.shape[-1]), dtype=feat.dtype, device=device)
             node_features[main_idx] = feat
-        graph = Data(x=node_features.to(device), edge_index=edge_index)
+        graph = Data(x=node_features.to(device), edge_index=edge_index, edge_attr=edge_attr)
         batch = Batch.from_data_list([graph])
         graphs_sequence.append(batch.to(device))
     return graphs_sequence
@@ -186,12 +189,26 @@ def load_model_and_stats(checkpoint_path="models/diffusion_chkpt.pth"):
         train_end = config.get("train_end", "2018-12-31")
         main_name = config.get("main_node_name", MAIN_NODE_NAME)
         main_train = df[(df["date"] <= pd.to_datetime(train_end)) & (df["node"] == main_name)].copy()
+        main_train = main_train.sort_values("date")
         feature_cols = config.get("feature_cols", FINAL_FEATURE_COLS)
+        target_cols = config.get("target_cols", FINAL_TARGET_COLS)
         train_features = main_train[feature_cols].values
         c_mean = stats["c_mean"].numpy()
         c_std = stats["c_std"].numpy()
         train_features_norm = (train_features - c_mean) / (c_std + 1e-5)
-        retrieval_db.add_items(train_features_norm, train_features_norm)
+
+        # Retrieval value = next-step outcome (target at tau+1), normalized like training targets.
+        precip_idx = list(target_cols).index("precipitation")
+        train_targets_g = main_train[target_cols].values.astype(np.float32)
+        train_targets_g[:, precip_idx] = np.log1p(train_targets_g[:, precip_idx])
+        t_mean = stats["t_mean"].numpy()
+        t_std = stats["t_std"].numpy()
+        train_targets_norm = ((train_targets_g - t_mean) / (t_std + 1e-5)).astype(np.float32)
+
+        retrieval_db.add_items(
+            train_features_norm[:-1].astype(np.float32),
+            train_targets_norm[1:],
+        )
     return model_wrapper, stats, retrieval_db
 
 
@@ -253,7 +270,7 @@ def run_inference_real(
         t_std = stats["t_std"].to(device)
         samples_denorm = samples * t_std + t_mean
         samples_denorm[:, 0] = torch.expm1(torch.clamp(samples_denorm[:, 0], max=20.0))
-        samples_denorm[:, 0] = torch.clamp(samples_denorm[:, 0], min=0.0)
+        samples_denorm[:, 0] = torch.clamp(samples_denorm[:, 0], min=0.0, max=PRECIP_PHYSICAL_MAX_MM)
         samples_denorm[:, 2] = torch.clamp(samples_denorm[:, 2], min=0.0, max=100.0)
         rain_cfg = config.get("rain_specialization", {})
         wet_prob_value = None

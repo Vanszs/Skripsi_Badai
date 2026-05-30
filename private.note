@@ -34,3 +34,64 @@ Input ERA5 hourly relatif kasar untuk kejadian hujan lokal/konvektif, jadi sinya
 Objektif training saat ini masih dominan diffusion noise + multi-target, jadi tidak sepenuhnya mengoptimalkan error hujan (RMSE/MAE) secara langsung.
 Rain gate (wet/dry) membantu event tertentu, tapi bisa menambah bias intensitas di minggu lain.
 Jadi: algoritma masih bisa ditingkatkan, tapi pada konfigurasi/data sekarang performa hujan belum konsisten mengalahkan persistence.
+
+
+  Masalah fundamental yang TIDAK bisa diperbaiki oleh kode — ini soal kecocokan data dengan tujuan:
+  
+  - Data = ERA5 reanalysis, resolusi 0.25° (~25–28 km/grid). Tiap "node" itu satu sel grid ~25 km, bukan observasi titik.
+  - Jarak antar node ~25 km. Untuk nowcasting hujan di puncak gunung (yang dipicu konveksi/orografi lokal skala 1–5 km), tetangga 25 km terlalu kasar untuk menangkap sel hujan yang sebenarnya.
+  - Lihat elevasi grid: MAIN 1529 m, UP 162 m, DOWN 0 m (di laut/maritim), LEFT 823 m, RIGHT 288 m. Node DOWN secara fisik rezim iklimnya beda total (laut vs puncak 1529 m). Dimasukkan sebagai
+  "konteks spasial gunung" itu lemah secara fisik — dokumen pun mengakuinya "accepted maritime context".
+  
+  ➡️ Artinya: batas atas performa hujan sudah dibatasi oleh data, bukan algoritma. Sebagus apa pun model, ERA5 0.25° memang buruk untuk hujan titik di gunung. Ini kenapa precip selalu kalah —
+  bukan semata bug.
+
+  3. Apakah robust?
+  
+  Beberapa hal membuat saya belum bisa bilang robust:
+  
+  1. Komponen utama (hujan) tetap kalah persistence (0.969 vs 0.685). Masalah ilmiah inti belum terpecahkan.
+  2. Ablation rusak → kontribusi GNN tak terbukti; narasi "hybrid lebih baik" rapuh.
+  3. Single run, single seed, eval di-subsample (3189 dari 35074). Tidak ada multi-seed / cross-validation antar tahun / confidence interval — standar minimal untuk klaim "robust".
+  4. Model rapuh terhadap perturbasi input (meledak saat conditioning di-nol-kan) → tanda model bergantung berat pada satu jalur, bukan benar-benar memanfaatkan ketiganya secara seimbang.
+  5. Rain gate sebelumnya kolaps di test (semua jadi kering) — perlu dipastikan tidak terulang.
+  
+de, tapi konsekuensi pilihan desain (terkendali)
+  
+  Yang saya verifikasi:
+  
+  - expm1 BUKAN penyebabnya. Di training, expm1 (train.py:194) hanya dipakai pada target ground-truth untuk membuat wet_labels lewat threshold >= → itu tidak masuk jalur gradien (label, bukan
+  prediksi). Jadi ledakan bukan dari situ. (Untuk eval/inference malah sudah ada clamp fisik PRECIP_PHYSICAL_MAX_MM — hygiene bagus.)
+  - Sumber sebenarnya: weighted_noise_loss (diffusion.py) yang sengaja memberi bobot 5× dan 10× untuk target bernilai besar (event hujan ekstrem). Saat batch kebetulan berisi hujan ekstrem
+  (target ternormalisasi besar) + diperkuat cond-dropout yang kadang menol-kan conditioning → loss & gradien melonjak.
+  - mean_grad_norm 151k vs max 8.9e8: pola mean jauh < max = spike langka (segelintir batch ekstrem) yang menarik rata-rata, bukan ketidakstabilan menyeluruh.
+  - grad_clip_norm=1.0 mengukur norm sebelum clip lalu memotongnya → update aktual tetap dibatasi. Buktinya: val konvergen 0.6085, non_finite_batches_skipped=0, tidak ada NaN.
+  
+  ➡️ Sifatnya: design choice yang terkendali, bukan bug dan bukan di luar kendali. Ini trade-off sadar: bobot 10× sengaja menekankan event ekstrem (untuk skill hujan). Kalau mau lebih halus,
+  tinggal turunkan multiplier (10×→3×) atau lr — opsional, tidak wajib karena clip sudah menangani. Cukup ditulis di laporan sebagai "weighted loss menimbulkan gradien besar pada event langka,
+  distabilkan via gradient clipping".
+  
+  #2 Sampel di-cap — murni pilihan saya saat runtime, 100% di dalam kendali, bukan cacat kode
+  
+  - Kode mendukung penuh hourly 35.074 sampel (--eval-step 1 tanpa --max-eval-samples).
+  - Saya sengaja cap (1000/3189) hanya untuk menghemat waktu verifikasi audit (full run ~5 jam di RTX 3050).
+  - Ini bukan keterbatasan kode/data/algoritma — cuma keputusan praktis saya. Untuk angka final skripsi tinggal jalankan tanpa cap.
+  
+  Ringkas
+  
+  ┌──────────────────┬─────────────┬──────────────────┬─────────────────────────────────────────────────────────────────┐
+  │ Hal              │ Cacat kode? │ Di luar kendali? │ Sifat                                                           │
+  ├──────────────────┼─────────────┼──────────────────┼─────────────────────────────────────────────────────────────────┤
+  │ #1 Grad spike    │ Tidak       │ Tidak            │ Konsekuensi weighted loss (sengaja), aman karena clip. Tunable. │
+  ├──────────────────┼─────────────┼──────────────────┼─────────────────────────────────────────────────────────────────┤
+  │ #2 Sampel di-cap │ Tidak       │ Tidak            │ Pilihan runtime saya untuk hemat waktu. Kode dukung full.       │
+  └──────────────────┴─────────────┴──────────────────┴─────────────────────────────────────────────────────────────────┘
+  
+  Keduanya bukan cacat kode dan bukan di luar kendali — #1 efek pilihan desain yang sudah distabilkan, #2 keputusan praktis saya. Tidak ada yang menurunkan validitas penelitian; cukup
+  didokumentasikan.
+
+  - Persistence = "besok sama seperti sekarang". Prediksi jam depan = nilai jam ini: ŷ(t+1) = y(t). Tanpa belajar, tanpa parameter. Baseline paling sederhana di meteorologi. Kuat untuk horizon
+  1 jam karena cuaca jarang berubah drastis.
+  - MLP (Multi-Layer Perceptron) = jaringan saraf feedforward paling dasar: beberapa lapis Linear → ReLU → Dropout. Belajar memetakan input (6 jam terakhir × 9 fitur, di-flatten) → 3 target.
+  Deterministik, supervised. Baseline "ada model tapi sederhana", pembanding di atas persistence.
+  

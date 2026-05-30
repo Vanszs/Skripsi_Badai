@@ -165,7 +165,10 @@ dengan \(g(y)\) untuk precipitation adalah \(\log(1+y)\), dan untuk variabel lai
 Alasan: distribusi curah hujan sangat skewed dan zero-inflated; transformasi log mengurangi dominasi outlier besar pada proses optimasi.
 
 #### 4.3 Komponen Spasial-Temporal (STGNN)
-Pada tiap timestep, node features diproses menggunakan Graph Attention Network (GAT). Hasil representasi per waktu kemudian diagregasi oleh temporal self-attention kausal, sehingga informasi masa depan tidak bocor ke masa lalu.
+Pada tiap timestep, node features diproses menggunakan Graph Attention Network (GAT) dengan
+**bobot edge berbasis jarak** (euclidean lat/lon antar node star, dialirkan sebagai `edge_attr`
+ke `GATConv(edge_dim=1)`). Hasil representasi per waktu kemudian diagregasi oleh temporal
+self-attention kausal, sehingga informasi masa depan tidak bocor ke masa lalu.
 
 Secara konseptual:
 1. Spatial encoding per \(\tau\):
@@ -180,11 +183,17 @@ Secara konseptual:
 Output \(h_t^{G}\) menjadi kondisi tambahan untuk model diffusion.
 
 #### 4.4 Retrieval-Augmented Memory
-Vektor context MAIN terbaru di-query ke basis data historis train-only:
+Basis data analog historis dibangun dari data train node MAIN saja, dengan pasangan
+**(kunci = fitur MAIN pada waktu \(\tau\), nilai = outcome target MAIN pada waktu \(\tau+1\), ternormalisasi)**.
+Vektor context MAIN terbaru \(c_t\) di-query ke basis ini:
 \[
 R_t = \text{kNN}(c_t,\mathcal{D}_{train},k)
 \]
-di mana \(c_t\) adalah context MAIN pada waktu \(t\). Pada training precompute retrieval, pencarian dibatasi strict-past dan self-neighbor dikeluarkan untuk mencegah leakage temporal.
+sehingga yang dikembalikan adalah **analog outcome jam-berikut** (bukan fitur), berdimensi
+\(k \times \text{num\_targets}\). Inilah makna "retrieval-augmented" yang sebenarnya: model
+dikondisikan oleh hasil historis dari situasi serupa. Pada training precompute retrieval,
+pencarian dibatasi strict-past dan self-neighbor dikeluarkan untuk mencegah leakage temporal
+(kunci pada posisi \(j=\tau\) hanya dipakai jika \(\tau+1 < t\)).
 
 #### 4.5 Conditional Diffusion Forecasting
 Model diffusion mempelajari prediksi noise pada target ternormalisasi. Skema dasar:
@@ -219,6 +228,19 @@ Prediksi titik ditetapkan sebagai median ensemble:
 \hat{y}_{t+1} = \text{median}_s\left(y_{t+1}^{(s)}\right)
 \]
 Jika probabilitas wet \(<\tau_{wet}\), komponen precipitation diset \(0\) sesuai kebijakan rain gate.
+
+**Conditioning dropout (robust ablation).** Agar studi ablation bermakna, saat training
+komponen kondisi graph (\(h_t^G\)) dan retrieval (\(R_t\)) di-nol-kan secara acak per-sampel
+dengan probabilitas \(p=0.15\) (independen). Tanpa ini, mematikan salah satu kondisi saat
+evaluasi (mengisinya dengan nol) menghasilkan input out-of-distribution sehingga prediksi noise
+menjadi liar. Dengan dropout ini, skenario ablation (`diff_only`, `diff_retrieval`, `diff_gnn`)
+tetap berada dalam distribusi yang dikenal model, sehingga kontribusi tiap komponen dapat
+dibandingkan secara adil.
+
+**Batas fisik precipitation.** Pada denormalisasi, hasil precipitation di-clamp ke rentang
+\([0, 60]\) mm/jam. Batas atas 60 mm/jam adalah pengaman numerik (maksimum dataset \(\approx 21.5\)
+mm/jam), jauh di atas nilai nyata sehingga tidak mendistorsi prediksi sehat, namun mencegah
+ledakan akibat \(\exp(\cdot)\) pada input ekstrem.
 
 #### 4.6 Cara Output Digunakan
 Output model digunakan dalam dua mode:

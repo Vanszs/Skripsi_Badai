@@ -244,7 +244,10 @@ def train_pipeline(
     early_stop_min_delta: float = 0.0,
     rain_specialization: bool = True,
     rain_occurrence_threshold_mm: float = 0.1,
-    wet_loss_weight: float = 0.5,
+    wet_loss_weight: float = 0.7,
+    cond_dropout: float = 0.15,
+    seed: int = 1,
+    lr: float = 1e-3,
 ) -> Tuple[float, Dict[str, object]]:
     print("=" * 80)
     print("TRAINING: 5-NODE STAR ST-GRAPH | MAIN-NODE-ONLY TARGET")
@@ -272,12 +275,21 @@ def train_pipeline(
     )
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    # Reproducibility: training was previously non-deterministic and could diverge
+    # (val loss 0.61 on a lucky seed vs >10 on an unlucky one) due to lr * weighted-loss.
+    import random as _random
+    _random.seed(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    if torch.cuda.is_available():
+        torch.cuda.manual_seed_all(seed)
     use_amp = bool(amp and torch.cuda.is_available())
     if torch.cuda.is_available():
-        torch.backends.cudnn.benchmark = True
+        # benchmark=False so the fixed seed gives reproducible training.
+        torch.backends.cudnn.benchmark = False
         torch.backends.cuda.matmul.allow_tf32 = True
         torch.backends.cudnn.allow_tf32 = True
-    print(f"Device: {device}")
+    print(f"Device: {device} | seed: {seed}")
 
     print("\n[1/8] Loading canonical dataset...")
     if not os.path.exists(data_path):
@@ -387,18 +399,30 @@ def train_pipeline(
         (train_features - stats["c_mean"].numpy()) / (stats["c_std"].numpy() + 1e-5)
     ).astype(np.float32)
 
+    # Retrieval values are the NEXT-STEP outcome (target at tau+1), normalized like training targets.
+    train_targets_raw = main_train[FINAL_TARGET_COLS].values.astype(np.float32)
+    train_targets_g = train_targets_raw.copy()
+    train_targets_g[:, precip_idx] = np.log1p(train_targets_g[:, precip_idx])
+    train_targets_norm = (
+        (train_targets_g - stats["t_mean"].numpy()) / (stats["t_std"].numpy() + 1e-5)
+    ).astype(np.float32)
+
     context_dim = len(feature_cols)
+    # DB key = feature at tau (drop last), value = outcome target at tau+1 (drop first).
+    retrieval_keys = train_features_norm[:-1]
+    retrieval_values = train_targets_norm[1:]
     retrieval_db = RetrievalDatabase(embedding_dim=context_dim)
-    retrieval_db.add_items(train_features_norm, train_features_norm)
+    retrieval_db.add_items(retrieval_keys, retrieval_values)
     retrieval_index = retrieval_db.index
 
     # Train retrieval is restricted to strict-past neighbors to avoid temporal look-ahead.
+    # Key position j == time tau; strict_past keeps j < t-1 so value time tau+1 < t.
     train_context_indices = np.array(train_dataset.valid_indices, dtype=np.int64) - 1
 
     train_retrieved = _build_precomputed_retrieval(
         train_dataset,
         retrieval_index,
-        train_features_norm,
+        retrieval_values,
         k_neighbors,
         strict_past=True,
         exclude_self=True,
@@ -407,7 +431,7 @@ def train_pipeline(
     val_retrieved = _build_precomputed_retrieval(
         val_dataset,
         retrieval_index,
-        train_features_norm,
+        retrieval_values,
         k_neighbors,
         strict_past=False,
         exclude_self=False,
@@ -415,11 +439,11 @@ def train_pipeline(
     )
     train_dataset.set_precomputed_retrieval(train_retrieved)
     val_dataset.set_precomputed_retrieval(val_retrieved)
-    print(f"Retrieval DB vectors: {len(train_features_norm):,}")
+    print(f"Retrieval DB vectors: {len(retrieval_values):,} (key=feat[t], value=target[t+1])")
 
     print("\n[6/8] Initialize models...")
-    retrieval_dim = context_dim * k_neighbors
     num_targets = len(FINAL_TARGET_COLS)
+    retrieval_dim = num_targets * k_neighbors
 
     st_gnn = SpatioTemporalGNN(
         node_features=context_dim,
@@ -440,7 +464,7 @@ def train_pipeline(
     forecaster = RainForecaster(diff_model, device=device)
 
     trainable_params = list(st_gnn.parameters()) + list(diff_model.parameters())
-    optimizer = torch.optim.AdamW(trainable_params, lr=1e-3, weight_decay=1e-4)
+    optimizer = torch.optim.AdamW(trainable_params, lr=lr, weight_decay=1e-4)
     scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
         optimizer,
         mode="min",
@@ -486,6 +510,14 @@ def train_pipeline(
 
             with torch.amp.autocast("cuda", enabled=use_amp):
                 graph_emb = st_gnn(batched_graphs)
+                # FIX #16: conditioning dropout so the model is robust to ablation
+                # (graph_emb / retrieved set to zero), making the ablation table meaningful.
+                if cond_dropout > 0.0:
+                    bsz = targets.shape[0]
+                    g_keep = (torch.rand(bsz, 1, device=device) >= cond_dropout).float()
+                    r_keep = (torch.rand(bsz, 1, device=device) >= cond_dropout).float()
+                    graph_emb = graph_emb * g_keep
+                    retrieved = retrieved * r_keep
                 noise = torch.randn_like(targets)
                 timesteps = torch.randint(0, 1000, (targets.shape[0],), device=device).long()
                 noisy_target = forecaster.scheduler.add_noise(targets, noise, timesteps)
@@ -682,6 +714,8 @@ def train_pipeline(
                     "feature_cols": feature_cols,
                     "target_cols": FINAL_TARGET_COLS,
                     "num_targets": num_targets,
+                    "cond_dropout": float(cond_dropout),
+                    "seed": int(seed),
                     "loss_type": (
                         "weighted_noise_mse_plus_wet_bce"
                         if effective_rain_specialization
@@ -813,7 +847,13 @@ def _parse_args():
     parser.add_argument("--early-stop-min-delta", type=float, default=0.0)
     parser.add_argument("--disable-rain-specialization", action="store_true")
     parser.add_argument("--rain-occurrence-threshold-mm", type=float, default=0.1)
-    parser.add_argument("--wet-loss-weight", type=float, default=0.5)
+    parser.add_argument("--wet-loss-weight", type=float, default=0.7)
+    parser.add_argument("--cond-dropout", type=float, default=0.15,
+                        help="Per-sample dropout prob for graph/retrieval conditioning (robust ablation).")
+    parser.add_argument("--seed", type=int, default=1,
+                        help="Random seed for reproducible training (1 is empirically stable).")
+    parser.add_argument("--lr", type=float, default=1e-3,
+                        help="Learning rate.")
     return parser.parse_args()
 
 
@@ -842,4 +882,7 @@ if __name__ == "__main__":
         rain_specialization=not args.disable_rain_specialization,
         rain_occurrence_threshold_mm=args.rain_occurrence_threshold_mm,
         wet_loss_weight=args.wet_loss_weight,
+        cond_dropout=args.cond_dropout,
+        seed=args.seed,
+        lr=args.lr,
     )

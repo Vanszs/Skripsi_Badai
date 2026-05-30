@@ -16,6 +16,7 @@ from src.config import (
     FINAL_TARGET_COLS,
     MAIN_NODE_NAME,
     NODE_NAMES,
+    build_star_edge_attr,
     build_star_edge_index,
     get_node_index_map,
 )
@@ -55,6 +56,7 @@ class TemporalGraphDataset(Dataset):
         self.main_node_name = main_node_name
         self.main_node_idx = self.node_to_idx[self.main_node_name]
         self.edge_index = edge_index if edge_index is not None else build_star_edge_index(self.node_names)
+        self.edge_attr = build_star_edge_attr(self.node_names)
         self.stats = stats
         self._prepare_data()
 
@@ -194,7 +196,7 @@ class TemporalGraphDataset(Dataset):
         for i in range(self.seq_len):
             t_idx = t - self.seq_len + i
             node_feats = self.features_norm[t_idx] if hasattr(self, "features_norm") else self.features[t_idx]
-            graph = Data(x=node_feats, edge_index=self.edge_index)
+            graph = Data(x=node_feats, edge_index=self.edge_index, edge_attr=self.edge_attr)
             graphs.append(graph)
 
         targets = self.targets_norm if hasattr(self, "targets_norm") else self.targets

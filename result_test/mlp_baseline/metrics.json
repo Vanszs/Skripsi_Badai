@@ -17,43 +17,47 @@
     "context_policy": "main_node_context",
     "model_mode": "era5",
     "data_path": "data/raw/pangrango_era5_5node_2005_2025.parquet",
-    "eval_step": 24,
+    "eval_step": 11,
+    "max_eval_samples": 0,
+    "samples_per_scenario": 3189,
     "num_ensemble": 30,
     "seq_len": 6,
+    "crps_estimator": "fair_unbiased",
+    "mlp_crps_type": "deterministic_single_pass",
     "rain_specialization_enabled": true,
     "rain_occurrence_threshold_mm": 0.1,
-    "rain_probability_threshold": 0.550000011920929
+    "rain_probability_threshold": 0.5
   },
   "metrics": {
     "precipitation": {
-      "rmse": 1.3038346767425537,
-      "mae": 0.7661505341529846,
-      "correlation": 0.42225785350888545,
-      "crps": 0.7347905703851689,
-      "brier_2mm": 0.14617115063079494,
-      "pod_2mm": 0.06726457399103139,
-      "far_2mm": 0.5454545454545454,
-      "csi_2mm": 0.06224066390041494,
-      "brier_5mm": 0.023939808481532147,
+      "rmse": 0.731556236743927,
+      "mae": 0.28233882784843445,
+      "correlation": 0.5509008484469582,
+      "crps": 0.28233882784843445,
+      "brier_2mm": 0.039197240514267796,
+      "pod_2mm": 0.08943089430894309,
+      "far_2mm": 0.5416666666666666,
+      "csi_2mm": 0.08088235294117647,
+      "brier_5mm": 0.006898714330511132,
       "pod_5mm": 0.0,
-      "far_5mm": NaN,
+      "far_5mm": 1.0,
       "csi_5mm": 0.0,
-      "brier_10mm": 0.0,
-      "pod_10mm": NaN,
+      "brier_10mm": 0.0006271558482282847,
+      "pod_10mm": 0.0,
       "far_10mm": NaN,
-      "csi_10mm": NaN
+      "csi_10mm": 0.0
     },
     "wind_speed": {
-      "rmse": 1.2971447706222534,
-      "mae": 1.0210740566253662,
-      "correlation": 0.8482409576059253,
-      "crps": 0.9618196406802847
+      "rmse": 1.1292475461959839,
+      "mae": 0.8858360648155212,
+      "correlation": 0.8320875516479871,
+      "crps": 0.8858360648155212
     },
     "humidity": {
-      "rmse": 4.266071319580078,
-      "mae": 3.4670910835266113,
-      "correlation": 0.9362319265235064,
-      "crps": 3.4067063135683293
+      "rmse": 3.8033461570739746,
+      "mae": 2.8186094760894775,
+      "correlation": 0.9583143441908555,
+      "crps": 2.8186094760894775
     }
   }
 }
