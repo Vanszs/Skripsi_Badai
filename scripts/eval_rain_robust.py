@@ -75,6 +75,10 @@ def _corr(a: np.ndarray, b: np.ndarray) -> float:
 
 
 def _event_metrics(actual: np.ndarray, pred: np.ndarray, threshold: float) -> Dict[str, float]:
+    # NOTE: deterministic point-based event detection (pred_point >= thr), where pred is the
+    # ensemble median. This differs intentionally from run_eval_final.py which uses probabilistic
+    # detection (P(ensemble > thr) >= 0.5). The weekly crosscheck is a point-forecast comparison
+    # vs persistence/MLP, so point-based detection is the consistent choice here.
     act = actual >= threshold
     pdn = pred >= threshold
     tp = float(np.logical_and(act, pdn).sum())

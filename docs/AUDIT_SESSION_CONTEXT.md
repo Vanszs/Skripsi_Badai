@@ -415,3 +415,36 @@ PERUBAHAN PENTING (jujur):
 - num_ensemble 30 (main) vs 20 (weekly) - beda parameter antar skrip.
 
 ### STATUS: bug KRITIS elevasi DIFIX → model kini sehat, reproducible, GNN berfungsi, hasil membaik & jujur.
+
+## 8g. SWARM AUDIT ROUND 2 (5 agen) — NO KRITIS/MAYOR; konsistensi minor difix (2026-05-31)
+
+Setelah push ee8e93a, swarm round-2 fokus: train/inference parity, nowcasting protocol fidelity,
+conditioning math, cross-script consistency, fresh-eyes dummy/hardcode hunt. Verifikasi numerik.
+
+### HASIL: TIDAK ada KRITIS/MAYOR baru. Parity & protocol BERSIH (terverifikasi):
+- Train vs inference parity: normalisasi (stats sama, elevation fallback), retrieval DB (np.allclose
+  values=targets[1:]), graph construction (shape & edge_attr identik), temporal indexing (target t,
+  context t-1, graphs t-6..t-1), denorm inversion, cond_dropout train-only, model.eval() di inference,
+  no leakage. SEMUA cocok.
+- Nowcasting protocol: one-step hourly with actual-update terkonfirmasi (no prediction feedback);
+  eval_step=11 coprime 24 -> cakupan diurnal seragam (132-133/jam, rasio 1.008, no bias); persistence
+  y(t+1)=y(t); recursive_closed_loop sudah TIDAK ada; target t+1 MAIN-only, no horizon>1.
+- Conditioning math: additive fusion (context+retrieval+graph ->hidden 128) dims benar; time emb benar;
+  wet_head time-independent (benar); sinusoidal emb formula benar; skip-connection dims benar.
+
+### Konsistensi MINOR yang DIFIX round ini:
+1. train_baseline precip prediction cap: clip(0,None)->clip(0,PRECIP_PHYSICAL_MAX_MM=60) (konsisten main eval; reporting-only).
+2. eval_rain_robust _event_metrics: tambah docstring jelaskan deteksi event point-based (median>=thr)
+   SENGAJA beda dari main eval probabilistik (P(ens>thr)>=0.5) - weekly = point-forecast comparison.
+3. Hapus direktori kosong src/graph/ (dead artifact).
+
+### Catatan (tidak difix - by design / cosmetic / non-blocker):
+- edge_attr konstan 0.25 (terdokumentasi; elevasi-diff dicoba & gagal, revert).
+- "U-Net like" backbone sebenarnya MLP+1 skip (penamaan overstatement; saran: "MLP denoiser w/ skip").
+- Tests struktural/contract (kecuali CRPS numeric) - tak menangkap regresi kualitas prediksi.
+- 5x/10x loss weight, 0.15 cond_dropout, 0.7 wet_loss_weight = heuristik (arbitrary tapi wajar).
+- xarray/cartopy di requirements tak dipakai di kode aktif (dari notebook arsip).
+- eval_step=11 di artefak (bukan hourly penuh) - tak bias, tapi METODE doc belum cantumkan (saran catat).
+
+### VERDICT round 2: CODE FAITHFUL ke judul, no cheating/dummy/hardcode/parity-break/leakage.
+Sisa murni MINOR/cosmetic/documentation. Tests 10/10. Commit berikut: konsistensi minor.
