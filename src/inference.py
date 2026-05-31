@@ -271,6 +271,7 @@ def run_inference_real(
         samples_denorm = samples * t_std + t_mean
         samples_denorm[:, 0] = torch.expm1(torch.clamp(samples_denorm[:, 0], max=20.0))
         samples_denorm[:, 0] = torch.clamp(samples_denorm[:, 0], min=0.0, max=PRECIP_PHYSICAL_MAX_MM)
+        samples_denorm[:, 1] = torch.clamp(samples_denorm[:, 1], min=0.0)  # wind speed >= 0
         samples_denorm[:, 2] = torch.clamp(samples_denorm[:, 2], min=0.0, max=100.0)
         rain_cfg = config.get("rain_specialization", {})
         wet_prob_value = None

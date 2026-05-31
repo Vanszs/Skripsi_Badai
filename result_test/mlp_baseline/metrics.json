@@ -22,22 +22,23 @@
     "samples_per_scenario": 3189,
     "num_ensemble": 30,
     "seq_len": 6,
+    "seed": 1,
     "crps_estimator": "fair_unbiased",
     "mlp_crps_type": "deterministic_single_pass",
     "rain_specialization_enabled": true,
     "rain_occurrence_threshold_mm": 0.1,
-    "rain_probability_threshold": 0.5
+    "rain_probability_threshold": 0.6000000238418579
   },
   "metrics": {
     "precipitation": {
-      "rmse": 0.731556236743927,
-      "mae": 0.28233882784843445,
-      "correlation": 0.5509008484469582,
-      "crps": 0.28233882784843445,
-      "brier_2mm": 0.039197240514267796,
-      "pod_2mm": 0.08943089430894309,
-      "far_2mm": 0.5416666666666666,
-      "csi_2mm": 0.08088235294117647,
+      "rmse": 0.7416852116584778,
+      "mae": 0.26859691739082336,
+      "correlation": 0.5460542566230869,
+      "crps": 0.26859691739082336,
+      "brier_2mm": 0.03857008466603951,
+      "pod_2mm": 0.056910569105691054,
+      "far_2mm": 0.5,
+      "csi_2mm": 0.05384615384615385,
       "brier_5mm": 0.006898714330511132,
       "pod_5mm": 0.0,
       "far_5mm": 1.0,
@@ -48,16 +49,16 @@
       "csi_10mm": 0.0
     },
     "wind_speed": {
-      "rmse": 1.1292475461959839,
-      "mae": 0.8858360648155212,
-      "correlation": 0.8320875516479871,
-      "crps": 0.8858360648155212
+      "rmse": 1.1556552648544312,
+      "mae": 0.9113976955413818,
+      "correlation": 0.8315048713223865,
+      "crps": 0.9113976955413818
     },
     "humidity": {
-      "rmse": 3.8033461570739746,
-      "mae": 2.8186094760894775,
-      "correlation": 0.9583143441908555,
-      "crps": 2.8186094760894775
+      "rmse": 4.5478596687316895,
+      "mae": 3.3325915336608887,
+      "correlation": 0.9556107045602318,
+      "crps": 3.3325915336608887
     }
   }
 }

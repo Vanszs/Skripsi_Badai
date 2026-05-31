@@ -244,6 +244,7 @@ def run_crosscheck(data_path: str, num_ensemble: int, num_inference_steps: int, 
                 )
                 sd = samples * t_std_t + t_mean_t
                 sd[:, 0] = torch.clamp(torch.expm1(torch.clamp(sd[:, 0], max=20.0)), min=0.0, max=PRECIP_PHYSICAL_MAX_MM)
+                sd[:, 1] = torch.clamp(sd[:, 1], min=0.0)  # wind speed >= 0
                 sd[:, 2] = torch.clamp(sd[:, 2], min=0.0, max=100.0)
                 model_preds[j] = torch.median(sd, dim=0).values.cpu().numpy()
 
@@ -257,7 +258,8 @@ def run_crosscheck(data_path: str, num_ensemble: int, num_inference_steps: int, 
                     x = features_norm[idx - seq_len : idx].flatten()
                     x_t = torch.tensor(x, dtype=torch.float32, device=device).unsqueeze(0)
                     out = mlp(x_t).cpu().numpy()[0] * t_std + t_mean
-                    out[0] = np.clip(np.expm1(min(out[0], 20.0)), 0.0, None)
+                    out[0] = np.clip(np.expm1(min(out[0], 20.0)), 0.0, PRECIP_PHYSICAL_MAX_MM)
+                    out[1] = np.clip(out[1], 0.0, None)  # wind speed >= 0
                     out[2] = np.clip(out[2], 0.0, 100.0)
                     mlp_preds[j] = out
 
@@ -351,7 +353,7 @@ def run_crosscheck(data_path: str, num_ensemble: int, num_inference_steps: int, 
 def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("--data-path", type=str, default=CANONICAL_DATA_PATH)
-    parser.add_argument("--num-ensemble", type=int, default=20)
+    parser.add_argument("--num-ensemble", type=int, default=30)
     parser.add_argument("--num-inference-steps", type=int, default=20)
     parser.add_argument("--device", type=str, default="cuda" if torch.cuda.is_available() else "cpu")
     return parser.parse_args()

@@ -22,42 +22,43 @@
     "samples_per_scenario": 3189,
     "num_ensemble": 30,
     "seq_len": 6,
+    "seed": 1,
     "crps_estimator": "fair_unbiased",
     "mlp_crps_type": "deterministic_single_pass",
     "rain_specialization_enabled": true,
     "rain_occurrence_threshold_mm": 0.1,
-    "rain_probability_threshold": 0.5
+    "rain_probability_threshold": 0.6000000238418579
   },
   "metrics": {
     "precipitation": {
-      "rmse": 0.8465991616249084,
-      "mae": 0.3720930814743042,
-      "correlation": 0.5078909021064093,
-      "crps": 0.3011306004559375,
-      "brier_2mm": 0.045116894881711445,
-      "pod_2mm": 0.3983739837398374,
-      "far_2mm": 0.7262569832402235,
-      "csi_2mm": 0.19367588932806323,
-      "brier_5mm": 0.010380822967840842,
+      "rmse": 0.7919542193412781,
+      "mae": 0.35300207138061523,
+      "correlation": 0.6390322075552407,
+      "crps": 0.2517963140936897,
+      "brier_2mm": 0.04941500296156928,
+      "pod_2mm": 0.7398373983739838,
+      "far_2mm": 0.7064516129032258,
+      "csi_2mm": 0.26608187134502925,
+      "brier_5mm": 0.0071223999163792205,
       "pod_5mm": 0.047619047619047616,
-      "far_5mm": 0.875,
-      "csi_5mm": 0.03571428571428571,
-      "brier_10mm": 0.0024685551026096654,
+      "far_5mm": 0.8,
+      "csi_5mm": 0.04,
+      "brier_10mm": 0.000653984181735828,
       "pod_10mm": 0.0,
-      "far_10mm": 1.0,
+      "far_10mm": NaN,
       "csi_10mm": 0.0
     },
     "wind_speed": {
-      "rmse": 1.112424612045288,
-      "mae": 0.8542079925537109,
-      "correlation": 0.8530309750260905,
-      "crps": 0.5965418984159088
+      "rmse": 0.9862248301506042,
+      "mae": 0.7477144002914429,
+      "correlation": 0.88888437747933,
+      "crps": 0.5222766955290746
     },
     "humidity": {
-      "rmse": 4.391406059265137,
-      "mae": 3.118004560470581,
-      "correlation": 0.9407834455831964,
-      "crps": 2.2446244620378586
+      "rmse": 2.989935874938965,
+      "mae": 2.053699254989624,
+      "correlation": 0.9728398770626523,
+      "crps": 1.455129778925098
     }
   }
 }

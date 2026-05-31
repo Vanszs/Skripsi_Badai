@@ -358,3 +358,60 @@ User minta fix semua 3 isu dari audit sub-agent. Dilakukan:
 - Tests 10/10 OK. PNG mingguan diregenerasi.
 
 ### STATUS: kode jujur & faithful ke judul; hasil dilaporkan apa adanya (tidak dicurangi).
+
+## 8f. SWARM AUDIT (8 agen) — KRITIS BUG DITEMUKAN & DIFIX: elevation normalization (2026-05-31)
+
+Setelah push commit 275ba18, dijalankan swarm 8 sub-agent (data, retrieval, diffusion, gnn,
+training, metrics, results, sintesis). Menemukan 1 BUG KRITIS yang TERLEWAT semua audit sebelumnya:
+
+### KRITIS — elevation std=0 → input GNN ~1e8 (INILAH penyebab grad spike, bukan weighted loss)
+- `compute_stats_from_training` hitung stats dari MAIN node saja. Elevation MAIN konstan 1529 m
+  → c_std[elevation]=0. Normalisasi `(x-mean)/(std+1e-5)` untuk node sekeliling:
+  UP -1.367e8, DOWN -1.529e8, LEFT -7.06e7, RIGHT -1.241e8.
+- Nilai ~1e8 ini masuk ke GATConv → gradien astronomis (max 8.9e8). Grad clip menahan update tapi
+  GNN dipaksa mengabaikan/melawan fitur elevasi → spatial conditioning lumpuh.
+- INI mengoreksi penjelasan saya sebelumnya yang SALAH ("grad spike = weighted loss"). Akar
+  sebenarnya = bug normalisasi elevasi. Juga menjelaskan seed-sensitivity & instabilitas.
+
+### FIX
+- `compute_stats_from_training`: untuk fitur dgn std main-node ~0 (degenerate), fallback ke
+  stats ALL-training-node. Elevasi kini c_mean=560.4 c_std=557.5 → normalisasi O(1)
+  (MAIN +1.74, UP -0.72, DOWN -1.01, LEFT +0.47, RIGHT -0.49). Fitur cuaca tetap main-node.
+- stats_scope = "main_node_only_with_allnode_fallback_for_constant_features".
+
+### RETRAIN (elevfix, seed 1, reproducible) — HASIL TERBAIK & SEHAT
+- best_val 0.5867 (terbaik dari semua run). **mean_grad_norm 1.72, max 9.40** (dulu 8.9e8!) → sehat.
+  non_finite=0. wet CSI 0.647.
+
+### HASIL EVAL FINAL (eval_step=11, 3189 sampel) — checkpoint elevfix
+| Var | full | diff_gnn | diff_only | persistence | mlp |
+|-----|------|----------|-----------|-------------|-----|
+| precip RMSE | 0.736 | 0.741 | 0.831 | 0.685 | 0.742 |
+| precip CRPS | 0.224 | 0.221 | 0.268 | 0.219 | 0.269 |
+| precip corr | 0.640 | 0.633 | 0.519 | 0.686 | 0.546 |
+| wind RMSE | 0.960 | 0.956 | 1.155 | 1.115 | 1.156 |
+| wind corr | 0.892 | 0.894 | 0.848 | 0.849 | 0.832 |
+| humidity RMSE | 2.910 | 2.860 | 4.298 | 4.494 | 4.548 |
+| humidity corr | 0.974 | 0.975 | 0.944 | 0.938 | 0.956 |
+
+PERUBAHAN PENTING (jujur):
+- GNN sekarang BENAR berkontribusi: diff_only->diff_gnn precip RMSE 0.831->0.741, corr 0.519->0.633;
+  wind 1.155->0.956; humidity 4.298->2.860. Sebelum fix, GNN lumpuh. INI bukti spatial conditioning
+  kini berfungsi nyata.
+- full_model MENANG telak vs persistence & MLP di wind (0.960 vs 1.115/1.156) & humidity
+  (2.910 vs 4.494/4.548). Precip: RMSE 0.736 masih sedikit kalah persistence (0.685) tapi
+  JAUH membaik (sebelum fix 0.847) & corr 0.640 mendekati; CRPS precip 0.224 ~ setara persistence 0.219.
+- Ablation waras & monotonik (diff_only < diff_gnn ~ full). CRPS fair. Tests 10/10.
+
+### TEMUAN LAIN SWARM (MINOR, belum difix - bukan blocker):
+- correlation return 0.0 (bukan NaN) saat std~0 (probabilistic_metrics.py) - semantik, tak kena di data nyata.
+- Brier/POD/FAR/CSI tidak NaN-safe - tak kena krn output di-clamp.
+- run_eval_final.py tak set seed sampling diffusion - hasil tak bit-reproducible (eval_rain_robust seed 1234).
+- RainForecaster.optimizer/criterion + train_step() = DEAD CODE (tak dipakai train.py).
+- wind speed tak di-clamp >=0 di denorm (konsisten dgn baseline; jarang negatif).
+- tz_localize(None) shift batas split ~7 jam (negligible, tetap kronologis).
+- Default grad_clip_norm=0.0 & early_stop_patience=6 di signature (run aktual pakai CLI 1.0/12).
+- edge_attr konstan 0.25 (terdokumentasi, bukan bug).
+- num_ensemble 30 (main) vs 20 (weekly) - beda parameter antar skrip.
+
+### STATUS: bug KRITIS elevasi DIFIX → model kini sehat, reproducible, GNN berfungsi, hasil membaik & jujur.

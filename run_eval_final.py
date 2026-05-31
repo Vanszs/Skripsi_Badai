@@ -175,6 +175,7 @@ def run_mlp_baseline(main_df, feature_cols, stats, eval_step, seq_len, num_ensem
             pred = model(x_t).cpu().numpy()[0]
         pred_denorm = pred * t_std + t_mean
         pred_denorm[0] = np.clip(np.expm1(np.clip(pred_denorm[0], a_min=None, a_max=20.0)), 0, PRECIP_PHYSICAL_MAX_MM)
+        pred_denorm[1] = np.clip(pred_denorm[1], 0, None)  # wind speed >= 0
         pred_denorm[2] = np.clip(pred_denorm[2], 0, 100)
         targets_all.append(target)
         preds_all.append(pred_denorm)
@@ -245,6 +246,7 @@ def run_diffusion_scenario(
             )
             samples_denorm = samples * t_std_t + t_mean_t
             samples_denorm[:, 0] = torch.clamp(torch.expm1(torch.clamp(samples_denorm[:, 0], max=20.0)), min=0.0, max=PRECIP_PHYSICAL_MAX_MM)
+            samples_denorm[:, 1] = torch.clamp(samples_denorm[:, 1], min=0.0)  # wind speed >= 0
             samples_denorm[:, 2] = torch.clamp(samples_denorm[:, 2], min=0.0, max=100.0)
             if rain_enabled:
                 wet_prob = forecaster.model.compute_wet_probability(
@@ -431,10 +433,18 @@ def plot_ablation(all_results, save_dir):
     plt.close()
 
 
-def main(eval_step=1, num_ensemble=30, seq_len=6, data_path=CANONICAL_DATA_PATH, max_eval_samples=0):
+def main(eval_step=1, num_ensemble=30, seq_len=6, data_path=CANONICAL_DATA_PATH, max_eval_samples=0, seed=1):
     print("=" * 70)
     print("COMPREHENSIVE 6-SCENARIO EVALUATION (MAIN NODE ONLY)")
     print("=" * 70)
+
+    # Reproducible diffusion sampling.
+    import random as _random
+    _random.seed(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    if torch.cuda.is_available():
+        torch.cuda.manual_seed_all(seed)
 
     os.makedirs("result_test/plots", exist_ok=True)
     os.makedirs("result_test/comparison", exist_ok=True)
@@ -512,6 +522,7 @@ def main(eval_step=1, num_ensemble=30, seq_len=6, data_path=CANONICAL_DATA_PATH,
         "samples_per_scenario": int(next(iter(sample_counts.values()))),
         "num_ensemble": num_ensemble,
         "seq_len": seq_len,
+        "seed": int(seed),
         "crps_estimator": "fair_unbiased",
         "mlp_crps_type": "deterministic_single_pass",
         "rain_specialization_enabled": bool(rain_cfg.get("enabled", False)),
@@ -600,6 +611,7 @@ def parse_args():
     parser.add_argument("--seq-len", type=int, default=6)
     parser.add_argument("--max-eval-samples", type=int, default=0,
                         help="Optional cap on number of eval samples per scenario (0 = no cap).")
+    parser.add_argument("--seed", type=int, default=1, help="Seed for reproducible diffusion sampling.")
     parser.add_argument("--data-path", type=str, default=CANONICAL_DATA_PATH)
     return parser.parse_args()
 
@@ -612,4 +624,5 @@ if __name__ == "__main__":
         seq_len=args.seq_len,
         data_path=args.data_path,
         max_eval_samples=args.max_eval_samples,
+        seed=args.seed,
     )

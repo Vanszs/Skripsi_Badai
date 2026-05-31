@@ -172,8 +172,6 @@ class RainForecaster:
         self.device = device
         # clip_sample=False: weather z-scores range [-4, +8], not [-1, 1] like images
         self.scheduler = DDPMScheduler(num_train_timesteps=1000, clip_sample=False)
-        self.optimizer = torch.optim.Adam(model.parameters(), lr=1e-3)
-        self.criterion = nn.MSELoss()
 
     @staticmethod
     def weighted_noise_loss(noise_pred, noise, target_reference):
@@ -187,48 +185,6 @@ class RainForecaster:
         weights[target_reference.abs() > 3.0] = 10.0
         return (error * weights).mean()
 
-    def train_step(self, batch_rain_target, batch_condition, 
-                   batch_retrieved=None, batch_graph_emb=None):
-        """
-        Single training step with DDPM loss.
-        
-        Args:
-            batch_rain_target: [B, 3] Actual targets (normalized) - multi-output
-            batch_condition: [B, C] Context features
-            batch_retrieved: [B, k, F] Retrieved historical analogs
-            batch_graph_emb: [B, G] Spatio-Temporal graph embedding [NEW]
-        
-        Returns:
-            float: MSE loss value
-        """
-        self.model.train()
-        self.optimizer.zero_grad()
-        
-        # Sample noise
-        noise = torch.randn_like(batch_rain_target).to(self.device)
-        timesteps = torch.randint(0, 1000, (batch_rain_target.shape[0],), device=self.device).long()
-        
-        # Add noise (forward diffusion)
-        noisy_target = self.scheduler.add_noise(batch_rain_target, noise, timesteps)
-        
-        # Predict noise (with all conditioning)
-        noise_pred = self.model(
-            noisy_target, 
-            timesteps, 
-            batch_condition, 
-            batch_retrieved,
-            batch_graph_emb  # [NEW] Graph conditioning
-        )
-        
-        # Weighted loss is shared with the main train loop for consistency.
-        loss = self.weighted_noise_loss(noise_pred, noise, batch_rain_target)
-        
-        self.optimizer.zero_grad()
-        loss.backward()
-        self.optimizer.step()
-        
-        return loss.item()
-    
     @torch.no_grad()
     def sample(self, condition, retrieved=None, graph_emb=None, num_samples=1):
         """

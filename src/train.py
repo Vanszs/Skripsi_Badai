@@ -84,13 +84,31 @@ def compute_stats_from_training(
         t_stds.append(float(values.std()))
 
     feature_values = main_df[list(feature_cols)].values
+    c_mean = feature_values.mean(axis=0)
+    c_std = feature_values.std(axis=0)
+
+    # FIX (KRITIS): some features are constant at the MAIN node (e.g. `elevation` is a
+    # single static value per node), giving std=0. Dividing surrounding-node values by
+    # (0 + 1e-5) produced ~1e8 GNN inputs and astronomical gradients. For any such
+    # degenerate feature, fall back to ALL-training-node stats so the cross-node scale
+    # is captured meaningfully (elevation varies across the 5 nodes by design).
+    all_node_values = train_df[list(feature_cols)].values
+    degenerate = c_std < 1e-6
+    if degenerate.any():
+        an_mean = all_node_values.mean(axis=0)
+        an_std = all_node_values.std(axis=0)
+        for i, is_deg in enumerate(degenerate):
+            if is_deg:
+                c_mean[i] = an_mean[i]
+                c_std[i] = an_std[i] if an_std[i] > 1e-6 else 1.0
+
     return {
         "t_mean": torch.tensor(t_means, dtype=torch.float32),
         "t_std": torch.tensor(t_stds, dtype=torch.float32),
-        "c_mean": torch.tensor(feature_values.mean(axis=0), dtype=torch.float32),
-        "c_std": torch.tensor(feature_values.std(axis=0), dtype=torch.float32),
+        "c_mean": torch.tensor(c_mean, dtype=torch.float32),
+        "c_std": torch.tensor(c_std, dtype=torch.float32),
         "target_cols": target_cols,
-        "stats_scope": "main_node_only",
+        "stats_scope": "main_node_only_with_allnode_fallback_for_constant_features",
     }
 
 
@@ -235,12 +253,12 @@ def train_pipeline(
     val_end: str = "2021-12-31",
     start_year: int = 2005,
     end_year: int = 2025,
-    grad_clip_norm: float = 0.0,
+    grad_clip_norm: float = 1.0,
     lr_reduce_factor: float = 0.5,
     lr_patience: int = 3,
     lr_threshold: float = 1e-4,
     min_lr: float = 1e-6,
-    early_stop_patience: int = 6,
+    early_stop_patience: int = 12,
     early_stop_min_delta: float = 0.0,
     rain_specialization: bool = True,
     rain_occurrence_threshold_mm: float = 0.1,
@@ -248,6 +266,7 @@ def train_pipeline(
     cond_dropout: float = 0.15,
     seed: int = 1,
     lr: float = 1e-3,
+    num_workers: int = 8,
 ) -> Tuple[float, Dict[str, object]]:
     print("=" * 80)
     print("TRAINING: 5-NODE STAR ST-GRAPH | MAIN-NODE-ONLY TARGET")
@@ -338,23 +357,23 @@ def train_pipeline(
         stats=stats,
     )
 
+    _nw = int(num_workers)
+    _loader_kwargs = dict(collate_fn=collate_temporal_graphs, num_workers=_nw, pin_memory=True)
+    if _nw > 0:
+        _loader_kwargs.update(persistent_workers=True, prefetch_factor=4)
     train_loader = torch.utils.data.DataLoader(
         train_dataset,
         batch_size=batch_size,
         shuffle=True,
-        collate_fn=collate_temporal_graphs,
-        num_workers=0,
-        pin_memory=True,
         drop_last=True,
+        **_loader_kwargs,
     )
     val_loader = torch.utils.data.DataLoader(
         val_dataset,
         batch_size=batch_size,
         shuffle=False,
-        collate_fn=collate_temporal_graphs,
-        num_workers=0,
-        pin_memory=True,
         drop_last=False,
+        **_loader_kwargs,
     )
     print(f"Train samples: {len(train_dataset)} | batches: {len(train_loader)}")
     print(f"Val samples:   {len(val_dataset)} | batches: {len(val_loader)}")
@@ -838,12 +857,12 @@ def _parse_args():
     parser.add_argument("--val-end", type=str, default="2021-12-31")
     parser.add_argument("--start-year", type=int, default=2005)
     parser.add_argument("--end-year", type=int, default=2025)
-    parser.add_argument("--grad-clip-norm", type=float, default=0.0)
+    parser.add_argument("--grad-clip-norm", type=float, default=1.0)
     parser.add_argument("--lr-reduce-factor", type=float, default=0.5)
     parser.add_argument("--lr-patience", type=int, default=3)
     parser.add_argument("--lr-threshold", type=float, default=1e-4)
     parser.add_argument("--min-lr", type=float, default=1e-6)
-    parser.add_argument("--early-stop-patience", type=int, default=6)
+    parser.add_argument("--early-stop-patience", type=int, default=12)
     parser.add_argument("--early-stop-min-delta", type=float, default=0.0)
     parser.add_argument("--disable-rain-specialization", action="store_true")
     parser.add_argument("--rain-occurrence-threshold-mm", type=float, default=0.1)
@@ -854,6 +873,8 @@ def _parse_args():
                         help="Random seed for reproducible training (1 is empirically stable).")
     parser.add_argument("--lr", type=float, default=1e-3,
                         help="Learning rate.")
+    parser.add_argument("--num-workers", type=int, default=8,
+                        help="DataLoader workers (parallel graph batching; 0=main process).")
     return parser.parse_args()
 
 
@@ -885,4 +906,5 @@ if __name__ == "__main__":
         cond_dropout=args.cond_dropout,
         seed=args.seed,
         lr=args.lr,
+        num_workers=args.num_workers,
     )

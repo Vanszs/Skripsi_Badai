@@ -43,13 +43,13 @@ def compute_mae(predictions: np.ndarray, observations: np.ndarray) -> float:
 
 
 def compute_correlation(predictions: np.ndarray, observations: np.ndarray) -> float:
-    """Pearson Correlation Coefficient (NaN-safe)."""
+    """Pearson Correlation Coefficient (NaN-safe). Undefined cases return NaN."""
     mask = ~(np.isnan(predictions) | np.isnan(observations))
     if mask.sum() < 3:
-        return 0.0
+        return float("nan")
     p, o = predictions[mask], observations[mask]
     if np.std(p) < 1e-10 or np.std(o) < 1e-10:
-        return 0.0
+        return float("nan")
     return float(np.corrcoef(p, o)[0, 1])
 
 

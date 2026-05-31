@@ -22,11 +22,12 @@
     "samples_per_scenario": 3189,
     "num_ensemble": 30,
     "seq_len": 6,
+    "seed": 1,
     "crps_estimator": "fair_unbiased",
     "mlp_crps_type": "deterministic_single_pass",
     "rain_specialization_enabled": true,
     "rain_occurrence_threshold_mm": 0.1,
-    "rain_probability_threshold": 0.5
+    "rain_probability_threshold": 0.6000000238418579
   },
   "metrics": {
     "precipitation": {

@@ -219,6 +219,7 @@ def train_mlp_baseline(
     targets_denorm = targets * t_std + t_mean
     preds_denorm[:, 0] = np.clip(np.expm1(np.clip(preds_denorm[:, 0], a_min=None, a_max=20.0)), 0, None)
     targets_denorm[:, 0] = np.clip(np.expm1(np.clip(targets_denorm[:, 0], a_min=None, a_max=20.0)), 0, None)
+    preds_denorm[:, 1] = np.clip(preds_denorm[:, 1], 0, None)  # wind speed >= 0
     preds_denorm[:, 2] = np.clip(preds_denorm[:, 2], 0, 100)
 
     var_names = ["precipitation", "wind_speed", "humidity"]
