@@ -8,6 +8,7 @@ from __future__ import annotations
 import argparse
 import os
 import sys
+import warnings
 from typing import Dict, Tuple
 
 import matplotlib
@@ -151,6 +152,7 @@ def _build_precomputed_retrieval(
 
     rows = []
     data_dim = int(data.shape[1])
+    zero_count = 0
     for i in range(n):
         query = contexts[i : i + 1]
         _, cand_idx = index.search(query, search_k)
@@ -171,12 +173,22 @@ def _build_precomputed_retrieval(
 
         if not filtered:
             rows.append(torch.zeros((k, data_dim), dtype=torch.float32))
+            zero_count += 1
             continue
 
         if len(filtered) < k:
             filtered.extend([filtered[-1]] * (k - len(filtered)))
         chosen = np.array(filtered[:k], dtype=np.int64)
         rows.append(torch.tensor(data[chosen], dtype=torch.float32))
+
+    if zero_count > 0:
+        pct = 100.0 * zero_count / n
+        warnings.warn(
+            f"Retrieval fallback to zeros for {zero_count}/{n} samples ({pct:.2f}%). "
+            "Consider increasing search_extra_factor or reducing strict_past/exclude_self constraints.",
+            RuntimeWarning,
+            stacklevel=2,
+        )
 
     retrieved = torch.stack(rows, dim=0)
     return retrieved.view(retrieved.shape[0], -1)

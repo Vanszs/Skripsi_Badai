@@ -57,19 +57,16 @@ def create_inference_graphs(condition_sequence, config, device="cpu"):
 
     graphs_sequence = []
     for t in range(seq_len):
-        if condition_sequence.dim() == 3:
-            node_features = condition_sequence[t]
-            if node_features.shape[0] != num_nodes:
-                raise ValueError(
-                    f"Condition node dimension mismatch. Expected {num_nodes}, got {node_features.shape[0]}"
-                )
-        else:
-            # Fallback: place provided vector on main node, zero elsewhere.
-            main_name = config.get("main_node_name", MAIN_NODE_NAME)
-            main_idx = node_names.index(main_name)
-            feat = condition_sequence[t].to(device)
-            node_features = torch.zeros((num_nodes, feat.shape[-1]), dtype=feat.dtype, device=device)
-            node_features[main_idx] = feat
+        if condition_sequence.dim() != 3:
+            raise ValueError(
+                f"condition_sequence must be 3-dimensional [seq_len, num_nodes, features], "
+                f"got shape {tuple(condition_sequence.shape)}"
+            )
+        node_features = condition_sequence[t]
+        if node_features.shape[0] != num_nodes:
+            raise ValueError(
+                f"Condition node dimension mismatch. Expected {num_nodes}, got {node_features.shape[0]}"
+            )
         graph = Data(x=node_features.to(device), edge_index=edge_index, edge_attr=edge_attr)
         batch = Batch.from_data_list([graph])
         graphs_sequence.append(batch.to(device))
@@ -111,7 +108,7 @@ def load_model_and_stats(checkpoint_path="models/diffusion_chkpt.pth"):
     config["rain_specialization"] = {
         "enabled": bool(rain_cfg.get("enabled", False)),
         "rain_occurrence_threshold_mm": float(rain_cfg.get("rain_occurrence_threshold_mm", 0.1)),
-        "wet_loss_weight": float(rain_cfg.get("wet_loss_weight", 0.0)),
+        "wet_loss_weight": float(rain_cfg.get("wet_loss_weight", 0.7)),
         "wet_pos_weight": float(rain_cfg.get("wet_pos_weight", 1.0)),
         "wet_probability_threshold": float(rain_cfg.get("wet_probability_threshold", 0.5)),
         "calibration_metric": str(rain_cfg.get("calibration_metric", "csi")),
@@ -229,7 +226,12 @@ def run_inference_real(
         features_norm = torch.tensor(features_norm, dtype=torch.float32)
     features_norm = features_norm.to(device)
 
+    num_nodes = len(model_wrapper.config.get("node_names", NODE_NAMES))
     if features_norm.dim() == 2:
+        # (seq_len, features) -> add batch dim
+        features_norm = features_norm.unsqueeze(0)
+    elif features_norm.dim() == 3 and features_norm.shape[1] == num_nodes:
+        # (seq_len, nodes, features) -> add batch dim
         features_norm = features_norm.unsqueeze(0)
 
     seq_len = features_norm.shape[1]

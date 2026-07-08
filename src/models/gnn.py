@@ -145,7 +145,7 @@ class SpatioTemporalGNN(nn.Module):
         for graph in graphs_sequence:
             # graph.x: [Total_Nodes_In_Batch, Features]
             # graph.edge_index: [2, Total_Edges]
-            # graph.edge_attr: [Total_Edges, 1] - per-edge distance weights
+            # graph.edge_attr: [Total_Edges, 1] - constant non-informative edge attribute
             # graph.batch: [Total_Nodes] - identifies which sample each node belongs to
             edge_attr = getattr(graph, "edge_attr", None)
             h = self.spatial_gnn(graph.x, graph.edge_index, edge_attr=edge_attr, batch=graph.batch)

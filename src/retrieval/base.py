@@ -25,16 +25,36 @@ class RetrievalDatabase:
             
         self.index.add(embeddings)
         self.stored_data.append(data_values) # List of arrays
+        self._cached_data = None  # invalidate cached concatenation
         
     def query(self, query_embedding, k=3):
         """
         Find k nearest neighbors.
-        Returns: 
-          - retrieved_values: [Batch, k, data_dim]
-          - distances: [Batch, k]
+
+        Args:
+            query_embedding: numpy array [Batch, dim]
+            k: number of neighbors
+
+        Returns:
+            torch.Tensor [Batch, k, data_dim]
         """
+        total_refs = self.index.ntotal
+        if total_refs == 0:
+            raise ValueError("RetrievalDatabase is empty. Call add_items() before query().")
+        if k > total_refs:
+            raise ValueError(
+                f"k={k} is larger than the number of stored items ({total_refs}). "
+                "Reduce k or add more items."
+            )
+
         distances, indices = self.index.search(query_embedding, k)
-        
+
+        if np.any(indices < 0):
+            raise RuntimeError(
+                "FAISS returned invalid indices (<0) despite k <= n_total. "
+                "This indicates a corrupted index or inconsistent state."
+            )
+
         # Cache concatenated data to avoid repeated memory allocation
         if not hasattr(self, '_cached_data') or self._cached_data is None:
             if isinstance(self.stored_data, list) and len(self.stored_data) > 0:
@@ -42,17 +62,12 @@ class RetrievalDatabase:
                 self._cached_data = np.concatenate(self.stored_data, axis=0).astype(np.float32)
             else:
                 self._cached_data = np.array(self.stored_data, dtype=np.float32)
-        
+
         all_data = self._cached_data
-        
-        batch_size = query_embedding.shape[0]
+
         data_dim = all_data.shape[1] if len(all_data.shape) > 1 else 1
-        
-        # Handle indices - clamp -1 to 0 for safety
-        valid_indices = indices.copy()
-        valid_indices[valid_indices == -1] = 0
-        
+
         # Vectorized lookup
-        retrieved_values = all_data[valid_indices]
-            
+        retrieved_values = all_data[indices]
+
         return torch.tensor(retrieved_values, dtype=torch.float32)
