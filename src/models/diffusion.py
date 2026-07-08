@@ -88,7 +88,7 @@ class ConditionalDiffusionModel(nn.Module):
             nn.Linear(hidden_dim, 1),
         )
 
-        # U-Net like backbone
+        # MLP denoiser with skip connection
         self.down1 = nn.Sequential(nn.Linear(input_dim, hidden_dim), nn.SiLU())
         self.down2 = nn.Sequential(nn.Linear(hidden_dim, hidden_dim * 2), nn.SiLU())
         

@@ -1,8 +1,8 @@
 # Konteks Sesi Audit & Perbaikan — RA-Diffusion 5-Node Star
 
 Disimpan: 2026-05-30 ~23:06 WIB
-Proyek: Nowcasting Probabilistik Cuaca Multi-Variabel, Gunung Gede–Pangrango,
-Retrieval-Augmented Diffusion + Spatio-Temporal Graph Conditioning (5-node star, main-node-only).
+Proyek: Nowcasting probabilistik presipitasi untuk mitigasi resiko pendaki di gunung gede-pangrango dengan menggunakan retrieval augemented difussion model dengan spatio temporal graph conditioning,
+Nowcasting probabilistik presipitasi untuk mitigasi resiko pendaki di gunung gede-pangrango dengan menggunakan retrieval augemented difussion model dengan spatio temporal graph conditioning (5-node star, main-node-only).
 
 Dokumen ini merekam alur diskusi, temuan audit, perbaikan, hasil re-evaluasi, dan status terkini
 agar sesi berikutnya bisa lanjut tanpa kehilangan konteks.

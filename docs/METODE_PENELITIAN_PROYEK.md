@@ -1,5 +1,5 @@
 # Dokumentasi Metode Penelitian Proyek  
-## Sistem Nowcasting Cuaca Berbasis 5-Node Star Spatio-Temporal Graph dan Retrieval-Augmented Diffusion
+## Nowcasting probabilistik presipitasi untuk mitigasi resiko pendaki di gunung gede-pangrango dengan menggunakan retrieval augemented difussion model dengan spatio temporal graph conditioning
 
 Dokumen ini menjelaskan metode penelitian proyek secara sistematis, mulai dari objek penelitian, sumber data, desain pipeline, metode analisis, hingga prosedur validasi dan evaluasi. Tujuan utama sistem adalah menghasilkan prediksi nowcasting jangka pendek untuk titik utama (MAIN) pada wilayah studi Gunung Gede-Pangrango dengan memanfaatkan konteks spasial dari node sekeliling serta memori historis berbasis retrieval.
 
@@ -50,6 +50,8 @@ Data spasial dikunci pada lima node kanonik berikut:
 - `LEFT`: `(-6.75, 106.75)`
 - `RIGHT`: `(-6.75, 107.25)`
 
+**Catatan keterbatasan node dan elevasi.** Elevasi yang digunakan berasal dari metadata Open-Meteo/ERA5 grid 0.25°, bukan pengukuran topografi exact. Konsekuensinya, elevasi MAIN terekam sebagai 1529 m, yaitu rata-rata sel grid yang lebih rendah dari elevasi puncak Gede–Pangrango sekitar 3000 m. Node DOWN (-7.00°, 107.00°) terekapi Open-Meteo sebagai 0 m, meskipun koordinat tersebut secara geografis berada di wilayah pesisir daratan. Perbedaan rezim cuaca antar node tetap dapat dipelajari model karena fitur cuaca tiap node berbeda, sedangkan nilai elevasi disimpan sebagai node feature untuk membedakan karakteristik lokasi.
+
 Setiap node divalidasi terhadap pusat grid yang benar-benar dikembalikan API (grid-center strict). Jika dua node jatuh pada grid center yang sama (collision), proses ingestion dihentikan (fail-fast). Pendekatan ini digunakan untuk menghindari bias analisis yang seolah-olah menganggap dua titik berbeda padahal identik secara grid meteorologis.
 
 ### 3. Tahapan Proyek (End-to-End Pipeline)
@@ -85,6 +87,8 @@ Alasan metodologis: split kronologis dipilih untuk mencegah leakage lintas waktu
 
 #### 3.3 Pemilihan Metode dan Alasan
 Model utama dipilih sebagai gabungan tiga komponen:
+
+**Catatan keterbatasan graph conditioning.** Pada konfigurasi 5-node star dengan grid ERA5 0.25°, jarak euclidean antar MAIN dan setiap node tetangga adalah konstan 0.25°. Oleh karena itu, atribut edge (`edge_attr`) yang digunakan pada `GATConv(edge_dim=1)` bersifat non-informatif karena bernilai identik untuk semua edge. Spatial conditioning berasal dari (i) topologi graf bintang yang memperkenalkan hubungan MAIN–tetangga, dan (ii) fitur node yang berbeda antar lokasi. Eksperimen dengan atribut edge tambahan (misal, perbedaan elevasi) telah dicoba tetapi menyebabkan training divergen, sehingga dipertahankan pendekatan edge-attribute konstan yang didokumentasikan secara transparan.
 1. **Spatio-Temporal GNN** untuk menangkap ketergantungan antar node dan antar waktu.
 2. **Retrieval k-NN berbasis FAISS** untuk mengambil analog historis dari kondisi saat ini.
 3. **Conditional Diffusion** untuk menghasilkan prediksi probabilistik multi-target.
@@ -96,6 +100,10 @@ Alasan pemilihan:
 Baseline pembanding:
 - **Persistence**: \(\hat{y}_{t+1}=y_t\).
 - **MLP baseline**: input lag MAIN-only (\(L \times F\) fitur diratakan), output 3 target pada \(t+1\).
+
+
+**Catatan evaluasi MLP baseline.** MLP adalah model deterministik satu-langkah (one-step point forecast) yang memetakan fitur lag node MAIN ke tiga target pada waktu \(t+1\). Berbeda dengan diffusion yang secara alami menghasilkan ensemble probabilistik, MLP tidak dirancang untuk memberikan rentang ketidakpastian. Oleh karena itu, pada evaluasi MLP dijalankan dalam mode `eval()` dengan satu kali forward pass tanpa MC-dropout; CRPS untuk MLP berarti mengukur ketidakpastian sebatas error absolut (MAE). Pendekatan ini memastikan perbandingan antar baseline tetap fair.
+
 
 #### 3.4 Implementasi Sistem/Program
 Implementasi terdiri dari modul terpisah:
@@ -249,10 +257,18 @@ Output model digunakan dalam dua mode:
 
 Dengan demikian, model tidak hanya dinilai dari ketepatan angka tunggal, tetapi juga dari kualitas distribusi prediksi dan kemampuan deteksi event hujan.
 
-### 5. Validasi dan Evaluasi
+#
+**Catatan protokol evaluasi.** Evaluasi model pada data test dilakukan dengan protokol one-step hourly: setiap sampel memprediksi satu jam ke depan (`t+1`) berdasarkan 6 jam observasi sebelumnya (`t-6` hingga `t-1`). Untuk mengurangi beban komputasi pada eksperimen utama, evaluasi dijalankan dengan `eval_step=11` yang memberikan cakupan diurnal seragam (coprime terhadap 24 jam) dan menghasilkan sekitar 3.200 sampel dari ~35.000 jam test. Kode mendukung evaluasi hourly penuh (`eval_step=1`) untuk angka definitif yang dapat dijalankan pada tahap akhir penelitian.
+
+
+## 5. Validasi dan Evaluasi
 Validasi proyek dilakukan pada dua lapisan: validasi struktural pipeline dan evaluasi performa prediksi.
 
-#### 5.1 Validasi Struktural
+##
+**Catatan protokol evaluasi.** Evaluasi model pada data test dilakukan dengan protokol one-step hourly: setiap sampel memprediksi satu jam ke depan (`t+1`) berdasarkan 6 jam observasi sebelumnya (`t-6` hingga `t-1`). Untuk mengurangi beban komputasi pada eksperimen utama, evaluasi dijalankan dengan `eval_step=11` yang memberikan cakupan diurnal seragam (coprime terhadap 24 jam) dan menghasilkan sekitar 3.200 sampel dari ~35.000 jam test. Kode mendukung evaluasi hourly penuh (`eval_step=1`) untuk angka definitif yang dapat dijalankan pada tahap akhir penelitian.
+
+
+## 5.1 Validasi Struktural
 Validasi struktural mencakup:
 1. verifikasi node order dan kelengkapan node per timestamp;
 2. verifikasi topologi graf star dengan 8 edge terarah;
@@ -262,7 +278,11 @@ Validasi struktural mencakup:
 
 Tujuan lapisan ini adalah memastikan model yang dievaluasi benar-benar merepresentasikan desain metodologis yang dideklarasikan.
 
-#### 5.2 Metrik Evaluasi
+##
+**Catatan protokol evaluasi.** Evaluasi model pada data test dilakukan dengan protokol one-step hourly: setiap sampel memprediksi satu jam ke depan (`t+1`) berdasarkan 6 jam observasi sebelumnya (`t-6` hingga `t-1`). Untuk mengurangi beban komputasi pada eksperimen utama, evaluasi dijalankan dengan `eval_step=11` yang memberikan cakupan diurnal seragam (coprime terhadap 24 jam) dan menghasilkan sekitar 3.200 sampel dari ~35.000 jam test. Kode mendukung evaluasi hourly penuh (`eval_step=1`) untuk angka definitif yang dapat dijalankan pada tahap akhir penelitian.
+
+
+## 5.2 Metrik Evaluasi
 Metrik deterministik:
 1. Root Mean Square Error (RMSE):
    \[
@@ -292,7 +312,11 @@ Interpretasi umum:
 - CRPS/Brier lebih kecil lebih baik;
 - POD tinggi, FAR rendah, CSI tinggi menunjukkan deteksi event lebih seimbang.
 
-#### 5.3 Kriteria Keberhasilan Sistem
+##
+**Catatan protokol evaluasi.** Evaluasi model pada data test dilakukan dengan protokol one-step hourly: setiap sampel memprediksi satu jam ke depan (`t+1`) berdasarkan 6 jam observasi sebelumnya (`t-6` hingga `t-1`). Untuk mengurangi beban komputasi pada eksperimen utama, evaluasi dijalankan dengan `eval_step=11` yang memberikan cakupan diurnal seragam (coprime terhadap 24 jam) dan menghasilkan sekitar 3.200 sampel dari ~35.000 jam test. Kode mendukung evaluasi hourly penuh (`eval_step=1`) untuk angka definitif yang dapat dijalankan pada tahap akhir penelitian.
+
+
+## 5.3 Kriteria Keberhasilan Sistem
 Kriteria keberhasilan didefinisikan pada tiga tingkat:
 1. **Keberhasilan teknis pipeline**: seluruh kontrak data-graf-target valid, artefak utama terbentuk, dan pipeline berjalan end-to-end tanpa mismatch struktural.
 2. **Keberhasilan komparatif model**: model utama dinilai terhadap baseline pada metrik deterministik dan probabilistik, bukan hanya satu metrik tunggal.

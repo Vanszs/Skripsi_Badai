@@ -1,0 +1,3038 @@
+{
+  "version": "1.0.0",
+  "gitCommitHash": "ebfc7842a03f50be9a949bb7c0e398395d459a07",
+  "generatedAt": "2026-07-08T15:01:11.279Z",
+  "files": {
+    "_archive/_doc_extract.txt": {
+      "filePath": "_archive/_doc_extract.txt",
+      "contentHash": "e1a083f275bd0c5abbb51bb1c3a00363f5376e35f3fe58a5fddd4ceda47a4973",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 493,
+      "hasStructuralAnalysis": false
+    },
+    "_archive/_extract_doc.py": {
+      "filePath": "_archive/_extract_doc.py",
+      "contentHash": "b0c9217e0756a890674430c50a061cdd43acbc4799a099413c78b58d0bbd7885",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "sys",
+          "specifiers": [
+            "sys"
+          ]
+        },
+        {
+          "source": "docx",
+          "specifiers": [
+            "Document"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 21,
+      "hasStructuralAnalysis": true
+    },
+    "_archive/complete_pipeline.ipynb": {
+      "filePath": "_archive/complete_pipeline.ipynb",
+      "contentHash": "32007b50cddc38e49a4df718fabbd102541ae39018062cba8878b39893ecd9f6",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 401,
+      "hasStructuralAnalysis": false
+    },
+    "_archive/debug_nan.py": {
+      "filePath": "_archive/debug_nan.py",
+      "contentHash": "81fd6979d4a179865ad454e46047bf10ca58618d7c7ae0f6d693aefdb1e981d2",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "torch",
+          "specifiers": [
+            "torch"
+          ]
+        },
+        {
+          "source": "numpy",
+          "specifiers": [
+            "np"
+          ]
+        },
+        {
+          "source": "pandas",
+          "specifiers": [
+            "pd"
+          ]
+        },
+        {
+          "source": "src.inference",
+          "specifiers": [
+            "load_model_and_stats",
+            "run_inference_hybrid"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 61,
+      "hasStructuralAnalysis": true
+    },
+    "_archive/Draft Bepan (2).docx": {
+      "filePath": "_archive/Draft Bepan (2).docx",
+      "contentHash": "0f28c6982e12cc4b8524f6043e09cdaec821f88eba1b4a6397cafd317e78fbf7",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 723,
+      "hasStructuralAnalysis": false
+    },
+    "_archive/generate_plots.py": {
+      "filePath": "_archive/generate_plots.py",
+      "contentHash": "eb08447f8558423557f88cf487826cb2339651d9271f8557e1ef997dbe599233",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "sys",
+          "specifiers": [
+            "sys"
+          ]
+        },
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "json",
+          "specifiers": [
+            "json"
+          ]
+        },
+        {
+          "source": "warnings",
+          "specifiers": [
+            "warnings"
+          ]
+        },
+        {
+          "source": "numpy",
+          "specifiers": [
+            "np"
+          ]
+        },
+        {
+          "source": "pandas",
+          "specifiers": [
+            "pd"
+          ]
+        },
+        {
+          "source": "torch",
+          "specifiers": [
+            "torch"
+          ]
+        },
+        {
+          "source": "tqdm",
+          "specifiers": [
+            "tqdm"
+          ]
+        },
+        {
+          "source": "matplotlib",
+          "specifiers": [
+            "matplotlib"
+          ]
+        },
+        {
+          "source": "matplotlib.pyplot",
+          "specifiers": [
+            "plt"
+          ]
+        },
+        {
+          "source": "matplotlib.dates",
+          "specifiers": [
+            "mdates"
+          ]
+        },
+        {
+          "source": "src.inference",
+          "specifiers": [
+            "load_model_and_stats",
+            "run_inference_hybrid"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 472,
+      "hasStructuralAnalysis": true
+    },
+    "_archive/run_analysis.py": {
+      "filePath": "_archive/run_analysis.py",
+      "contentHash": "804590ded4061f5c4ddb51ea007f2e7f38ff0b874946a2424b79e0b76e0cbfea",
+      "functions": [
+        {
+          "name": "haversine",
+          "params": [
+            "lat1",
+            "lon1",
+            "lat2",
+            "lon2"
+          ],
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "W",
+          "params": [
+            "s"
+          ],
+          "exported": true,
+          "lineCount": 1
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "sys",
+          "specifiers": [
+            "sys"
+          ]
+        },
+        {
+          "source": "json",
+          "specifiers": [
+            "json"
+          ]
+        },
+        {
+          "source": "warnings",
+          "specifiers": [
+            "warnings"
+          ]
+        },
+        {
+          "source": "numpy",
+          "specifiers": [
+            "np"
+          ]
+        },
+        {
+          "source": "pandas",
+          "specifiers": [
+            "pd"
+          ]
+        },
+        {
+          "source": "matplotlib",
+          "specifiers": [
+            "matplotlib"
+          ]
+        },
+        {
+          "source": "matplotlib.pyplot",
+          "specifiers": [
+            "plt"
+          ]
+        },
+        {
+          "source": "matplotlib.gridspec",
+          "specifiers": [
+            "gridspec"
+          ]
+        },
+        {
+          "source": "math",
+          "specifiers": [
+            "radians",
+            "sin",
+            "cos",
+            "sqrt",
+            "atan2"
+          ]
+        }
+      ],
+      "exports": [
+        "haversine",
+        "W"
+      ],
+      "totalLines": 822,
+      "hasStructuralAnalysis": true
+    },
+    "_archive/run_threshold_analysis.py": {
+      "filePath": "_archive/run_threshold_analysis.py",
+      "contentHash": "a9fba4be84dd7f2f01ca05231eea50d3d082433933d75d1680c4c08c210603c9",
+      "functions": [
+        {
+          "name": "compute_csi",
+          "params": [
+            "ensemble",
+            "obs",
+            "threshold",
+            "prob_threshold"
+          ],
+          "exported": true,
+          "lineCount": 15
+        },
+        {
+          "name": "count_contingency",
+          "params": [
+            "ensemble",
+            "obs",
+            "threshold",
+            "prob_threshold"
+          ],
+          "exported": true,
+          "lineCount": 15
+        },
+        {
+          "name": "W",
+          "params": [
+            "s"
+          ],
+          "exported": true,
+          "lineCount": 1
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "sys",
+          "specifiers": [
+            "sys"
+          ]
+        },
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "time",
+          "specifiers": [
+            "time"
+          ]
+        },
+        {
+          "source": "json",
+          "specifiers": [
+            "json"
+          ]
+        },
+        {
+          "source": "warnings",
+          "specifiers": [
+            "warnings"
+          ]
+        },
+        {
+          "source": "numpy",
+          "specifiers": [
+            "np"
+          ]
+        },
+        {
+          "source": "pandas",
+          "specifiers": [
+            "pd"
+          ]
+        },
+        {
+          "source": "torch",
+          "specifiers": [
+            "torch"
+          ]
+        },
+        {
+          "source": "matplotlib",
+          "specifiers": [
+            "matplotlib"
+          ]
+        },
+        {
+          "source": "matplotlib.pyplot",
+          "specifiers": [
+            "plt"
+          ]
+        },
+        {
+          "source": "matplotlib.gridspec",
+          "specifiers": [
+            "gridspec"
+          ]
+        },
+        {
+          "source": "tqdm",
+          "specifiers": [
+            "tqdm"
+          ]
+        },
+        {
+          "source": "src.inference",
+          "specifiers": [
+            "load_model_and_stats",
+            "run_inference_hybrid"
+          ]
+        },
+        {
+          "source": "src.evaluation.probabilistic_metrics",
+          "specifiers": [
+            "compute_brier_score",
+            "compute_pod",
+            "compute_far"
+          ]
+        }
+      ],
+      "exports": [
+        "compute_csi",
+        "count_contingency",
+        "W"
+      ],
+      "totalLines": 620,
+      "hasStructuralAnalysis": true
+    },
+    "_archive/thesis_analysis.ipynb": {
+      "filePath": "_archive/thesis_analysis.ipynb",
+      "contentHash": "8c92c3fe04cdae432e7a008ff2a2151d94788b526f774947c8bdf7d19347c3ea",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 542,
+      "hasStructuralAnalysis": false
+    },
+    ".agent/rules/respon.md": {
+      "filePath": ".agent/rules/respon.md",
+      "contentHash": "e7bc7fb3b6e6e1729a1dc9495af19055ad14d3d86c716522531eac1284268bd3",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 423,
+      "hasStructuralAnalysis": true
+    },
+    ".agent/skills/thesis-sentinel/scripts/health_check.py": {
+      "filePath": ".agent/skills/thesis-sentinel/scripts/health_check.py",
+      "contentHash": "f95198a0c5a0542c6b0df64ecbd082e7e898e7b65c1a7d3e2a12afa98cd9ae80",
+      "functions": [
+        {
+          "name": "run_health_check",
+          "params": [],
+          "exported": true,
+          "lineCount": 73
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "sys",
+          "specifiers": [
+            "sys"
+          ]
+        },
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "torch",
+          "specifiers": [
+            "torch"
+          ]
+        }
+      ],
+      "exports": [
+        "run_health_check"
+      ],
+      "totalLines": 92,
+      "hasStructuralAnalysis": true
+    },
+    ".agent/skills/thesis-sentinel/SKILL.md": {
+      "filePath": ".agent/skills/thesis-sentinel/SKILL.md",
+      "contentHash": "d843e3466eb278826586f2f4d54e6cb4f9a996be849c24c4498ac2c7e09a5167",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 53,
+      "hasStructuralAnalysis": true
+    },
+    ".github/agents/independent-verification-auditor.agent.md": {
+      "filePath": ".github/agents/independent-verification-auditor.agent.md",
+      "contentHash": "5e6f15ef4347b5387a9be7ef366be4a53f5cfd92d046d2c631f43e87addfc30a",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 176,
+      "hasStructuralAnalysis": true
+    },
+    ".github/hooks/rtk-hook.ps1": {
+      "filePath": ".github/hooks/rtk-hook.ps1",
+      "contentHash": "21a41b755a8a0748dadd282a7602986e05581a281cbc05de098da04c08ae7694",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 78,
+      "hasStructuralAnalysis": false
+    },
+    ".github/hooks/rtk-session.ps1": {
+      "filePath": ".github/hooks/rtk-session.ps1",
+      "contentHash": "bc49f2392289036ef2a462c660fca17cd03eb8c4f14e3609e7e4f90629a02386",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 17,
+      "hasStructuralAnalysis": false
+    },
+    ".github/hooks/rtk.json": {
+      "filePath": ".github/hooks/rtk.json",
+      "contentHash": "58ad8d55f03dcb9f248aae10068c25b8872e0b7a3f77f0863557f70d76ca4d71",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 20,
+      "hasStructuralAnalysis": true
+    },
+    ".github/rules/respon.md": {
+      "filePath": ".github/rules/respon.md",
+      "contentHash": "9630ec9fce25d5255a9d3f1304f9756195c029c6bc05787bed9e3790be4a98e2",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 433,
+      "hasStructuralAnalysis": true
+    },
+    ".github/skills/thesis-sentinel/scripts/health_check.py": {
+      "filePath": ".github/skills/thesis-sentinel/scripts/health_check.py",
+      "contentHash": "f95198a0c5a0542c6b0df64ecbd082e7e898e7b65c1a7d3e2a12afa98cd9ae80",
+      "functions": [
+        {
+          "name": "run_health_check",
+          "params": [],
+          "exported": true,
+          "lineCount": 73
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "sys",
+          "specifiers": [
+            "sys"
+          ]
+        },
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "torch",
+          "specifiers": [
+            "torch"
+          ]
+        }
+      ],
+      "exports": [
+        "run_health_check"
+      ],
+      "totalLines": 92,
+      "hasStructuralAnalysis": true
+    },
+    ".github/skills/thesis-sentinel/SKILL.md": {
+      "filePath": ".github/skills/thesis-sentinel/SKILL.md",
+      "contentHash": "d843e3466eb278826586f2f4d54e6cb4f9a996be849c24c4498ac2c7e09a5167",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 53,
+      "hasStructuralAnalysis": true
+    },
+    ".kiro/settings/lsp.json": {
+      "filePath": ".kiro/settings/lsp.json",
+      "contentHash": "69aaab5b2c07f6f47866c30330cbbbf323f859ca05b039f4afbc9ab72d12de28",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 205,
+      "hasStructuralAnalysis": true
+    },
+    ".understand-anything/.understandignore": {
+      "filePath": ".understand-anything/.understandignore",
+      "contentHash": "d3e33492e2318aa711132bca3b023c23ac82ee3ecc63a68670f039fc8fa1718d",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 38,
+      "hasStructuralAnalysis": false
+    },
+    ".understand-anything/fingerprints.json": {
+      "filePath": ".understand-anything/fingerprints.json",
+      "contentHash": "c9fe23a2aff53eca5f50cc6f25185ecbd5c1a625cbd3333ce178367a78409b78",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 2998,
+      "hasStructuralAnalysis": true
+    },
+    ".understand-anything/intermediate/scan-result.json": {
+      "filePath": ".understand-anything/intermediate/scan-result.json",
+      "contentHash": "6f4324f9fe9a98eb068beeb2f66f0ab5f1cd3cdbc0bd827c20ddd932c816df7d",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 456,
+      "hasStructuralAnalysis": true
+    },
+    ".understand-anything/knowledge-graph.json": {
+      "filePath": ".understand-anything/knowledge-graph.json",
+      "contentHash": "6479e7386634970ecff2591c9074f1d0c6bdc35665583936c84e493f854a46bf",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 5864,
+      "hasStructuralAnalysis": true
+    },
+    ".understand-anything/meta.json": {
+      "filePath": ".understand-anything/meta.json",
+      "contentHash": "25ff3143c6c0fcfd455a46f635d304f58e801d7ab84a25f56af6b3af2531ef7a",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 6,
+      "hasStructuralAnalysis": true
+    },
+    "docs/ACTIVE_5NODE_STAR_MAIN.md": {
+      "filePath": "docs/ACTIVE_5NODE_STAR_MAIN.md",
+      "contentHash": "932f8ca01aa0ff4ed4ed5df192e0e1eb2384bc297d19ba8649ead361fc8735b4",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 54,
+      "hasStructuralAnalysis": true
+    },
+    "docs/AUDIT_FIX_PLAN.md": {
+      "filePath": "docs/AUDIT_FIX_PLAN.md",
+      "contentHash": "ffe901db2c33c2b46c440c27cac2cdb105df42fc94907233fb93b17a6e6b83cc",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 217,
+      "hasStructuralAnalysis": true
+    },
+    "docs/AUDIT_SESSION_CONTEXT.md": {
+      "filePath": "docs/AUDIT_SESSION_CONTEXT.md",
+      "contentHash": "24fe43f6d07c84941d52c548eb1480de7e3393159eb8c49f17670377ef8f1ffe",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 451,
+      "hasStructuralAnalysis": true
+    },
+    "docs/KNOWLEDGE.md": {
+      "filePath": "docs/KNOWLEDGE.md",
+      "contentHash": "6978e92c6bbde600edb3a918a528e2709693ed540d52d55fb3961d00b64e832c",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 447,
+      "hasStructuralAnalysis": true
+    },
+    "docs/METODE_PENELITIAN_PROYEK.md": {
+      "filePath": "docs/METODE_PENELITIAN_PROYEK.md",
+      "contentHash": "36f3773c3baabf75d04d1623b3c1936dee94df7f256f1bebc713db8d796eb4c2",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 331,
+      "hasStructuralAnalysis": true
+    },
+    "docs/MIGRATION_CHECKLIST_STATUS.md": {
+      "filePath": "docs/MIGRATION_CHECKLIST_STATUS.md",
+      "contentHash": "00b434302d2b320623b5ee35094201467d8f3ab227e44ca0750417d874925827",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 164,
+      "hasStructuralAnalysis": true
+    },
+    "docs/README.md": {
+      "filePath": "docs/README.md",
+      "contentHash": "b0c37fedabe88cca2fa2228159bdc53b514798013f22f4bb95b671c21e5167d8",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 14,
+      "hasStructuralAnalysis": true
+    },
+    "notebooks/evaluasi_model.ipynb": {
+      "filePath": "notebooks/evaluasi_model.ipynb",
+      "contentHash": "db719e975ce5be6457f576a8bc808885f4aa710859d5d7c9f578e0355b5630ae",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 67,
+      "hasStructuralAnalysis": false
+    },
+    "private.note": {
+      "filePath": "private.note",
+      "contentHash": "6802f0c545805531a21fd3c47014ca4a401d15c459c416dfd3a13b9c87b0e3f9",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 165,
+      "hasStructuralAnalysis": false
+    },
+    "requirements.txt": {
+      "filePath": "requirements.txt",
+      "contentHash": "9a8e97a140af0785b94b0ccc8f2a181a4b3d16d0e5bcd17b2f53833430a3a23e",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 16,
+      "hasStructuralAnalysis": false
+    },
+    "result_test/comparison/comparison_summary.csv": {
+      "filePath": "result_test/comparison/comparison_summary.csv",
+      "contentHash": "95766d258765351ddb37f38f2fdcd753e0731683614399f1eeff154c54a6f279",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 20,
+      "hasStructuralAnalysis": false
+    },
+    "result_test/comparison/comparison_summary.json": {
+      "filePath": "result_test/comparison/comparison_summary.json",
+      "contentHash": "53aa35f36171e472d169c3bfc35f974810dfab4d710574ea26ddf235193bdb2a",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 226,
+      "hasStructuralAnalysis": true
+    },
+    "result_test/diff_gnn/metrics.json": {
+      "filePath": "result_test/diff_gnn/metrics.json",
+      "contentHash": "fe94b90962205a86fe67c2a8b00eb77cca9e67efcad8d8069ebb226ead05f3ea",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 64,
+      "hasStructuralAnalysis": true
+    },
+    "result_test/diff_only/metrics.json": {
+      "filePath": "result_test/diff_only/metrics.json",
+      "contentHash": "22ad966b34805e4c14f6fd6d7a4c661cfe98a084a0d1e9d718d3de0c5e929126",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 64,
+      "hasStructuralAnalysis": true
+    },
+    "result_test/diff_retrieval/metrics.json": {
+      "filePath": "result_test/diff_retrieval/metrics.json",
+      "contentHash": "8bf25934a5b269b30c6797dee87bd079f97da0b71ad70755441f58529fb8418a",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 64,
+      "hasStructuralAnalysis": true
+    },
+    "result_test/EVALUATION_REPORT.md": {
+      "filePath": "result_test/EVALUATION_REPORT.md",
+      "contentHash": "2a5a5aa50dd49482a6ab59770dd90e3aff8660e7ab968b9cee9afd9ff4b82e18",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 91,
+      "hasStructuralAnalysis": true
+    },
+    "result_test/full_model/metrics.json": {
+      "filePath": "result_test/full_model/metrics.json",
+      "contentHash": "3a4398cdea8c85ec9dd2c15b977b09b0394e19d5ef71da8a088eee67d52caffa",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 64,
+      "hasStructuralAnalysis": true
+    },
+    "result_test/mlp_baseline/metrics.json": {
+      "filePath": "result_test/mlp_baseline/metrics.json",
+      "contentHash": "aa8835ef9b69cf7a16a88c532fc8b06383c1f92327723d91a62ae7bdde1fe296",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 64,
+      "hasStructuralAnalysis": true
+    },
+    "result_test/nowcasting_hourly_week/driest_week_actual_vs_pred.csv": {
+      "filePath": "result_test/nowcasting_hourly_week/driest_week_actual_vs_pred.csv",
+      "contentHash": "e4959c46f3cd0d2c94621ced94d3feecc4ad196dd8ab0153026f0b5d55a17d69",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 164,
+      "hasStructuralAnalysis": false
+    },
+    "result_test/nowcasting_hourly_week/median_week_actual_vs_pred.csv": {
+      "filePath": "result_test/nowcasting_hourly_week/median_week_actual_vs_pred.csv",
+      "contentHash": "ba1ecac85ac86c714cb786ca5d2c458c8607de202dcab44e9e746f22ec74d289",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 164,
+      "hasStructuralAnalysis": false
+    },
+    "result_test/nowcasting_hourly_week/weekly_crosscheck_3var_meta.json": {
+      "filePath": "result_test/nowcasting_hourly_week/weekly_crosscheck_3var_meta.json",
+      "contentHash": "bd4691e8ca0184905022eefd4ecf5f5346352965e978327bce598654d697a5c9",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 262,
+      "hasStructuralAnalysis": true
+    },
+    "result_test/nowcasting_hourly_week/weekly_crosscheck_3var.csv": {
+      "filePath": "result_test/nowcasting_hourly_week/weekly_crosscheck_3var.csv",
+      "contentHash": "5b3fbd17210c6cfd20173b42ae6fff26785ced2400c338be01713dbc85a0c56e",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 5,
+      "hasStructuralAnalysis": false
+    },
+    "result_test/nowcasting_hourly_week/wettest_week_actual_vs_pred.csv": {
+      "filePath": "result_test/nowcasting_hourly_week/wettest_week_actual_vs_pred.csv",
+      "contentHash": "c6363ca3ee18cbb1893fe7845258e06b95592ae66f1639911b4ac12f62da2ec1",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 164,
+      "hasStructuralAnalysis": false
+    },
+    "result_test/persistence/metrics.json": {
+      "filePath": "result_test/persistence/metrics.json",
+      "contentHash": "226d52b7d2dce6ba86be60d39bc3e7e539db43ea26188c92630d995a6da2698e",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 64,
+      "hasStructuralAnalysis": true
+    },
+    "result_test/README.md": {
+      "filePath": "result_test/README.md",
+      "contentHash": "23f0044dfaffabcde09d01b8f3d2d434f196c6c9888790892c09cbe7e5489120",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 19,
+      "hasStructuralAnalysis": true
+    },
+    "results/baseline_results/baseline_metrics.json": {
+      "filePath": "results/baseline_results/baseline_metrics.json",
+      "contentHash": "55702f79fb097bee7c8f90528e933d6a2ed51a25f523b09f72127320eefb3855",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 30,
+      "hasStructuralAnalysis": true
+    },
+    "results/README.md": {
+      "filePath": "results/README.md",
+      "contentHash": "01ecddc274d0f49a4c565b0c3ea9828c58f015432c378fa3fd418ee64c44a6e8",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 13,
+      "hasStructuralAnalysis": true
+    },
+    "run_eval_final.py": {
+      "filePath": "run_eval_final.py",
+      "contentHash": "2dc4bedb11fe6caff158ab96418e61fd038541815eb4f46035669f22e0e567bf",
+      "functions": [
+        {
+          "name": "load_test_data",
+          "params": [
+            "data_path"
+          ],
+          "exported": true,
+          "lineCount": 40
+        },
+        {
+          "name": "get_per_node_sequence",
+          "params": [
+            "per_node_data",
+            "idx",
+            "seq_len",
+            "feature_cols",
+            "stats"
+          ],
+          "exported": true,
+          "lineCount": 18
+        },
+        {
+          "name": "_eval_indices",
+          "params": [
+            "main_df",
+            "seq_len",
+            "eval_step",
+            "max_eval_samples"
+          ],
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "run_persistence",
+          "params": [
+            "main_df",
+            "eval_step",
+            "seq_len",
+            "max_eval_samples"
+          ],
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "run_mlp_baseline",
+          "params": [
+            "main_df",
+            "feature_cols",
+            "stats",
+            "eval_step",
+            "seq_len",
+            "num_ensemble",
+            "max_eval_samples"
+          ],
+          "exported": true,
+          "lineCount": 37
+        },
+        {
+          "name": "run_diffusion_scenario",
+          "params": [
+            "main_df",
+            "per_node_data",
+            "feature_cols",
+            "stats",
+            "eval_step",
+            "seq_len",
+            "num_ensemble",
+            "use_retrieval",
+            "use_gnn",
+            "max_eval_samples"
+          ],
+          "exported": true,
+          "lineCount": 98
+        },
+        {
+          "name": "compute_scenario_metrics",
+          "params": [
+            "targets",
+            "preds",
+            "ensemble"
+          ],
+          "exported": true,
+          "lineCount": 20
+        },
+        {
+          "name": "plot_bar_chart",
+          "params": [
+            "all_results",
+            "save_dir"
+          ],
+          "exported": true,
+          "lineCount": 17
+        },
+        {
+          "name": "plot_scatter",
+          "params": [
+            "all_data",
+            "save_dir"
+          ],
+          "exported": true,
+          "lineCount": 18
+        },
+        {
+          "name": "plot_time_series",
+          "params": [
+            "all_data",
+            "save_dir",
+            "n_points"
+          ],
+          "exported": true,
+          "lineCount": 22
+        },
+        {
+          "name": "plot_reliability",
+          "params": [
+            "all_data",
+            "save_dir"
+          ],
+          "exported": true,
+          "lineCount": 27
+        },
+        {
+          "name": "plot_crps_comparison",
+          "params": [
+            "all_results",
+            "save_dir"
+          ],
+          "exported": true,
+          "lineCount": 14
+        },
+        {
+          "name": "plot_ablation",
+          "params": [
+            "all_results",
+            "save_dir"
+          ],
+          "exported": true,
+          "lineCount": 18
+        },
+        {
+          "name": "main",
+          "params": [
+            "eval_step",
+            "num_ensemble",
+            "seq_len",
+            "data_path",
+            "max_eval_samples",
+            "seed"
+          ],
+          "exported": true,
+          "lineCount": 168
+        },
+        {
+          "name": "parse_args",
+          "params": [],
+          "exported": true,
+          "lineCount": 11
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "argparse",
+          "specifiers": [
+            "argparse"
+          ]
+        },
+        {
+          "source": "json",
+          "specifiers": [
+            "json"
+          ]
+        },
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "sys",
+          "specifiers": [
+            "sys"
+          ]
+        },
+        {
+          "source": "typing",
+          "specifiers": [
+            "Dict",
+            "Tuple"
+          ]
+        },
+        {
+          "source": "matplotlib",
+          "specifiers": [
+            "matplotlib"
+          ]
+        },
+        {
+          "source": "matplotlib.pyplot",
+          "specifiers": [
+            "plt"
+          ]
+        },
+        {
+          "source": "numpy",
+          "specifiers": [
+            "np"
+          ]
+        },
+        {
+          "source": "pandas",
+          "specifiers": [
+            "pd"
+          ]
+        },
+        {
+          "source": "torch",
+          "specifiers": [
+            "torch"
+          ]
+        },
+        {
+          "source": "tqdm",
+          "specifiers": [
+            "tqdm"
+          ]
+        },
+        {
+          "source": "src.config",
+          "specifiers": [
+            "CONTEXT_POLICY",
+            "FINAL_FEATURE_COLS",
+            "FINAL_TARGET_COLS",
+            "MAIN_NODE_NAME",
+            "NODE_COORDINATES",
+            "NODE_NAMES",
+            "OPEN_METEO_MODEL",
+            "PRECIP_PHYSICAL_MAX_MM",
+            "TARGET_NODE_POLICY",
+            "harmonize_weather_columns",
+            "validate_feature_schema",
+            "validate_feature_values"
+          ]
+        },
+        {
+          "source": "src.data.ingest",
+          "specifiers": [
+            "CANONICAL_DATA_PATH",
+            "fetch_era5_data"
+          ]
+        },
+        {
+          "source": "src.evaluation.probabilistic_metrics",
+          "specifiers": [
+            "compute_brier_score",
+            "compute_correlation",
+            "compute_crps",
+            "compute_csi",
+            "compute_far",
+            "compute_mae",
+            "compute_pod",
+            "compute_rmse"
+          ]
+        },
+        {
+          "source": "src.inference",
+          "specifiers": [
+            "create_inference_graphs",
+            "load_model_and_stats"
+          ]
+        },
+        {
+          "source": "src.models.mlp_baseline",
+          "specifiers": [
+            "MLPBaseline"
+          ]
+        },
+        {
+          "source": "src.train",
+          "specifiers": [
+            "compute_stats_from_training",
+            "temporal_split"
+          ]
+        }
+      ],
+      "exports": [
+        "load_test_data",
+        "get_per_node_sequence",
+        "_eval_indices",
+        "run_persistence",
+        "run_mlp_baseline",
+        "run_diffusion_scenario",
+        "compute_scenario_metrics",
+        "plot_bar_chart",
+        "plot_scatter",
+        "plot_time_series",
+        "plot_reliability",
+        "plot_crps_comparison",
+        "plot_ablation",
+        "main",
+        "parse_args"
+      ],
+      "totalLines": 629,
+      "hasStructuralAnalysis": true
+    },
+    "scripts/eval_rain_robust.py": {
+      "filePath": "scripts/eval_rain_robust.py",
+      "contentHash": "21e393e1d4cb0247018e26f0490cc665618299c7deb65274092ed7c5fd880ff4",
+      "functions": [
+        {
+          "name": "_seed_everything",
+          "params": [
+            "seed"
+          ],
+          "returnType": "None",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "_corr",
+          "params": [
+            "a",
+            "b"
+          ],
+          "returnType": "float",
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "_event_metrics",
+          "params": [
+            "actual",
+            "pred",
+            "threshold"
+          ],
+          "returnType": "Dict[str, float]",
+          "exported": true,
+          "lineCount": 14
+        },
+        {
+          "name": "_pick_week_windows",
+          "params": [
+            "main_df"
+          ],
+          "returnType": "List[WeekWindow]",
+          "exported": true,
+          "lineCount": 22
+        },
+        {
+          "name": "_build_test_frames",
+          "params": [
+            "data_path"
+          ],
+          "exported": true,
+          "lineCount": 37
+        },
+        {
+          "name": "_get_per_node_sequence",
+          "params": [
+            "per_node_data",
+            "idx",
+            "seq_len",
+            "feature_cols",
+            "stats"
+          ],
+          "returnType": "torch.Tensor",
+          "exported": true,
+          "lineCount": 14
+        },
+        {
+          "name": "_load_mlp",
+          "params": [
+            "device"
+          ],
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "run_crosscheck",
+          "params": [
+            "data_path",
+            "num_ensemble",
+            "num_inference_steps",
+            "device"
+          ],
+          "exported": true,
+          "lineCount": 169
+        },
+        {
+          "name": "parse_args",
+          "params": [],
+          "exported": true,
+          "lineCount": 7
+        }
+      ],
+      "classes": [
+        {
+          "name": "WeekWindow",
+          "methods": [],
+          "properties": [
+            "name",
+            "start_idx",
+            "end_idx",
+            "precip_sum"
+          ],
+          "exported": true,
+          "lineCount": 5
+        }
+      ],
+      "imports": [
+        {
+          "source": "argparse",
+          "specifiers": [
+            "argparse"
+          ]
+        },
+        {
+          "source": "json",
+          "specifiers": [
+            "json"
+          ]
+        },
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "sys",
+          "specifiers": [
+            "sys"
+          ]
+        },
+        {
+          "source": "dataclasses",
+          "specifiers": [
+            "dataclass",
+            "asdict"
+          ]
+        },
+        {
+          "source": "typing",
+          "specifiers": [
+            "Dict",
+            "List"
+          ]
+        },
+        {
+          "source": "numpy",
+          "specifiers": [
+            "np"
+          ]
+        },
+        {
+          "source": "pandas",
+          "specifiers": [
+            "pd"
+          ]
+        },
+        {
+          "source": "torch",
+          "specifiers": [
+            "torch"
+          ]
+        },
+        {
+          "source": "src.config",
+          "specifiers": [
+            "FINAL_FEATURE_COLS",
+            "FINAL_TARGET_COLS",
+            "MAIN_NODE_NAME",
+            "NODE_NAMES",
+            "PRECIP_PHYSICAL_MAX_MM",
+            "harmonize_weather_columns",
+            "validate_feature_schema",
+            "validate_feature_values"
+          ]
+        },
+        {
+          "source": "src.data.ingest",
+          "specifiers": [
+            "CANONICAL_DATA_PATH"
+          ]
+        },
+        {
+          "source": "src.inference",
+          "specifiers": [
+            "create_inference_graphs",
+            "load_model_and_stats"
+          ]
+        },
+        {
+          "source": "src.models.mlp_baseline",
+          "specifiers": [
+            "MLPBaseline"
+          ]
+        },
+        {
+          "source": "src.train",
+          "specifiers": [
+            "compute_stats_from_training",
+            "temporal_split"
+          ]
+        }
+      ],
+      "exports": [
+        "WeekWindow",
+        "_seed_everything",
+        "_corr",
+        "_event_metrics",
+        "_pick_week_windows",
+        "_build_test_frames",
+        "_get_per_node_sequence",
+        "_load_mlp",
+        "run_crosscheck",
+        "parse_args"
+      ],
+      "totalLines": 374,
+      "hasStructuralAnalysis": true
+    },
+    "scripts/plot_week_timeseries.py": {
+      "filePath": "scripts/plot_week_timeseries.py",
+      "contentHash": "f9f5695e9cfaec9fb3894020540da498a8ac60050be23ae0db1e7944e6846c82",
+      "functions": [
+        {
+          "name": "plot_week",
+          "params": [
+            "window"
+          ],
+          "exported": true,
+          "lineCount": 22
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "argparse",
+          "specifiers": [
+            "argparse"
+          ]
+        },
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "matplotlib",
+          "specifiers": [
+            "matplotlib"
+          ]
+        },
+        {
+          "source": "matplotlib.pyplot",
+          "specifiers": [
+            "plt"
+          ]
+        },
+        {
+          "source": "pandas",
+          "specifiers": [
+            "pd"
+          ]
+        }
+      ],
+      "exports": [
+        "plot_week"
+      ],
+      "totalLines": 59,
+      "hasStructuralAnalysis": true
+    },
+    "src/config.py": {
+      "filePath": "src/config.py",
+      "contentHash": "1598e02118667f5a15a496651d3cfb8a72015d49d8d6eb28498ea2b545c2f674",
+      "functions": [
+        {
+          "name": "harmonize_weather_columns",
+          "params": [
+            "df"
+          ],
+          "returnType": "pd.DataFrame",
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "validate_feature_schema",
+          "params": [
+            "df",
+            "feature_cols",
+            "target_cols"
+          ],
+          "returnType": "None",
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "validate_feature_values",
+          "params": [
+            "df",
+            "feature_cols"
+          ],
+          "returnType": "None",
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "get_node_dataframe",
+          "params": [],
+          "returnType": "pd.DataFrame",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "get_node_index_map",
+          "params": [
+            "node_names"
+          ],
+          "returnType": "Dict[str, int]",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "build_star_edge_index",
+          "params": [
+            "node_names"
+          ],
+          "returnType": "torch.Tensor",
+          "exported": true,
+          "lineCount": 17
+        },
+        {
+          "name": "build_star_edge_attr",
+          "params": [
+            "node_names"
+          ],
+          "returnType": "torch.Tensor",
+          "exported": true,
+          "lineCount": 26
+        },
+        {
+          "name": "get_checkpoint_node_metadata",
+          "params": [],
+          "returnType": "Dict[str, object]",
+          "exported": true,
+          "lineCount": 16
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "typing",
+          "specifiers": [
+            "Dict",
+            "List",
+            "Tuple"
+          ]
+        },
+        {
+          "source": "pandas",
+          "specifiers": [
+            "pd"
+          ]
+        },
+        {
+          "source": "torch",
+          "specifiers": [
+            "torch"
+          ]
+        }
+      ],
+      "exports": [
+        "harmonize_weather_columns",
+        "validate_feature_schema",
+        "validate_feature_values",
+        "get_node_dataframe",
+        "get_node_index_map",
+        "build_star_edge_index",
+        "build_star_edge_attr",
+        "get_checkpoint_node_metadata"
+      ],
+      "totalLines": 225,
+      "hasStructuralAnalysis": true
+    },
+    "src/data/ingest.py": {
+      "filePath": "src/data/ingest.py",
+      "contentHash": "c4e2a32350107aee9c14af7ce0dd900139e82430f90ef9d731076796258832f9",
+      "functions": [
+        {
+          "name": "get_node_definitions_df",
+          "params": [],
+          "returnType": "pd.DataFrame",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "fetch_elevation",
+          "params": [
+            "nodes_df"
+          ],
+          "returnType": "Dict[str, float]",
+          "exported": true,
+          "lineCount": 13
+        },
+        {
+          "name": "derive_land_sea_mask",
+          "params": [
+            "elevation"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 2
+        },
+        {
+          "name": "_extract_hourly_response",
+          "params": [
+            "response"
+          ],
+          "exported": true,
+          "lineCount": 21
+        },
+        {
+          "name": "_validate_grid_identity",
+          "params": [
+            "nodes_df"
+          ],
+          "returnType": "Dict[str, Dict[str, float]]",
+          "exported": true,
+          "lineCount": 49
+        },
+        {
+          "name": "_write_grid_validation_report",
+          "params": [
+            "grid_meta"
+          ],
+          "returnType": "None",
+          "exported": true,
+          "lineCount": 17
+        },
+        {
+          "name": "fetch_era5_data",
+          "params": [
+            "start_year",
+            "end_year",
+            "interval"
+          ],
+          "returnType": "pd.DataFrame",
+          "exported": true,
+          "lineCount": 102
+        },
+        {
+          "name": "get_node_metadata",
+          "params": [],
+          "returnType": "pd.DataFrame",
+          "exported": true,
+          "lineCount": 14
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "json",
+          "specifiers": [
+            "json"
+          ]
+        },
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "typing",
+          "specifiers": [
+            "Dict",
+            "List"
+          ]
+        },
+        {
+          "source": "openmeteo_requests",
+          "specifiers": [
+            "openmeteo_requests"
+          ]
+        },
+        {
+          "source": "pandas",
+          "specifiers": [
+            "pd"
+          ]
+        },
+        {
+          "source": "requests",
+          "specifiers": [
+            "requests"
+          ]
+        },
+        {
+          "source": "requests_cache",
+          "specifiers": [
+            "requests_cache"
+          ]
+        },
+        {
+          "source": "retry_requests",
+          "specifiers": [
+            "retry"
+          ]
+        },
+        {
+          "source": "src.config",
+          "specifiers": [
+            "FINAL_FEATURE_COLS",
+            "MAIN_NODE_NAME",
+            "NODE_COORDINATES",
+            "NODE_DEFINITIONS",
+            "NODE_NAMES",
+            "NODE_ROLES",
+            "OPEN_METEO_MODEL"
+          ]
+        }
+      ],
+      "exports": [
+        "get_node_definitions_df",
+        "fetch_elevation",
+        "derive_land_sea_mask",
+        "_extract_hourly_response",
+        "_validate_grid_identity",
+        "_write_grid_validation_report",
+        "fetch_era5_data",
+        "get_node_metadata"
+      ],
+      "totalLines": 271,
+      "hasStructuralAnalysis": true
+    },
+    "src/data/temporal_loader.py": {
+      "filePath": "src/data/temporal_loader.py",
+      "contentHash": "f5acc78524fd4c1d68f615e5f5f0baf3286a3edee71ac4fc47c970128cefcbad",
+      "functions": [
+        {
+          "name": "collate_temporal_graphs",
+          "params": [
+            "batch"
+          ],
+          "exported": true,
+          "lineCount": 24
+        },
+        {
+          "name": "create_temporal_dataloader",
+          "params": [
+            "df",
+            "feature_cols",
+            "seq_len",
+            "batch_size",
+            "stats",
+            "shuffle"
+          ],
+          "returnType": "DataLoader",
+          "exported": true,
+          "lineCount": 23
+        },
+        {
+          "name": "crosscheck_temporal_loader",
+          "params": [],
+          "exported": true,
+          "lineCount": 51
+        }
+      ],
+      "classes": [
+        {
+          "name": "TemporalGraphDataset",
+          "methods": [
+            "__init__",
+            "_assert_node_contract",
+            "_prepare_data",
+            "_normalize",
+            "set_precomputed_retrieval",
+            "get_all_contexts_for_valid_indices",
+            "__len__",
+            "__getitem__"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 185
+        }
+      ],
+      "imports": [
+        {
+          "source": "typing",
+          "specifiers": [
+            "List",
+            "Optional",
+            "Tuple"
+          ]
+        },
+        {
+          "source": "numpy",
+          "specifiers": [
+            "np"
+          ]
+        },
+        {
+          "source": "pandas",
+          "specifiers": [
+            "pd"
+          ]
+        },
+        {
+          "source": "torch",
+          "specifiers": [
+            "torch"
+          ]
+        },
+        {
+          "source": "torch.utils.data",
+          "specifiers": [
+            "DataLoader",
+            "Dataset"
+          ]
+        },
+        {
+          "source": "torch_geometric.data",
+          "specifiers": [
+            "Batch",
+            "Data"
+          ]
+        },
+        {
+          "source": "src.config",
+          "specifiers": [
+            "FINAL_TARGET_COLS",
+            "MAIN_NODE_NAME",
+            "NODE_NAMES",
+            "build_star_edge_attr",
+            "build_star_edge_index",
+            "get_node_index_map"
+          ]
+        }
+      ],
+      "exports": [
+        "TemporalGraphDataset",
+        "collate_temporal_graphs",
+        "create_temporal_dataloader",
+        "crosscheck_temporal_loader"
+      ],
+      "totalLines": 318,
+      "hasStructuralAnalysis": true
+    },
+    "src/evaluation/__init__.py": {
+      "filePath": "src/evaluation/__init__.py",
+      "contentHash": "aedf8d0a39773f983329b8799a52822b8a0497157de46aa1ebd7ad5f37a9ddf4",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 4,
+      "hasStructuralAnalysis": true
+    },
+    "src/evaluation/probabilistic_metrics.py": {
+      "filePath": "src/evaluation/probabilistic_metrics.py",
+      "contentHash": "13ccbeb71eb618746aa7f18565f92fccafcf0b314848619283205e10d0f76103",
+      "functions": [
+        {
+          "name": "compute_rmse",
+          "params": [
+            "predictions",
+            "observations"
+          ],
+          "returnType": "float",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "compute_mae",
+          "params": [
+            "predictions",
+            "observations"
+          ],
+          "returnType": "float",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "compute_correlation",
+          "params": [
+            "predictions",
+            "observations"
+          ],
+          "returnType": "float",
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "compute_crps",
+          "params": [
+            "ensemble_samples",
+            "observations"
+          ],
+          "returnType": "float",
+          "exported": true,
+          "lineCount": 53
+        },
+        {
+          "name": "compute_brier_score",
+          "params": [
+            "ensemble_samples",
+            "observations",
+            "threshold"
+          ],
+          "returnType": "float",
+          "exported": true,
+          "lineCount": 36
+        },
+        {
+          "name": "compute_pod",
+          "params": [
+            "ensemble_samples",
+            "observations",
+            "threshold",
+            "prob_threshold"
+          ],
+          "returnType": "float",
+          "exported": true,
+          "lineCount": 34
+        },
+        {
+          "name": "compute_far",
+          "params": [
+            "ensemble_samples",
+            "observations",
+            "threshold",
+            "prob_threshold"
+          ],
+          "returnType": "float",
+          "exported": true,
+          "lineCount": 34
+        },
+        {
+          "name": "compute_csi",
+          "params": [
+            "ensemble_samples",
+            "observations",
+            "threshold",
+            "prob_threshold"
+          ],
+          "returnType": "float",
+          "exported": true,
+          "lineCount": 37
+        },
+        {
+          "name": "compute_all_metrics",
+          "params": [
+            "ensemble_samples",
+            "observations",
+            "deterministic_predictions",
+            "heavy_rain_threshold",
+            "prob_threshold"
+          ],
+          "returnType": "Dict[str, float]",
+          "exported": true,
+          "lineCount": 36
+        },
+        {
+          "name": "compute_reliability_data",
+          "params": [
+            "ensemble_samples",
+            "observations",
+            "threshold",
+            "n_bins"
+          ],
+          "returnType": "Dict",
+          "exported": true,
+          "lineCount": 39
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "numpy",
+          "specifiers": [
+            "np"
+          ]
+        },
+        {
+          "source": "typing",
+          "specifiers": [
+            "Dict",
+            "Optional"
+          ]
+        }
+      ],
+      "exports": [
+        "compute_rmse",
+        "compute_mae",
+        "compute_correlation",
+        "compute_crps",
+        "compute_brier_score",
+        "compute_pod",
+        "compute_far",
+        "compute_csi",
+        "compute_all_metrics",
+        "compute_reliability_data"
+      ],
+      "totalLines": 345,
+      "hasStructuralAnalysis": true
+    },
+    "src/inference.py": {
+      "filePath": "src/inference.py",
+      "contentHash": "9f4936c0c7d06dca184a4b4096353c46dd523113c934b27d2615eac666b0e13a",
+      "functions": [
+        {
+          "name": "_build_edge_index_from_config",
+          "params": [
+            "config",
+            "device"
+          ],
+          "returnType": "torch.Tensor",
+          "exported": true,
+          "lineCount": 16
+        },
+        {
+          "name": "create_inference_graphs",
+          "params": [
+            "condition_sequence",
+            "config",
+            "device"
+          ],
+          "exported": true,
+          "lineCount": 31
+        },
+        {
+          "name": "load_model_and_stats",
+          "params": [
+            "checkpoint_path"
+          ],
+          "exported": true,
+          "lineCount": 115
+        },
+        {
+          "name": "run_inference_real",
+          "params": [
+            "features_norm",
+            "model_wrapper",
+            "stats",
+            "retrieval_db",
+            "num_samples",
+            "device"
+          ],
+          "exported": true,
+          "lineCount": 85
+        }
+      ],
+      "classes": [
+        {
+          "name": "InferenceModelWrapper",
+          "methods": [
+            "__init__",
+            "eval",
+            "to"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 17
+        }
+      ],
+      "imports": [
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "typing",
+          "specifiers": [
+            "Dict",
+            "List"
+          ]
+        },
+        {
+          "source": "numpy",
+          "specifiers": [
+            "np"
+          ]
+        },
+        {
+          "source": "pandas",
+          "specifiers": [
+            "pd"
+          ]
+        },
+        {
+          "source": "torch",
+          "specifiers": [
+            "torch"
+          ]
+        },
+        {
+          "source": "torch_geometric.data",
+          "specifiers": [
+            "Batch",
+            "Data"
+          ]
+        },
+        {
+          "source": "src.config",
+          "specifiers": [
+            "FINAL_FEATURE_COLS",
+            "FINAL_TARGET_COLS",
+            "MAIN_NODE_NAME",
+            "NODE_NAMES",
+            "PRECIP_PHYSICAL_MAX_MM",
+            "STAR_EDGE_COUNT",
+            "TARGET_NODE_POLICY",
+            "build_star_edge_attr",
+            "build_star_edge_index",
+            "harmonize_weather_columns",
+            "validate_feature_schema",
+            "validate_feature_values"
+          ]
+        },
+        {
+          "source": "src.models.diffusion",
+          "specifiers": [
+            "ConditionalDiffusionModel",
+            "RainForecaster"
+          ]
+        },
+        {
+          "source": "src.models.gnn",
+          "specifiers": [
+            "SpatioTemporalGNN"
+          ]
+        },
+        {
+          "source": "src.retrieval.base",
+          "specifiers": [
+            "RetrievalDatabase"
+          ]
+        }
+      ],
+      "exports": [
+        "_build_edge_index_from_config",
+        "create_inference_graphs",
+        "InferenceModelWrapper",
+        "load_model_and_stats",
+        "run_inference_real"
+      ],
+      "totalLines": 300,
+      "hasStructuralAnalysis": true
+    },
+    "src/models/diffusion.py": {
+      "filePath": "src/models/diffusion.py",
+      "contentHash": "42e1b5bfb3d5ca74f110f00ce0bd7529bd82d07003a09ecf927692030b0ce7e1",
+      "functions": [],
+      "classes": [
+        {
+          "name": "SinusoidalPositionEmbeddings",
+          "methods": [
+            "__init__",
+            "forward"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 13
+        },
+        {
+          "name": "ConditionalDiffusionModel",
+          "methods": [
+            "__init__",
+            "_encode_condition",
+            "compute_wet_logit",
+            "compute_wet_probability",
+            "forward"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 138
+        },
+        {
+          "name": "RainForecaster",
+          "methods": [
+            "__init__",
+            "weighted_noise_loss",
+            "sample",
+            "sample_fast"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 110
+        }
+      ],
+      "imports": [
+        {
+          "source": "torch",
+          "specifiers": [
+            "torch"
+          ]
+        },
+        {
+          "source": "torch.nn",
+          "specifiers": [
+            "nn"
+          ]
+        },
+        {
+          "source": "math",
+          "specifiers": [
+            "math"
+          ]
+        },
+        {
+          "source": "diffusers",
+          "specifiers": [
+            "DDPMScheduler",
+            "DDIMScheduler"
+          ]
+        },
+        {
+          "source": "src.config",
+          "specifiers": [
+            "FINAL_TARGET_COLS"
+          ]
+        }
+      ],
+      "exports": [
+        "SinusoidalPositionEmbeddings",
+        "ConditionalDiffusionModel",
+        "RainForecaster"
+      ],
+      "totalLines": 272,
+      "hasStructuralAnalysis": true
+    },
+    "src/models/gnn.py": {
+      "filePath": "src/models/gnn.py",
+      "contentHash": "c709401bde9b34579cc60ba59fafe57c5734efd466928593278b0ed2595d5ba0",
+      "functions": [],
+      "classes": [
+        {
+          "name": "TemporalAttention",
+          "methods": [
+            "__init__",
+            "forward"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 48
+        },
+        {
+          "name": "SpatialGNN",
+          "methods": [
+            "__init__",
+            "forward"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 33
+        },
+        {
+          "name": "SpatioTemporalGNN",
+          "methods": [
+            "__init__",
+            "forward"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 63
+        }
+      ],
+      "imports": [
+        {
+          "source": "torch",
+          "specifiers": [
+            "torch"
+          ]
+        },
+        {
+          "source": "torch.nn",
+          "specifiers": [
+            "nn"
+          ]
+        },
+        {
+          "source": "torch_geometric.nn",
+          "specifiers": [
+            "GATConv",
+            "global_mean_pool"
+          ]
+        }
+      ],
+      "exports": [
+        "TemporalAttention",
+        "SpatialGNN",
+        "SpatioTemporalGNN"
+      ],
+      "totalLines": 162,
+      "hasStructuralAnalysis": true
+    },
+    "src/models/mlp_baseline.py": {
+      "filePath": "src/models/mlp_baseline.py",
+      "contentHash": "6993451360364010c7fb1847904a0f41513e7ab6a73bc0869c535f3e1da2a54e",
+      "functions": [],
+      "classes": [
+        {
+          "name": "MLPBaseline",
+          "methods": [
+            "__init__",
+            "forward"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 40
+        }
+      ],
+      "imports": [
+        {
+          "source": "torch",
+          "specifiers": [
+            "torch"
+          ]
+        },
+        {
+          "source": "torch.nn",
+          "specifiers": [
+            "nn"
+          ]
+        },
+        {
+          "source": "src.config",
+          "specifiers": [
+            "FINAL_TARGET_COLS"
+          ]
+        }
+      ],
+      "exports": [
+        "MLPBaseline"
+      ],
+      "totalLines": 62,
+      "hasStructuralAnalysis": true
+    },
+    "src/retrieval/base.py": {
+      "filePath": "src/retrieval/base.py",
+      "contentHash": "e4f2ec4bad98984a460875bc3cbf41cd3797f0def9ec5a02efa61b2b4f442fd2",
+      "functions": [],
+      "classes": [
+        {
+          "name": "RetrievalDatabase",
+          "methods": [
+            "__init__",
+            "add_items",
+            "query"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 54
+        }
+      ],
+      "imports": [
+        {
+          "source": "torch",
+          "specifiers": [
+            "torch"
+          ]
+        },
+        {
+          "source": "faiss",
+          "specifiers": [
+            "faiss"
+          ]
+        },
+        {
+          "source": "numpy",
+          "specifiers": [
+            "np"
+          ]
+        }
+      ],
+      "exports": [
+        "RetrievalDatabase"
+      ],
+      "totalLines": 59,
+      "hasStructuralAnalysis": true
+    },
+    "src/train_baseline.py": {
+      "filePath": "src/train_baseline.py",
+      "contentHash": "2211912a5bec3be0daa8ce1a4450ba3588520c05da822b69d38d315576a497fb",
+      "functions": [
+        {
+          "name": "train_mlp_baseline",
+          "params": [
+            "data_path",
+            "seq_len",
+            "batch_size",
+            "epochs",
+            "hidden_dim",
+            "lr",
+            "patience",
+            "train_end",
+            "val_end"
+          ],
+          "exported": true,
+          "lineCount": 185
+        },
+        {
+          "name": "_parse_args",
+          "params": [],
+          "exported": true,
+          "lineCount": 12
+        }
+      ],
+      "classes": [
+        {
+          "name": "MLPDataset",
+          "methods": [
+            "__init__",
+            "__len__",
+            "__getitem__"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 43
+        }
+      ],
+      "imports": [
+        {
+          "source": "argparse",
+          "specifiers": [
+            "argparse"
+          ]
+        },
+        {
+          "source": "json",
+          "specifiers": [
+            "json"
+          ]
+        },
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "sys",
+          "specifiers": [
+            "sys"
+          ]
+        },
+        {
+          "source": "matplotlib",
+          "specifiers": [
+            "matplotlib"
+          ]
+        },
+        {
+          "source": "matplotlib.pyplot",
+          "specifiers": [
+            "plt"
+          ]
+        },
+        {
+          "source": "numpy",
+          "specifiers": [
+            "np"
+          ]
+        },
+        {
+          "source": "pandas",
+          "specifiers": [
+            "pd"
+          ]
+        },
+        {
+          "source": "torch",
+          "specifiers": [
+            "torch"
+          ]
+        },
+        {
+          "source": "torch.nn",
+          "specifiers": [
+            "nn"
+          ]
+        },
+        {
+          "source": "torch.utils.data",
+          "specifiers": [
+            "torch.utils.data"
+          ]
+        },
+        {
+          "source": "src.config",
+          "specifiers": [
+            "CONTEXT_POLICY",
+            "FINAL_FEATURE_COLS",
+            "FINAL_TARGET_COLS",
+            "MAIN_NODE_NAME",
+            "NODE_COORDINATES",
+            "OPEN_METEO_MODEL",
+            "PRECIP_PHYSICAL_MAX_MM",
+            "TARGET_NODE_POLICY",
+            "get_checkpoint_node_metadata",
+            "harmonize_weather_columns",
+            "validate_feature_schema",
+            "validate_feature_values"
+          ]
+        },
+        {
+          "source": "src.data.ingest",
+          "specifiers": [
+            "CANONICAL_DATA_PATH",
+            "fetch_era5_data"
+          ]
+        },
+        {
+          "source": "src.models.mlp_baseline",
+          "specifiers": [
+            "MLPBaseline"
+          ]
+        },
+        {
+          "source": "src.train",
+          "specifiers": [
+            "compute_stats_from_training",
+            "temporal_split"
+          ]
+        }
+      ],
+      "exports": [
+        "MLPDataset",
+        "train_mlp_baseline",
+        "_parse_args"
+      ],
+      "totalLines": 302,
+      "hasStructuralAnalysis": true
+    },
+    "src/train.py": {
+      "filePath": "src/train.py",
+      "contentHash": "d3b3a6e00d1b7cf89fb45aebec3a4fad04692deb616ad423c09578945b240086",
+      "functions": [
+        {
+          "name": "temporal_split",
+          "params": [
+            "df",
+            "train_end",
+            "val_end"
+          ],
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "compute_stats_from_training",
+          "params": [
+            "train_df",
+            "feature_cols",
+            "target_col",
+            "main_node_name"
+          ],
+          "returnType": "Dict[str, torch.Tensor]",
+          "exported": true,
+          "lineCount": 51
+        },
+        {
+          "name": "_build_precomputed_retrieval",
+          "params": [
+            "dataset",
+            "index",
+            "data",
+            "k",
+            "strict_past",
+            "exclude_self",
+            "query_context_indices",
+            "search_extra_factor",
+            "chunk_size"
+          ],
+          "returnType": "torch.Tensor",
+          "exported": true,
+          "lineCount": 68
+        },
+        {
+          "name": "_tensor_corrcoef",
+          "params": [
+            "a",
+            "b"
+          ],
+          "returnType": "float",
+          "exported": true,
+          "lineCount": 15
+        },
+        {
+          "name": "_extract_precip_mm_from_normalized_targets",
+          "params": [
+            "targets",
+            "precip_idx",
+            "t_mean_precip",
+            "t_std_precip"
+          ],
+          "returnType": "torch.Tensor",
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "_binary_event_metrics",
+          "params": [
+            "prob",
+            "obs",
+            "threshold"
+          ],
+          "returnType": "Dict[str, float]",
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "_calibrate_wet_probability_threshold",
+          "params": [
+            "prob",
+            "obs",
+            "candidates"
+          ],
+          "returnType": "Dict[str, float]",
+          "exported": true,
+          "lineCount": 13
+        },
+        {
+          "name": "train_pipeline",
+          "params": [
+            "data_path",
+            "seq_len",
+            "batch_size",
+            "epochs",
+            "hidden_dim",
+            "graph_dim",
+            "k_neighbors",
+            "amp",
+            "train_end",
+            "val_end",
+            "start_year",
+            "end_year",
+            "grad_clip_norm",
+            "lr_reduce_factor",
+            "lr_patience",
+            "lr_threshold",
+            "min_lr",
+            "early_stop_patience",
+            "early_stop_min_delta",
+            "rain_specialization",
+            "rain_occurrence_threshold_mm",
+            "wet_loss_weight",
+            "cond_dropout",
+            "seed",
+            "lr",
+            "num_workers"
+          ],
+          "returnType": "Tuple[float, Dict[str, object]]",
+          "exported": true,
+          "lineCount": 601
+        },
+        {
+          "name": "_parse_args",
+          "params": [],
+          "exported": true,
+          "lineCount": 33
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "argparse",
+          "specifiers": [
+            "argparse"
+          ]
+        },
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "sys",
+          "specifiers": [
+            "sys"
+          ]
+        },
+        {
+          "source": "typing",
+          "specifiers": [
+            "Dict",
+            "Tuple"
+          ]
+        },
+        {
+          "source": "matplotlib",
+          "specifiers": [
+            "matplotlib"
+          ]
+        },
+        {
+          "source": "matplotlib.pyplot",
+          "specifiers": [
+            "plt"
+          ]
+        },
+        {
+          "source": "numpy",
+          "specifiers": [
+            "np"
+          ]
+        },
+        {
+          "source": "pandas",
+          "specifiers": [
+            "pd"
+          ]
+        },
+        {
+          "source": "torch",
+          "specifiers": [
+            "torch"
+          ]
+        },
+        {
+          "source": "torch.utils.data",
+          "specifiers": [
+            "torch.utils.data"
+          ]
+        },
+        {
+          "source": "tqdm",
+          "specifiers": [
+            "tqdm"
+          ]
+        },
+        {
+          "source": "src.config",
+          "specifiers": [
+            "FINAL_FEATURE_COLS",
+            "FINAL_TARGET_COLS",
+            "MAIN_NODE_NAME",
+            "NODE_COORDINATES",
+            "NODE_NAMES",
+            "OPEN_METEO_MODEL",
+            "STAR_EDGE_COUNT",
+            "TARGET_NODE_POLICY",
+            "CONTEXT_POLICY",
+            "build_star_edge_index",
+            "get_checkpoint_node_metadata",
+            "harmonize_weather_columns",
+            "validate_feature_schema",
+            "validate_feature_values"
+          ]
+        },
+        {
+          "source": "src.data.ingest",
+          "specifiers": [
+            "CANONICAL_DATA_PATH",
+            "fetch_era5_data"
+          ]
+        },
+        {
+          "source": "src.data.temporal_loader",
+          "specifiers": [
+            "TemporalGraphDataset",
+            "collate_temporal_graphs"
+          ]
+        },
+        {
+          "source": "src.models.diffusion",
+          "specifiers": [
+            "ConditionalDiffusionModel",
+            "RainForecaster"
+          ]
+        },
+        {
+          "source": "src.models.gnn",
+          "specifiers": [
+            "SpatioTemporalGNN"
+          ]
+        },
+        {
+          "source": "src.retrieval.base",
+          "specifiers": [
+            "RetrievalDatabase"
+          ]
+        }
+      ],
+      "exports": [
+        "temporal_split",
+        "compute_stats_from_training",
+        "_build_precomputed_retrieval",
+        "_tensor_corrcoef",
+        "_extract_precip_mm_from_normalized_targets",
+        "_binary_event_metrics",
+        "_calibrate_wet_probability_threshold",
+        "train_pipeline",
+        "_parse_args"
+      ],
+      "totalLines": 911,
+      "hasStructuralAnalysis": true
+    },
+    "tests/test_checkpoint_contract.py": {
+      "filePath": "tests/test_checkpoint_contract.py",
+      "contentHash": "d1435b6da6b6a8145891cfdfa979b7fd017918dcc9b4a8a35ef75eb1aaca44e2",
+      "functions": [],
+      "classes": [
+        {
+          "name": "CheckpointContractTest",
+          "methods": [
+            "test_diffusion_checkpoint_metadata_contract"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 27
+        }
+      ],
+      "imports": [
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "unittest",
+          "specifiers": [
+            "unittest"
+          ]
+        },
+        {
+          "source": "torch",
+          "specifiers": [
+            "torch"
+          ]
+        }
+      ],
+      "exports": [
+        "CheckpointContractTest"
+      ],
+      "totalLines": 34,
+      "hasStructuralAnalysis": true
+    },
+    "tests/test_config_topology.py": {
+      "filePath": "tests/test_config_topology.py",
+      "contentHash": "223460af70a870f872e6497d2128bf65f84a5df0c2e4c28393be69630e1da1ab",
+      "functions": [],
+      "classes": [
+        {
+          "name": "ConfigTopologyTest",
+          "methods": [
+            "test_canonical_node_order_and_size",
+            "test_star_topology_edges",
+            "test_star_edge_attr_shape_and_positivity"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 19
+        },
+        {
+          "name": "CRPSNumericTest",
+          "methods": [
+            "test_crps_single_member_equals_mae",
+            "test_crps_two_member_fair_estimator"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 16
+        }
+      ],
+      "imports": [
+        {
+          "source": "unittest",
+          "specifiers": [
+            "unittest"
+          ]
+        },
+        {
+          "source": "numpy",
+          "specifiers": [
+            "np"
+          ]
+        },
+        {
+          "source": "src.config",
+          "specifiers": [
+            "MAIN_NODE_NAME",
+            "NODE_NAMES",
+            "NUM_NODES",
+            "STAR_EDGE_COUNT",
+            "STAR_EDGES",
+            "build_star_edge_attr",
+            "build_star_edge_index"
+          ]
+        },
+        {
+          "source": "src.evaluation.probabilistic_metrics",
+          "specifiers": [
+            "compute_crps",
+            "compute_mae"
+          ]
+        }
+      ],
+      "exports": [
+        "ConfigTopologyTest",
+        "CRPSNumericTest"
+      ],
+      "totalLines": 54,
+      "hasStructuralAnalysis": true
+    },
+    "tests/test_inference_smoke.py": {
+      "filePath": "tests/test_inference_smoke.py",
+      "contentHash": "14e65af3f69875dc050e13a637a0fe0bd09e2a6374b04e5db6a26bcca7daf9cb",
+      "functions": [],
+      "classes": [
+        {
+          "name": "InferenceSmokeTest",
+          "methods": [
+            "test_inference_smoke_main_node_output"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 41
+        }
+      ],
+      "imports": [
+        {
+          "source": "numpy",
+          "specifiers": [
+            "np"
+          ]
+        },
+        {
+          "source": "pandas",
+          "specifiers": [
+            "pd"
+          ]
+        },
+        {
+          "source": "unittest",
+          "specifiers": [
+            "unittest"
+          ]
+        },
+        {
+          "source": "src.inference",
+          "specifiers": [
+            "create_inference_graphs",
+            "load_model_and_stats",
+            "run_inference_real"
+          ]
+        }
+      ],
+      "exports": [
+        "InferenceSmokeTest"
+      ],
+      "totalLines": 49,
+      "hasStructuralAnalysis": true
+    },
+    "tests/test_loader_contract.py": {
+      "filePath": "tests/test_loader_contract.py",
+      "contentHash": "9d515874d250b681c2eb4a78c3b9974b313b3ce284fb2342a65d350d6d68483d",
+      "functions": [
+        {
+          "name": "_make_rows",
+          "params": [
+            "ts",
+            "node"
+          ],
+          "exported": true,
+          "lineCount": 15
+        },
+        {
+          "name": "_build_df",
+          "params": [
+            "node_order"
+          ],
+          "exported": true,
+          "lineCount": 9
+        }
+      ],
+      "classes": [
+        {
+          "name": "LoaderContractTest",
+          "methods": [
+            "test_loader_accepts_canonical_order",
+            "test_loader_rejects_wrong_order",
+            "test_loader_rejects_missing_node"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 15
+        }
+      ],
+      "imports": [
+        {
+          "source": "pandas",
+          "specifiers": [
+            "pd"
+          ]
+        },
+        {
+          "source": "unittest",
+          "specifiers": [
+            "unittest"
+          ]
+        },
+        {
+          "source": "src.config",
+          "specifiers": [
+            "FINAL_FEATURE_COLS"
+          ]
+        },
+        {
+          "source": "src.data.temporal_loader",
+          "specifiers": [
+            "TemporalGraphDataset"
+          ]
+        }
+      ],
+      "exports": [
+        "_make_rows",
+        "_build_df",
+        "LoaderContractTest"
+      ],
+      "totalLines": 51,
+      "hasStructuralAnalysis": true
+    }
+  }
+}

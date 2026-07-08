@@ -1,0 +1,456 @@
+{
+  "scriptCompleted": true,
+  "files": [
+    {
+      "path": "_archive/_doc_extract.txt",
+      "language": "txt",
+      "sizeLines": 492,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "_archive/_extract_doc.py",
+      "language": "python",
+      "sizeLines": 20,
+      "fileCategory": "code"
+    },
+    {
+      "path": "_archive/complete_pipeline.ipynb",
+      "language": "ipynb",
+      "sizeLines": 400,
+      "fileCategory": "code"
+    },
+    {
+      "path": "_archive/debug_nan.py",
+      "language": "python",
+      "sizeLines": 60,
+      "fileCategory": "code"
+    },
+    {
+      "path": "_archive/Draft Bepan (2).docx",
+      "language": "docx",
+      "sizeLines": 722,
+      "fileCategory": "code"
+    },
+    {
+      "path": "_archive/generate_plots.py",
+      "language": "python",
+      "sizeLines": 471,
+      "fileCategory": "code"
+    },
+    {
+      "path": "_archive/run_analysis.py",
+      "language": "python",
+      "sizeLines": 821,
+      "fileCategory": "code"
+    },
+    {
+      "path": "_archive/run_threshold_analysis.py",
+      "language": "python",
+      "sizeLines": 619,
+      "fileCategory": "code"
+    },
+    {
+      "path": "_archive/thesis_analysis.ipynb",
+      "language": "ipynb",
+      "sizeLines": 541,
+      "fileCategory": "code"
+    },
+    {
+      "path": ".agent/rules/respon.md",
+      "language": "markdown",
+      "sizeLines": 422,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".agent/skills/thesis-sentinel/scripts/health_check.py",
+      "language": "python",
+      "sizeLines": 91,
+      "fileCategory": "code"
+    },
+    {
+      "path": ".agent/skills/thesis-sentinel/SKILL.md",
+      "language": "markdown",
+      "sizeLines": 52,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".github/agents/independent-verification-auditor.agent.md",
+      "language": "markdown",
+      "sizeLines": 175,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".github/hooks/rtk-hook.ps1",
+      "language": "powershell",
+      "sizeLines": 77,
+      "fileCategory": "script"
+    },
+    {
+      "path": ".github/hooks/rtk-session.ps1",
+      "language": "powershell",
+      "sizeLines": 16,
+      "fileCategory": "script"
+    },
+    {
+      "path": ".github/hooks/rtk.json",
+      "language": "json",
+      "sizeLines": 19,
+      "fileCategory": "config"
+    },
+    {
+      "path": ".github/rules/respon.md",
+      "language": "markdown",
+      "sizeLines": 432,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".github/skills/thesis-sentinel/scripts/health_check.py",
+      "language": "python",
+      "sizeLines": 91,
+      "fileCategory": "code"
+    },
+    {
+      "path": ".github/skills/thesis-sentinel/SKILL.md",
+      "language": "markdown",
+      "sizeLines": 52,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".kiro/settings/lsp.json",
+      "language": "json",
+      "sizeLines": 204,
+      "fileCategory": "config"
+    },
+    {
+      "path": ".understand-anything/.understandignore",
+      "language": "unknown",
+      "sizeLines": 37,
+      "fileCategory": "code"
+    },
+    {
+      "path": ".understand-anything/fingerprints.json",
+      "language": "json",
+      "sizeLines": 2997,
+      "fileCategory": "config"
+    },
+    {
+      "path": ".understand-anything/intermediate/scan-result.json",
+      "language": "json",
+      "sizeLines": 562,
+      "fileCategory": "config"
+    },
+    {
+      "path": ".understand-anything/knowledge-graph.json",
+      "language": "json",
+      "sizeLines": 5863,
+      "fileCategory": "config"
+    },
+    {
+      "path": ".understand-anything/meta.json",
+      "language": "json",
+      "sizeLines": 5,
+      "fileCategory": "config"
+    },
+    {
+      "path": "docs/ACTIVE_5NODE_STAR_MAIN.md",
+      "language": "markdown",
+      "sizeLines": 53,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/AUDIT_FIX_PLAN.md",
+      "language": "markdown",
+      "sizeLines": 216,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/AUDIT_SESSION_CONTEXT.md",
+      "language": "markdown",
+      "sizeLines": 450,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/KNOWLEDGE.md",
+      "language": "markdown",
+      "sizeLines": 446,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/METODE_PENELITIAN_PROYEK.md",
+      "language": "markdown",
+      "sizeLines": 330,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/MIGRATION_CHECKLIST_STATUS.md",
+      "language": "markdown",
+      "sizeLines": 163,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/README.md",
+      "language": "markdown",
+      "sizeLines": 13,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "notebooks/evaluasi_model.ipynb",
+      "language": "ipynb",
+      "sizeLines": 66,
+      "fileCategory": "code"
+    },
+    {
+      "path": "private.note",
+      "language": "note",
+      "sizeLines": 164,
+      "fileCategory": "code"
+    },
+    {
+      "path": "requirements.txt",
+      "language": "txt",
+      "sizeLines": 15,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "result_test/comparison/comparison_summary.csv",
+      "language": "csv",
+      "sizeLines": 19,
+      "fileCategory": "data"
+    },
+    {
+      "path": "result_test/comparison/comparison_summary.json",
+      "language": "json",
+      "sizeLines": 225,
+      "fileCategory": "config"
+    },
+    {
+      "path": "result_test/diff_gnn/metrics.json",
+      "language": "json",
+      "sizeLines": 63,
+      "fileCategory": "config"
+    },
+    {
+      "path": "result_test/diff_only/metrics.json",
+      "language": "json",
+      "sizeLines": 63,
+      "fileCategory": "config"
+    },
+    {
+      "path": "result_test/diff_retrieval/metrics.json",
+      "language": "json",
+      "sizeLines": 63,
+      "fileCategory": "config"
+    },
+    {
+      "path": "result_test/EVALUATION_REPORT.md",
+      "language": "markdown",
+      "sizeLines": 90,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "result_test/full_model/metrics.json",
+      "language": "json",
+      "sizeLines": 63,
+      "fileCategory": "config"
+    },
+    {
+      "path": "result_test/mlp_baseline/metrics.json",
+      "language": "json",
+      "sizeLines": 63,
+      "fileCategory": "config"
+    },
+    {
+      "path": "result_test/nowcasting_hourly_week/driest_week_actual_vs_pred.csv",
+      "language": "csv",
+      "sizeLines": 163,
+      "fileCategory": "data"
+    },
+    {
+      "path": "result_test/nowcasting_hourly_week/median_week_actual_vs_pred.csv",
+      "language": "csv",
+      "sizeLines": 163,
+      "fileCategory": "data"
+    },
+    {
+      "path": "result_test/nowcasting_hourly_week/weekly_crosscheck_3var_meta.json",
+      "language": "json",
+      "sizeLines": 261,
+      "fileCategory": "config"
+    },
+    {
+      "path": "result_test/nowcasting_hourly_week/weekly_crosscheck_3var.csv",
+      "language": "csv",
+      "sizeLines": 4,
+      "fileCategory": "data"
+    },
+    {
+      "path": "result_test/nowcasting_hourly_week/wettest_week_actual_vs_pred.csv",
+      "language": "csv",
+      "sizeLines": 163,
+      "fileCategory": "data"
+    },
+    {
+      "path": "result_test/persistence/metrics.json",
+      "language": "json",
+      "sizeLines": 63,
+      "fileCategory": "config"
+    },
+    {
+      "path": "result_test/README.md",
+      "language": "markdown",
+      "sizeLines": 18,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "results/baseline_results/baseline_metrics.json",
+      "language": "json",
+      "sizeLines": 29,
+      "fileCategory": "config"
+    },
+    {
+      "path": "results/README.md",
+      "language": "markdown",
+      "sizeLines": 12,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "run_eval_final.py",
+      "language": "python",
+      "sizeLines": 628,
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/eval_rain_robust.py",
+      "language": "python",
+      "sizeLines": 373,
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/plot_week_timeseries.py",
+      "language": "python",
+      "sizeLines": 58,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/config.py",
+      "language": "python",
+      "sizeLines": 224,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/data/ingest.py",
+      "language": "python",
+      "sizeLines": 270,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/data/temporal_loader.py",
+      "language": "python",
+      "sizeLines": 317,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/evaluation/__init__.py",
+      "language": "python",
+      "sizeLines": 3,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/evaluation/probabilistic_metrics.py",
+      "language": "python",
+      "sizeLines": 344,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/inference.py",
+      "language": "python",
+      "sizeLines": 299,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/models/diffusion.py",
+      "language": "python",
+      "sizeLines": 271,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/models/gnn.py",
+      "language": "python",
+      "sizeLines": 161,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/models/mlp_baseline.py",
+      "language": "python",
+      "sizeLines": 61,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/retrieval/base.py",
+      "language": "python",
+      "sizeLines": 58,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/train_baseline.py",
+      "language": "python",
+      "sizeLines": 301,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/train.py",
+      "language": "python",
+      "sizeLines": 910,
+      "fileCategory": "code"
+    },
+    {
+      "path": "tests/test_checkpoint_contract.py",
+      "language": "python",
+      "sizeLines": 33,
+      "fileCategory": "code"
+    },
+    {
+      "path": "tests/test_config_topology.py",
+      "language": "python",
+      "sizeLines": 53,
+      "fileCategory": "code"
+    },
+    {
+      "path": "tests/test_inference_smoke.py",
+      "language": "python",
+      "sizeLines": 48,
+      "fileCategory": "code"
+    },
+    {
+      "path": "tests/test_loader_contract.py",
+      "language": "python",
+      "sizeLines": 50,
+      "fileCategory": "code"
+    }
+  ],
+  "totalFiles": 71,
+  "filteredByIgnore": 0,
+  "estimatedComplexity": "moderate",
+  "stats": {
+    "filesScanned": 71,
+    "byCategory": {
+      "docs": 17,
+      "code": 32,
+      "script": 2,
+      "config": 15,
+      "data": 5
+    },
+    "byLanguage": {
+      "txt": 2,
+      "python": 26,
+      "ipynb": 3,
+      "docx": 1,
+      "markdown": 15,
+      "powershell": 2,
+      "json": 15,
+      "unknown": 1,
+      "note": 1,
+      "csv": 5
+    }
+  }
+}

@@ -1,7 +1,7 @@
 # RENCANA PERBAIKAN ROBUST — Audit Skripsi RA-Diffusion 5-Node Star
 
 > Tujuan: menyelaraskan **kode / flow / algoritma** dengan **judul & metodologi** yang dideklarasikan
-> ("Retrieval-Augmented Diffusion Model dengan Spatio-Temporal Graph Conditioning, 5-node star, main-node-only, hourly nowcasting").
+> ("Nowcasting probabilistik presipitasi untuk mitigasi resiko pendaki di gunung gede-pangrango dengan menggunakan retrieval augemented difussion model dengan spatio temporal graph conditioning, 5-node star, main-node-only, hourly nowcasting").
 > Dokumen ini adalah rencana untuk di-review SEBELUM eksekusi. Belum ada kode yang diubah.
 
 Tanggal: 2026-05-30

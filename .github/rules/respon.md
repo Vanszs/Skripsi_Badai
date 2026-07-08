@@ -200,7 +200,7 @@ ERA5 Data → Sliding Window (seq_len=6) → Feature Normalization (z-score)
   │
   └─► ConditionalDiffusionModel
         Conditioning = time_emb + context_emb + retrieval_emb + graph_emb (additive)
-        Architecture: U-Net-like MLP (down1→down2→mid→skip→up1→out)
+        Architecture: MLP denoiser with skip connection (down1→down2→mid→skip→up1→out)
         Training scheduler: DDPMScheduler (1000 timesteps)
         Inference scheduler: DDIMScheduler (20 steps)
         30 ensemble samples → median = point prediction
