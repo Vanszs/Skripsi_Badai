@@ -30,7 +30,7 @@ jika anda membuat test file, setelah test langsung hapus saja.
 
 | Field | Nilai |
 |-------|-------|
-| **Judul Skripsi** | Nowcasting Probabilistik Cuaca Multi-Variabel untuk Mitigasi Risiko Pendakian di Gunung Gede–Pangrango Menggunakan Retrieval-Augmented Diffusion Model dengan Spatio-Temporal Graph Conditioning |
+| **Judul Skripsi** | Nowcasting probabilistik presipitasi untuk mitigasi resiko pendaki di gunung gede-pangrango dengan menggunakan retrieval augemented difussion model dengan spatio temporal graph conditioning |
 | **Mahasiswa** | Bevantyo Satria Pinandhita (NPM 22081010153) |
 | **Pembimbing** | Faisal Muttaqin, S.Kom, M.T. & Andreas Nugroho Sihananto, S.Kom., M.Kom. |
 | **Universitas** | UPN Veteran Jawa Timur — Program Studi Informatika |

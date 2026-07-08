@@ -213,4 +213,4 @@ Tahap E — RE-AUDIT (ulangi audit awal persis)
 
 ## 7. Catatan integritas
 
-Perbaikan ini membuat tiga pilar judul benar-benar berfungsi (Retrieval-Augmented = analog outcome; Graph Conditioning = edge berbobot jarak; hourly nowcasting = evaluasi per-jam). Perbaikan **tidak** menjamin dan **tidak** akan dipaksa agar model unggul di semua metrik. Hasil akhir dilaporkan apa adanya per-variabel dan per-jenis-metrik, sesuai metodologi §5.3.
+Perbaikan ini membuat tiga pilar judul benar-benar berfungsi (Retrieval-Augmented = analog outcome; Graph Conditioning = topologi bintang + fitur node, dengan `edge_attr` konstan non-informatif yang didokumentasikan secara transparan; hourly nowcasting = evaluasi per-jam). Perbaikan **tidak** menjamin dan **tidak** akan dipaksa agar model unggul di semua metrik. Hasil akhir dilaporkan apa adanya per-variabel dan per-jenis-metrik, sesuai metodologi §5.3.

@@ -174,8 +174,10 @@ Alasan: distribusi curah hujan sangat skewed dan zero-inflated; transformasi log
 
 #### 4.3 Komponen Spasial-Temporal (STGNN)
 Pada tiap timestep, node features diproses menggunakan Graph Attention Network (GAT) dengan
-**bobot edge berbasis jarak** (euclidean lat/lon antar node star, dialirkan sebagai `edge_attr`
-ke `GATConv(edge_dim=1)`). Hasil representasi per waktu kemudian diagregasi oleh temporal
+`edge_attr` konstan yang dialirkan ke `GATConv(edge_dim=1)`. Pada grid ERA5 0.25°, jarak
+lat/lon antar MAIN dan setiap node tetangga identik (0.25°), sehingga `edge_attr` bersifat
+non-informatif; spatial conditioning utama berasal dari topologi graf bintang dan perbedaan
+fitur node antar lokasi. Hasil representasi per waktu kemudian diagregasi oleh temporal
 self-attention kausal, sehingga informasi masa depan tidak bocor ke masa lalu.
 
 Secara konseptual:
@@ -264,10 +266,6 @@ Dengan demikian, model tidak hanya dinilai dari ketepatan angka tunggal, tetapi 
 ## 5. Validasi dan Evaluasi
 Validasi proyek dilakukan pada dua lapisan: validasi struktural pipeline dan evaluasi performa prediksi.
 
-##
-**Catatan protokol evaluasi.** Evaluasi model pada data test dilakukan dengan protokol one-step hourly: setiap sampel memprediksi satu jam ke depan (`t+1`) berdasarkan 6 jam observasi sebelumnya (`t-6` hingga `t-1`). Untuk mengurangi beban komputasi pada eksperimen utama, evaluasi dijalankan dengan `eval_step=11` yang memberikan cakupan diurnal seragam (coprime terhadap 24 jam) dan menghasilkan sekitar 3.200 sampel dari ~35.000 jam test. Kode mendukung evaluasi hourly penuh (`eval_step=1`) untuk angka definitif yang dapat dijalankan pada tahap akhir penelitian.
-
-
 ## 5.1 Validasi Struktural
 Validasi struktural mencakup:
 1. verifikasi node order dan kelengkapan node per timestamp;
@@ -277,10 +275,6 @@ Validasi struktural mencakup:
 5. pengujian unit otomatis (`7/7` pass).
 
 Tujuan lapisan ini adalah memastikan model yang dievaluasi benar-benar merepresentasikan desain metodologis yang dideklarasikan.
-
-##
-**Catatan protokol evaluasi.** Evaluasi model pada data test dilakukan dengan protokol one-step hourly: setiap sampel memprediksi satu jam ke depan (`t+1`) berdasarkan 6 jam observasi sebelumnya (`t-6` hingga `t-1`). Untuk mengurangi beban komputasi pada eksperimen utama, evaluasi dijalankan dengan `eval_step=11` yang memberikan cakupan diurnal seragam (coprime terhadap 24 jam) dan menghasilkan sekitar 3.200 sampel dari ~35.000 jam test. Kode mendukung evaluasi hourly penuh (`eval_step=1`) untuk angka definitif yang dapat dijalankan pada tahap akhir penelitian.
-
 
 ## 5.2 Metrik Evaluasi
 Metrik deterministik:
@@ -311,10 +305,6 @@ Interpretasi umum:
 - korelasi lebih tinggi menandakan kesesuaian pola temporal lebih baik;
 - CRPS/Brier lebih kecil lebih baik;
 - POD tinggi, FAR rendah, CSI tinggi menunjukkan deteksi event lebih seimbang.
-
-##
-**Catatan protokol evaluasi.** Evaluasi model pada data test dilakukan dengan protokol one-step hourly: setiap sampel memprediksi satu jam ke depan (`t+1`) berdasarkan 6 jam observasi sebelumnya (`t-6` hingga `t-1`). Untuk mengurangi beban komputasi pada eksperimen utama, evaluasi dijalankan dengan `eval_step=11` yang memberikan cakupan diurnal seragam (coprime terhadap 24 jam) dan menghasilkan sekitar 3.200 sampel dari ~35.000 jam test. Kode mendukung evaluasi hourly penuh (`eval_step=1`) untuk angka definitif yang dapat dijalankan pada tahap akhir penelitian.
-
 
 ## 5.3 Kriteria Keberhasilan Sistem
 Kriteria keberhasilan didefinisikan pada tiga tingkat:
