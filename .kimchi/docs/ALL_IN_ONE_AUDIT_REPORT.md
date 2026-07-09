@@ -133,15 +133,33 @@ STAR_EDGE_COUNT = len(STAR_EDGES)  # = 8
 
 ---
 
-#### 1.2.5 Evaluation Subsampling
+#### 1.2.5 Evaluation Subsampling (`eval_step=11`)
 
 **Lokasi PDF:** BAB 3 evaluasi (~[2280])
 
 **Klaim PDF:** Subsampling temporal untuk mengurangi autokorelasi.
 
-**Bukti Kode:** `run_eval_final.py` menggunakan parameter `--eval-step` (default 1, artefak evaluasi menggunakan 11).
+**Pertanyaan Umum:** Apakah `eval_step=11` berarti model memprediksi 11 jam ke depan seperti TFT?
 
-**Perbaikan:** Jelaskan `eval_step=11` dipilih untuk mengurangi autokorelasi sambil mempertahankan ukuran sampel ~3,189 per skenario. Kode juga mendukung `eval_step=1` untuk evaluasi penuh.
+**Jawaban: TIDAK.** `eval_step=11` **bukan** horizon prediksi. Model tetap memprediksi **1 jam ke depan (t+1)** dari 6 jam input terakhir.
+
+**Penjelasan:**
+- `seq_len=6`: model melihat 6 jam data historis.
+- Prediksi: selalu **t+1** = 1 jam ke depan.
+- `eval_step=11`: hanya menentukan **jarak antar titik evaluasi**.
+  - Jika data uji memiliki 35.000 jam, dengan `eval_step=11` kita evaluasi pada jam ke-6, 17, 28, 39, dst.
+  - Setiap evaluasi tetap memprediksi **1 jam ke depan** dari posisi tersebut.
+  - Tujuannya mengurangi autokorelasi antar sampel karena data cuaca per jam saling berkorelasi tinggi.
+
+**Bukti Kode:**
+```python
+# run_eval_final.py
+idxs = list(range(seq_len, len(main_df), eval_step))  # eval_step hanya mengatur jarak sampel
+# ...
+target = targets_raw[idx]  # target selalu t+1 dari idx
+```
+
+**Perbaikan:** Jelaskan dengan tegas bahwa `eval_step=11` adalah **subsampling evaluasi**, bukan horizon prediksi. Model selalu one-step t+1.
 
 ---
 
@@ -362,5 +380,5 @@ A: Log transform, weighted loss 5×/10×, retrieval, diffusion ensemble.
 **Q: Edge attributes?**  
 A: Konstanta 0.25°. Eksperimen elevasi menyebabkan divergence.
 
-**Q: Kenapa eval_step=11?**  
-A: Mengurangi autokorelasi sambil mempertahankan ~3,189 sampel per skenario.
+**Q: Kenapa eval_step=11? Apakah berarti prediksi 11 jam ke depan?**  
+A: **Tidak.** `eval_step=11` hanya mengatur jarak antar titik evaluasi. Model tetap prediksi **1 jam ke depan (t+1)** dari 6 jam input. Eval_step dipakai untuk mengurangi autokorelasi antar sampel cuaca yang berdekatan.
