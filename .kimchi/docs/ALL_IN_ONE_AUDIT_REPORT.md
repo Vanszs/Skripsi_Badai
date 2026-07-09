@@ -78,15 +78,23 @@ STAR_EDGE_COUNT = len(STAR_EDGES)  # = 8
 
 ---
 
-#### 1.2.2 Mobile Application Claim
+#### 1.2.2 Output / Deliverable: Mobile App Claim
 
 **Lokasi PDF:** BAB 1 [92], [101], [109]
 
 **Klaim PDF:** Aplikasi mobile sebagai media penyampaian informasi cuaca.
 
-**Bukti Kode:** Tidak ada direktori/file aplikasi mobile (Android, iOS, Flutter, React Native, API backend) di repo. Pipeline berakhir di `run_eval_final.py`.
+**Klarifikasi Penulis:** Output yang sebenarnya direncanakan adalah **sistem web dashboard berbasis Vue.js (frontend) dan FastAPI (backend)**, bukan aplikasi mobile. Namun, di repo saat ini belum ada implementasi Vue/FastAPI — pipeline berakhir di `run_eval_final.py`.
 
-**Perbaikan:** Hapus klaim aplikasi mobile dari rumusan masalah, tujuan, dan manfaat; atau bangun prototipe.
+**Bukti Kode:**
+- Tidak ada direktori/file aplikasi mobile (Android, iOS, Flutter, React Native).
+- Tidak ada kode Vue atau FastAPI di repo saat ini.
+- Pipeline berakhir di `run_eval_final.py` yang menghasilkan artefak evaluasi statis.
+
+**Perbaikan:**
+- Ganti klaim "aplikasi mobile" menjadi **"sistem visualisasi berbasis web dengan Vue.js dan FastAPI"** di rumusan masalah, tujuan, dan manfaat.
+- Atau, jika belum sempat dibangun, arahkan sebagai **future work** / rencana pengembangan lanjut.
+- Tambahkan subbab di BAB 2/Landasan Teori tentang arsitektur output sistem: Vue.js + FastAPI untuk menampilkan hasil prediksi probabilistik.
 
 ---
 
@@ -285,7 +293,7 @@ optimizer = torch.optim.AdamW(trainable_params, lr=lr, weight_decay=1e-4)
 
 1. Ganti "fully-connected" → "star topology" (BAB 2 [1309], BAB 3 [2023]).
 2. Perjelas abstrak: model prediksi **1 jam ke depan (t+1)** dalam kerangka nowcasting 0–6 jam.
-3. Hapus/implementasikan aplikasi mobile.
+3. Koreksi klaim aplikasi mobile menjadi **sistem web dashboard (Vue.js + FastAPI)** atau arahkan sebagai future work.
 4. Hapus/implementasikan hybrid persistence.
 
 ### Priority 2 — Important
@@ -331,8 +339,8 @@ A: Kode pakai star topology 8 edge terarah MAIN↔UP/DOWN/LEFT/RIGHT. Neighbor t
 **Q: 0–6 jam atau 1 jam?**  
 A: 0–6 jam adalah definisi WMO nowcasting. Model prediksi **1 jam ke depan (t+1)**.
 
-**Q: Aplikasi mobile di mana?**  
-A: Tidak diimplementasikan. Pipeline berakhir di `run_eval_final.py`.
+**Q: Output sistem seperti apa?**  
+A: Rencana output adalah **web dashboard berbasis Vue.js (frontend) dan FastAPI (backend)**, bukan aplikasi mobile. Namun, implementasi Vue/FastAPI belum ada di repo saat ini; pipeline masih berakhir di evaluasi statis `run_eval_final.py`.
 
 **Q: Hybrid persistence?**  
 A: Tidak diimplementasikan. Hanya naive persistence (copy t-1 ke t).
