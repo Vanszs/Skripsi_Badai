@@ -100,13 +100,24 @@ STAR_EDGE_COUNT = len(STAR_EDGES)  # = 8
 
 #### 1.2.3 Hybrid Persistence
 
-**Lokasi PDF:** BAB 3 [863]
+**Lokasi PDF:** BAB 3 — muncul sebagai label "Hybrid Persistence Post-Processing" di sekitar [863], tetapi **tidak dijelaskan detailnya di badan teks PDF**.
 
-**Klaim PDF:** Hybrid persistence dengan bobot 0.90/0.90/0.70.
+**Lokasi DOCX (untuk referensi):** [547]–[550] — di sini dijelaskan skema hybrid persistence dengan rumus dan bobot 0,90 untuk curah hujan, 0,90 untuk angin, 0,70 untuk kelembapan, yang ditentukan secara empiris dari data validasi.
 
-**Bukti Kode:** `run_eval_final.py` lines 133–144 hanya implementasi **naive persistence** (copy t-1 ke t). Tidak ada bobot hybrid.
+**Klaim:** Model menggunakan hybrid persistence post-processing yang menggabungkan prediksi model dengan observasi lag terakhir menggunakan bobot tertentu.
 
-**Perbaikan:** Hapus atau implementasikan hybrid persistence di pipeline evaluasi.
+**Bukti Kode:**
+- `run_eval_final.py` lines 133–144 hanya implementasi **naive persistence** (copy t-1 ke t):
+  ```python
+  pred = np.array([main_df.iloc[idx - 1][c] for c in TARGET_COLS], dtype=np.float32)
+  ```
+- Tidak ada bobot hybrid (0.90/0.90/0.70), tidak ada optimasi di data validasi, dan tidak ada penggabungan prediksi model dengan observasi.
+
+**Perbedaan:**
+- **Klaim draft:** Post-processing hybrid dengan bobot optimal per variabel.
+- **Kode:** Persistence sederhana tanpa bobot, tanpa mixing dengan prediksi model.
+
+**Perbaikan:** Hapus label/klaim hybrid persistence dari PDF, atau implementasikan hybrid persistence sesuai klaim di `run_eval_final.py`.
 
 ---
 
