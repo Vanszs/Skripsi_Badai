@@ -173,6 +173,73 @@ Tidak kontradiksi, tetapi memang perlu dijelaskan dengan hati-hati:
 - Artefak hasil yang dilaporkan menggunakan `eval_step=11`.
 - Ini adalah **pilihan protokol evaluasi**, bukan perubahan cara model bekerja.
 
+**Detail: Mengapa eval_step=11 Mengurangi Bias Autokorelasi?**
+
+#### Apa itu Autokorelasi?
+
+Autokorelasi adalah korelasi antara suatu nilai pada waktu t dengan nilai pada waktu t-1, t-2, dst. Pada data cuaca per jam:
+- Suhu jam 10:00 sangat mirip suhu jam 09:00.
+- Curah hujan jam 10:00 sangat mirip curah hujan jam 09:00 (jika tidak ada perubahan cuaca besar).
+- Jadi error prediksi jam 10:00 dan jam 11:00 tidak independen — mereka saling berkaitan.
+
+#### Mengapa Evaluasi Setiap Jam Memberikan Metrik Terlalu Optimis?
+
+Contoh sederhana (persistence baseline):
+
+| Jam | Hujan Aktual | Prediksi Persistence (t-1) | Error |
+|---|---:|---:|---:|
+| 10:00 | 2.0 mm | 1.9 mm | 0.1 |
+| 11:00 | 2.1 mm | 2.0 mm | 0.1 |
+| 12:00 | 2.2 mm | 2.1 mm | 0.1 |
+| 13:00 | 2.3 mm | 2.2 mm | 0.1 |
+| ... | ... | ... | ... |
+| 20:00 | 2.9 mm | 2.8 mm | 0.1 |
+
+Karena cuaca berubah perlahan, persistence selalu benar hampir semua jam. MAE-nya bisa 0.1 mm, yang terlihat sangat baik. Padahal ini bukan karena model pintar, melainkan karena data saling berkorelasi tinggi.
+
+Jika kita evaluasi setiap jam, metrik (RMSE, MAE, CRPS) akan terlalu rendah (terlalu optimis) karena sebagian besar "kemudahan" datang dari autokorelasi, bukan dari kemampuan model.
+
+#### Bagaimana eval_step=11 Membantu?
+
+Dengan eval_step=11, kita hanya evaluasi pada jam yang cukup jauh:
+
+| Jam Evaluasi | Hujan Aktual | Prediksi Persistence | Error |
+|---|---:|---:|---:|
+| 10:00 | 2.0 mm | 1.9 mm | 0.1 |
+| 21:00 | 1.5 mm | 2.9 mm | 1.4 |
+| 08:00 (besok) | 0.0 mm | 1.5 mm | 1.5 |
+| ... | ... | ... | ... |
+
+Sampel-sampel ini lebih independen karena jaraknya cukup jauh (11 jam). Errornya lebih mencerminkan kemampuan sebenarnya model dalam menangkap perubahan cuaca, bukan hanya "ikut-ikutan" autokorelasi.
+
+#### Kenapa 11, Bukan 1 atau 100?
+
+- `eval_step=1`: evaluasi penuh → metrik terlalu optimis karena autokorelasi.
+- `eval_step=11`: kompromi. Cukup jauh untuk mengurangi autokorelasi, tapi masih menghasilkan ~3.189 sampel per skenario → cukup untuk metrik yang stabil.
+- `eval_step=100`: sampel terlalu sedikit → metrik tidak stabil (varians tinggi).
+
+#### Trade-off
+
+| eval_step | Keuntungan | Kerugian |
+|---|---|---|
+| 1 | Evaluasi paling lengkap | Metrik terlalu optimis, tidak jujur |
+| 11 | Kompromi: cukup banyak sampel + lebih independen | Tidak se-lengkap evaluasi penuh |
+| 100+ | Sampel sangat independen | Sampel sedikit, metrik tidak stabil |
+
+#### Mengapa Ini Penting untuk Baseline Persistence?
+
+Persistence adalah baseline yang sangat kuat untuk data berautokorelasi tinggi. Tanpa spacing, persistence bisa tampil hampir sempurna, sehingga model baru terlihat tidak berkontribusi. Dengan spacing, kita bisa melihat apakah model benar-benar lebih baik dari persistence pada situasi yang lebih menantang.
+
+#### Analogi Sederhana
+
+Bayangkan menguji kemampuan seseorang menebak arah mobil:
+- Jika ditanya setiap 1 detik, dia bisa jawab "sama dengan 1 detik lalu" dan benar terus.
+- Jika ditanya setiap 1 menit, dia harus benar-benar paham pola perjalanan mobil.
+
+eval_step=11 seperti menanyakan setiap 1 menit, bukan setiap 1 detik.
+
+---
+
 **Operasional Real-Time: Prediksi Tiap Jam**
 
 Jika model digunakan secara operasional, prediksi dilakukan **tiap jam secara rolling**:
