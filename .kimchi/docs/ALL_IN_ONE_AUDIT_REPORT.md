@@ -159,7 +159,24 @@ idxs = list(range(seq_len, len(main_df), eval_step))  # eval_step hanya mengatur
 target = targets_raw[idx]  # target selalu t+1 dari idx
 ```
 
-**Perbaikan:** Jelaskan dengan tegas bahwa `eval_step=11` adalah **subsampling evaluasi**, bukan horizon prediksi. Model selalu one-step t+1.
+**Apakah Kontradiksi?**
+
+Tidak kontradiksi, tetapi memang perlu dijelaskan dengan hati-hati:
+
+| Fase | Mengapa pakai data per jam? | Mengapa boleh / perlu? |
+|---|---|---|
+| **Pelatihan** | Model dilatih dengan setiap timestep karena perlu belajar dari semua pola temporal, termasuk transisi cepat event cuaca. | Training loss dihitung per sampel; semua data dipakai untuk update bobot. |
+| **Evaluasi** | `eval_step=11` membuat jarak antar sampel evaluasi. | Metrik evaluasi pada data berkorelasi tinggi akan terlalu optimis jika sampel berdekatan dihitung semua. Spacing memberikan estimasi generalisasi yang lebih jujur. |
+
+**Catatan Penting:**
+- Default kode adalah `eval_step=1` (evaluasi penuh setiap jam).
+- Artefak hasil yang dilaporkan menggunakan `eval_step=11`.
+- Ini adalah **pilihan protokol evaluasi**, bukan perubahan cara model bekerja.
+
+**Jawaban untuk Sidang:**  
+> "Model dilatih dengan data per jam karena harus belajar pola transisi cuaca. Saat evaluasi, kita subsampling setiap 11 jam agar metrik tidak bias akibat autokorelasi tinggi antar jam berdekatan. Model tetap prediksi 1 jam ke depan pada setiap titik evaluasi."
+
+**Perbaikan:** Jelaskan dengan tegas bahwa `eval_step=11` adalah **subsampling evaluasi**, bukan horizon prediksi. Model selalu one-step t+1. Tambahkan justifikasi mengapa training per jam dan evaluasi dengan spacing adalah praktik yang valid.
 
 ---
 
@@ -381,4 +398,7 @@ A: Log transform, weighted loss 5×/10×, retrieval, diffusion ensemble.
 A: Konstanta 0.25°. Eksperimen elevasi menyebabkan divergence.
 
 **Q: Kenapa eval_step=11? Apakah berarti prediksi 11 jam ke depan?**  
-A: **Tidak.** `eval_step=11` hanya mengatur jarak antar titik evaluasi. Model tetap prediksi **1 jam ke depan (t+1)** dari 6 jam input. Eval_step dipakai untuk mengurangi autokorelasi antar sampel cuaca yang berdekatan.
+A: **Tidak.** `eval_step=11` hanya mengatur jarak antar titik evaluasi. Model tetap prediksi **1 jam ke depan (t+1)** dari 6 jam input. Eval_step dipakai untuk mengurangi autokorelasi antar sampel cuaca yang berdekatan, bukan mengubah horizon prediksi.
+
+**Q: Kalau evaluasi pakai eval_step=11, bukankah kontradiksi dengan pelatihan yang pakai data per jam?**  
+A: **Tidak kontradiksi.** Pelatihan memang harus pakai semua data per jam agar model belajar pola transisi cuaca. Evaluasi dengan spacing adalah praktik umum untuk mendapatkan metrik yang tidak terlalu optimis akibat autokorelasi antar jam berdekatan. Model selalu prediksi 1 jam ke depan pada setiap titik evaluasi.
