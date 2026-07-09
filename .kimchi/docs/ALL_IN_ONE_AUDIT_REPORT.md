@@ -240,6 +240,23 @@ eval_step=11 seperti menanyakan setiap 1 menit, bukan setiap 1 detik.
 
 ---
 
+**eval_step Berlaku untuk Semua Skenario, Bukan Hanya Baseline**
+
+`eval_step=11` adalah **protokol evaluasi global**, bukan setting khusus untuk persistence atau baseline. Semua 6 skenario dievaluasi dengan protokol yang sama:
+
+1. `persistence`
+2. `mlp_baseline`
+3. `diff_only`
+4. `diff_retrieval`
+5. `diff_gnn`
+6. `full_model`
+
+Semuanya diprediksi pada **titik-titik evaluasi yang sama** (setiap 11 jam). Jadi perbandingan antar skenario tetap adil.
+
+Mengapa ini penting? Karena kalau hanya baseline yang di-spacing sementara model lain dievaluasi per jam, hasilnya tidak bisa dibandingkan. Di sini, **semua skenario pakai aturan evaluasi yang identik**.
+
+---
+
 **Operasional Real-Time: Prediksi Tiap Jam**
 
 Jika model digunakan secara operasional, prediksi dilakukan **tiap jam secara rolling**:
@@ -327,6 +344,18 @@ optimizer = torch.optim.AdamW(trainable_params, lr=lr, weight_decay=1e-4)
 - Weighted noise loss 5×/10× di `src/models/diffusion.py` lines 178–185.
 - Retrieval-augmented historical analogs via `src/retrieval/base.py`.
 - Diffusion ensemble (num_ensemble=30).
+
+**Hasil/Metrik dari Evaluasi (Bukti Bahwa Upaya Belum Cukup):**
+
+Dari `result_test/EVALUATION_REPORT.md` dan `result_test/*/metrics.json` (eval_step=11, n=3.189 per skenario):
+
+| Threshold | Skenario Terbaik | POD | CSI |
+|---|---:|---:|---:|
+| 2 mm | full_model | 0.7398 | 0.2661 |
+| 5 mm | diff_retrieval | 0.0476 | 0.0455 |
+| **10 mm** | **diffusion models** | **0.0000** | **0.0000** |
+
+Pada event ekstrem (≥10 mm), seluruh model diffusion (diff_only, diff_retrieval, diff_gnn, full_model) memiliki **POD = 0.0000** dan **CSI = 0.0000**. Artinya, meskipun sudah diterapkan log transform, weighted loss, retrieval, dan ensemble, model belum mampu mendeteksi satu pun event presipitasi ekstrem pada threshold 10 mm.
 
 **Mengapa tidak bisa diatasi:** Frekuensi event ekstrem dalam data ERA5 2005–2025 tetap terbatas; tidak ada teknik yang bisa menciptakan informasi yang tidak ada di data historis.
 
