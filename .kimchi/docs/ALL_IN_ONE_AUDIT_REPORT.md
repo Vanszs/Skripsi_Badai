@@ -365,10 +365,24 @@ Pada event ekstrem (≥10 mm), seluruh model diffusion (diff_only, diff_retrieva
 
 **Keterbatasan:** Edge attributes konstan 0.25° dan non-informatif.
 
+**Bukti Kode (Hasil Nyata):**
+
+Running `build_star_edge_attr()` dari `src/config.py` menghasilkan:
+
+```python
+edge_attr values: [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25]
+unique values: [0.25]
+shape: torch.Size([8, 1])
+```
+
+Semua 8 edge terarah memiliki nilai edge attribute **sama persis = 0.25°**. Artinya, edge_attr tidak memberikan informasi tambahan untuk membedakan satu edge dengan edge lainnya.
+
 **Bukti Usaha:**
-- Eksperimen edge attribute berbasis elevasi → training divergence.
+- Eksperimen edge attribute berbasis elevasi → training divergence (tercatat di docstring `src/config.py build_star_edge_attr()`).
 - Revert ke konstanta jarak lat/lon.
 - Sinyal spasial dipreserved melalui topologi star dan fitur node yang berbeda.
+
+**Keterbatasan Bukti:** Tidak ada log/metrik training tersimpan untuk eksperimen edge attribute berbasis elevasi. Bukti upaya tersebut hanya tersedia dalam bentuk dokumentasi kode.
 
 **Mengapa tidak bisa diatasi:** Pada grid ERA5 0.25°, jarak lat/lon dari MAIN ke semua neighbor tepat 0.25°. Edge attribute berbasis elevasi merusak konvergensi.
 
