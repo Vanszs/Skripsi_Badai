@@ -173,10 +173,24 @@ Tidak kontradiksi, tetapi memang perlu dijelaskan dengan hati-hati:
 - Artefak hasil yang dilaporkan menggunakan `eval_step=11`.
 - Ini adalah **pilihan protokol evaluasi**, bukan perubahan cara model bekerja.
 
-**Jawaban untuk Sidang:**  
-> "Model dilatih dengan data per jam karena harus belajar pola transisi cuaca. Saat evaluasi, kita subsampling setiap 11 jam agar metrik tidak bias akibat autokorelasi tinggi antar jam berdekatan. Model tetap prediksi 1 jam ke depan pada setiap titik evaluasi."
+**Operasional Real-Time: Prediksi Tiap Jam**
 
-**Perbaikan:** Jelaskan dengan tegas bahwa `eval_step=11` adalah **subsampling evaluasi**, bukan horizon prediksi. Model selalu one-step t+1. Tambahkan justifikasi mengapa training per jam dan evaluasi dengan spacing adalah praktik yang valid.
+Jika model digunakan secara operasional, prediksi dilakukan **tiap jam secara rolling**:
+- Setiap jam baru, ambil data 6 jam terakhir (t-5 sampai t).
+- Prediksi jam t+1.
+- Ulangi di jam berikutnya dengan window yang bergeser.
+
+`eval_step=11` **tidak berlaku** untuk operasional — itu hanya protokol evaluasi. Contoh:
+- Jam 12:00 → input jam 06:00–11:00 → prediksi jam 13:00.
+- Jam 13:00 → input jam 07:00–12:00 → prediksi jam 14:00.
+- Dan seterusnya.
+
+**Catatan:** Untuk operasional real-time, sumber data harus diganti dari ERA5 (reanalysis, latensi 5–7 hari) ke data near real-time seperti radar, stasiun cuaca otomatis (AWS), atau satelit.
+
+**Jawaban untuk Sidang:**  
+> "Model dilatih dengan data per jam karena harus belajar pola transisi cuaca. Saat evaluasi, kita subsampling setiap 11 jam agar metrik tidak bias akibat autokorelasi tinggi antar jam berdekatan. Model tetap prediksi 1 jam ke depan pada setiap titik evaluasi. Kalau operasional, model justru dipakai tiap jam dengan rolling window 6 jam terakhir."
+
+**Perbaikan:** Jelaskan dengan tegas bahwa `eval_step=11` adalah **subsampling evaluasi**, bukan horizon prediksi. Model selalu one-step t+1. Tambahkan justifikasi mengapa training per jam dan evaluasi dengan spacing adalah praktik yang valid, serta bedakan protokol evaluasi dengan operasional rolling forecast.
 
 ---
 
@@ -402,3 +416,6 @@ A: **Tidak.** `eval_step=11` hanya mengatur jarak antar titik evaluasi. Model te
 
 **Q: Kalau evaluasi pakai eval_step=11, bukankah kontradiksi dengan pelatihan yang pakai data per jam?**  
 A: **Tidak kontradiksi.** Pelatihan memang harus pakai semua data per jam agar model belajar pola transisi cuaca. Evaluasi dengan spacing adalah praktik umum untuk mendapatkan metrik yang tidak terlalu optimis akibat autokorelasi antar jam berdekatan. Model selalu prediksi 1 jam ke depan pada setiap titik evaluasi.
+
+**Q: Kalau dipakai real-time, apakah bisa prediksi tiap jam?**  
+A: **Bisa.** Operasional real-time justru prediksi tiap jam secara rolling: setiap jam baru, model mengambil 6 jam terakhir dan memprediksi 1 jam ke depan. `eval_step=11` hanya protokol evaluasi, bukan cara operasional. Keterbatasannya adalah sumber data: ERA5 bukan real-time, jadi untuk operasional harus diganti dengan data radar/AWS/satellit near real-time.
