@@ -1,0 +1,13 @@
+{
+  "name": "skripsi-gedepangrango-monorepo",
+  "version": "1.0.0",
+  "description": "Monorepo RA-Diffusion Weather Nowcasting Gede-Pangrango (FastAPI + Vite React)",
+  "private": true,
+  "scripts": {
+    "dev:api": "python main.py",
+    "dev:web": "npm --prefix web run dev",
+    "build:web": "npm --prefix web run build",
+    "test:api": "python -c \"import main; print('Root FastAPI check OK')\"",
+    "test:eval": "python core/scripts/run_eval_final.py --help"
+  }
+}

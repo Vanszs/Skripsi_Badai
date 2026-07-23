@@ -1,0 +1,6 @@
+{
+  "name": "AeroCast Gede",
+  "description": "Atmospheric Intelligence System for Mt. Pangrango with 5-Node ST-GNN Star Topology & Retrieval Augmented Forecast",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
