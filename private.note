@@ -95,3 +95,70 @@ de, tapi konsekuensi pilihan desain (terkendali)
   - MLP (Multi-Layer Perceptron) = jaringan saraf feedforward paling dasar: beberapa lapis Linear → ReLU → Dropout. Belajar memetakan input (6 jam terakhir × 9 fitur, di-flatten) → 3 target.
   Deterministik, supervised. Baseline "ada model tapi sederhana", pembanding di atas persistence.
   
+
+==================================================================================
+KETERBATASAN PENELITIAN (WAJIB DIDOKUMENTASIKAN DI SKRIPSI) — update 2026-05-31
+==================================================================================
+
+A. KETERBATASAN DATA (ERA5) — paling fundamental, batas atas performa
+   1. Resolusi spasial kasar: ERA5 reanalysis 0.25 deg (~25-28 km/sel grid). Tiap "node" =
+      satu sel grid ~25 km, BUKAN observasi stasiun titik. Hujan konvektif/orografis di puncak
+      gunung berskala 1-5 km -> tidak tertangkap grid 25 km. Inilah sebab utama precip kalah
+      persistence (bukan bug algoritma).
+   2. Reanalysis, bukan observasi langsung: ERA5 adalah hasil asimilasi model, sudah "dihaluskan"
+      -> event ekstrem tiba-tiba (spike hujan) teredam, sinyal lemah.
+   3. Resolusi temporal: hourly. Cukup untuk nowcasting 1 jam, tapi konveksi sub-jam tak terlihat.
+   4. Node DOWN (-7.00,107.00) jatuh di laut/maritim (elevasi grid 0 m) vs MAIN puncak 1529 m.
+      Rezim iklim beda total; dipakai sebagai "konteks spasial gunung" -> lemah secara fisik
+      ("accepted maritime context" di grid validation). 4 tetangga elevasinya sangat beragam
+      (162/0/823/288 m) -> konteks spasial tidak homogen.
+   5. precipitation autocorrelation lag-1 sangat tinggi (~0.67) + zero-inflated (banyak 0) ->
+      persistence sudah sangat kuat sebagai baseline 1 jam, sulit dikalahkan.
+
+B. KETERBATASAN CAKUPAN SPASIAL
+   - Hanya 5 titik grid tetap (1 MAIN + 4 tetangga), topologi star. Bukan peta kontinu/area.
+   - Prediksi & evaluasi hanya untuk node MAIN (main_node_only). Generalisasi ke titik lain
+     di kawasan Gede-Pangrango tidak diuji.
+
+C. KETERBATASAN METODOLOGI / EVALUASI
+   1. Single seed (seed=1), single training run. BELUM ada multi-seed / cross-validation antar
+      tahun / confidence interval. Klaim "robust" statistik perlu beberapa seed.
+   2. Artefak evaluasi utama pakai eval_step=11 (subsampel ~3189 dari ~35074 jam test) demi
+      kecepatan. TIDAK bias (11 coprime 24 -> cakupan diurnal merata), tapi untuk angka FINAL
+      skripsi sebaiknya jalankan --eval-step 1 (hourly penuh).
+   3. Hyperparameter (5x/10x weighted-loss, cond_dropout 0.15, wet_loss_weight 0.7) ditetapkan
+      heuristik TANPA ablation/sensitivity study formal.
+   4. Tests otomatis 10/10 mayoritas structural/contract (+CRPS numeric); belum ada test yang
+      menjamin kualitas prediksi (regresi akurasi bisa lolos test).
+   5. edge_attr graf konstan (0.25) karena grid equidistant -> non-informatif; sinyal spasial
+      murni dari topologi + fitur node. Dicoba ganti selisih-elevasi -> training divergen ->
+      direvert. Bukan kecurangan, keterbatasan terdokumentasi.
+
+D. KETERBATASAN ARSITEKTUR / PENAMAAN
+   - Denoiser diffusion disebut "U-Net-like" di komentar, tapi sebenarnya MLP + 1 skip
+     connection (bukan U-Net konvolusional multi-skala). Untuk target vektor 3-variabel ini
+     pilihan wajar, tapi penyebutan "U-Net" sebaiknya dikoreksi jadi "MLP denoiser w/ skip
+     (U-Net-inspired)" di laporan agar tidak menyesatkan.
+
+E. KOREKSI CATATAN LAMA (PENTING)
+   - Catatan lama di file ini menyebut penyebab grad-spike = "weighted_noise_loss 5x/10x".
+     Itu TIDAK akurat. Audit swarm + verifikasi numerik membuktikan akar sebenarnya = BUG
+     normalisasi: elevasi MAIN konstan -> std=0 -> normalisasi (x-mean)/(std+1e-5) bikin
+     fitur elevasi node tetangga jadi ~1.5e8 -> gradien meledak (max 8.9e8) -> GNN lumpuh.
+     SUDAH DIFIX (fallback all-node stats untuk fitur konstan). Setelah fix: mean_grad_norm
+     ~1.72, max ~9.4 (sehat), best_val 0.587, GNN benar2 berkontribusi (ablation
+     diff_only->diff_gnn precip 0.87->0.78). weighted-loss tetap memberi gradien agak besar
+     pada event langka tapi WAJAR & ditahan grad-clip.
+
+F. HASIL JUJUR (apa adanya, bukan dipaksa)
+   - Model MENANG vs persistence & MLP di wind_speed & relative_humidity (RMSE & korelasi).
+   - Model masih KALAH persistence di precipitation RMSE (0.79 vs 0.685) -> konsekuensi
+     keterbatasan A (ERA5 0.25 deg utk hujan titik gunung), bukan cacat implementasi.
+   - Ini temuan riset yang SAH: "RA-Diffusion+STGNN unggul utk variabel kontinu autokorelasi
+     tinggi; untuk hujan lokal, input ERA5 0.25 deg menjadi pembatas utama."
+
+G. ARAH PERBAIKAN (future work)
+   - Ganti/augmentasi sumber hujan dgn resolusi lebih halus (radar BMKG, satelit GSMaP/IMERG).
+   - Multi-seed + interval kepercayaan; ablation hyperparameter formal.
+   - Edge feature informatif (mis. elevasi/jarak nyata) dgn skema normalisasi stabil.
+   - Loss event-aware khusus hujan (klasifikasi + regresi intensitas) yang dioptimasi langsung.
