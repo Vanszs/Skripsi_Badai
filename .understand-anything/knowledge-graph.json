@@ -3,38 +3,20 @@
   "project": {
     "name": "Skripsi_Bevan",
     "languages": [
-      "csv",
-      "docx",
-      "ipynb",
-      "json",
-      "markdown",
-      "note",
-      "powershell",
-      "python",
-      "txt",
-      "unknown"
+      "Python",
+      "Markdown",
+      "JSON"
     ],
     "frameworks": [
-      "Cartopy",
-      "Diffusers",
-      "FAISS",
-      "Matplotlib",
-      "NumPy",
-      "Open-Meteo",
       "PyTorch",
       "PyTorch Geometric",
-      "Transformers",
-      "pandas",
-      "requests-cache",
-      "retry-requests",
-      "scikit-learn",
-      "tqdm",
-      "xarray"
+      "Diffusers",
+      "FAISS",
+      "OpenMeteo"
     ],
-    "description": "Skripsi_Bevan is a Python research project that combines graph neural networks, diffusion models, and FAISS-based retrieval for weather nowcasting. It is built on PyTorch, PyTorch Geometric, and Open-Meteo data pipelines, with evaluation scripts and baseline MLP comparisons.",
-    "analyzedAt": "2026-07-08T11:43:43.061013+00:00",
-    "gitCommitHash": "ebfc7842a03f50be9a949bb7c0e398395d459a07",
-    "lastUpdated": "\"__now__\""
+    "description": "Retrieval-Augmented Diffusion Model dengan Spatio-Temporal Graph Conditioning untuk Nowcasting Presipitasi di Gunung Gede-Pangrango",
+    "analyzedAt": "2026-07-23T13:02:12.119249+00:00",
+    "gitCommitHash": "ebfc7842a03f50be9a949bb7c0e398395d459a07"
   },
   "nodes": [
     {
@@ -65,82 +47,6 @@
       "complexity": "complex"
     },
     {
-      "id": "file:src/inference.py",
-      "type": "file",
-      "name": "inference.py",
-      "filePath": "src/inference.py",
-      "summary": "Core inference module that loads trained GNN and diffusion models and runs real-time precipitation nowcasting.",
-      "tags": [
-        "inference",
-        "precipitation-nowcasting",
-        "gnn",
-        "diffusion",
-        "model-loading",
-        "tested"
-      ],
-      "complexity": "complex"
-    },
-    {
-      "id": "file:src/models/diffusion.py",
-      "type": "file",
-      "name": "diffusion.py",
-      "filePath": "src/models/diffusion.py",
-      "summary": "Conditional diffusion model and rainfall forecaster using an MLP denoiser with skip connection (previously mislabeled U-Net-like).",
-      "tags": [
-        "diffusion-model",
-        "generative-model",
-        "ddpm",
-        "ddim",
-        "precipitation",
-        "mlp-denoiser"
-      ],
-      "complexity": "complex"
-    },
-    {
-      "id": "file:src/models/gnn.py",
-      "type": "file",
-      "name": "gnn.py",
-      "filePath": "src/models/gnn.py",
-      "summary": "Spatio-temporal graph neural network combining GAT-based spatial layers and temporal self-attention.",
-      "tags": [
-        "gnn",
-        "graph-neural-network",
-        "spatiotemporal",
-        "gat",
-        "attention"
-      ],
-      "complexity": "moderate"
-    },
-    {
-      "id": "file:src/retrieval/base.py",
-      "type": "file",
-      "name": "base.py",
-      "filePath": "src/retrieval/base.py",
-      "summary": "FAISS-backed retrieval database for storing and querying historical weather context vectors.",
-      "tags": [
-        "retrieval",
-        "faiss",
-        "nearest-neighbor",
-        "database"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "file:src/train.py",
-      "type": "file",
-      "name": "train.py",
-      "filePath": "src/train.py",
-      "summary": "End-to-end training pipeline for the GNN+diffusion precipitation nowcasting model, including data loading, retrieval precomputation, optimization, and checkpointing.",
-      "tags": [
-        "training",
-        "pipeline",
-        "entry-point",
-        "optimization",
-        "checkpointing"
-      ],
-      "complexity": "complex"
-    },
-    {
       "id": "file:tests/test_inference_smoke.py",
       "type": "file",
       "name": "test_inference_smoke.py",
@@ -153,374 +59,6 @@
         "validation"
       ],
       "complexity": "simple"
-    },
-    {
-      "id": "function:src/inference.py:_build_edge_index_from_config",
-      "type": "function",
-      "name": "_build_edge_index_from_config",
-      "filePath": "src/inference.py",
-      "summary": "Builds a star-shaped PyTorch edge index from node configuration.",
-      "tags": [
-        "graph-construction",
-        "edge-index",
-        "config-driven"
-      ],
-      "complexity": "simple",
-      "lineRange": [
-        28,
-        43
-      ]
-    },
-    {
-      "id": "function:src/inference.py:create_inference_graphs",
-      "type": "function",
-      "name": "create_inference_graphs",
-      "filePath": "src/inference.py",
-      "summary": "Converts a normalized condition sequence into a batched PyTorch Geometric graph sequence.",
-      "tags": [
-        "graph-construction",
-        "batching",
-        "inference"
-      ],
-      "complexity": "simple",
-      "lineRange": [
-        46,
-        76
-      ]
-    },
-    {
-      "id": "class:src/inference.py:InferenceModelWrapper",
-      "type": "class",
-      "name": "InferenceModelWrapper",
-      "filePath": "src/inference.py",
-      "summary": "Thin wrapper that exposes eval and device-move helpers for the coupled ST-GNN and forecaster models.",
-      "tags": [
-        "model-wrapper",
-        "inference",
-        "helper"
-      ],
-      "complexity": "simple",
-      "lineRange": [
-        79,
-        95
-      ]
-    },
-    {
-      "id": "function:src/inference.py:load_model_and_stats",
-      "type": "function",
-      "name": "load_model_and_stats",
-      "filePath": "src/inference.py",
-      "summary": "Loads checkpoint weights, instantiates model components, and builds the retrieval database from training data.",
-      "tags": [
-        "model-loading",
-        "checkpoint",
-        "retrieval",
-        "data-preparation"
-      ],
-      "complexity": "complex",
-      "lineRange": [
-        98,
-        212
-      ]
-    },
-    {
-      "id": "function:src/inference.py:run_inference_real",
-      "type": "function",
-      "name": "run_inference_real",
-      "filePath": "src/inference.py",
-      "summary": "Runs the full inference loop: graph encoding, retrieval query, diffusion sampling, and denormalization.",
-      "tags": [
-        "inference",
-        "sampling",
-        "denormalization",
-        "retrieval"
-      ],
-      "complexity": "complex",
-      "lineRange": [
-        215,
-        299
-      ]
-    },
-    {
-      "id": "class:src/models/diffusion.py:SinusoidalPositionEmbeddings",
-      "type": "class",
-      "name": "SinusoidalPositionEmbeddings",
-      "filePath": "src/models/diffusion.py",
-      "summary": "Sinusoidal time-step embedding layer used by the noise model.",
-      "tags": [
-        "time-embedding",
-        "diffusion",
-        "positional-encoding"
-      ],
-      "complexity": "simple",
-      "lineRange": [
-        8,
-        20
-      ]
-    },
-    {
-      "id": "class:src/models/diffusion.py:ConditionalDiffusionModel",
-      "type": "class",
-      "name": "ConditionalDiffusionModel",
-      "filePath": "src/models/diffusion.py",
-      "summary": "MLP denoiser with residual skip connection plus wet-event auxiliary head; not a U-Net.",
-      "tags": [
-        "diffusion-model",
-        "mlp-denoiser",
-        "skip-connection",
-        "noise-prediction",
-        "classification"
-      ],
-      "complexity": "complex",
-      "lineRange": [
-        22,
-        159
-      ]
-    },
-    {
-      "id": "class:src/models/diffusion.py:RainForecaster",
-      "type": "class",
-      "name": "RainForecaster",
-      "filePath": "src/models/diffusion.py",
-      "summary": "High-level forecaster wrapping the diffusion model with DDPM/DDIM sampling and a wet-probability head.",
-      "tags": [
-        "forecaster",
-        "sampling",
-        "ddpm",
-        "ddim",
-        "precipitation"
-      ],
-      "complexity": "complex",
-      "lineRange": [
-        161,
-        270
-      ]
-    },
-    {
-      "id": "class:src/models/gnn.py:TemporalAttention",
-      "type": "class",
-      "name": "TemporalAttention",
-      "filePath": "src/models/gnn.py",
-      "summary": "Causal temporal self-attention block for sequence-level node features.",
-      "tags": [
-        "attention",
-        "temporal",
-        "transformer",
-        "causal-mask"
-      ],
-      "complexity": "moderate",
-      "lineRange": [
-        14,
-        61
-      ]
-    },
-    {
-      "id": "class:src/models/gnn.py:SpatialGNN",
-      "type": "class",
-      "name": "SpatialGNN",
-      "filePath": "src/models/gnn.py",
-      "summary": "Two-layer GAT convolutional block for spatial message passing across the station graph.",
-      "tags": [
-        "gnn",
-        "gat",
-        "spatial",
-        "message-passing"
-      ],
-      "complexity": "simple",
-      "lineRange": [
-        64,
-        96
-      ]
-    },
-    {
-      "id": "class:src/models/gnn.py:SpatioTemporalGNN",
-      "type": "class",
-      "name": "SpatioTemporalGNN",
-      "filePath": "src/models/gnn.py",
-      "summary": "Combines spatial GNN layers with temporal attention to produce graph embeddings for diffusion conditioning.",
-      "tags": [
-        "spatiotemporal",
-        "gnn",
-        "embedding",
-        "model"
-      ],
-      "complexity": "moderate",
-      "lineRange": [
-        99,
-        161
-      ]
-    },
-    {
-      "id": "class:src/retrieval/base.py:RetrievalDatabase",
-      "type": "class",
-      "name": "RetrievalDatabase",
-      "filePath": "src/retrieval/base.py",
-      "summary": "FAISS index wrapper that supports adding historical vectors and querying nearest neighbors.",
-      "tags": [
-        "retrieval",
-        "faiss",
-        "nearest-neighbor",
-        "vector-search"
-      ],
-      "complexity": "simple",
-      "lineRange": [
-        5,
-        58
-      ]
-    },
-    {
-      "id": "function:src/train.py:temporal_split",
-      "type": "function",
-      "name": "temporal_split",
-      "filePath": "src/train.py",
-      "summary": "Splits a DataFrame into train/validation/test sets by date boundaries.",
-      "tags": [
-        "data-splitting",
-        "temporal",
-        "preprocessing"
-      ],
-      "complexity": "simple",
-      "lineRange": [
-        48,
-        59
-      ]
-    },
-    {
-      "id": "function:src/train.py:compute_stats_from_training",
-      "type": "function",
-      "name": "compute_stats_from_training",
-      "filePath": "src/train.py",
-      "summary": "Computes condition and target normalization statistics from the training split.",
-      "tags": [
-        "statistics",
-        "normalization",
-        "feature-engineering"
-      ],
-      "complexity": "moderate",
-      "lineRange": [
-        62,
-        112
-      ]
-    },
-    {
-      "id": "function:src/train.py:_build_precomputed_retrieval",
-      "type": "function",
-      "name": "_build_precomputed_retrieval",
-      "filePath": "src/train.py",
-      "summary": "Precomputes nearest-neighbor retrieval contexts for training and validation indices.",
-      "tags": [
-        "retrieval",
-        "precomputation",
-        "nearest-neighbor"
-      ],
-      "complexity": "moderate",
-      "lineRange": [
-        115,
-        182
-      ]
-    },
-    {
-      "id": "function:src/train.py:_tensor_corrcoef",
-      "type": "function",
-      "name": "_tensor_corrcoef",
-      "filePath": "src/train.py",
-      "summary": "Computes Pearson correlation coefficients between two tensors on CPU.",
-      "tags": [
-        "metric",
-        "correlation",
-        "evaluation"
-      ],
-      "complexity": "simple",
-      "lineRange": [
-        185,
-        199
-      ]
-    },
-    {
-      "id": "function:src/train.py:_extract_precip_mm_from_normalized_targets",
-      "type": "function",
-      "name": "_extract_precip_mm_from_normalized_targets",
-      "filePath": "src/train.py",
-      "summary": "Converts normalized target values back to precipitation millimeters.",
-      "tags": [
-        "denormalization",
-        "precipitation",
-        "preprocessing"
-      ],
-      "complexity": "simple",
-      "lineRange": [
-        202,
-        213
-      ]
-    },
-    {
-      "id": "function:src/train.py:_binary_event_metrics",
-      "type": "function",
-      "name": "_binary_event_metrics",
-      "filePath": "src/train.py",
-      "summary": "Computes binary contingency counts for a given wet/dry probability threshold.",
-      "tags": [
-        "metrics",
-        "classification",
-        "contingency"
-      ],
-      "complexity": "simple",
-      "lineRange": [
-        216,
-        225
-      ]
-    },
-    {
-      "id": "function:src/train.py:_calibrate_wet_probability_threshold",
-      "type": "function",
-      "name": "_calibrate_wet_probability_threshold",
-      "filePath": "src/train.py",
-      "summary": "Selects the wet-event probability threshold that maximizes a simple skill score.",
-      "tags": [
-        "calibration",
-        "threshold",
-        "classification"
-      ],
-      "complexity": "simple",
-      "lineRange": [
-        228,
-        240
-      ]
-    },
-    {
-      "id": "function:src/train.py:train_pipeline",
-      "type": "function",
-      "name": "train_pipeline",
-      "filePath": "src/train.py",
-      "summary": "Full training loop: data ingestion, model creation, retrieval precomputation, optimization, validation, and checkpoint saving.",
-      "tags": [
-        "training",
-        "pipeline",
-        "entry-point",
-        "optimization"
-      ],
-      "complexity": "complex",
-      "lineRange": [
-        243,
-        843
-      ]
-    },
-    {
-      "id": "function:src/train.py:_parse_args",
-      "type": "function",
-      "name": "_parse_args",
-      "filePath": "src/train.py",
-      "summary": "Defines CLI argument parser for the training script.",
-      "tags": [
-        "cli",
-        "argument-parsing",
-        "entry-point"
-      ],
-      "complexity": "simple",
-      "lineRange": [
-        846,
-        878
-      ]
     },
     {
       "id": "class:tests/test_inference_smoke.py:InferenceSmokeTest",
@@ -543,42 +81,45 @@
     {
       "id": "file:run_eval_final.py",
       "type": "file",
-      "name": "run_eval_final.py",
+      "name": "Run Evaluasi Final 6 Skenario",
       "filePath": "run_eval_final.py",
-      "summary": "Final evaluation entry point that benchmarks persistence, MLP baseline, and diffusion-GNN scenarios with probabilistic metrics and visualizations.",
+      "summary": "Script utama evaluasi 6 skenario (persistence, MLP, diff_only, diff_retrieval, diff_gnn, full_model) pada main-node test split. Menulis metrics.json per skenario, comparison_summary.csv/json, EVALUATION_REPORT.md, dan 6 plot ke result_test/.",
       "tags": [
-        "entry-point",
-        "evaluation",
-        "visualization",
-        "benchmarking"
+        "eval",
+        "ablation",
+        "diffusion",
+        "retrieval",
+        "gnn"
       ],
       "complexity": "complex"
     },
     {
       "id": "file:scripts/eval_rain_robust.py",
       "type": "file",
-      "name": "eval_rain_robust.py",
+      "name": "Crosscheck Mingguan Presipitasi",
       "filePath": "scripts/eval_rain_robust.py",
-      "summary": "Robustness evaluation script that cross-checks diffusion and MLP forecasts across selected rainy week windows.",
+      "summary": "Crosscheck mingguan (1-step hourly + actual update) untuk 3 variabel pada window driest/median/wettest week. Bandingkan RA-Diffusion vs persistence vs MLP. Deterministik (fixed seed), tulis CSV + JSON metadata.",
       "tags": [
-        "evaluation",
-        "robustness",
-        "cross-check",
-        "script"
+        "crosscheck",
+        "weekly",
+        "presipitasi",
+        "one-step",
+        "deterministik"
       ],
       "complexity": "complex"
     },
     {
       "id": "file:src/config.py",
       "type": "file",
-      "name": "config.py",
+      "name": "Kontrak Konfigurasi 5-Node",
       "filePath": "src/config.py",
-      "summary": "Central configuration module defining node topology, feature validation, and star-graph edge construction helpers.",
+      "summary": "Kontrak tunggal sistem: definisi 5 node star (MAIN/UP/DOWN/LEFT/RIGHT), kolom fitur/target, edge index/attr, metadata checkpoint, helper validasi schema.",
       "tags": [
-        "configuration",
-        "validation",
-        "graph-topology",
-        "utility",
+        "kontrak",
+        "star-graph",
+        "5-node",
+        "main-node",
+        "edge-index",
         "tested"
       ],
       "complexity": "moderate"
@@ -588,15 +129,13 @@
       "type": "function",
       "name": "load_test_data",
       "filePath": "run_eval_final.py",
-      "lineRange": [
-        60,
-        99
-      ],
-      "summary": "Loads or downloads test data, normalizes columns, validates schema, and splits out per-node sequences.",
+      "summary": "Muat dataset parquet, validasi schema, split temporal, kembalikan main_df (MAIN node saja), per_node_data dict untuk semua node, feature_cols dari checkpoint, dan stats training.",
       "tags": [
         "data-loading",
-        "validation",
-        "preprocessing"
+        "temporal-split",
+        "schema-validation",
+        "checkpoint",
+        "main-node"
       ],
       "complexity": "moderate"
     },
@@ -605,15 +144,13 @@
       "type": "function",
       "name": "get_per_node_sequence",
       "filePath": "run_eval_final.py",
-      "lineRange": [
-        102,
-        119
-      ],
-      "summary": "Builds a sliding-window tensor for every node given normalized features and training statistics.",
+      "summary": "Bangun sequence tensor [seq_len, num_nodes, feature_dim] untuk semua node pada window idx, dengan normalisasi z-score. Dipakai untuk graph conditioning pada saat inferensi.",
       "tags": [
-        "sequence-building",
-        "tensorization",
-        "preprocessing"
+        "sequence-builder",
+        "graph-input",
+        "normalisasi",
+        "per-node",
+        "tensor"
       ],
       "complexity": "moderate"
     },
@@ -622,15 +159,13 @@
       "type": "function",
       "name": "_eval_indices",
       "filePath": "run_eval_final.py",
-      "lineRange": [
-        122,
-        130
-      ],
-      "summary": "Selects evaluation sample indices respecting sequence length and optional maximum sample cap.",
+      "summary": "Generator tunggal indeks evaluasi (start dari seq_len, step = eval_step) untuk menjamin alignment antar semua skenario.",
       "tags": [
-        "sampling",
-        "evaluation",
-        "utility"
+        "eval-index",
+        "alignment",
+        "subsampling",
+        "helper",
+        "eval-step"
       ],
       "complexity": "simple"
     },
@@ -639,15 +174,13 @@
       "type": "function",
       "name": "run_persistence",
       "filePath": "run_eval_final.py",
-      "lineRange": [
-        133,
-        144
-      ],
-      "summary": "Runs a naive persistence baseline that repeats the last observed value as the forecast.",
+      "summary": "Skenario persistence: prediksi = observasi pada indeks-1. Ensemble size 1 (CRPS turun ke MAE).",
       "tags": [
-        "baseline",
         "persistence",
-        "evaluation"
+        "baseline",
+        "ensemble",
+        "deterministik",
+        "lower-bound"
       ],
       "complexity": "simple"
     },
@@ -656,16 +189,13 @@
       "type": "function",
       "name": "run_mlp_baseline",
       "filePath": "run_eval_final.py",
-      "lineRange": [
-        147,
-        183
-      ],
-      "summary": "Loads a trained MLP baseline and generates deterministic forecasts over the evaluation window.",
+      "summary": "Muat checkpoint MLP, prediksi deterministik pada indeks eval, denormalisasi dengan inverse log1p untuk presipitasi, ensemble size 1.",
       "tags": [
-        "baseline",
-        "inference",
-        "mlp",
-        "evaluation"
+        "mlp-baseline",
+        "checkpoint",
+        "deterministik",
+        "denormalisasi",
+        "ensemble"
       ],
       "complexity": "moderate"
     },
@@ -674,16 +204,13 @@
       "type": "function",
       "name": "run_diffusion_scenario",
       "filePath": "run_eval_final.py",
-      "lineRange": [
-        186,
-        283
-      ],
-      "summary": "Runs the diffusion-GNN nowcasting scenario with optional retrieval and GNN conditioning, producing ensemble forecasts.",
+      "summary": "Skenario diffusion dengan flag use_retrieval dan use_gnn untuk ablation. Sample_fast N kali, denormalisasi, dan opsional rain-gate post-loop dengan anti-degenerate guard.",
       "tags": [
         "diffusion",
-        "gnn",
-        "inference",
-        "ensemble"
+        "ablation",
+        "rain-gate",
+        "ensemble",
+        "anti-degenerate"
       ],
       "complexity": "complex"
     },
@@ -692,15 +219,13 @@
       "type": "function",
       "name": "compute_scenario_metrics",
       "filePath": "run_eval_final.py",
-      "lineRange": [
-        286,
-        305
-      ],
-      "summary": "Computes deterministic and probabilistic verification metrics for a forecast scenario.",
+      "summary": "Hitung RMSE/MAE/Corr/CRPS untuk semua variabel, plus Brier/POD/FAR/CSI presipitasi pada threshold 2/5/10 mm. Dict per-variabel.",
       "tags": [
         "metrics",
-        "verification",
-        "evaluation"
+        "crps",
+        "brier",
+        "csi",
+        "threshold"
       ],
       "complexity": "moderate"
     },
@@ -709,15 +234,13 @@
       "type": "function",
       "name": "plot_bar_chart",
       "filePath": "run_eval_final.py",
-      "lineRange": [
-        308,
-        324
-      ],
-      "summary": "Renders a grouped bar chart comparing scenario metrics across output variables.",
+      "summary": "Plot 3x3 bar chart RMSE/MAE/Corr untuk tiap variabel, bandingkan semua skenario. Simpan ke plots/bar_chart_metrics.png.",
       "tags": [
-        "visualization",
-        "plotting",
-        "metrics"
+        "plot",
+        "bar-chart",
+        "visualisasi",
+        "ablation",
+        "matplotlib"
       ],
       "complexity": "simple"
     },
@@ -726,15 +249,13 @@
       "type": "function",
       "name": "plot_scatter",
       "filePath": "run_eval_final.py",
-      "lineRange": [
-        327,
-        344
-      ],
-      "summary": "Plots predicted versus actual scatter plots with marginal uncertainty shading.",
+      "summary": "Scatter actual vs prediksi full_model, diwarnai oleh ensemble std sebagai uncertainty. Simpan ke plots/scatter_actual_vs_pred.png.",
       "tags": [
-        "visualization",
-        "plotting",
-        "evaluation"
+        "plot",
+        "scatter",
+        "uncertainty",
+        "visualisasi",
+        "matplotlib"
       ],
       "complexity": "simple"
     },
@@ -743,15 +264,13 @@
       "type": "function",
       "name": "plot_time_series",
       "filePath": "run_eval_final.py",
-      "lineRange": [
-        347,
-        368
-      ],
-      "summary": "Draws time-series plots with median predictions and percentile envelopes.",
+      "summary": "Plot timeseries actual vs median pred + P10-P90 band untuk full_model pada 720 timestep pertama.",
       "tags": [
-        "visualization",
-        "plotting",
-        "time-series"
+        "plot",
+        "time-series",
+        "ensemble-band",
+        "visualisasi",
+        "matplotlib"
       ],
       "complexity": "simple"
     },
@@ -760,32 +279,28 @@
       "type": "function",
       "name": "plot_reliability",
       "filePath": "run_eval_final.py",
-      "lineRange": [
-        371,
-        397
-      ],
-      "summary": "Generates reliability diagrams comparing forecast probabilities against observed frequencies.",
+      "summary": "Reliability diagram presipitasi > 2mm dari full_model (10 bin). Garis perfect = diagonal.",
       "tags": [
-        "visualization",
+        "plot",
         "reliability",
-        "probabilistic"
+        "kalibrasi",
+        "presipitasi",
+        "matplotlib"
       ],
-      "complexity": "moderate"
+      "complexity": "simple"
     },
     {
       "id": "function:run_eval_final.py:plot_crps_comparison",
       "type": "function",
       "name": "plot_crps_comparison",
       "filePath": "run_eval_final.py",
-      "lineRange": [
-        400,
-        413
-      ],
-      "summary": "Creates horizontal bar charts comparing CRPS values across scenarios.",
+      "summary": "Bar horizontal CRPS untuk tiap skenario pada 3 variabel.",
       "tags": [
-        "visualization",
+        "plot",
         "crps",
-        "comparison"
+        "ablation",
+        "visualisasi",
+        "matplotlib"
       ],
       "complexity": "simple"
     },
@@ -794,15 +309,13 @@
       "type": "function",
       "name": "plot_ablation",
       "filePath": "run_eval_final.py",
-      "lineRange": [
-        416,
-        433
-      ],
-      "summary": "Plots ablation-study curves showing metric changes across model configurations.",
+      "summary": "Line plot korelasi skenario diff_only \u2192 diff_retrieval \u2192 diff_gnn \u2192 full_model untuk menunjukkan kontribusi tiap komponen.",
       "tags": [
-        "visualization",
+        "plot",
         "ablation",
-        "evaluation"
+        "kontribusi",
+        "visualisasi",
+        "matplotlib"
       ],
       "complexity": "simple"
     },
@@ -811,15 +324,13 @@
       "type": "function",
       "name": "main",
       "filePath": "run_eval_final.py",
-      "lineRange": [
-        436,
-        603
-      ],
-      "summary": "Top-level evaluation orchestrator that seeds random state, loads data, runs scenarios, computes metrics, and writes reports.",
+      "summary": "Orchestrator 6 skenario eval. Set seed, panggil run_* untuk tiap skenario, fail-fast jika sample-count tidak align, tulis metadata+results+plots+EVALUATION_REPORT.md.",
       "tags": [
-        "entry-point",
         "orchestrator",
-        "evaluation"
+        "eval",
+        "alignment-check",
+        "seed",
+        "report-writer"
       ],
       "complexity": "complex"
     },
@@ -828,15 +339,13 @@
       "type": "function",
       "name": "parse_args",
       "filePath": "run_eval_final.py",
-      "lineRange": [
-        606,
-        616
-      ],
-      "summary": "Parses command-line arguments for the final evaluation script.",
+      "summary": "Parser CLI: eval-step, num-ensemble, seq-len, max-eval-samples, seed, data-path.",
       "tags": [
         "cli",
-        "argument-parsing",
-        "entry-point"
+        "argparse",
+        "config",
+        "eval-step",
+        "seed"
       ],
       "complexity": "simple"
     },
@@ -862,15 +371,13 @@
       "type": "function",
       "name": "_seed_everything",
       "filePath": "scripts/eval_rain_robust.py",
-      "lineRange": [
-        59,
-        63
-      ],
-      "summary": "Fixes NumPy, PyTorch, and CUDA random seeds for reproducible evaluation.",
+      "summary": "Set seed numpy + torch + cuda untuk reprodusibilitas lintas device.",
       "tags": [
-        "reproducibility",
         "seed",
-        "utility"
+        "reprodusibilitas",
+        "helper",
+        "numpy",
+        "torch"
       ],
       "complexity": "simple"
     },
@@ -879,15 +386,13 @@
       "type": "function",
       "name": "_corr",
       "filePath": "scripts/eval_rain_robust.py",
-      "lineRange": [
-        66,
-        74
-      ],
-      "summary": "Computes Pearson correlation between two arrays with safe handling of zero variance.",
+      "summary": "Korelasi Pearson aman-divide-by-zero antara dua array 1D.",
       "tags": [
-        "metric",
-        "correlation",
-        "utility"
+        "korelasi",
+        "pearson",
+        "helper",
+        "numpy",
+        "statistik"
       ],
       "complexity": "simple"
     },
@@ -896,15 +401,13 @@
       "type": "function",
       "name": "_event_metrics",
       "filePath": "scripts/eval_rain_robust.py",
-      "lineRange": [
-        77,
-        90
-      ],
-      "summary": "Calculates binary event counts for POD, FAR, and CSI computation at a rainfall threshold.",
+      "summary": "Hitung POD/FAR/CSI berbasis deteksi point (median ensemble >= threshold). Berbeda dari run_eval_final yang probabilistic.",
       "tags": [
-        "metrics",
-        "binary-events",
-        "verification"
+        "event-metrics",
+        "pod",
+        "far",
+        "csi",
+        "point-based"
       ],
       "complexity": "simple"
     },
@@ -913,15 +416,13 @@
       "type": "function",
       "name": "_pick_week_windows",
       "filePath": "scripts/eval_rain_robust.py",
-      "lineRange": [
-        93,
-        114
-      ],
-      "summary": "Selects dry, median, and wet weekly windows based on aggregated precipitation sums.",
+      "summary": "Pilih 3 window 168 jam dari test split: driest (sum presipitasi minimum), median (paling dekat median), wettest (maksimum).",
       "tags": [
-        "sampling",
-        "robustness",
-        "precipitation"
+        "window-selection",
+        "presipitasi",
+        "mingguan",
+        "helper",
+        "driest-wettest"
       ],
       "complexity": "moderate"
     },
@@ -930,15 +431,13 @@
       "type": "function",
       "name": "_build_test_frames",
       "filePath": "scripts/eval_rain_robust.py",
-      "lineRange": [
-        117,
-        153
-      ],
-      "summary": "Loads the test parquet, validates columns, restores training statistics, and returns per-node data frames.",
+      "summary": "Muat parquet, validasi, split temporal dari metadata checkpoint, susun main_df + per_node_data dict + stats training.",
       "tags": [
         "data-loading",
-        "validation",
-        "preprocessing"
+        "test-frames",
+        "schema-validation",
+        "checkpoint",
+        "main-node"
       ],
       "complexity": "moderate"
     },
@@ -947,15 +446,13 @@
       "type": "function",
       "name": "_get_per_node_sequence",
       "filePath": "scripts/eval_rain_robust.py",
-      "lineRange": [
-        156,
-        169
-      ],
-      "summary": "Constructs per-node sliding-window tensors for robustness evaluation.",
+      "summary": "Bangun sequence per-node ter-normalisasi [seq_len, num_nodes, feature_dim] dari per_node_data untuk idx tertentu.",
       "tags": [
-        "sequence-building",
-        "tensorization",
-        "preprocessing"
+        "sequence-builder",
+        "per-node",
+        "normalisasi",
+        "tensor",
+        "graph-input"
       ],
       "complexity": "moderate"
     },
@@ -964,15 +461,13 @@
       "type": "function",
       "name": "_load_mlp",
       "filePath": "scripts/eval_rain_robust.py",
-      "lineRange": [
-        172,
-        183
-      ],
-      "summary": "Loads a trained MLP baseline checkpoint onto the requested device.",
+      "summary": "Muat checkpoint MLP (jika ada), kembalikan model di device atau None.",
       "tags": [
-        "baseline",
-        "inference",
-        "checkpoint"
+        "checkpoint",
+        "mlp-baseline",
+        "optional",
+        "loader",
+        "device"
       ],
       "complexity": "simple"
     },
@@ -981,16 +476,13 @@
       "type": "function",
       "name": "run_crosscheck",
       "filePath": "scripts/eval_rain_robust.py",
-      "lineRange": [
-        186,
-        354
-      ],
-      "summary": "Cross-checks diffusion-GNN and MLP forecasts over selected rainy windows and writes summary CSVs and JSONs.",
+      "summary": "Loop 3 window mingguan, jalankan one-step nowcasting aktual vs model vs persistence vs MLP, hitung metrics, tulis CSV per window + JSON metadata. Rain-gate dengan anti-degenerate guard per window.",
       "tags": [
-        "evaluation",
-        "robustness",
-        "cross-check",
-        "ensemble"
+        "crosscheck",
+        "weekly",
+        "rain-gate",
+        "orchestrator",
+        "one-step"
       ],
       "complexity": "complex"
     },
@@ -999,15 +491,13 @@
       "type": "function",
       "name": "parse_args",
       "filePath": "scripts/eval_rain_robust.py",
-      "lineRange": [
-        357,
-        363
-      ],
-      "summary": "Parses command-line arguments for the robustness evaluation script.",
+      "summary": "Parser CLI: data-path, num-ensemble, num-inference-steps, device.",
       "tags": [
         "cli",
-        "argument-parsing",
-        "entry-point"
+        "argparse",
+        "config",
+        "ensemble",
+        "device"
       ],
       "complexity": "simple"
     },
@@ -1016,15 +506,13 @@
       "type": "function",
       "name": "harmonize_weather_columns",
       "filePath": "src/config.py",
-      "lineRange": [
-        115,
-        122
-      ],
-      "summary": "Renames legacy weather column names to the canonical project schema.",
+      "summary": "Rename kolom legacy (cloudcover\u2192cloud_cover, dew_point_2m\u2192dewpoint_2m) ke kontrak final. Idempotent.",
       "tags": [
-        "data-cleaning",
         "schema",
-        "utility"
+        "rename",
+        "legacy",
+        "helper",
+        "kontrak"
       ],
       "complexity": "simple"
     },
@@ -1033,15 +521,13 @@
       "type": "function",
       "name": "validate_feature_schema",
       "filePath": "src/config.py",
-      "lineRange": [
-        125,
-        133
-      ],
-      "summary": "Ensures a dataframe contains the expected feature and target columns before modeling.",
+      "summary": "Validasi kolom wajib (feature + target) ada di DataFrame, lempar ValueError dengan daftar missing jika tidak.",
       "tags": [
-        "validation",
+        "validasi",
         "schema",
-        "quality"
+        "kontrak",
+        "fail-fast",
+        "helper"
       ],
       "complexity": "simple"
     },
@@ -1050,15 +536,13 @@
       "type": "function",
       "name": "validate_feature_values",
       "filePath": "src/config.py",
-      "lineRange": [
-        136,
-        143
-      ],
-      "summary": "Checks that feature columns have a sufficient ratio of non-missing values.",
+      "summary": "Validasi fitur wajib yang ada di schema tidak seluruhnya NaN. Lempar ValueError dengan daftar kolom kosong.",
       "tags": [
-        "validation",
-        "quality",
-        "missing-data"
+        "validasi",
+        "nan-check",
+        "kontrak",
+        "fail-fast",
+        "helper"
       ],
       "complexity": "simple"
     },
@@ -1067,15 +551,13 @@
       "type": "function",
       "name": "get_node_dataframe",
       "filePath": "src/config.py",
-      "lineRange": [
-        146,
-        150
-      ],
-      "summary": "Returns a dataframe describing all monitoring nodes with latitudes and longitudes.",
+      "summary": "Kembalikan salinan tabel node kanonik (MAIN, UP, DOWN, LEFT, RIGHT) dengan kolom name/role/alias/lat/lon/elevation.",
       "tags": [
-        "metadata",
-        "nodes",
-        "utility"
+        "node-table",
+        "kanonik",
+        "kontrak",
+        "helper",
+        "dataframe"
       ],
       "complexity": "simple"
     },
@@ -1084,15 +566,13 @@
       "type": "function",
       "name": "get_node_index_map",
       "filePath": "src/config.py",
-      "lineRange": [
-        153,
-        158
-      ],
-      "summary": "Builds a name-to-index mapping for graph nodes.",
+      "summary": "Bangun dict node_name \u2192 index untuk tensor ordering yang stabil lintas ingestion/loader/train/checkpoint.",
       "tags": [
-        "graph-topology",
-        "indexing",
-        "utility"
+        "node-index",
+        "kontrak",
+        "helper",
+        "ordering",
+        "mapping"
       ],
       "complexity": "simple"
     },
@@ -1101,49 +581,42 @@
       "type": "function",
       "name": "build_star_edge_index",
       "filePath": "src/config.py",
-      "lineRange": [
-        161,
-        177
-      ],
-      "summary": "Constructs a star-shaped edge index connecting the main node to all other nodes.",
+      "summary": "Konstruksi edge_index directed [2, num_edges] untuk star graph dari STAR_EDGES (MAIN\u2194UP/DOWN/LEFT/RIGHT bidirectional). Validasi count.",
       "tags": [
-        "graph-topology",
-        "edges",
-        "gnn"
+        "edge-index",
+        "star-graph",
+        "pytorch-geometric",
+        "kontrak",
+        "graph-topology"
       ],
-      "complexity": "moderate"
+      "complexity": "simple"
     },
     {
       "id": "function:src/config.py:build_star_edge_attr",
       "type": "function",
       "name": "build_star_edge_attr",
       "filePath": "src/config.py",
-      "lineRange": [
-        180,
-        205
-      ],
-      "summary": "Computes geospatial edge attributes for the star graph using the haversine distance metric.",
+      "summary": "Bangun per-edge attribute [num_edges, 1] berisi jarak euclidean lat/lon antar node. Catatan: pada grid 0.25 deg nilai konstan, edge_attr non-informatif (sinyal spasial dari topology).",
       "tags": [
-        "graph-topology",
-        "geospatial",
-        "edges"
+        "edge-attr",
+        "jarak-euclidean",
+        "star-graph",
+        "kontrak",
+        "graph-topology"
       ],
-      "complexity": "moderate",
-      "languageNotes": "Uses haversine distance to encode spatial relationships as edge features."
+      "complexity": "simple"
     },
     {
       "id": "function:src/config.py:get_checkpoint_node_metadata",
       "type": "function",
       "name": "get_checkpoint_node_metadata",
       "filePath": "src/config.py",
-      "lineRange": [
-        208,
-        223
-      ],
-      "summary": "Returns serializable node metadata to store alongside model checkpoints for reproducibility.",
+      "summary": "Bangun dict metadata node (names/roles/coords/main_id/topology/edges) yang WAJIB disimpan dalam setiap model checkpoint.",
       "tags": [
-        "metadata",
         "checkpoint",
+        "metadata",
+        "kontrak",
+        "node-info",
         "serialization"
       ],
       "complexity": "simple"
@@ -1151,27 +624,29 @@
     {
       "id": "file:src/data/ingest.py",
       "type": "file",
-      "name": "ingest.py",
+      "name": "Ingest ERA5 Open-Meteo",
       "filePath": "src/data/ingest.py",
-      "summary": "Weather data ingestion pipeline that downloads ERA5 reanalysis via Open-Meteo, validates the node grid, and persists parquet files.",
+      "summary": "Fetcher ERA5 5-node dari Open-Meteo Archive API dengan cache+retry, validasi grid-center (fail-fast collision), fetch elevasi, persistensi parquet + grid validation report.",
       "tags": [
-        "data-pipeline",
-        "ingestion",
+        "ingest",
+        "open-meteo",
         "era5",
-        "validation"
+        "data-loading",
+        "5-node"
       ],
       "complexity": "complex"
     },
     {
       "id": "file:src/models/mlp_baseline.py",
       "type": "file",
-      "name": "mlp_baseline.py",
+      "name": "MLP Baseline Model",
       "filePath": "src/models/mlp_baseline.py",
-      "summary": "Simple multilayer perceptron baseline used for deterministic precipitation nowcasting comparisons.",
+      "summary": "MLP 3-layer deterministik sebagai baseline pembanding: Linear\u2192ReLU\u2192Dropout\u2192Linear\u2192ReLU\u2192Dropout\u2192Linear. Output 3 target (precip/wind/humid) normalized.",
       "tags": [
-        "model",
-        "baseline",
         "mlp",
+        "baseline",
+        "deterministik",
+        "regressor",
         "pytorch"
       ],
       "complexity": "simple"
@@ -1179,14 +654,16 @@
     {
       "id": "file:src/train_baseline.py",
       "type": "file",
-      "name": "train_baseline.py",
+      "name": "Training MLP Baseline",
       "filePath": "src/train_baseline.py",
-      "summary": "Training entry point for the MLP baseline, including dataset construction, training loop, and evaluation metrics.",
+      "summary": "Training pipeline MLP baseline (deterministik, no retrieval/GNN). CosineAnnealingLR, early stopping patience, persistensi checkpoint + baseline_metrics.json + loss curve.",
       "tags": [
         "training",
-        "entry-point",
-        "baseline",
-        "pytorch"
+        "mlp-baseline",
+        "deterministik",
+        "early-stopping",
+        "main-node",
+        "tested"
       ],
       "complexity": "complex"
     },
@@ -1195,15 +672,13 @@
       "type": "function",
       "name": "get_node_definitions_df",
       "filePath": "src/data/ingest.py",
-      "lineRange": [
-        30,
-        34
-      ],
-      "summary": "Returns a dataframe copy of the hard-coded node definitions.",
+      "summary": "Wrapper get_node_dataframe dari config untuk konsistensi urutan node kanonik.",
       "tags": [
-        "metadata",
-        "nodes",
-        "utility"
+        "node-table",
+        "helper",
+        "kontrak",
+        "wrapper",
+        "dataframe"
       ],
       "complexity": "simple"
     },
@@ -1212,16 +687,13 @@
       "type": "function",
       "name": "fetch_elevation",
       "filePath": "src/data/ingest.py",
-      "lineRange": [
-        37,
-        49
-      ],
-      "summary": "Queries the Open-Meteo elevation API for each node and appends elevation values.",
+      "summary": "Panggil Open-Meteo Elevation API untuk seluruh node, kembalikan dict name \u2192 elevasi (m).",
       "tags": [
+        "elevasi",
+        "open-meteo",
         "api",
-        "elevation",
-        "metadata",
-        "open-meteo"
+        "node-feature",
+        "helper"
       ],
       "complexity": "simple"
     },
@@ -1230,15 +702,13 @@
       "type": "function",
       "name": "derive_land_sea_mask",
       "filePath": "src/data/ingest.py",
-      "lineRange": [
-        52,
-        53
-      ],
-      "summary": "Derives a binary land-sea mask from elevation values.",
+      "summary": "Heuristik land/sea: 1 jika elevasi > 0, else 0. Catatan: node DOWN punya elevasi 0 (maritime context accepted).",
       "tags": [
-        "feature-engineering",
-        "mask",
-        "utility"
+        "land-sea-mask",
+        "helper",
+        "elevasi",
+        "heuristik",
+        "node-feature"
       ],
       "complexity": "simple"
     },
@@ -1247,15 +717,13 @@
       "type": "function",
       "name": "_extract_hourly_response",
       "filePath": "src/data/ingest.py",
-      "lineRange": [
-        56,
-        76
-      ],
-      "summary": "Unpacks hourly Open-Meteo response objects into a tidy pandas dataframe.",
+      "summary": "Ekstrak array numpy untuk 8 variabel hourly (precip/temp/rh/dewpoint/pressure/wind_speed/wind_dir/cloud) + date range dari satu response Open-Meteo.",
       "tags": [
-        "data-parsing",
         "open-meteo",
-        "hourly"
+        "hourly",
+        "numpy",
+        "extractor",
+        "internal"
       ],
       "complexity": "moderate"
     },
@@ -1264,33 +732,28 @@
       "type": "function",
       "name": "_validate_grid_identity",
       "filePath": "src/data/ingest.py",
-      "lineRange": [
-        79,
-        127
-      ],
-      "summary": "Verifies that configured node coordinates match the nearest ERA5 grid cells and reports collisions.",
+      "summary": "Probe grid-center tiap node dengan 1 hari data untuk deteksi tabrakan (5 node \u2192 5 grid unik). Fail-fast jika ada collision.",
       "tags": [
-        "validation",
-        "grid",
-        "geospatial",
-        "quality"
+        "grid-validation",
+        "fail-fast",
+        "collision-check",
+        "open-meteo",
+        "kontrak"
       ],
-      "complexity": "complex"
+      "complexity": "moderate"
     },
     {
       "id": "function:src/data/ingest.py:_write_grid_validation_report",
       "type": "function",
       "name": "_write_grid_validation_report",
       "filePath": "src/data/ingest.py",
-      "lineRange": [
-        130,
-        146
-      ],
-      "summary": "Writes grid validation metadata to a JSON report file.",
+      "summary": "Persistensi laporan grid validation (JSON) berisi grid center tiap node + kebijakan non-independence + catatan maritime context.",
       "tags": [
-        "reporting",
-        "validation",
-        "serialization"
+        "grid-validation",
+        "json",
+        "report",
+        "internal",
+        "persistence"
       ],
       "complexity": "simple"
     },
@@ -1299,16 +762,13 @@
       "type": "function",
       "name": "fetch_era5_data",
       "filePath": "src/data/ingest.py",
-      "lineRange": [
-        149,
-        250
-      ],
-      "summary": "Downloads multi-year ERA5 hourly data for all nodes, validates the grid, adds lags, and saves parquet outputs.",
+      "summary": "Pipeline utama ingest: validate grid, fetch elevasi, request archive 2005-2025 hourly untuk 5 node, bangun DataFrame wide dengan kolom final + precip_lag1, simpan parquet + grid report. Tulis ulang alias canonical 2005_2025.",
       "tags": [
-        "data-pipeline",
+        "ingest",
         "era5",
-        "ingestion",
-        "parquet"
+        "parquet",
+        "pipeline",
+        "main-node"
       ],
       "complexity": "complex"
     },
@@ -1317,17 +777,15 @@
       "type": "function",
       "name": "get_node_metadata",
       "filePath": "src/data/ingest.py",
-      "lineRange": [
-        253,
-        266
-      ],
-      "summary": "Collects grid and elevation metadata for all nodes as a single dataframe.",
+      "summary": "Bangun DataFrame node dengan grid_center (diverifikasi), elevasi, land_sea_mask, model_mode, is_main_node flag.",
       "tags": [
-        "metadata",
-        "nodes",
-        "utility"
+        "node-metadata",
+        "grid-center",
+        "elevasi",
+        "helper",
+        "dataframe"
       ],
-      "complexity": "simple"
+      "complexity": "moderate"
     },
     {
       "id": "class:src/models/mlp_baseline.py:MLPBaseline",
@@ -1370,16 +828,13 @@
       "type": "function",
       "name": "train_mlp_baseline",
       "filePath": "src/train_baseline.py",
-      "lineRange": [
-        88,
-        272
-      ],
-      "summary": "End-to-end training routine for the MLP baseline including data splits, optimization, and metric reporting.",
+      "summary": "Pipeline training MLP: load parquet, split temporal, compute stats, build datasets, AdamW + CosineAnnealingLR, train+val per epoch, simpan best checkpoint, evaluasi test (denormalisasi), tulis baseline_metrics.json + loss curve.",
       "tags": [
         "training",
-        "baseline",
-        "optimization",
-        "metrics"
+        "mlp-baseline",
+        "checkpoint",
+        "evaluasi-test",
+        "main-node"
       ],
       "complexity": "complex"
     },
@@ -1388,15 +843,13 @@
       "type": "function",
       "name": "_parse_args",
       "filePath": "src/train_baseline.py",
-      "lineRange": [
-        275,
-        286
-      ],
-      "summary": "Parses command-line arguments for the MLP baseline training script.",
+      "summary": "Parser CLI MLP training: data-path, seq-len, batch-size, epochs, hidden-dim, lr, patience, train-end, val-end.",
       "tags": [
         "cli",
-        "argument-parsing",
-        "entry-point"
+        "argparse",
+        "config",
+        "training",
+        "helper"
       ],
       "complexity": "simple"
     },
@@ -1417,19 +870,18 @@
     {
       "id": "file:src/evaluation/probabilistic_metrics.py",
       "type": "file",
-      "name": "probabilistic_metrics.py",
+      "name": "Modul Metrik Probabilistik",
       "filePath": "src/evaluation/probabilistic_metrics.py",
-      "summary": "Collection of deterministic and probabilistic verification metrics (RMSE, MAE, correlation, CRPS, Brier, POD, FAR, CSI, reliability) used to evaluate ensemble precipitation nowcasts.",
+      "summary": "Implementasi metrik deterministik (RMSE/MAE/Corr) dan probabilistik (CRPS fair estimator, Brier, POD/FAR/CSI) untuk nowcasting hujan. Plus reliability binning.",
       "tags": [
-        "evaluation",
         "metrics",
-        "probabilistic-forecasting",
-        "verification",
-        "ensemble",
+        "crps",
+        "brier",
+        "csi",
+        "evaluasi",
         "tested"
       ],
-      "complexity": "complex",
-      "languageNotes": "Vectorized numpy implementations for ensemble-based forecast verification."
+      "complexity": "moderate"
     },
     {
       "id": "file:tests/test_config_topology.py",
@@ -1504,15 +956,13 @@
       "type": "function",
       "name": "compute_rmse",
       "filePath": "src/evaluation/probabilistic_metrics.py",
-      "lineRange": [
-        29,
-        34
-      ],
-      "summary": "Computes root-mean-square error while ignoring NaN observations.",
+      "summary": "Root Mean Square Error NaN-safe antara prediksi dan observasi.",
       "tags": [
-        "metric",
         "rmse",
-        "deterministic"
+        "deterministik",
+        "metric",
+        "nan-safe",
+        "helper"
       ],
       "complexity": "simple"
     },
@@ -1521,15 +971,13 @@
       "type": "function",
       "name": "compute_mae",
       "filePath": "src/evaluation/probabilistic_metrics.py",
-      "lineRange": [
-        37,
-        42
-      ],
-      "summary": "Computes mean absolute error while ignoring NaN observations.",
+      "summary": "Mean Absolute Error NaN-safe.",
       "tags": [
-        "metric",
         "mae",
-        "deterministic"
+        "deterministik",
+        "metric",
+        "nan-safe",
+        "helper"
       ],
       "complexity": "simple"
     },
@@ -1538,15 +986,13 @@
       "type": "function",
       "name": "compute_correlation",
       "filePath": "src/evaluation/probabilistic_metrics.py",
-      "lineRange": [
-        45,
-        53
-      ],
-      "summary": "Computes Pearson correlation between predictions and observations with NaN handling.",
+      "summary": "Korelasi Pearson NaN-safe. Return NaN jika std nol atau sampel < 3.",
       "tags": [
-        "metric",
-        "correlation",
-        "deterministic"
+        "korelasi",
+        "pearson",
+        "deterministik",
+        "nan-safe",
+        "metric"
       ],
       "complexity": "simple"
     },
@@ -1555,16 +1001,13 @@
       "type": "function",
       "name": "compute_crps",
       "filePath": "src/evaluation/probabilistic_metrics.py",
-      "lineRange": [
-        60,
-        112
-      ],
-      "summary": "Computes the Continuous Ranked Probability Score for ensemble forecasts against observations.",
+      "summary": "CRPS Continuous Ranked Probability Score dengan fair unbiased estimator untuk term E|X-X'|. CRPS = MAE jika ensemble size 1.",
       "tags": [
-        "metric",
         "crps",
-        "probabilistic",
-        "ensemble"
+        "probabilistik",
+        "fair-estimator",
+        "ensemble",
+        "metric"
       ],
       "complexity": "moderate"
     },
@@ -1573,107 +1016,90 @@
       "type": "function",
       "name": "compute_brier_score",
       "filePath": "src/evaluation/probabilistic_metrics.py",
-      "lineRange": [
-        115,
-        150
-      ],
-      "summary": "Computes Brier score for binary exceedance events from ensemble samples.",
+      "summary": "Brier Score untuk event hujan lebat. Probabilitas = fraksi ensemble > threshold.",
       "tags": [
+        "brier",
+        "probabilistik",
+        "threshold-event",
         "metric",
-        "brier-score",
-        "probabilistic"
+        "presipitasi"
       ],
-      "complexity": "moderate"
+      "complexity": "simple"
     },
     {
       "id": "function:src/evaluation/probabilistic_metrics.py:compute_pod",
       "type": "function",
       "name": "compute_pod",
       "filePath": "src/evaluation/probabilistic_metrics.py",
-      "lineRange": [
-        153,
-        186
-      ],
-      "summary": "Computes Probability of Detection for heavy-rain events at given thresholds.",
+      "summary": "Probability of Detection = hits / (hits + misses). NaN jika tidak ada event observasi.",
       "tags": [
-        "metric",
         "pod",
-        "probabilistic",
-        "threshold"
+        "event-metric",
+        "threshold",
+        "hits",
+        "presipitasi"
       ],
-      "complexity": "moderate"
+      "complexity": "simple"
     },
     {
       "id": "function:src/evaluation/probabilistic_metrics.py:compute_far",
       "type": "function",
       "name": "compute_far",
       "filePath": "src/evaluation/probabilistic_metrics.py",
-      "lineRange": [
-        189,
-        222
-      ],
-      "summary": "Computes False Alarm Ratio for heavy-rain events at given thresholds.",
+      "summary": "False Alarm Ratio = false_alarms / (hits + false_alarms). NaN jika tidak ada prediksi positif.",
       "tags": [
-        "metric",
         "far",
-        "probabilistic",
-        "threshold"
+        "event-metric",
+        "false-alarm",
+        "threshold",
+        "presipitasi"
       ],
-      "complexity": "moderate"
+      "complexity": "simple"
     },
     {
       "id": "function:src/evaluation/probabilistic_metrics.py:compute_csi",
       "type": "function",
       "name": "compute_csi",
       "filePath": "src/evaluation/probabilistic_metrics.py",
-      "lineRange": [
-        225,
-        261
-      ],
-      "summary": "Computes Critical Success Index from probabilistic exceedance forecasts.",
+      "summary": "Critical Success Index = hits / (hits + misses + false_alarms). Threat Score.",
       "tags": [
-        "metric",
         "csi",
-        "probabilistic",
-        "threshold"
+        "threat-score",
+        "event-metric",
+        "threshold",
+        "presipitasi"
       ],
-      "complexity": "moderate"
+      "complexity": "simple"
     },
     {
       "id": "function:src/evaluation/probabilistic_metrics.py:compute_all_metrics",
       "type": "function",
       "name": "compute_all_metrics",
       "filePath": "src/evaluation/probabilistic_metrics.py",
-      "lineRange": [
-        268,
-        303
-      ],
-      "summary": "Aggregates deterministic median and all probabilistic verification scores into a single result dictionary.",
+      "summary": "Hitung sekaligus semua metrik deterministik + probabilistik untuk satu skenario. Default deterministic_pred = median ensemble.",
       "tags": [
-        "metric",
-        "aggregation",
-        "evaluation",
-        "ensemble"
+        "aggregator",
+        "metrics",
+        "all-in-one",
+        "median-fallback",
+        "evaluasi"
       ],
-      "complexity": "moderate"
+      "complexity": "simple"
     },
     {
       "id": "function:src/evaluation/probabilistic_metrics.py:compute_reliability_data",
       "type": "function",
       "name": "compute_reliability_data",
       "filePath": "src/evaluation/probabilistic_metrics.py",
-      "lineRange": [
-        306,
-        344
-      ],
-      "summary": "Builds reliability diagram data by binning forecast probabilities against observed frequencies.",
+      "summary": "Hitung forecast_prob vs observed_freq dalam 10 bin untuk reliability diagram presipitasi.",
       "tags": [
-        "metric",
         "reliability",
-        "calibration",
-        "probabilistic"
+        "binning",
+        "kalibrasi",
+        "presipitasi",
+        "plot-input"
       ],
-      "complexity": "moderate"
+      "complexity": "simple"
     },
     {
       "id": "class:tests/test_config_topology.py:ConfigTopologyTest",
@@ -2396,49 +1822,48 @@
     {
       "id": "file:scripts/plot_week_timeseries.py",
       "type": "file",
-      "name": "plot_week_timeseries.py",
+      "name": "Plot Timeseries Mingguan",
       "filePath": "scripts/plot_week_timeseries.py",
-      "summary": "Generates one-week hourly timeseries comparison plots across actual, full model, persistence, and MLP predictions.",
+      "summary": "Plot timeseries 1 minggu dari CSV eval_rain_robust: actual (hitam), full model (merah), persistence (biru putus-putus), MLP (hijau titik-titik) untuk 3 variabel. Output PNG.",
       "tags": [
-        "script",
-        "visualization",
-        "timeseries",
-        "evaluation"
+        "plot",
+        "time-series",
+        "visualisasi",
+        "weekly",
+        "matplotlib"
       ],
-      "complexity": "moderate"
+      "complexity": "simple"
     },
     {
       "id": "function:scripts/plot_week_timeseries.py:plot_week",
       "type": "function",
       "name": "plot_week",
       "filePath": "scripts/plot_week_timeseries.py",
-      "lineRange": [
-        24,
-        45
-      ],
-      "summary": "Plots actual versus model, persistence, and optional MLP predictions for a selected evaluation week.",
+      "summary": "Baca CSV window tertentu, plot 3-panel stacked timeseries (precip/wind/humid) bandingkan actual vs 3 model. Simpan PNG 150 dpi.",
       "tags": [
-        "visualization",
-        "plotting",
-        "evaluation"
+        "plot",
+        "time-series",
+        "matplotlib",
+        "weekly",
+        "presipitasi"
       ],
-      "complexity": "moderate"
+      "complexity": "simple"
     },
     {
       "id": "file:src/data/temporal_loader.py",
       "type": "file",
-      "name": "temporal_loader.py",
+      "name": "Temporal Graph Dataset Loader",
       "filePath": "src/data/temporal_loader.py",
-      "summary": "Builds PyTorch datasets and dataloaders for sliding-window spatio-temporal graph sequences on the 5-node star topology.",
+      "summary": "Dataset sliding window seq_len untuk 5-node star graph, normalisasi fitur/target (precip log1p), output target main-node-only, contract enforcement ketat (urutan node, presence, complete timestamps).",
       "tags": [
-        "data-loader",
         "dataset",
-        "temporal-graph",
-        "pytorch-geometric",
+        "sliding-window",
+        "5-node",
+        "main-node",
+        "normalisasi",
         "tested"
       ],
-      "complexity": "complex",
-      "languageNotes": "Uses torch_geometric Batch and Data to materialize per-timestep star-graph snapshots."
+      "complexity": "complex"
     },
     {
       "id": "class:src/data/temporal_loader.py:TemporalGraphDataset",
@@ -2548,15 +1973,13 @@
       "type": "function",
       "name": "collate_temporal_graphs",
       "filePath": "src/data/temporal_loader.py",
-      "lineRange": [
-        212,
-        235
-      ],
-      "summary": "Custom collate function that batches per-timestep graph snapshots, targets, contexts, and optional retrieval tensors.",
+      "summary": "Collate fn: gabung per-timestep graphs jadi batched PyG Batch per timestep, stack target/context/retrieval. Support opsional precomputed_retrieval.",
       "tags": [
         "collate",
-        "dataloader",
-        "batching"
+        "pytorch",
+        "pyg",
+        "batch",
+        "retrieval"
       ],
       "complexity": "moderate"
     },
@@ -2565,61 +1988,60 @@
       "type": "function",
       "name": "create_temporal_dataloader",
       "filePath": "src/data/temporal_loader.py",
-      "lineRange": [
-        238,
-        260
-      ],
-      "summary": "Factory that constructs a TemporalGraphDataset and wraps it in a PyTorch DataLoader with the custom collate function.",
+      "summary": "Convenience builder DataLoader dengan TemporalGraphDataset + collate_temporal_graphs.",
       "tags": [
-        "factory",
         "dataloader",
-        "dataset-builder"
+        "helper",
+        "pytorch",
+        "wrapper",
+        "builder"
       ],
-      "complexity": "moderate"
+      "complexity": "simple"
     },
     {
       "id": "function:src/data/temporal_loader.py:crosscheck_temporal_loader",
       "type": "function",
       "name": "crosscheck_temporal_loader",
       "filePath": "src/data/temporal_loader.py",
-      "lineRange": [
-        263,
-        313
-      ],
-      "summary": "Lightweight smoke test that builds a synthetic 5-node hourly dataset and prints shape diagnostics for the loader.",
+      "summary": "Sanity check ringan: bangun df sintetis 48 jam \u00d7 5 node, instantiate dataset, cetak shape graph/target/context.",
       "tags": [
-        "smoke-test",
-        "validation",
-        "diagnostics"
+        "sanity-check",
+        "crosscheck",
+        "synthetic-data",
+        "debug",
+        "helper"
       ],
-      "complexity": "moderate"
+      "complexity": "simple"
     },
     {
       "id": "file:src/evaluation/__init__.py",
       "type": "file",
-      "name": "__init__.py",
+      "name": "Init Package Evaluasi",
       "filePath": "src/evaluation/__init__.py",
-      "summary": "Package initializer for the evaluation module.",
+      "summary": "File kosong penanda package src.evaluation. Berisi docstring saja.",
       "tags": [
-        "entry-point",
-        "barrel",
-        "evaluation"
+        "package-init",
+        "marker",
+        "evaluation",
+        "empty",
+        "kontrak"
       ],
       "complexity": "simple"
     },
     {
       "id": "file:tests/test_checkpoint_contract.py",
       "type": "file",
-      "name": "test_checkpoint_contract.py",
+      "name": "Test Kontrak Checkpoint",
       "filePath": "tests/test_checkpoint_contract.py",
-      "summary": "Unit test that validates the metadata contract of saved diffusion model checkpoints.",
+      "summary": "Test unittest untuk kontrak checkpoint diffusion: validasi metadata wajib (node_names, roles, coords, graph_topology=star, target_node_policy=main_node_only, num_nodes=5, retrieval_dim=num_targets*k_neighbors).",
       "tags": [
         "test",
         "checkpoint",
-        "contract",
-        "unit-test"
+        "kontrak",
+        "metadata",
+        "unittest"
       ],
-      "complexity": "moderate"
+      "complexity": "simple"
     },
     {
       "id": "class:tests/test_checkpoint_contract.py:CheckpointContractTest",
@@ -2719,304 +2141,612 @@
         "contract"
       ],
       "complexity": "simple"
+    },
+    {
+      "id": "file:result_test/diff_only/metrics.json",
+      "type": "config",
+      "name": "Metrics Diff Only",
+      "filePath": "result_test/diff_only/metrics.json",
+      "summary": "Hasil metrik evaluasi skenario diffusion-only (tanpa retrieval, tanpa GNN) pada test split main-node-only. Berisi RMSE/MAE/Corr/CRPS untuk 3 variabel (precipitation, wind_speed, humidity) plus threshold metrics pada 2/5/10 mm.",
+      "tags": [
+        "metrics",
+        "eval-test",
+        "diffusion",
+        "ablation",
+        "main-node"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:result_test/diff_retrieval/metrics.json",
+      "type": "config",
+      "name": "Metrics Diff Retrieval",
+      "filePath": "result_test/diff_retrieval/metrics.json",
+      "summary": "Hasil metrik skenario diffusion + FAISS retrieval (tanpa GNN) pada test split. Skema sama dengan diff_only untuk kelengkapan ablation.",
+      "tags": [
+        "metrics",
+        "eval-test",
+        "diffusion",
+        "retrieval",
+        "ablation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:result_test/EVALUATION_REPORT.md",
+      "type": "document",
+      "name": "Laporan Evaluasi Markdown",
+      "filePath": "result_test/EVALUATION_REPORT.md",
+      "summary": "Laporan markdown auto-generated berisi metadata eval (main_node, num_ensemble, seq_len, seed, rain_specialization) dan tabel ringkasan RMSE/MAE/Corr/CRPS untuk semua 6 skenario pada tiap variabel, ditambah threshold metrics presipitasi.",
+      "tags": [
+        "report",
+        "eval-test",
+        "ablation",
+        "main-node",
+        "presipitasi"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:result_test/full_model/metrics.json",
+      "type": "config",
+      "name": "Metrics Full Model",
+      "filePath": "result_test/full_model/metrics.json",
+      "summary": "Hasil metrik skenario full model (diffusion + retrieval + GNN) pada test split. Merujuk kepada model utama skripsi dengan semua conditional aktif.",
+      "tags": [
+        "metrics",
+        "eval-test",
+        "full-model",
+        "ablation",
+        "main-node"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:result_test/mlp_baseline/metrics.json",
+      "type": "config",
+      "name": "Metrics MLP Baseline",
+      "filePath": "result_test/mlp_baseline/metrics.json",
+      "summary": "Hasil metrik MLP baseline deterministik pada test split main-node. CRPS = MAE karena single-member ensemble. Threshold metrics disediakan untuk perbandingan.",
+      "tags": [
+        "metrics",
+        "eval-test",
+        "mlp-baseline",
+        "deterministik",
+        "main-node"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:result_test/persistence/metrics.json",
+      "type": "config",
+      "name": "Metrics Persistence",
+      "filePath": "result_test/persistence/metrics.json",
+      "summary": "Hasil metrik baseline persistence (prediksi = observasi jam sebelumnya). Acuan lower-bound sederhana. CRPS = MAE untuk ensemble size 1.",
+      "tags": [
+        "metrics",
+        "eval-test",
+        "persistence",
+        "baseline",
+        "main-node"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:result_test/README.md",
+      "type": "document",
+      "name": "README Active Evaluation Outputs",
+      "filePath": "result_test/README.md",
+      "summary": "Penjelasan singkat folder result_test sebagai output eval aktif pipeline 5-node star canonical, daftar 6 skenario aktif dan catatan legacy.",
+      "tags": [
+        "readme",
+        "eval-test",
+        "kontrak",
+        "active-outputs",
+        "main-node"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:results/baseline_results/baseline_metrics.json",
+      "type": "config",
+      "name": "Metrics MLP Baseline Lama",
+      "filePath": "results/baseline_results/baseline_metrics.json",
+      "summary": "Hasil metrik MLP baseline versi lama dari train_baseline.py (RMSE/MAE/Correlation saja, tanpa CRPS). Disimpan di results/baseline_results/.",
+      "tags": [
+        "metrics",
+        "baseline",
+        "mlp",
+        "main-node",
+        "training-output"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:results/README.md",
+      "type": "document",
+      "name": "README Active Results",
+      "filePath": "results/README.md",
+      "summary": "Penjelasan folder results sebagai output aktif pipeline 5-node canonical. Subfolder aktif: baseline_results/, training_logs/. Legacy 3-node dipindah ke _archive/.",
+      "tags": [
+        "readme",
+        "results",
+        "kontrak",
+        "active-outputs",
+        "main-node"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:scripts/eval_rain_robust.py:WeekWindow",
+      "type": "function",
+      "name": "WeekWindow",
+      "filePath": "scripts/eval_rain_robust.py",
+      "summary": "Dataclass untuk satu window mingguan: name, start_idx, end_idx, precip_sum. Dipakai sebagai kandidat window driest/median/wettest.",
+      "tags": [
+        "dataclass",
+        "window",
+        "presipitasi",
+        "helper",
+        "mingguan"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/data/temporal_loader.py:TemporalGraphDataset",
+      "type": "function",
+      "name": "TemporalGraphDataset",
+      "filePath": "src/data/temporal_loader.py",
+      "summary": "Dataset sliding-window PyTorch: validasi contract node, susun tensor [T, N, F] dan [T, N, targets], normalisasi dengan stats, kembalikan list of PyG Data per timestep + target/context main-node.",
+      "tags": [
+        "dataset",
+        "pytorch",
+        "sliding-window",
+        "graph",
+        "kontrak"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:src/inference.py",
+      "type": "file",
+      "name": "Inference RA-Diffusion",
+      "filePath": "src/inference.py",
+      "summary": "Loader checkpoint + rekonstruksi Retrieval DB + builder inference graph + runner satu-shot nowcasting. Validasi kontrak metadata, denormalisasi, rain-gate.",
+      "tags": [
+        "inference",
+        "checkpoint",
+        "retrieval-rebuild",
+        "rain-gate",
+        "star-graph",
+        "tested"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:src/inference.py:_build_edge_index_from_config",
+      "type": "function",
+      "name": "_build_edge_index_from_config",
+      "filePath": "src/inference.py",
+      "summary": "Bangun edge_index dari metadata checkpoint jika ada star_edges, else fallback ke STAR_EDGES config. Validasi STAR_EDGE_COUNT.",
+      "tags": [
+        "edge-index",
+        "checkpoint-metadata",
+        "internal",
+        "star-graph",
+        "kontrak"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/inference.py:create_inference_graphs",
+      "type": "function",
+      "name": "create_inference_graphs",
+      "filePath": "src/inference.py",
+      "summary": "Bangun list of PyG Batch dari condition_sequence [seq_len, num_nodes, features] menggunakan metadata checkpoint, kembalikan sequence siap diumpankan ke ST-GNN.",
+      "tags": [
+        "graph-builder",
+        "pyg",
+        "inference",
+        "per-node",
+        "batch"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/inference.py:InferenceModelWrapper",
+      "type": "function",
+      "name": "InferenceModelWrapper",
+      "filePath": "src/inference.py",
+      "summary": "Wrapper tipis yang menggabungkan SpatioTemporalGNN + RainForecaster + config dict. Expose eval() dan to(device).",
+      "tags": [
+        "wrapper",
+        "model-bundle",
+        "eval-mode",
+        "device-mgmt",
+        "kontrak"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/inference.py:load_model_and_stats",
+      "type": "function",
+      "name": "load_model_and_stats",
+      "filePath": "src/inference.py",
+      "summary": "Muat checkpoint torch, instantiate SpatioTemporalGNN + ConditionalDiffusionModel, load_state_dict (strict=False, allow wet_head optional), rebuild RetrievalDatabase dari data train main-node. Validasi metadata wajib ada.",
+      "tags": [
+        "checkpoint-loader",
+        "model-rebuild",
+        "retrieval-rebuild",
+        "kontrak-validation",
+        "main-node"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:src/inference.py:run_inference_real",
+      "type": "function",
+      "name": "run_inference_real",
+      "filePath": "src/inference.py",
+      "summary": "Real-time one-step inference: padding/crop seq_len, jalankan ST-GNN, query FAISS retrieval, sample diffusion (DDIM 20 steps), denormalisasi (expm1 precip), rain-gate dengan wet probability threshold. Return dict with samples.",
+      "tags": [
+        "inference",
+        "one-step",
+        "ddim",
+        "rain-gate",
+        "denormalisasi"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:src/models/diffusion.py",
+      "type": "file",
+      "name": "Conditional Diffusion + RainForecaster",
+      "filePath": "src/models/diffusion.py",
+      "summary": "Conditional Diffusion Model 3-target (precip/wind/rh) dengan time/context/retrieval/graph conditioning dan auxiliary wet/dry head. RainForecaster wrapper untuk training+DDPM/DDIM sampling dengan NaN guard.",
+      "tags": [
+        "diffusion",
+        "ddpm",
+        "ddim",
+        "conditional",
+        "multi-target"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:src/models/diffusion.py:SinusoidalPositionEmbeddings",
+      "type": "function",
+      "name": "SinusoidalPositionEmbeddings",
+      "filePath": "src/models/diffusion.py",
+      "summary": "Embedding sinusoidal untuk timestep diffusion (sin/cos dengan half_dim, scaled oleh log(10000)).",
+      "tags": [
+        "time-embedding",
+        "sinusoidal",
+        "diffusion",
+        "positional",
+        "helper"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/models/diffusion.py:ConditionalDiffusionModel",
+      "type": "function",
+      "name": "ConditionalDiffusionModel",
+      "filePath": "src/models/diffusion.py",
+      "summary": "MLP denoiser 3-target dengan conditioning: time + context + retrieval + graph_emb. Opsional wet_head auxiliary untuk klasifikasi hujan/tidak. U-Net-like dengan skip connection.",
+      "tags": [
+        "diffusion",
+        "denoiser",
+        "multi-conditioning",
+        "wet-head",
+        "u-net-skip"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:src/models/diffusion.py:RainForecaster",
+      "type": "function",
+      "name": "RainForecaster",
+      "filePath": "src/models/diffusion.py",
+      "summary": "Wrapper training/inference untuk ConditionalDiffusionModel. DDPMScheduler (clip_sample=False untuk weather z-score) + DDIM fast sampler (cached, AMP, NaN clamp). Weighted noise MSE loss dengan bobot lebih untuk extreme values.",
+      "tags": [
+        "wrapper",
+        "scheduler",
+        "ddim-fast",
+        "weighted-loss",
+        "amp-safe"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:src/models/gnn.py",
+      "type": "file",
+      "name": "Spatio-Temporal GNN",
+      "filePath": "src/models/gnn.py",
+      "summary": "Spatio-Temporal GNN 5-node: SpatialGNN (2-layer GAT dengan edge_attr) per timestep + TemporalAttention (causal multihead self-attention) antar timestep + projection ke graph embedding.",
+      "tags": [
+        "gnn",
+        "gat",
+        "temporal-attention",
+        "spatio-temporal",
+        "pytorch-geometric"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:src/models/gnn.py:TemporalAttention",
+      "type": "function",
+      "name": "TemporalAttention",
+      "filePath": "src/models/gnn.py",
+      "summary": "Multihead self-attention causal dengan learned positional embedding dan LayerNorm. Output = representasi timestep terakhir [Batch, Hidden_Dim].",
+      "tags": [
+        "temporal-attention",
+        "causal-mask",
+        "multihead",
+        "positional-embedding",
+        "transformer"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/models/gnn.py:SpatialGNN",
+      "type": "function",
+      "name": "SpatialGNN",
+      "filePath": "src/models/gnn.py",
+      "summary": "GATConv 2-layer dengan edge_attr (edge_dim=1), multi-head concat layer 1, single-head layer 2. Optional global_mean_pool untuk graph-level output.",
+      "tags": [
+        "gat",
+        "graph-attention",
+        "edge-attr",
+        "pytorch-geometric",
+        "spatial"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/models/gnn.py:SpatioTemporalGNN",
+      "type": "function",
+      "name": "SpatioTemporalGNN",
+      "filePath": "src/models/gnn.py",
+      "summary": "Gabungan: SpatialGNN per timestep \u2192 stack \u2192 TemporalAttention \u2192 linear projection ke graph_dim. Output [Batch, Output_Dim] untuk conditioning diffusion.",
+      "tags": [
+        "spatio-temporal",
+        "composite",
+        "graph-embedding",
+        "pipeline",
+        "conditioning"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/models/mlp_baseline.py:MLPBaseline",
+      "type": "function",
+      "name": "MLPBaseline",
+      "filePath": "src/models/mlp_baseline.py",
+      "summary": "nn.Sequential 3-layer MLP dengan ReLU + Dropout 0.2. Input flattened [B, seq_len*F], output [B, num_targets].",
+      "tags": [
+        "mlp",
+        "baseline",
+        "regressor",
+        "dropout",
+        "sequential"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/retrieval/base.py",
+      "type": "file",
+      "name": "FAISS Retrieval Database",
+      "filePath": "src/retrieval/base.py",
+      "summary": "Wrapper FAISS IndexFlatL2 dengan cached concatenated data_values. add_items() insert embeddings, query() kembalikan k tetangga terdekat sebagai torch tensor.",
+      "tags": [
+        "retrieval",
+        "faiss",
+        "knn",
+        "l2-distance",
+        "analog"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/retrieval/base.py:RetrievalDatabase",
+      "type": "function",
+      "name": "RetrievalDatabase",
+      "filePath": "src/retrieval/base.py",
+      "summary": "Class dengan faiss.IndexFlatL2 dan list stored_data. Validasi dimension, train IVF jika belum, search + cached lookup. Validasi k > n_total.",
+      "tags": [
+        "faiss",
+        "retrieval",
+        "index",
+        "knn",
+        "cache"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/train_baseline.py:MLPDataset",
+      "type": "function",
+      "name": "MLPDataset",
+      "filePath": "src/train_baseline.py",
+      "summary": "Dataset main-node-only flattening seq_len fitur jadi 1D vector. Pre-normalized dengan stats training. Output (x, y) tuple.",
+      "tags": [
+        "dataset",
+        "mlp",
+        "main-node",
+        "flatten",
+        "normalisasi"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/train.py",
+      "type": "file",
+      "name": "Training Pipeline RA-Diffusion",
+      "filePath": "src/train.py",
+      "summary": "Pipeline training lengkap RA-Diffusion: ingestion, split temporal, compute stats, build temporal datasets, precomputed retrieval (strict_past), init ST-GNN + Diffusion, train loop dengan weighted noise MSE + wet BCE, ReduceLROnPlateau + early stopping, simpan checkpoint dengan metadata lengkap.",
+      "tags": [
+        "training",
+        "diffusion",
+        "retrieval",
+        "gnn",
+        "rain-specialization",
+        "tested"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:src/train.py:temporal_split",
+      "type": "function",
+      "name": "temporal_split",
+      "filePath": "src/train.py",
+      "summary": "Split DataFrame ke train/val/test berdasar tanggal. Default train_end=2018-12-31, val_end=2021-12-31. Handle timezone aware datetime.",
+      "tags": [
+        "split",
+        "temporal",
+        "train-val-test",
+        "helper",
+        "kontrak"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/train.py:compute_stats_from_training",
+      "type": "function",
+      "name": "compute_stats_from_training",
+      "filePath": "src/train.py",
+      "summary": "Hitung mean/std untuk normalisasi target (precip log1p) dan fitur dari main-node train. Fallback ke all-node stats untuk fitur konstan (mis. elevation) agar tidak menghasilkan ~1e8 GNN input.",
+      "tags": [
+        "normalisasi",
+        "stats",
+        "main-node",
+        "fallback",
+        "kontrak"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/train.py:_build_precomputed_retrieval",
+      "type": "function",
+      "name": "_build_precomputed_retrieval",
+      "filePath": "src/train.py",
+      "summary": "Bangun tensor retrieval precomputed untuk seluruh dataset (FAISS kNN dengan filter strict_past/exclude_self). Optimasi chunked fast-path saat tanpa filter, fallback per-row saat ada filter dengan warning fallback-zero.",
+      "tags": [
+        "retrieval",
+        "precomputed",
+        "faiss",
+        "strict-past",
+        "knn-filter"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:src/train.py:_tensor_corrcoef",
+      "type": "function",
+      "name": "_tensor_corrcoef",
+      "filePath": "src/train.py",
+      "summary": "Pearson correlation NaN-safe pada flattened torch tensors. Return NaN jika denom=0.",
+      "tags": [
+        "korelasi",
+        "pearson",
+        "torch",
+        "helper",
+        "nan-safe"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/train.py:_extract_precip_mm_from_normalized_targets",
+      "type": "function",
+      "name": "_extract_precip_mm_from_normalized_targets",
+      "filePath": "src/train.py",
+      "summary": "Inverse-transform precip dari normalized ke mm/h: denormalize \u2192 clamp log space \u2192 expm1 \u2192 clamp >= 0.",
+      "tags": [
+        "denormalisasi",
+        "precip",
+        "expm1",
+        "inverse-transform",
+        "helper"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/train.py:_binary_event_metrics",
+      "type": "function",
+      "name": "_binary_event_metrics",
+      "filePath": "src/train.py",
+      "summary": "Hitung CSI/POD/FAR untuk threshold tunggal dari probability vs observation binary.",
+      "tags": [
+        "event-metrics",
+        "csi",
+        "pod",
+        "far",
+        "calibration"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/train.py:_calibrate_wet_probability_threshold",
+      "type": "function",
+      "name": "_calibrate_wet_probability_threshold",
+      "filePath": "src/train.py",
+      "summary": "Grid search threshold wet probability untuk maximize CSI pada validation set. Return best (threshold, csi, pod, far).",
+      "tags": [
+        "kalibrasi",
+        "threshold-search",
+        "csi-max",
+        "wet-probability",
+        "helper"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/train.py:train_pipeline",
+      "type": "function",
+      "name": "train_pipeline",
+      "filePath": "src/train.py",
+      "summary": "Fungsi training utama 8-step: load data, split, stats, datasets, retrieval, init models, train+val loop (weighted noise + wet BCE + cond dropout + AMP + grad clip + LR scheduler), checkpoint save best val, plot loss curve, return summary dict.",
+      "tags": [
+        "training",
+        "pipeline",
+        "amp",
+        "grad-clip",
+        "checkpoint"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:src/train.py:_parse_args",
+      "type": "function",
+      "name": "_parse_args",
+      "filePath": "src/train.py",
+      "summary": "Parser CLI training: data-path, seq-len, batch-size, epochs, hidden-dim, graph-dim, k-neighbors, AMP flag, train/val-end, grad-clip, LR scheduler params, early stop, rain specialization flags, cond-dropout, seed, lr, num-workers.",
+      "tags": [
+        "cli",
+        "argparse",
+        "config",
+        "training",
+        "rich-flags"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:tests/test_checkpoint_contract.py:CheckpointContractTest",
+      "type": "function",
+      "name": "CheckpointContractTest",
+      "filePath": "tests/test_checkpoint_contract.py",
+      "summary": "Kelas unittest. test_diffusion_checkpoint_metadata_contract: assert metadata key wajib + topology star + num_nodes 5 + target_policy main_node_only + retrieval_dim invariant.",
+      "tags": [
+        "unittest",
+        "checkpoint",
+        "kontrak",
+        "validation",
+        "invariant"
+      ],
+      "complexity": "simple"
     }
   ],
   "edges": [
     {
-      "source": "file:src/inference.py",
-      "target": "function:src/inference.py:_build_edge_index_from_config",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1.0
-    },
-    {
-      "source": "file:src/inference.py",
-      "target": "function:src/inference.py:_build_edge_index_from_config",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:src/inference.py",
-      "target": "function:src/inference.py:create_inference_graphs",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1.0
-    },
-    {
-      "source": "file:src/inference.py",
-      "target": "function:src/inference.py:create_inference_graphs",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:src/inference.py",
-      "target": "class:src/inference.py:InferenceModelWrapper",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1.0
-    },
-    {
-      "source": "file:src/inference.py",
-      "target": "class:src/inference.py:InferenceModelWrapper",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:src/inference.py",
-      "target": "function:src/inference.py:load_model_and_stats",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1.0
-    },
-    {
-      "source": "file:src/inference.py",
-      "target": "function:src/inference.py:load_model_and_stats",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:src/inference.py",
-      "target": "function:src/inference.py:run_inference_real",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1.0
-    },
-    {
-      "source": "file:src/inference.py",
-      "target": "function:src/inference.py:run_inference_real",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:src/models/diffusion.py",
-      "target": "class:src/models/diffusion.py:SinusoidalPositionEmbeddings",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1.0
-    },
-    {
-      "source": "file:src/models/diffusion.py",
-      "target": "class:src/models/diffusion.py:SinusoidalPositionEmbeddings",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:src/models/diffusion.py",
-      "target": "class:src/models/diffusion.py:ConditionalDiffusionModel",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1.0
-    },
-    {
-      "source": "file:src/models/diffusion.py",
-      "target": "class:src/models/diffusion.py:ConditionalDiffusionModel",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:src/models/diffusion.py",
-      "target": "class:src/models/diffusion.py:RainForecaster",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1.0
-    },
-    {
-      "source": "file:src/models/diffusion.py",
-      "target": "class:src/models/diffusion.py:RainForecaster",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:src/models/gnn.py",
-      "target": "class:src/models/gnn.py:TemporalAttention",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1.0
-    },
-    {
-      "source": "file:src/models/gnn.py",
-      "target": "class:src/models/gnn.py:TemporalAttention",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:src/models/gnn.py",
-      "target": "class:src/models/gnn.py:SpatialGNN",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1.0
-    },
-    {
-      "source": "file:src/models/gnn.py",
-      "target": "class:src/models/gnn.py:SpatialGNN",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:src/models/gnn.py",
-      "target": "class:src/models/gnn.py:SpatioTemporalGNN",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1.0
-    },
-    {
-      "source": "file:src/models/gnn.py",
-      "target": "class:src/models/gnn.py:SpatioTemporalGNN",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:src/retrieval/base.py",
-      "target": "class:src/retrieval/base.py:RetrievalDatabase",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1.0
-    },
-    {
-      "source": "file:src/retrieval/base.py",
-      "target": "class:src/retrieval/base.py:RetrievalDatabase",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:src/train.py",
-      "target": "function:src/train.py:temporal_split",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1.0
-    },
-    {
-      "source": "file:src/train.py",
-      "target": "function:src/train.py:temporal_split",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:src/train.py",
-      "target": "function:src/train.py:compute_stats_from_training",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1.0
-    },
-    {
-      "source": "file:src/train.py",
-      "target": "function:src/train.py:compute_stats_from_training",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:src/train.py",
-      "target": "function:src/train.py:_build_precomputed_retrieval",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1.0
-    },
-    {
-      "source": "file:src/train.py",
-      "target": "function:src/train.py:_build_precomputed_retrieval",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:src/train.py",
-      "target": "function:src/train.py:_tensor_corrcoef",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1.0
-    },
-    {
-      "source": "file:src/train.py",
-      "target": "function:src/train.py:_tensor_corrcoef",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:src/train.py",
-      "target": "function:src/train.py:_extract_precip_mm_from_normalized_targets",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1.0
-    },
-    {
-      "source": "file:src/train.py",
-      "target": "function:src/train.py:_extract_precip_mm_from_normalized_targets",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:src/train.py",
-      "target": "function:src/train.py:_binary_event_metrics",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1.0
-    },
-    {
-      "source": "file:src/train.py",
-      "target": "function:src/train.py:_binary_event_metrics",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:src/train.py",
-      "target": "function:src/train.py:_calibrate_wet_probability_threshold",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1.0
-    },
-    {
-      "source": "file:src/train.py",
-      "target": "function:src/train.py:_calibrate_wet_probability_threshold",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:src/train.py",
-      "target": "function:src/train.py:train_pipeline",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1.0
-    },
-    {
-      "source": "file:src/train.py",
-      "target": "function:src/train.py:train_pipeline",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:src/train.py",
-      "target": "function:src/train.py:_parse_args",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1.0
-    },
-    {
-      "source": "file:src/train.py",
-      "target": "function:src/train.py:_parse_args",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
       "source": "file:tests/test_inference_smoke.py",
       "target": "class:tests/test_inference_smoke.py:InferenceSmokeTest",
       "type": "contains",
@@ -3027,363 +2757,6 @@
       "source": "file:tests/test_inference_smoke.py",
       "target": "class:tests/test_inference_smoke.py:InferenceSmokeTest",
       "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:_archive/debug_nan.py",
-      "target": "file:src/inference.py",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7
-    },
-    {
-      "source": "file:_archive/generate_plots.py",
-      "target": "file:src/inference.py",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7
-    },
-    {
-      "source": "file:src/inference.py",
-      "target": "file:src/config.py",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7
-    },
-    {
-      "source": "file:src/inference.py",
-      "target": "file:src/models/diffusion.py",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7
-    },
-    {
-      "source": "file:src/inference.py",
-      "target": "file:src/models/gnn.py",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7
-    },
-    {
-      "source": "file:src/inference.py",
-      "target": "file:src/retrieval/base.py",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7
-    },
-    {
-      "source": "file:src/models/diffusion.py",
-      "target": "file:src/config.py",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7
-    },
-    {
-      "source": "file:src/train.py",
-      "target": "file:src/config.py",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7
-    },
-    {
-      "source": "file:src/train.py",
-      "target": "file:src/data/ingest.py",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7
-    },
-    {
-      "source": "file:src/train.py",
-      "target": "file:src/data/temporal_loader.py",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7
-    },
-    {
-      "source": "file:src/train.py",
-      "target": "file:src/models/diffusion.py",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7
-    },
-    {
-      "source": "file:src/train.py",
-      "target": "file:src/models/gnn.py",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7
-    },
-    {
-      "source": "file:src/train.py",
-      "target": "file:src/retrieval/base.py",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7
-    },
-    {
-      "source": "file:tests/test_inference_smoke.py",
-      "target": "file:src/inference.py",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7
-    },
-    {
-      "source": "file:src/inference.py",
-      "target": "file:tests/test_inference_smoke.py",
-      "type": "tested_by",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "function:src/inference.py:_build_edge_index_from_config",
-      "target": "function:src/config.py:build_star_edge_index",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:src/inference.py:create_inference_graphs",
-      "target": "function:src/inference.py:_build_edge_index_from_config",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:src/inference.py:create_inference_graphs",
-      "target": "function:src/config.py:build_star_edge_index",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:src/inference.py:create_inference_graphs",
-      "target": "function:src/config.py:build_star_edge_attr",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:src/inference.py:run_inference_real",
-      "target": "function:src/inference.py:create_inference_graphs",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:src/inference.py:run_inference_real",
-      "target": "class:src/retrieval/base.py:RetrievalDatabase",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:src/inference.py:run_inference_real",
-      "target": "class:src/models/diffusion.py:RainForecaster",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:src/inference.py:run_inference_real",
-      "target": "class:src/models/diffusion.py:ConditionalDiffusionModel",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:src/inference.py:load_model_and_stats",
-      "target": "class:src/models/gnn.py:SpatioTemporalGNN",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:src/inference.py:load_model_and_stats",
-      "target": "class:src/models/diffusion.py:ConditionalDiffusionModel",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:src/inference.py:load_model_and_stats",
-      "target": "class:src/models/diffusion.py:RainForecaster",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:src/inference.py:load_model_and_stats",
-      "target": "class:src/inference.py:InferenceModelWrapper",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:src/inference.py:load_model_and_stats",
-      "target": "class:src/retrieval/base.py:RetrievalDatabase",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:src/inference.py:load_model_and_stats",
-      "target": "function:src/config.py:harmonize_weather_columns",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:src/inference.py:load_model_and_stats",
-      "target": "function:src/config.py:validate_feature_schema",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:src/inference.py:load_model_and_stats",
-      "target": "function:src/config.py:validate_feature_values",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:src/train.py:train_pipeline",
-      "target": "function:src/data/ingest.py:fetch_era5_data",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:src/train.py:train_pipeline",
-      "target": "class:src/data/temporal_loader.py:TemporalGraphDataset",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:src/train.py:train_pipeline",
-      "target": "function:src/config.py:harmonize_weather_columns",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:src/train.py:train_pipeline",
-      "target": "function:src/config.py:validate_feature_schema",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:src/train.py:train_pipeline",
-      "target": "function:src/config.py:validate_feature_values",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:src/train.py:train_pipeline",
-      "target": "function:src/config.py:build_star_edge_index",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:src/train.py:train_pipeline",
-      "target": "function:src/config.py:get_checkpoint_node_metadata",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:src/train.py:train_pipeline",
-      "target": "class:src/retrieval/base.py:RetrievalDatabase",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:src/train.py:train_pipeline",
-      "target": "class:src/models/gnn.py:SpatioTemporalGNN",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:src/train.py:train_pipeline",
-      "target": "class:src/models/diffusion.py:ConditionalDiffusionModel",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:src/train.py:train_pipeline",
-      "target": "class:src/models/diffusion.py:RainForecaster",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:src/train.py:train_pipeline",
-      "target": "function:src/train.py:_build_precomputed_retrieval",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:src/train.py:train_pipeline",
-      "target": "function:src/train.py:_tensor_corrcoef",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:src/train.py:train_pipeline",
-      "target": "function:src/train.py:_extract_precip_mm_from_normalized_targets",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:src/train.py:train_pipeline",
-      "target": "function:src/train.py:_calibrate_wet_probability_threshold",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:src/train.py:_calibrate_wet_probability_threshold",
-      "target": "function:src/train.py:_binary_event_metrics",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "class:tests/test_inference_smoke.py:InferenceSmokeTest",
-      "target": "function:src/inference.py:load_model_and_stats",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "class:tests/test_inference_smoke.py:InferenceSmokeTest",
-      "target": "function:src/inference.py:create_inference_graphs",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "class:tests/test_inference_smoke.py:InferenceSmokeTest",
-      "target": "function:src/inference.py:run_inference_real",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "class:tests/test_inference_smoke.py:InferenceSmokeTest",
-      "target": "class:src/retrieval/base.py:RetrievalDatabase",
-      "type": "calls",
       "direction": "forward",
       "weight": 0.8
     },
@@ -3515,21 +2888,7 @@
     },
     {
       "source": "file:run_eval_final.py",
-      "target": "file:src/inference.py",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7
-    },
-    {
-      "source": "file:run_eval_final.py",
       "target": "file:src/models/mlp_baseline.py",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7
-    },
-    {
-      "source": "file:run_eval_final.py",
-      "target": "file:src/train.py",
       "type": "imports",
       "direction": "forward",
       "weight": 0.7
@@ -3663,20 +3022,6 @@
     {
       "source": "function:run_eval_final.py:load_test_data",
       "target": "function:src/config.py:validate_feature_values",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:run_eval_final.py:load_test_data",
-      "target": "function:src/train.py:temporal_split",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:run_eval_final.py:load_test_data",
-      "target": "function:src/train.py:compute_stats_from_training",
       "type": "calls",
       "direction": "forward",
       "weight": 0.8
@@ -3689,20 +3034,6 @@
       "weight": 0.8
     },
     {
-      "source": "function:run_eval_final.py:run_diffusion_scenario",
-      "target": "function:src/inference.py:load_model_and_stats",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:run_eval_final.py:run_diffusion_scenario",
-      "target": "function:src/inference.py:create_inference_graphs",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
       "source": "function:run_eval_final.py:compute_scenario_metrics",
       "target": "function:src/evaluation/probabilistic_metrics.py:compute_rmse",
       "type": "calls",
@@ -3844,21 +3175,7 @@
     },
     {
       "source": "file:scripts/eval_rain_robust.py",
-      "target": "file:src/inference.py",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7
-    },
-    {
-      "source": "file:scripts/eval_rain_robust.py",
       "target": "file:src/models/mlp_baseline.py",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7
-    },
-    {
-      "source": "file:scripts/eval_rain_robust.py",
-      "target": "file:src/train.py",
       "type": "imports",
       "direction": "forward",
       "weight": 0.7
@@ -3955,36 +3272,8 @@
       "weight": 0.8
     },
     {
-      "source": "function:scripts/eval_rain_robust.py:_build_test_frames",
-      "target": "function:src/train.py:temporal_split",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:scripts/eval_rain_robust.py:_build_test_frames",
-      "target": "function:src/train.py:compute_stats_from_training",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
       "source": "function:scripts/eval_rain_robust.py:_load_mlp",
       "target": "class:src/models/mlp_baseline.py:MLPBaseline",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:scripts/eval_rain_robust.py:run_crosscheck",
-      "target": "function:src/inference.py:load_model_and_stats",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:scripts/eval_rain_robust.py:run_crosscheck",
-      "target": "function:src/inference.py:create_inference_graphs",
       "type": "calls",
       "direction": "forward",
       "weight": 0.8
@@ -4285,13 +3574,6 @@
     },
     {
       "source": "file:src/train_baseline.py",
-      "target": "file:src/train.py",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7
-    },
-    {
-      "source": "file:src/train_baseline.py",
       "target": "class:src/train_baseline.py:MLPDataset",
       "type": "exports",
       "direction": "forward",
@@ -4335,20 +3617,6 @@
     {
       "source": "function:src/train_baseline.py:train_mlp_baseline",
       "target": "function:src/config.py:validate_feature_values",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:src/train_baseline.py:train_mlp_baseline",
-      "target": "function:src/train.py:temporal_split",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:src/train_baseline.py:train_mlp_baseline",
-      "target": "function:src/train.py:compute_stats_from_training",
       "type": "calls",
       "direction": "forward",
       "weight": 0.8
@@ -4580,13 +3848,6 @@
     {
       "source": "file:_archive/run_threshold_analysis.py",
       "target": "file:src/evaluation/probabilistic_metrics.py",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7
-    },
-    {
-      "source": "file:_archive/run_threshold_analysis.py",
-      "target": "file:src/inference.py",
       "type": "imports",
       "direction": "forward",
       "weight": 0.7
@@ -4761,35 +4022,7 @@
     },
     {
       "source": "document:docs/METODE_PENELITIAN_PROYEK.md",
-      "target": "file:src/models/gnn.py",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:docs/METODE_PENELITIAN_PROYEK.md",
-      "target": "file:src/models/diffusion.py",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:docs/METODE_PENELITIAN_PROYEK.md",
-      "target": "file:src/train.py",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:docs/METODE_PENELITIAN_PROYEK.md",
       "target": "file:src/train_baseline.py",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:docs/METODE_PENELITIAN_PROYEK.md",
-      "target": "file:src/inference.py",
       "type": "documents",
       "direction": "forward",
       "weight": 0.5
@@ -4824,27 +4057,6 @@
     },
     {
       "source": "document:docs/MIGRATION_CHECKLIST_STATUS.md",
-      "target": "file:src/models/gnn.py",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:docs/MIGRATION_CHECKLIST_STATUS.md",
-      "target": "file:src/models/diffusion.py",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:docs/MIGRATION_CHECKLIST_STATUS.md",
-      "target": "file:src/train.py",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:docs/MIGRATION_CHECKLIST_STATUS.md",
       "target": "file:src/train_baseline.py",
       "type": "documents",
       "direction": "forward",
@@ -4852,21 +4064,7 @@
     },
     {
       "source": "document:docs/MIGRATION_CHECKLIST_STATUS.md",
-      "target": "file:src/inference.py",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:docs/MIGRATION_CHECKLIST_STATUS.md",
       "target": "file:run_eval_final.py",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:docs/MIGRATION_CHECKLIST_STATUS.md",
-      "target": "file:src/retrieval/base.py",
       "type": "documents",
       "direction": "forward",
       "weight": 0.5
@@ -4881,27 +4079,6 @@
     {
       "source": "document:docs/MIGRATION_CHECKLIST_STATUS.md",
       "target": "file:notebooks/evaluasi_model.ipynb",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:docs/KNOWLEDGE.md",
-      "target": "file:src/models/gnn.py",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:docs/KNOWLEDGE.md",
-      "target": "file:src/retrieval/base.py",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:docs/KNOWLEDGE.md",
-      "target": "file:src/train.py",
       "type": "documents",
       "direction": "forward",
       "weight": 0.5
@@ -4929,13 +4106,6 @@
     },
     {
       "source": "document:docs/KNOWLEDGE.md",
-      "target": "file:src/inference.py",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:docs/KNOWLEDGE.md",
       "target": "file:run_eval_final.py",
       "type": "documents",
       "direction": "forward",
@@ -4957,35 +4127,7 @@
     },
     {
       "source": "document:docs/AUDIT_FIX_PLAN.md",
-      "target": "file:src/train.py",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:docs/AUDIT_FIX_PLAN.md",
-      "target": "file:src/inference.py",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:docs/AUDIT_FIX_PLAN.md",
-      "target": "file:src/models/diffusion.py",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:docs/AUDIT_FIX_PLAN.md",
       "target": "file:src/config.py",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:docs/AUDIT_FIX_PLAN.md",
-      "target": "file:src/models/gnn.py",
       "type": "documents",
       "direction": "forward",
       "weight": 0.5
@@ -5019,34 +4161,6 @@
       "weight": 0.5
     },
     {
-      "source": "document:docs/AUDIT_FIX_PLAN.md",
-      "target": "file:src/retrieval/base.py",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:docs/AUDIT_SESSION_CONTEXT.md",
-      "target": "file:src/train.py",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:docs/AUDIT_SESSION_CONTEXT.md",
-      "target": "file:src/inference.py",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:docs/AUDIT_SESSION_CONTEXT.md",
-      "target": "file:src/models/diffusion.py",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
       "source": "document:docs/AUDIT_SESSION_CONTEXT.md",
       "target": "file:src/config.py",
       "type": "documents",
@@ -5055,21 +4169,7 @@
     },
     {
       "source": "document:docs/AUDIT_SESSION_CONTEXT.md",
-      "target": "file:src/models/gnn.py",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:docs/AUDIT_SESSION_CONTEXT.md",
       "target": "file:src/data/temporal_loader.py",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:docs/AUDIT_SESSION_CONTEXT.md",
-      "target": "file:src/retrieval/base.py",
       "type": "documents",
       "direction": "forward",
       "weight": 0.5
@@ -5577,76 +4677,1123 @@
       "type": "documents",
       "direction": "forward",
       "weight": 0.5
+    },
+    {
+      "source": "file:scripts/eval_rain_robust.py",
+      "target": "function:scripts/eval_rain_robust.py:WeekWindow",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/data/temporal_loader.py",
+      "target": "function:src/data/temporal_loader.py:TemporalGraphDataset",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/inference.py",
+      "target": "function:src/inference.py:_build_edge_index_from_config",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/inference.py",
+      "target": "function:src/inference.py:create_inference_graphs",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/inference.py",
+      "target": "function:src/inference.py:InferenceModelWrapper",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/inference.py",
+      "target": "function:src/inference.py:load_model_and_stats",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/inference.py",
+      "target": "function:src/inference.py:run_inference_real",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/models/diffusion.py",
+      "target": "function:src/models/diffusion.py:SinusoidalPositionEmbeddings",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/models/diffusion.py",
+      "target": "function:src/models/diffusion.py:ConditionalDiffusionModel",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/models/diffusion.py",
+      "target": "function:src/models/diffusion.py:RainForecaster",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/models/gnn.py",
+      "target": "function:src/models/gnn.py:TemporalAttention",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/models/gnn.py",
+      "target": "function:src/models/gnn.py:SpatialGNN",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/models/gnn.py",
+      "target": "function:src/models/gnn.py:SpatioTemporalGNN",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/models/mlp_baseline.py",
+      "target": "function:src/models/mlp_baseline.py:MLPBaseline",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/retrieval/base.py",
+      "target": "function:src/retrieval/base.py:RetrievalDatabase",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/train_baseline.py",
+      "target": "function:src/train_baseline.py:MLPDataset",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/train.py",
+      "target": "function:src/train.py:temporal_split",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/train.py",
+      "target": "function:src/train.py:compute_stats_from_training",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/train.py",
+      "target": "function:src/train.py:_build_precomputed_retrieval",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/train.py",
+      "target": "function:src/train.py:_tensor_corrcoef",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/train.py",
+      "target": "function:src/train.py:_extract_precip_mm_from_normalized_targets",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/train.py",
+      "target": "function:src/train.py:_binary_event_metrics",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/train.py",
+      "target": "function:src/train.py:_calibrate_wet_probability_threshold",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/train.py",
+      "target": "function:src/train.py:train_pipeline",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/train.py",
+      "target": "function:src/train.py:_parse_args",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:tests/test_checkpoint_contract.py",
+      "target": "function:tests/test_checkpoint_contract.py:CheckpointContractTest",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/models/diffusion.py",
+      "target": "file:src/config.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/inference.py",
+      "target": "file:src/config.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/inference.py",
+      "target": "file:src/models/diffusion.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/inference.py",
+      "target": "file:src/models/gnn.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/inference.py",
+      "target": "file:src/retrieval/base.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/train.py",
+      "target": "file:src/config.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/train.py",
+      "target": "file:src/data/ingest.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/train.py",
+      "target": "file:src/data/temporal_loader.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/train.py",
+      "target": "file:src/models/diffusion.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/train.py",
+      "target": "file:src/models/gnn.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/train.py",
+      "target": "file:src/retrieval/base.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/train_baseline.py",
+      "target": "file:src/train.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:run_eval_final.py",
+      "target": "file:src/inference.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:run_eval_final.py",
+      "target": "file:src/train.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:scripts/eval_rain_robust.py",
+      "target": "file:src/inference.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:scripts/eval_rain_robust.py",
+      "target": "file:src/train.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "function:src/train.py:train_pipeline",
+      "target": "function:src/config.py:get_checkpoint_node_metadata",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/train.py:train_pipeline",
+      "target": "function:src/train.py:temporal_split",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/train.py:train_pipeline",
+      "target": "function:src/train.py:compute_stats_from_training",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/train.py:train_pipeline",
+      "target": "function:src/train.py:_build_precomputed_retrieval",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/train.py:train_pipeline",
+      "target": "function:src/train.py:_extract_precip_mm_from_normalized_targets",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/train.py:train_pipeline",
+      "target": "function:src/train.py:_calibrate_wet_probability_threshold",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/train.py:train_pipeline",
+      "target": "function:src/train.py:_tensor_corrcoef",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/train.py:train_pipeline",
+      "target": "function:src/models/diffusion.py:RainForecaster",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/train_baseline.py:train_mlp_baseline",
+      "target": "function:src/train.py:temporal_split",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/train_baseline.py:train_mlp_baseline",
+      "target": "function:src/train.py:compute_stats_from_training",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/train_baseline.py:train_mlp_baseline",
+      "target": "function:src/models/mlp_baseline.py:MLPBaseline",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/inference.py:run_inference_real",
+      "target": "function:src/inference.py:create_inference_graphs",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/inference.py:run_inference_real",
+      "target": "function:src/retrieval/base.py:RetrievalDatabase",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/inference.py:run_inference_real",
+      "target": "function:src/models/diffusion.py:RainForecaster",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/inference.py:run_inference_real",
+      "target": "function:src/models/diffusion.py:ConditionalDiffusionModel",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/inference.py:run_inference_real",
+      "target": "function:src/models/gnn.py:SpatioTemporalGNN",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/inference.py:load_model_and_stats",
+      "target": "function:src/models/gnn.py:SpatioTemporalGNN",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/inference.py:load_model_and_stats",
+      "target": "function:src/models/diffusion.py:ConditionalDiffusionModel",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/inference.py:load_model_and_stats",
+      "target": "function:src/models/diffusion.py:RainForecaster",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/inference.py:load_model_and_stats",
+      "target": "function:src/retrieval/base.py:RetrievalDatabase",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/inference.py:load_model_and_stats",
+      "target": "function:src/config.py:harmonize_weather_columns",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/inference.py:load_model_and_stats",
+      "target": "function:src/config.py:validate_feature_schema",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/inference.py:load_model_and_stats",
+      "target": "function:src/config.py:validate_feature_values",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/inference.py:load_model_and_stats",
+      "target": "function:src/config.py:build_star_edge_attr",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/inference.py:create_inference_graphs",
+      "target": "function:src/inference.py:_build_edge_index_from_config",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/inference.py:create_inference_graphs",
+      "target": "function:src/config.py:build_star_edge_attr",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/models/diffusion.py:RainForecaster",
+      "target": "function:src/models/diffusion.py:ConditionalDiffusionModel",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/models/diffusion.py:ConditionalDiffusionModel",
+      "target": "function:src/models/diffusion.py:SinusoidalPositionEmbeddings",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/models/gnn.py:SpatioTemporalGNN",
+      "target": "function:src/models/gnn.py:SpatialGNN",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/models/gnn.py:SpatioTemporalGNN",
+      "target": "function:src/models/gnn.py:TemporalAttention",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/data/temporal_loader.py:create_temporal_dataloader",
+      "target": "function:src/data/temporal_loader.py:TemporalGraphDataset",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/data/temporal_loader.py:create_temporal_dataloader",
+      "target": "function:src/data/temporal_loader.py:collate_temporal_graphs",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/data/temporal_loader.py:crosscheck_temporal_loader",
+      "target": "function:src/data/temporal_loader.py:TemporalGraphDataset",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/data/temporal_loader.py:TemporalGraphDataset",
+      "target": "function:src/config.py:build_star_edge_index",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/data/temporal_loader.py:TemporalGraphDataset",
+      "target": "function:src/config.py:build_star_edge_attr",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/data/temporal_loader.py:TemporalGraphDataset",
+      "target": "function:src/config.py:get_node_index_map",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/data/ingest.py:fetch_era5_data",
+      "target": "function:src/data/ingest.py:_validate_grid_identity",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/data/ingest.py:fetch_era5_data",
+      "target": "function:src/data/ingest.py:_write_grid_validation_report",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/data/ingest.py:fetch_era5_data",
+      "target": "function:src/data/ingest.py:fetch_elevation",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/data/ingest.py:fetch_era5_data",
+      "target": "function:src/data/ingest.py:_extract_hourly_response",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/data/ingest.py:fetch_era5_data",
+      "target": "function:src/data/ingest.py:get_node_definitions_df",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/data/ingest.py:get_node_metadata",
+      "target": "function:src/data/ingest.py:_validate_grid_identity",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/data/ingest.py:get_node_metadata",
+      "target": "function:src/data/ingest.py:fetch_elevation",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/data/ingest.py:get_node_metadata",
+      "target": "function:src/data/ingest.py:derive_land_sea_mask",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/data/ingest.py:get_node_metadata",
+      "target": "function:src/data/ingest.py:get_node_definitions_df",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:run_eval_final.py:main",
+      "target": "function:run_eval_final.py:load_test_data",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:run_eval_final.py:main",
+      "target": "function:run_eval_final.py:run_persistence",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:run_eval_final.py:main",
+      "target": "function:run_eval_final.py:run_mlp_baseline",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:run_eval_final.py:main",
+      "target": "function:run_eval_final.py:run_diffusion_scenario",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:run_eval_final.py:main",
+      "target": "function:run_eval_final.py:compute_scenario_metrics",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:run_eval_final.py:main",
+      "target": "function:run_eval_final.py:plot_bar_chart",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:run_eval_final.py:main",
+      "target": "function:run_eval_final.py:plot_scatter",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:run_eval_final.py:main",
+      "target": "function:run_eval_final.py:plot_time_series",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:run_eval_final.py:main",
+      "target": "function:run_eval_final.py:plot_reliability",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:run_eval_final.py:main",
+      "target": "function:run_eval_final.py:plot_crps_comparison",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:run_eval_final.py:main",
+      "target": "function:run_eval_final.py:plot_ablation",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:run_eval_final.py:run_diffusion_scenario",
+      "target": "function:run_eval_final.py:get_per_node_sequence",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:run_eval_final.py:run_diffusion_scenario",
+      "target": "function:run_eval_final.py:_eval_indices",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:run_eval_final.py:run_diffusion_scenario",
+      "target": "function:src/inference.py:create_inference_graphs",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:run_eval_final.py:run_diffusion_scenario",
+      "target": "function:src/inference.py:load_model_and_stats",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:run_eval_final.py:run_diffusion_scenario",
+      "target": "function:src/models/diffusion.py:RainForecaster",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:run_eval_final.py:run_diffusion_scenario",
+      "target": "function:src/models/diffusion.py:ConditionalDiffusionModel",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:run_eval_final.py:run_diffusion_scenario",
+      "target": "function:src/retrieval/base.py:RetrievalDatabase",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:run_eval_final.py:run_mlp_baseline",
+      "target": "function:run_eval_final.py:_eval_indices",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:run_eval_final.py:run_mlp_baseline",
+      "target": "function:src/models/mlp_baseline.py:MLPBaseline",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:run_eval_final.py:run_persistence",
+      "target": "function:run_eval_final.py:_eval_indices",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:scripts/eval_rain_robust.py:run_crosscheck",
+      "target": "function:scripts/eval_rain_robust.py:_seed_everything",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:scripts/eval_rain_robust.py:run_crosscheck",
+      "target": "function:scripts/eval_rain_robust.py:_build_test_frames",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:scripts/eval_rain_robust.py:run_crosscheck",
+      "target": "function:scripts/eval_rain_robust.py:_pick_week_windows",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:scripts/eval_rain_robust.py:run_crosscheck",
+      "target": "function:scripts/eval_rain_robust.py:_get_per_node_sequence",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:scripts/eval_rain_robust.py:run_crosscheck",
+      "target": "function:scripts/eval_rain_robust.py:_load_mlp",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:scripts/eval_rain_robust.py:run_crosscheck",
+      "target": "function:scripts/eval_rain_robust.py:_event_metrics",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:scripts/eval_rain_robust.py:run_crosscheck",
+      "target": "function:scripts/eval_rain_robust.py:_corr",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:scripts/eval_rain_robust.py:run_crosscheck",
+      "target": "function:src/inference.py:create_inference_graphs",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:scripts/eval_rain_robust.py:run_crosscheck",
+      "target": "function:src/inference.py:load_model_and_stats",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:scripts/eval_rain_robust.py:run_crosscheck",
+      "target": "function:src/models/diffusion.py:RainForecaster",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:scripts/eval_rain_robust.py:run_crosscheck",
+      "target": "function:src/models/diffusion.py:ConditionalDiffusionModel",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:scripts/eval_rain_robust.py:run_crosscheck",
+      "target": "function:src/retrieval/base.py:RetrievalDatabase",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:scripts/eval_rain_robust.py:run_crosscheck",
+      "target": "function:src/models/gnn.py:SpatioTemporalGNN",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:run_eval_final.py:main",
+      "target": "file:result_test/diff_only/metrics.json",
+      "type": "writes_to",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "function:run_eval_final.py:main",
+      "target": "file:result_test/diff_retrieval/metrics.json",
+      "type": "writes_to",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "function:run_eval_final.py:main",
+      "target": "file:result_test/full_model/metrics.json",
+      "type": "writes_to",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "function:run_eval_final.py:main",
+      "target": "file:result_test/mlp_baseline/metrics.json",
+      "type": "writes_to",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "function:run_eval_final.py:main",
+      "target": "file:result_test/persistence/metrics.json",
+      "type": "writes_to",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "function:run_eval_final.py:main",
+      "target": "file:result_test/EVALUATION_REPORT.md",
+      "type": "writes_to",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "function:src/train_baseline.py:train_mlp_baseline",
+      "target": "file:results/baseline_results/baseline_metrics.json",
+      "type": "writes_to",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:result_test/EVALUATION_REPORT.md",
+      "target": "file:result_test/README.md",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:result_test/README.md",
+      "target": "file:result_test/full_model/metrics.json",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:results/README.md",
+      "target": "file:results/baseline_results/baseline_metrics.json",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/train.py",
+      "target": "file:tests/test_checkpoint_contract.py",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/train_baseline.py",
+      "target": "file:tests/test_checkpoint_contract.py",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/inference.py",
+      "target": "file:tests/test_checkpoint_contract.py",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/config.py",
+      "target": "function:src/models/gnn.py:TemporalAttention",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/config.py",
+      "target": "function:src/models/gnn.py:SpatialGNN",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/config.py",
+      "target": "function:src/models/gnn.py:SpatioTemporalGNN",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/models/diffusion.py",
+      "target": "function:src/models/gnn.py:SpatioTemporalGNN",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/inference.py",
+      "target": "function:src/models/gnn.py:SpatioTemporalGNN",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/train.py",
+      "target": "function:src/models/gnn.py:SpatioTemporalGNN",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/train.py",
+      "target": "function:src/retrieval/base.py:RetrievalDatabase",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/inference.py",
+      "target": "function:src/retrieval/base.py:RetrievalDatabase",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/models/diffusion.py",
+      "target": "function:src/models/diffusion.py:SinusoidalPositionEmbeddings",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/evaluation/__init__.py",
+      "target": "file:src/evaluation/probabilistic_metrics.py",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "function:scripts/plot_week_timeseries.py:plot_week",
+      "target": "file:result_test/EVALUATION_REPORT.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:scripts/plot_week_timeseries.py",
+      "target": "file:scripts/eval_rain_robust.py",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:scripts/eval_rain_robust.py",
+      "target": "file:run_eval_final.py",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/inference.py",
+      "target": "function:src/models/diffusion.py:ConditionalDiffusionModel",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/models/mlp_baseline.py",
+      "target": "file:src/models/diffusion.py",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/train_baseline.py",
+      "target": "file:src/train.py",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/config.py",
+      "target": "file:src/retrieval/base.py",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/config.py",
+      "target": "file:src/models/gnn.py",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/config.py",
+      "target": "file:src/models/diffusion.py",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/config.py",
+      "target": "file:src/inference.py",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/config.py",
+      "target": "file:src/train.py",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:tests/test_checkpoint_contract.py",
+      "target": "file:src/inference.py",
+      "type": "validates",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:tests/test_checkpoint_contract.py",
+      "target": "file:src/train.py",
+      "type": "validates",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:tests/test_checkpoint_contract.py",
+      "target": "file:src/config.py",
+      "type": "validates",
+      "direction": "forward",
+      "weight": 0.5
     }
   ],
   "layers": [
     {
-      "id": "layer:config-graph-topology",
-      "name": "Configuration & Graph Topology",
-      "description": "Canonical 5-node star topology definition, node coordinate validation, and shared graph-configuration helpers used by the GNN-diffusion precipitation nowcasting pipeline.",
+      "id": "layer:dokumentasi-dan-konfigurasi",
+      "name": "Dokumentasi & Konfigurasi Proyek",
+      "description": "Dokumen skripsi, laporan audit, panduan proyek, serta konfigurasi environment dan dependensi",
       "nodeIds": [
-        "file:src/config.py"
-      ]
-    },
-    {
-      "id": "layer:data-ingestion-loading",
-      "name": "Data Ingestion & Loading",
-      "description": "ERA5 weather data download, grid validation, parquet persistence, and PyTorch Geometric sliding-window dataset construction for spatio-temporal star-graph sequences.",
-      "nodeIds": [
-        "file:src/data/ingest.py",
-        "file:src/data/temporal_loader.py"
-      ]
-    },
-    {
-      "id": "layer:model-components",
-      "name": "Model Components",
-      "description": "Neural-network building blocks including the spatio-temporal GNN, conditional diffusion rainfall forecaster, MLP baseline, and FAISS-backed historical-context retrieval store.",
-      "nodeIds": [
-        "file:src/models/diffusion.py",
-        "file:src/models/gnn.py",
-        "file:src/models/mlp_baseline.py",
-        "file:src/retrieval/base.py"
-      ]
-    },
-    {
-      "id": "layer:training-inference-orchestration",
-      "name": "Training & Inference Orchestration",
-      "description": "End-to-end training loops, checkpointing, real-time nowcasting inference, and probabilistic verification metrics that wire data, models, and retrieval together.",
-      "nodeIds": [
-        "file:src/train.py",
-        "file:src/train_baseline.py",
-        "file:src/inference.py",
-        "file:src/evaluation/__init__.py",
-        "file:src/evaluation/probabilistic_metrics.py"
-      ]
-    },
-    {
-      "id": "layer:evaluation-scripts-notebooks",
-      "name": "Evaluation Scripts & Notebooks",
-      "description": "Standalone benchmark entry points, robustness checks, one-week timeseries plotting, and exploratory notebooks for comparing model scenarios against persistence and MLP baselines.",
-      "nodeIds": [
-        "file:run_eval_final.py",
-        "file:scripts/eval_rain_robust.py",
-        "file:scripts/plot_week_timeseries.py",
-        "file:notebooks/evaluasi_model.ipynb"
-      ]
-    },
-    {
-      "id": "layer:tests",
-      "name": "Tests",
-      "description": "Unit and smoke tests validating topology construction, temporal-loader contracts, checkpoint metadata, and inference sanity for the nowcasting system.",
-      "nodeIds": [
-        "file:tests/test_inference_smoke.py",
-        "file:tests/test_config_topology.py",
-        "file:tests/test_checkpoint_contract.py",
-        "file:tests/test_loader_contract.py"
-      ]
-    },
-    {
-      "id": "layer:documentation",
-      "name": "Documentation",
-      "description": "Project knowledge base, research methodology, migration checklists, audit plans, and the Python dependency manifest describing the GNN+diffusion nowcasting thesis.",
-      "nodeIds": [
+        "file:.github/hooks/rtk-hook.ps1",
+        "file:.github/hooks/rtk-session.ps1",
+        "config:.github/hooks/rtk.json",
         "document:docs/ACTIVE_5NODE_STAR_MAIN.md",
         "document:docs/AUDIT_FIX_PLAN.md",
         "document:docs/AUDIT_SESSION_CONTEXT.md",
@@ -5654,20 +5801,17 @@
         "document:docs/METODE_PENELITIAN_PROYEK.md",
         "document:docs/MIGRATION_CHECKLIST_STATUS.md",
         "document:docs/README.md",
-        "document:requirements.txt"
-      ]
-    },
-    {
-      "id": "layer:results-outputs",
-      "name": "Results & Evaluation Outputs",
-      "description": "Generated CSV timeseries, JSON metric summaries, and markdown reports from diffusion-only, diffusion-GNN, retrieval-augmented, MLP, and persistence baseline experiments.",
-      "nodeIds": [
-        "file:result_test/nowcasting_hourly_week/driest_week_actual_vs_pred.csv",
-        "file:result_test/nowcasting_hourly_week/median_week_actual_vs_pred.csv",
-        "file:result_test/nowcasting_hourly_week/weekly_crosscheck_3var.csv",
         "config:result_test/nowcasting_hourly_week/weekly_crosscheck_3var_meta.json",
-        "file:result_test/nowcasting_hourly_week/wettest_week_actual_vs_pred.csv",
-        "file:result_test/comparison/comparison_summary.csv",
+        "document:_archive/_doc_extract.txt",
+        "document:.agent/rules/respon.md",
+        "document:.agent/skills/thesis-sentinel/SKILL.md",
+        "document:.github/agents/independent-verification-auditor.agent.md",
+        "document:.github/rules/respon.md",
+        "file:.github/skills/thesis-sentinel/scripts/health_check.py",
+        "document:.github/skills/thesis-sentinel/SKILL.md",
+        "config:.kiro/settings/lsp.json",
+        "file:private.note",
+        "document:requirements.txt",
         "config:result_test/comparison/comparison_summary.json",
         "config:result_test/diff_gnn/metrics.json",
         "config:result_test/diff_only/metrics.json",
@@ -5678,188 +5822,202 @@
         "config:result_test/persistence/metrics.json",
         "document:result_test/README.md",
         "config:results/baseline_results/baseline_metrics.json",
-        "document:results/README.md"
+        "document:results/README.md",
+        "file:result_test/diff_only/metrics.json",
+        "file:result_test/diff_retrieval/metrics.json",
+        "file:result_test/EVALUATION_REPORT.md",
+        "file:result_test/full_model/metrics.json",
+        "file:result_test/mlp_baseline/metrics.json",
+        "file:result_test/persistence/metrics.json",
+        "file:result_test/README.md",
+        "file:results/baseline_results/baseline_metrics.json",
+        "file:results/README.md"
       ]
     },
     {
-      "id": "layer:archive",
-      "name": "Archive",
-      "description": "Legacy notebooks, debug scripts, threshold analyses, plotting utilities, draft thesis documents, and extracted documentation retained for historical reference.",
+      "id": "layer:pengolahan-data-dan-ingest",
+      "name": "Pipelines Data & Loader Temporal",
+      "description": "Modul ingest data meteorologi Open-Meteo, pembentukan lag feature, transformasi log1p, z-score, dan temporal star-graph loader",
+      "nodeIds": [
+        "file:src/data/ingest.py",
+        "file:src/data/temporal_loader.py",
+        "file:tests/test_loader_contract.py"
+      ]
+    },
+    {
+      "id": "layer:representasi-spasio-temporal-gnn",
+      "name": "Arsitektur Spatio-Temporal GNN",
+      "description": "Spatial GAT (Graph Attention Network) 5-node star graph dan Temporal Attention dengan causal masking",
+      "nodeIds": [
+        "file:src/models/gnn.py"
+      ]
+    },
+    {
+      "id": "layer:retrieval-analog-historis",
+      "name": "Mekanisme Retrieval Analog Historis",
+      "description": "Indeks FAISS L2 L2-Distance untuk pencarian k-NN analog cuaca historis sebagai kondisiying diffusion",
+      "nodeIds": [
+        "file:src/retrieval/base.py"
+      ]
+    },
+    {
+      "id": "layer:conditional-diffusion-model",
+      "name": "Conditional Denoising Diffusion Model",
+      "description": "DDPMScheduler/DDIMScheduler, Conditional Denoising Neural Network dengan joint conditioning (GNN + Retrieval), dan loss terbobot",
+      "nodeIds": [
+        "file:src/models/mlp_baseline.py",
+        "file:src/models/diffusion.py"
+      ]
+    },
+    {
+      "id": "layer:pelatihan-dan-baseline",
+      "name": "Modul Pelatihan & Baseline",
+      "description": "Skrip pelatihan diffusion model (train.py) dan model baseline MLP (train_baseline.py)",
+      "nodeIds": [
+        "file:src/train_baseline.py",
+        "file:src/train.py"
+      ]
+    },
+    {
+      "id": "layer:inferensi-dan-nowcasting",
+      "name": "Pipeline Inferensi Probabilistik",
+      "description": "Rolling window one-step-ahead probabilistic nowcasting ensemble sampler untuk node MAIN",
+      "nodeIds": [
+        "file:run_eval_final.py",
+        "file:src/inference.py"
+      ]
+    },
+    {
+      "id": "layer:evaluasi-dan-metrik",
+      "name": "Evaluasi & Metrik Probabilistik",
+      "description": "Hitung MAE, RMSE, Pearson r, CRPS (fair estimator), Brier score, POD, FAR, CSI, dan reliability diagram",
+      "nodeIds": [
+        "file:scripts/eval_rain_robust.py",
+        "file:src/evaluation/probabilistic_metrics.py",
+        "file:result_test/nowcasting_hourly_week/driest_week_actual_vs_pred.csv",
+        "file:result_test/nowcasting_hourly_week/median_week_actual_vs_pred.csv",
+        "file:result_test/nowcasting_hourly_week/weekly_crosscheck_3var.csv",
+        "file:result_test/nowcasting_hourly_week/wettest_week_actual_vs_pred.csv",
+        "file:result_test/comparison/comparison_summary.csv",
+        "file:scripts/plot_week_timeseries.py",
+        "file:src/evaluation/__init__.py"
+      ]
+    },
+    {
+      "id": "layer:pengujian-dan-unit-tests",
+      "name": "Pengujian Otomatis (Unit & Integration Tests)",
+      "description": "Pengujian kontrak checkpoint, loader, topology star, retrieval, dan inferensi smoke test",
+      "nodeIds": [
+        "file:tests/test_inference_smoke.py",
+        "file:tests/test_config_topology.py",
+        "file:tests/test_checkpoint_contract.py"
+      ]
+    },
+    {
+      "id": "layer:komponen-lainnya",
+      "name": "Komponen Tambahan",
+      "description": "File pendukung dan utilitas proyek",
       "nodeIds": [
         "file:_archive/debug_nan.py",
         "file:_archive/generate_plots.py",
+        "file:src/config.py",
         "file:_archive/run_threshold_analysis.py",
-        "document:_archive/_doc_extract.txt",
         "file:_archive/_extract_doc.py",
         "file:_archive/complete_pipeline.ipynb",
         "file:_archive/Draft Bepan (2).docx",
         "file:_archive/run_analysis.py",
-        "file:_archive/thesis_analysis.ipynb"
-      ]
-    },
-    {
-      "id": "layer:project-tooling",
-      "name": "Project Tooling & Support",
-      "description": "Agent rules, IDE settings, GitHub hooks, thesis-sentinel health checks, understand-anything ignore patterns, and private project notes that support development workflow.",
-      "nodeIds": [
-        "file:.github/hooks/rtk-hook.ps1",
-        "file:.github/hooks/rtk-session.ps1",
-        "config:.github/hooks/rtk.json",
-        "document:.github/agents/independent-verification-auditor.agent.md",
-        "document:.github/rules/respon.md",
-        "file:.github/skills/thesis-sentinel/scripts/health_check.py",
-        "document:.github/skills/thesis-sentinel/SKILL.md",
-        "document:.agent/rules/respon.md",
+        "file:_archive/thesis_analysis.ipynb",
         "file:.agent/skills/thesis-sentinel/scripts/health_check.py",
-        "document:.agent/skills/thesis-sentinel/SKILL.md",
-        "config:.kiro/settings/lsp.json",
         "file:.understand-anything/.understandignore",
-        "file:private.note"
+        "file:notebooks/evaluasi_model.ipynb"
       ]
     }
   ],
   "tour": [
     {
       "order": 1,
-      "title": "Project Overview",
-      "description": "Start with the active documentation index, then explore the comprehensive knowledge base and research-methodology document. These files explain the project's goal: spatiotemporal precipitation nowcasting for the Gede-Pangrango region using ERA5 data, a canonical 5-node star graph, GNN encoding, retrieval augmentation, and diffusion generation.",
+      "title": "1. Gambaran Umum Proyek & Konfigurasi Topologi",
+      "description": "Langkah pertama memahami proyek skripsi: konfigurasi topologi graf star 5-node (MAIN, UP, DOWN, LEFT, RIGHT) di Gunung Gede-Pangrango serta dependensi proyek.",
       "nodeIds": [
-        "document:docs/README.md",
-        "document:docs/KNOWLEDGE.md",
+        "file:src/config.py",
         "document:docs/METODE_PENELITIAN_PROYEK.md"
       ]
     },
     {
       "order": 2,
-      "title": "Training Pipeline Entry Point",
-      "description": "The training script is the main entry point that orchestrates the entire learning workflow. It ingests weather data, builds the star graph, precomputes retrieval contexts, trains the GNN and diffusion models, validates performance, and saves checkpoints.",
+      "title": "2. Pipeline Data & Representasi Temporal Graph",
+      "description": "Pengambilan data meteorologi per jam dari Open-Meteo ERA5, pembuatan feature lag 1 jam, log-transform log1p, z-score normalization, dan pembuatan sequence graph PyTorch-Geometric.",
       "nodeIds": [
-        "file:src/train.py",
-        "function:src/train.py:train_pipeline"
-      ],
-      "languageLesson": "Python scripts often use an argparse helper to expose CLI hyperparameters and a single high-level function that wires data loaders, models, optimizers, and loggers together."
+        "file:src/data/ingest.py",
+        "file:src/data/temporal_loader.py"
+      ]
     },
     {
       "order": 3,
-      "title": "Configuration & Graph Topology",
-      "description": "The central configuration module defines the canonical 5-node star topology and validates the feature schema before any model sees data. It also builds the star-shaped edge index and geospatial edge attributes that connect the main node to surrounding stations.",
+      "title": "3. Arsitektur Spatio-Temporal Graph Neural Network (ST-GNN)",
+      "description": "Ekstraksi fitur spasial inter-node menggunakan 2-layer Spatial Graph Attention Network (GAT) diikuti oleh Temporal Attention dengan causal masking untuk menangkap dinamika temporal.",
       "nodeIds": [
-        "file:src/config.py",
-        "function:src/config.py:build_star_edge_index"
-      ],
-      "languageLesson": "Encapsulating topology helpers in a dedicated module makes the graph structure a first-class citizen: change the node list here and every downstream model, loader, and evaluation script updates consistently."
+        "file:src/models/gnn.py",
+        "function:src/models/gnn.py:SpatialGNN",
+        "function:src/models/gnn.py:TemporalAttention",
+        "function:src/models/gnn.py:SpatioTemporalGNN"
+      ]
     },
     {
       "order": 4,
-      "title": "Weather Data Ingestion",
-      "description": "The ingestion module downloads ERA5 reanalysis through Open-Meteo, validates that configured coordinates align with ERA5 grid cells, and persists tidy parquet files. This is the first stage of the pipeline that turns raw meteorology into machine-readable tabular data.",
+      "title": "4. Retrieval-Augmented Historical Analogs (FAISS)",
+      "description": "Pencarian k-NN analog cuaca ekstrem historis menggunakan indeks FAISS L2 Distance untuk memperkaya kondisi generasi diffusion model.",
       "nodeIds": [
-        "file:src/data/ingest.py"
+        "file:src/retrieval/base.py",
+        "function:src/retrieval/base.py:RetrievalDatabase"
       ]
     },
     {
       "order": 5,
-      "title": "Temporal Graph Data Loading",
-      "description": "The temporal loader converts tabular sequences into sliding-window PyTorch Geometric graph snapshots on the canonical 5-node star. It enforces the node-order contract, normalizes features and targets, and batches samples with a custom collate function.",
+      "title": "5. Conditional Denoising Diffusion Model",
+      "description": "Arsitektur utama model generatif probabilistik: DDPMScheduler/DDIMScheduler, Conditional Denoising Neural Network dengan joint conditioning (GNN + Retrieval), serta weighted noise loss.",
       "nodeIds": [
-        "file:src/data/temporal_loader.py",
-        "class:src/data/temporal_loader.py:TemporalGraphDataset"
-      ],
-      "languageLesson": "A PyTorch Dataset implements __getitem__ and __len__ so a DataLoader can batch samples; a custom collate function lets you stack irregular graph snapshots into a single mini-batch."
+        "file:src/models/diffusion.py",
+        "function:src/models/diffusion.py:ConditionalDiffusionModel",
+        "function:src/models/diffusion.py:RainForecaster"
+      ]
     },
     {
       "order": 6,
-      "title": "Spatio-Temporal GNN Encoder",
-      "description": "The GNN model combines graph-attention spatial layers with causal temporal self-attention to encode each 5-node snapshot into a conditioned representation. This representation feeds the downstream diffusion forecaster and shapes how information propagates across stations and time.",
+      "title": "6. Pipeline Pelatihan & Baseline",
+      "description": "Prosedur pelatihan end-to-end dengan optimizer AdamW, scheduler, dan logging loss, serta model baseline MLP sebagai pembanding deterministik.",
       "nodeIds": [
-        "file:src/models/gnn.py",
-        "class:src/models/gnn.py:SpatioTemporalGNN"
-      ],
-      "languageLesson": "Message-passing neural networks alternate neighborhood aggregation (spatial reasoning) with sequence modeling (temporal reasoning) to capture both spatial correlations and temporal dynamics."
+        "file:src/train.py",
+        "file:src/train_baseline.py",
+        "file:src/models/mlp_baseline.py"
+      ]
     },
     {
       "order": 7,
-      "title": "Conditional Diffusion Forecaster",
-      "description": "The diffusion module implements a conditional DDPM/DDIM sampler that predicts precipitation and wet-event probabilities. The RainForecaster wraps the noise model into a high-level interface for generating ensemble nowcasts conditioned on GNN-encoded states.",
-      "nodeIds": [
-        "file:src/models/diffusion.py",
-        "class:src/models/diffusion.py:RainForecaster",
-        "class:src/models/diffusion.py:ConditionalDiffusionModel"
-      ],
-      "languageLesson": "Diffusion models learn to reverse a gradual noising process, turning random noise into structured forecasts; conditioning on graph embeddings lets the model respect spatial and meteorological context."
-    },
-    {
-      "order": 8,
-      "title": "Retrieval-Augmented Context Store",
-      "description": "Historical weather context vectors are indexed in a FAISS-backed retrieval database. At inference time, the system queries nearest neighbors from the training set to enrich the diffusion condition with analogous past weather patterns.",
-      "nodeIds": [
-        "file:src/retrieval/base.py",
-        "class:src/retrieval/base.py:RetrievalDatabase"
-      ],
-      "languageLesson": "FAISS is a library for efficient approximate nearest-neighbor search over dense vectors, enabling memory-augmented models without storing the entire training set in GPU memory."
-    },
-    {
-      "order": 9,
-      "title": "Real-Time Inference Pipeline",
-      "description": "The inference module loads trained checkpoints and normalization statistics, builds the inference graphs, queries the retrieval store, runs diffusion sampling, and denormalizes outputs into physical units. It is the production path from raw conditions to nowcasts.",
+      "title": "7. Inferensi Nowcasting Probabilistik",
+      "description": "Prosedur inferensi one-step-ahead rolling forecast yang menghasilkan sampel ensemble probabilistik presipitasi khusus untuk titik puncak/pos utama (node MAIN).",
       "nodeIds": [
         "file:src/inference.py",
         "function:src/inference.py:run_inference_real"
-      ],
-      "languageLesson": "Inference scripts usually separate model loading (heavy, done once) from the forward loop (repeated per sample) and handle device placement so the same code runs on CPU or CUDA."
+      ]
     },
     {
-      "order": 10,
-      "title": "Evaluation Orchestration",
-      "description": "The final evaluation script benchmarks persistence, MLP, and diffusion-GNN scenarios, computes deterministic and probabilistic metrics, and produces comparison plots and reports. It is the main entry point for measuring model quality after training.",
+      "order": 8,
+      "title": "8. Evaluasi Metrik & Skenario Ablation Study",
+      "description": "Evaluasi komprehensif 6 skenario eksperimen (Persistence, MLP, Diff Only, Diff+Ret, Diff+STGNN, Full Model) menggunakan metrik MAE, RMSE, Pearson r, CRPS, Brier Score, POD, FAR, CSI, dan reliability diagram.",
       "nodeIds": [
         "file:run_eval_final.py",
-        "function:run_eval_final.py:main"
-      ],
-      "languageLesson": "A well-structured evaluation script seeds random state, loads the same test data for every scenario, and writes both machine-readable JSON metrics and human-readable plots for reproducible reporting."
-    },
-    {
-      "order": 11,
-      "title": "Probabilistic Metrics Library",
-      "description": "The metrics module collects verification scores such as RMSE, MAE, correlation, CRPS, Brier score, POD, FAR, CSI, and reliability diagrams. These metrics quantify both accuracy and forecast sharpness, which is essential for comparing ensemble and deterministic baselines.",
-      "nodeIds": [
         "file:src/evaluation/probabilistic_metrics.py",
-        "function:src/evaluation/probabilistic_metrics.py:compute_all_metrics"
-      ],
-      "languageLesson": "Continuous Ranked Probability Score (CRPS) generalizes MAE to probabilistic forecasts: a perfect deterministic forecast has CRPS equal to its MAE, while a sharp, well-calibrated ensemble can score lower."
-    },
-    {
-      "order": 12,
-      "title": "Baselines & Robustness Checks",
-      "description": "The MLP baseline and its training script provide a lightweight deterministic comparison, while the robustness evaluation script cross-checks forecasts across selected dry, median, and wet weekly windows. Together they show how the diffusion-GNN model performs under varying rainfall regimes.",
-      "nodeIds": [
-        "file:src/models/mlp_baseline.py",
-        "file:src/train_baseline.py",
         "file:scripts/eval_rain_robust.py"
       ]
     },
     {
-      "order": 13,
-      "title": "Tests & Model Contracts",
-      "description": "The test suite guards the canonical node ordering, temporal loader contracts, checkpoint metadata, and end-to-end inference smoke paths. These tests ensure that refactors do not silently break the 5-node star graph assumptions or the checkpoint format.",
+      "order": 9,
+      "title": "9. Kontrak Pengujian Otomatis",
+      "description": "Pengujian otomatis untuk memastikan integritas loader, kontinuitas checkpoint model, topologi graf, dan kestabilan inferensi.",
       "nodeIds": [
-        "file:tests/test_config_topology.py",
-        "file:tests/test_loader_contract.py",
-        "file:tests/test_checkpoint_contract.py",
-        "file:tests/test_inference_smoke.py"
-      ],
-      "languageLesson": "Contract tests encode invariants that matter more than exact numerical outputs: if graph topology, node order, or checkpoint metadata changes, the test suite fails before bad predictions reach evaluation."
-    },
-    {
-      "order": 14,
-      "title": "Results & Reports",
-      "description": "Evaluation outputs include CSV timeseries, JSON metric summaries, and markdown reports for each scenario. The evaluation report summarizes deterministic and probabilistic metrics by variable, giving a concise view of which models excel at precipitation, wind, and humidity nowcasting.",
-      "nodeIds": [
-        "document:result_test/EVALUATION_REPORT.md",
-        "document:result_test/README.md",
-        "config:result_test/comparison/comparison_summary.json"
-      ],
-      "languageLesson": "Splitting results into machine-readable JSON and human-readable markdown lets automated dashboards consume metrics while researchers can read the narrative report directly."
+        "file:tests/test_checkpoint_contract.py"
+      ]
     }
   ]
 }

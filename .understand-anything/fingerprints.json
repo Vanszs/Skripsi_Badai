@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "gitCommitHash": "ebfc7842a03f50be9a949bb7c0e398395d459a07",
-  "generatedAt": "2026-07-08T15:01:11.279Z",
+  "gitCommitHash": "69445df206f1e7d42ae994cfdd71bbbc785145c1",
+  "generatedAt": "2026-07-23T13:02:23.843Z",
   "files": {
     "_archive/_doc_extract.txt": {
       "filePath": "_archive/_doc_extract.txt",
@@ -517,7 +517,7 @@
     },
     ".github/rules/respon.md": {
       "filePath": ".github/rules/respon.md",
-      "contentHash": "9630ec9fce25d5255a9d3f1304f9756195c029c6bc05787bed9e3790be4a98e2",
+      "contentHash": "5718fd3ac1f2ed26bf4077ccd43f308681b632403a96cb2a1fa80b5b6b1f6001",
       "functions": [],
       "classes": [],
       "imports": [],
@@ -595,12 +595,12 @@
     },
     ".understand-anything/fingerprints.json": {
       "filePath": ".understand-anything/fingerprints.json",
-      "contentHash": "c9fe23a2aff53eca5f50cc6f25185ecbd5c1a625cbd3333ce178367a78409b78",
+      "contentHash": "66eee74495a2c0e6e27b315dd46c4f161642acd541b198baf706646c12ecc17f",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 2998,
+      "totalLines": 3038,
       "hasStructuralAnalysis": true
     },
     ".understand-anything/intermediate/scan-result.json": {
@@ -615,22 +615,22 @@
     },
     ".understand-anything/knowledge-graph.json": {
       "filePath": ".understand-anything/knowledge-graph.json",
-      "contentHash": "6479e7386634970ecff2591c9074f1d0c6bdc35665583936c84e493f854a46bf",
+      "contentHash": "7310fbd23e8303f0a73b612591886f06987d39e9c72e685ddeecd9b385e6b2cc",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 5864,
+      "totalLines": 6023,
       "hasStructuralAnalysis": true
     },
     ".understand-anything/meta.json": {
       "filePath": ".understand-anything/meta.json",
-      "contentHash": "25ff3143c6c0fcfd455a46f635d304f58e801d7ab84a25f56af6b3af2531ef7a",
+      "contentHash": "83f24db72417c7b3df756ea079546a5aa96528d9cb6b92f9bcd635ff7b9f43ac",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 6,
+      "totalLines": 9,
       "hasStructuralAnalysis": true
     },
     "docs/ACTIVE_5NODE_STAR_MAIN.md": {
@@ -645,7 +645,7 @@
     },
     "docs/AUDIT_FIX_PLAN.md": {
       "filePath": "docs/AUDIT_FIX_PLAN.md",
-      "contentHash": "ffe901db2c33c2b46c440c27cac2cdb105df42fc94907233fb93b17a6e6b83cc",
+      "contentHash": "8154e379a1ed2f1ffa803dc1864104144339338f98bdd66e5fa2cc4608f669e4",
       "functions": [],
       "classes": [],
       "imports": [],
@@ -675,12 +675,12 @@
     },
     "docs/METODE_PENELITIAN_PROYEK.md": {
       "filePath": "docs/METODE_PENELITIAN_PROYEK.md",
-      "contentHash": "36f3773c3baabf75d04d1623b3c1936dee94df7f256f1bebc713db8d796eb4c2",
+      "contentHash": "dc7487010363c202a5084e744d16588e39c9cf940c6e2916e6095a95f3bb31d3",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 331,
+      "totalLines": 321,
       "hasStructuralAnalysis": true
     },
     "docs/MIGRATION_CHECKLIST_STATUS.md": {
@@ -2016,7 +2016,7 @@
     },
     "src/inference.py": {
       "filePath": "src/inference.py",
-      "contentHash": "9f4936c0c7d06dca184a4b4096353c46dd523113c934b27d2615eac666b0e13a",
+      "contentHash": "70e4c48458e0328d6a4d3bebcd23f52f7b9b0d33b42df3fb7cfc3f95e7cea5e5",
       "functions": [
         {
           "name": "_build_edge_index_from_config",
@@ -2036,7 +2036,7 @@
             "device"
           ],
           "exported": true,
-          "lineCount": 31
+          "lineCount": 28
         },
         {
           "name": "load_model_and_stats",
@@ -2057,7 +2057,7 @@
             "device"
           ],
           "exported": true,
-          "lineCount": 85
+          "lineCount": 90
         }
       ],
       "classes": [
@@ -2156,7 +2156,7 @@
         "load_model_and_stats",
         "run_inference_real"
       ],
-      "totalLines": 300,
+      "totalLines": 302,
       "hasStructuralAnalysis": true
     },
     "src/models/diffusion.py": {
@@ -2243,7 +2243,7 @@
     },
     "src/models/gnn.py": {
       "filePath": "src/models/gnn.py",
-      "contentHash": "c709401bde9b34579cc60ba59fafe57c5734efd466928593278b0ed2595d5ba0",
+      "contentHash": "f3603b29a3279ff411706e2b30da255409f5cb0af78129e259cdb183d3103578",
       "functions": [],
       "classes": [
         {
@@ -2350,7 +2350,7 @@
     },
     "src/retrieval/base.py": {
       "filePath": "src/retrieval/base.py",
-      "contentHash": "e4f2ec4bad98984a460875bc3cbf41cd3797f0def9ec5a02efa61b2b4f442fd2",
+      "contentHash": "824ccd5aa505db44ecb479cf3888480dc6c05290016130fe445d1d26c9f3424a",
       "functions": [],
       "classes": [
         {
@@ -2362,7 +2362,7 @@
           ],
           "properties": [],
           "exported": true,
-          "lineCount": 54
+          "lineCount": 69
         }
       ],
       "imports": [
@@ -2388,7 +2388,7 @@
       "exports": [
         "RetrievalDatabase"
       ],
-      "totalLines": 59,
+      "totalLines": 74,
       "hasStructuralAnalysis": true
     },
     "src/train_baseline.py": {
@@ -2546,7 +2546,7 @@
     },
     "src/train.py": {
       "filePath": "src/train.py",
-      "contentHash": "d3b3a6e00d1b7cf89fb45aebec3a4fad04692deb616ad423c09578945b240086",
+      "contentHash": "65dc5f783e2d09482f48911b088af4597beffa4769d98832155cde2ec9d59a29",
       "functions": [
         {
           "name": "temporal_split",
@@ -2585,7 +2585,7 @@
           ],
           "returnType": "torch.Tensor",
           "exported": true,
-          "lineCount": 68
+          "lineCount": 79
         },
         {
           "name": "_tensor_corrcoef",
@@ -2690,6 +2690,12 @@
           "source": "sys",
           "specifiers": [
             "sys"
+          ]
+        },
+        {
+          "source": "warnings",
+          "specifiers": [
+            "warnings"
           ]
         },
         {
@@ -2805,7 +2811,7 @@
         "train_pipeline",
         "_parse_args"
       ],
-      "totalLines": 911,
+      "totalLines": 923,
       "hasStructuralAnalysis": true
     },
     "tests/test_checkpoint_contract.py": {
