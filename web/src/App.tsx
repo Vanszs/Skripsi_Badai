@@ -12,7 +12,7 @@ import { ModelPerformancePanel } from './components/ModelPerformancePanel';
 import { RetrievalAnalogsPanel } from './components/RetrievalAnalogsPanel';
 import { NodeDetailModal } from './components/NodeDetailModal';
 import { TopologyGraphOverlay } from './components/TopologyGraphOverlay';
-import { Download, Maximize2, Activity, AlertTriangle, Database, X, CloudRain, MapPinned } from 'lucide-react';
+import { Download, Maximize2, Activity, AlertTriangle, Database, X, CloudRain, MapPinned, ChevronDown, ChevronUp } from 'lucide-react';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<ActiveTab>('map');
@@ -23,6 +23,7 @@ export default function App() {
   const [nodesVisible, setNodesVisible] = useState(true);
   const [liveSnapshot, setLiveSnapshot] = useState<DashboardLiveSnapshot | null>(null);
   const [isLiveLoading, setIsLiveLoading] = useState(true);
+  const [isAnalysisExpanded, setIsAnalysisExpanded] = useState(false);
 
   // Modals state
   const [isTopologyModalOpen, setIsTopologyModalOpen] = useState(false);
@@ -172,7 +173,11 @@ export default function App() {
             </div>
 
             {/* Lower Section: Technical Bento Grid Panel */}
-            <div className="h-[310px] sm:h-[330px] [@media(max-height:500px)]:h-[45vh] [@media(max-height:500px)]:min-h-[180px] bg-white border-t border-[#d8d4c8] relative z-20 flex-shrink-0 overflow-y-auto overflow-x-hidden p-4 md:p-5 -mt-3">
+            <section className={`analysis-drawer bg-white border-t border-[#d8d4c8] z-20 overflow-hidden ${
+              isAnalysisExpanded
+                ? 'absolute inset-x-0 bottom-0 top-0 z-30 p-4 md:p-5 overflow-y-auto'
+                : 'relative h-[154px] sm:h-[168px] flex-shrink-0 p-4 md:p-5 -mt-3'
+            }`} aria-label="Analisis hujan dan pembanding historis">
               {/* Header inside Bento Grid */}
               <div className="flex items-center justify-between mb-3.5 border-b border-white/10 pb-2.5">
                 <h2 className="font-headline text-sm md:text-base font-bold text-[#202720] flex items-center gap-2">
@@ -180,6 +185,15 @@ export default function App() {
                   Analisis hujan dan pembanding historis
                 </h2>
                 <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => setIsAnalysisExpanded((expanded) => !expanded)}
+                    aria-expanded={isAnalysisExpanded}
+                    aria-label={isAnalysisExpanded ? 'Ringkas analisis' : 'Perluas analisis'}
+                    className="analysis-drawer__toggle"
+                    title={isAnalysisExpanded ? 'Ringkas analisis' : 'Perluas analisis'}
+                  >
+                    {isAnalysisExpanded ? <ChevronDown className="w-4 h-4" /> : <ChevronUp className="w-4 h-4" />}
+                  </button>
                   <button
                     onClick={handleExportData}
                     className="p-1.5 rounded-lg bg-[#131b2e] text-[#94a3b8] hover:text-[#00f0ff] hover:bg-[#1a253d] transition-all border border-white/12 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06)]"
@@ -198,7 +212,7 @@ export default function App() {
               </div>
 
               {/* Bento Grid Layout */}
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-3.5">
+              <div className="analysis-drawer__content grid grid-cols-1 md:grid-cols-4 gap-3.5">
                 {/* 1. Probabilistic Forecast Chart (2 Cols) */}
                 <div className="md:col-span-2 glass-panel p-3.5 flex flex-col">
                   <ForecastChart selectedNodeId="MAIN" forecastData={mainForecast} />
@@ -228,7 +242,8 @@ export default function App() {
                   />
                 </div>
               </div>
-            </div>
+              {!isAnalysisExpanded && <div className="analysis-drawer__fade" aria-hidden="true" />}
+            </section>
           </div>
         )}
 

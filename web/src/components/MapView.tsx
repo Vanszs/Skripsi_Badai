@@ -31,6 +31,7 @@ const MapViewComponent: React.FC<MapViewProps> = ({
 }) => {
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<L.Map | null>(null);
+  const vectorRendererRef = useRef<L.Canvas | null>(null);
   const markersRef = useRef<Record<string, L.Marker>>({});
   const polyLinesRef = useRef<Record<string, L.Polyline>>({});
   const cellsRef = useRef<Record<string, L.Rectangle>>({});
@@ -54,7 +55,14 @@ const MapViewComponent: React.FC<MapViewProps> = ({
       maxBoundsViscosity: 0.9,
       zoomControl: false,
       attributionControl: true,
+      preferCanvas: true,
+      zoomAnimation: true,
+      zoomAnimationThreshold: 4,
+      wheelDebounceTime: 35,
+      wheelPxPerZoomLevel: 90,
     });
+
+    L.control.zoom({ position: 'topright' }).addTo(map);
 
     L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
       attribution: '&copy; <a href="https://carto.com/">CARTO</a> &copy; OpenStreetMap',
@@ -63,6 +71,8 @@ const MapViewComponent: React.FC<MapViewProps> = ({
       detectRetina: true,
     }).addTo(map);
 
+    // One viewport of overscan prevents ERA5 cells from clipping during a drag.
+    vectorRendererRef.current = L.canvas({ padding: 1 });
     mapInstanceRef.current = map;
     const resizeObserver = new ResizeObserver(() => map.invalidateSize());
     resizeObserver.observe(mapContainerRef.current);
@@ -75,6 +85,7 @@ const MapViewComponent: React.FC<MapViewProps> = ({
       polyLinesRef.current = {};
       markersRef.current = {};
       cellsRef.current = {};
+      vectorRendererRef.current = null;
       map.remove();
       mapInstanceRef.current = null;
     };
@@ -104,7 +115,7 @@ const MapViewComponent: React.FC<MapViewProps> = ({
         existingCell.setStyle(precipitationStyle(rain));
         existingCell.setTooltipContent(label);
       } else {
-        const cell = L.rectangle(bounds, precipitationStyle(rain)).addTo(map);
+        const cell = L.rectangle(bounds, { ...precipitationStyle(rain), renderer: vectorRendererRef.current ?? undefined }).addTo(map);
         cell.bindTooltip(label, { className: 'era5-cell-tooltip', sticky: true });
         cellsRef.current[node.id] = cell;
       }
@@ -138,6 +149,7 @@ const MapViewComponent: React.FC<MapViewProps> = ({
           weight: Math.max(1, weight * 3),
           opacity: 0.38,
           dashArray: '4, 8',
+          renderer: vectorRendererRef.current ?? undefined,
         }).addTo(map);
         line.bindTooltip(`Pengaruh area ${id} ke MAIN: ${(weight * 100).toFixed(0)}%`, {
           permanent: false,

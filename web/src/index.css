@@ -129,6 +129,7 @@ button:focus-visible, [role="button"]:focus-visible, a:focus-visible, input:focu
 .app-shell [class*="rounded-xl"] { border-radius: var(--radius-md) !important; }
 .app-shell [class*="rounded-lg"] { border-radius: var(--radius-sm) !important; }
 .app-shell [class*="rounded-md"] { border-radius: 6px !important; }
+.app-shell [class*="rounded-none"] { border-radius: var(--radius-sm) !important; }
 .app-shell [class*="shadow-"] { box-shadow: var(--shadow-sm) !important; }
 .app-shell [class*="backdrop-blur"] { backdrop-filter: none !important; }
 .app-shell [class*="transition-all"] { transition-property: color, background-color, border-color, opacity, box-shadow, transform !important; transition-duration: 200ms !important; transition-timing-function: cubic-bezier(.2, .8, .2, 1) !important; }
@@ -165,6 +166,55 @@ button:focus-visible, [role="button"]:focus-visible, a:focus-visible, input:focu
 .era5-cell-tooltip, .era5-edge-tooltip { border: 1px solid var(--line); border-radius: 6px; background: #fff; color: var(--ink); box-shadow: var(--shadow-sm); font: 500 11px/1.5 'IBM Plex Mono', monospace; }
 .era5-edge-tooltip { padding: 2px 5px; color: var(--ink); font-size: 10px; font-weight: 600; }
 .era5-cell-tooltip::before, .era5-edge-tooltip::before { border-top-color: #fff; }
+
+.analysis-drawer {
+  transition: height 240ms cubic-bezier(.2, .8, .2, 1), inset 240ms cubic-bezier(.2, .8, .2, 1), box-shadow 240ms ease;
+}
+.analysis-drawer:has(.analysis-drawer__fade) { box-shadow: 0 -10px 28px rgb(26 38 31 / .08); }
+.analysis-drawer__content { position: relative; z-index: 0; }
+.analysis-drawer__fade {
+  position: absolute;
+  z-index: 1;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 88px;
+  pointer-events: none;
+  background: linear-gradient(to bottom, rgb(255 255 255 / 0), #fff 76%);
+}
+.analysis-drawer__toggle {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--green);
+  border-radius: 8px;
+  background: var(--green-soft);
+  color: var(--green);
+  transition: transform 200ms cubic-bezier(.2, .8, .2, 1), background-color 200ms ease, color 200ms ease;
+}
+.analysis-drawer__toggle:hover { background: var(--green); color: #fff; transform: translateY(-1px); }
+.analysis-drawer__toggle:active { transform: translateY(0); }
+.era5-map .leaflet-control-zoom {
+  margin: 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+.era5-map .leaflet-control-zoom a {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border: 0;
+  background: rgb(255 255 255 / .92);
+  color: var(--ink);
+  font: 600 20px/1 'IBM Plex Mono', monospace;
+  transition: background-color 180ms ease, color 180ms ease;
+}
+.era5-map .leaflet-control-zoom a + a { border-top: 1px solid var(--line); }
+.era5-map .leaflet-control-zoom a:hover { background: var(--green-soft); color: var(--green); }
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: #e7e4dc; }
 ::-webkit-scrollbar-thumb { background: #a8afa4; border-radius: 3px; }
@@ -172,6 +222,7 @@ button:focus-visible, [role="button"]:focus-visible, a:focus-visible, input:focu
 
 @media (max-width: 768px), (max-height: 500px) {
   button, [role="button"], a { min-height: 44px; min-width: 44px; }
+  .analysis-drawer__toggle { width: 44px; height: 44px; }
   .era5-legend { display: none; }
   .era5-hover-card { left: 12px; bottom: 12px; width: calc(100% - 24px); }
 }
