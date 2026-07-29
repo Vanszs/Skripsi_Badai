@@ -1,0 +1,471 @@
+{
+  "nodes": [
+    {
+      "id": "file:api/routers/dashboard.py",
+      "type": "file",
+      "name": "dashboard.py",
+      "filePath": "api/routers/dashboard.py",
+      "summary": "Source module (dashboard.py) implementing 1 functions (17 lines).",
+      "tags": [
+        "code"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:api/routers/dashboard.py:get_live_dashboard",
+      "type": "function",
+      "name": "get_live_dashboard",
+      "filePath": "api/routers/dashboard.py",
+      "lineRange": [
+        7,
+        17
+      ],
+      "summary": "Function get_live_dashboard defined in dashboard.py.",
+      "tags": [
+        "function",
+        "code"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:api/routers/metrics.py",
+      "type": "file",
+      "name": "metrics.py",
+      "filePath": "api/routers/metrics.py",
+      "summary": "Source module (metrics.py) implementing 1 functions (18 lines).",
+      "tags": [
+        "code",
+        "metrics",
+        "evaluation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:api/routers/metrics.py:get_metrics_summary",
+      "type": "function",
+      "name": "get_metrics_summary",
+      "filePath": "api/routers/metrics.py",
+      "lineRange": [
+        10,
+        18
+      ],
+      "summary": "Function get_metrics_summary defined in metrics.py.",
+      "tags": [
+        "function",
+        "code",
+        "metrics",
+        "evaluation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:core/data/raw/pangrango_era5_5node_2005_2025.parquet",
+      "type": "file",
+      "name": "pangrango_era5_5node_2005_2025.parquet",
+      "filePath": "core/data/raw/pangrango_era5_5node_2005_2025.parquet",
+      "summary": "Source module (pangrango_era5_5node_2005_2025.parquet) implementing helper logic (99595 lines).",
+      "tags": [
+        "code",
+        "loader",
+        "data-pipeline"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:core/data/raw/pangrango_era5_5node_2024_2024.parquet",
+      "type": "file",
+      "name": "pangrango_era5_5node_2024_2024.parquet",
+      "filePath": "core/data/raw/pangrango_era5_5node_2024_2024.parquet",
+      "summary": "Source module (pangrango_era5_5node_2024_2024.parquet) implementing helper logic (3818 lines).",
+      "tags": [
+        "code",
+        "loader",
+        "data-pipeline"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "config:core/data/raw/pangrango_era5_5node_grid_validation.json",
+      "type": "config",
+      "name": "pangrango_era5_5node_grid_validation.json",
+      "filePath": "core/data/raw/pangrango_era5_5node_grid_validation.json",
+      "summary": "Configuration file (pangrango_era5_5node_grid_validation.json) specifying project settings, environment, or build properties.",
+      "tags": [
+        "configuration",
+        "build-system"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:core/data/raw/README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "core/data/raw/README.md",
+      "summary": "Documentation file (README.md) covering project architecture, specs, or guidelines.",
+      "tags": [
+        "spec",
+        "documentation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:core/models/diffusion_chkpt.pth",
+      "type": "file",
+      "name": "diffusion_chkpt.pth",
+      "filePath": "core/models/diffusion_chkpt.pth",
+      "summary": "Source module (diffusion_chkpt.pth) implementing helper logic (4569 lines).",
+      "tags": [
+        "code",
+        "deep-learning",
+        "architecture"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:core/models/mlp_baseline_chkpt.pth",
+      "type": "file",
+      "name": "mlp_baseline_chkpt.pth",
+      "filePath": "core/models/mlp_baseline_chkpt.pth",
+      "summary": "Source module (mlp_baseline_chkpt.pth) implementing helper logic (363 lines).",
+      "tags": [
+        "code",
+        "deep-learning",
+        "architecture"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:core/notebooks/evaluasi_model.ipynb",
+      "type": "file",
+      "name": "evaluasi_model.ipynb",
+      "filePath": "core/notebooks/evaluasi_model.ipynb",
+      "summary": "Source module (evaluasi_model.ipynb) implementing helper logic (66 lines).",
+      "tags": [
+        "deep-learning",
+        "architecture",
+        "metrics",
+        "evaluation",
+        "code"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "config:core/results/baseline_results/baseline_metrics.json",
+      "type": "config",
+      "name": "baseline_metrics.json",
+      "filePath": "core/results/baseline_results/baseline_metrics.json",
+      "summary": "Configuration file (baseline_metrics.json) specifying project settings, environment, or build properties.",
+      "tags": [
+        "configuration",
+        "build-system"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:core/results/README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "core/results/README.md",
+      "summary": "Documentation file (README.md) covering project architecture, specs, or guidelines.",
+      "tags": [
+        "spec",
+        "documentation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "schema:core/results/result_test/comparison/comparison_summary.csv",
+      "type": "schema",
+      "name": "comparison_summary.csv",
+      "filePath": "core/results/result_test/comparison/comparison_summary.csv",
+      "summary": "Data schema or table definition (comparison_summary.csv).",
+      "tags": [
+        "code"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:core/results/result_test/comparison/comparison_summary.json",
+      "type": "config",
+      "name": "comparison_summary.json",
+      "filePath": "core/results/result_test/comparison/comparison_summary.json",
+      "summary": "Configuration file (comparison_summary.json) specifying project settings, environment, or build properties.",
+      "tags": [
+        "configuration",
+        "build-system"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "config:core/results/result_test/diff_gnn/metrics.json",
+      "type": "config",
+      "name": "metrics.json",
+      "filePath": "core/results/result_test/diff_gnn/metrics.json",
+      "summary": "Configuration file (metrics.json) specifying project settings, environment, or build properties.",
+      "tags": [
+        "configuration",
+        "build-system"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "config:core/results/result_test/diff_only/metrics.json",
+      "type": "config",
+      "name": "metrics.json",
+      "filePath": "core/results/result_test/diff_only/metrics.json",
+      "summary": "Configuration file (metrics.json) specifying project settings, environment, or build properties.",
+      "tags": [
+        "configuration",
+        "build-system"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "config:core/results/result_test/diff_retrieval/metrics.json",
+      "type": "config",
+      "name": "metrics.json",
+      "filePath": "core/results/result_test/diff_retrieval/metrics.json",
+      "summary": "Configuration file (metrics.json) specifying project settings, environment, or build properties.",
+      "tags": [
+        "configuration",
+        "build-system"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:core/results/result_test/EVALUATION_REPORT.md",
+      "type": "document",
+      "name": "EVALUATION_REPORT.md",
+      "filePath": "core/results/result_test/EVALUATION_REPORT.md",
+      "summary": "Documentation file (EVALUATION_REPORT.md) covering project architecture, specs, or guidelines.",
+      "tags": [
+        "spec",
+        "documentation"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "config:core/results/result_test/full_model/metrics.json",
+      "type": "config",
+      "name": "metrics.json",
+      "filePath": "core/results/result_test/full_model/metrics.json",
+      "summary": "Configuration file (metrics.json) specifying project settings, environment, or build properties.",
+      "tags": [
+        "configuration",
+        "build-system"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "config:core/results/result_test/mlp_baseline/metrics.json",
+      "type": "config",
+      "name": "metrics.json",
+      "filePath": "core/results/result_test/mlp_baseline/metrics.json",
+      "summary": "Configuration file (metrics.json) specifying project settings, environment, or build properties.",
+      "tags": [
+        "configuration",
+        "build-system"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "config:core/results/result_test/persistence/metrics.json",
+      "type": "config",
+      "name": "metrics.json",
+      "filePath": "core/results/result_test/persistence/metrics.json",
+      "summary": "Configuration file (metrics.json) specifying project settings, environment, or build properties.",
+      "tags": [
+        "configuration",
+        "build-system"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:core/results/result_test/README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "core/results/result_test/README.md",
+      "summary": "Documentation file (README.md) covering project architecture, specs, or guidelines.",
+      "tags": [
+        "spec",
+        "documentation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:core/scripts/plot_week_timeseries.py",
+      "type": "file",
+      "name": "plot_week_timeseries.py",
+      "filePath": "core/scripts/plot_week_timeseries.py",
+      "summary": "Source module (plot_week_timeseries.py) implementing 1 functions (58 lines).",
+      "tags": [
+        "code"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:core/scripts/plot_week_timeseries.py:plot_week",
+      "type": "function",
+      "name": "plot_week",
+      "filePath": "core/scripts/plot_week_timeseries.py",
+      "lineRange": [
+        24,
+        45
+      ],
+      "summary": "Function plot_week defined in plot_week_timeseries.py.",
+      "tags": [
+        "function",
+        "code"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:core/src/components/HistoricalAnalogsExplorer.tsx",
+      "type": "file",
+      "name": "HistoricalAnalogsExplorer.tsx",
+      "filePath": "core/src/components/HistoricalAnalogsExplorer.tsx",
+      "summary": "Source module (HistoricalAnalogsExplorer.tsx) implementing 1 functions (245 lines).",
+      "tags": [
+        "code"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:core/src/components/HistoricalAnalogsExplorer.tsx:HistoricalAnalogsExplorer",
+      "type": "function",
+      "name": "HistoricalAnalogsExplorer",
+      "filePath": "core/src/components/HistoricalAnalogsExplorer.tsx",
+      "lineRange": [
+        88,
+        243
+      ],
+      "summary": "Function HistoricalAnalogsExplorer defined in HistoricalAnalogsExplorer.tsx.",
+      "tags": [
+        "function",
+        "code"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:core/src/components/ProbabilisticNowcastChart.tsx",
+      "type": "file",
+      "name": "ProbabilisticNowcastChart.tsx",
+      "filePath": "core/src/components/ProbabilisticNowcastChart.tsx",
+      "summary": "Source module (ProbabilisticNowcastChart.tsx) implementing 2 functions (207 lines).",
+      "tags": [
+        "code"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:core/src/components/ProbabilisticNowcastChart.tsx:calculatePercentile",
+      "type": "function",
+      "name": "calculatePercentile",
+      "filePath": "core/src/components/ProbabilisticNowcastChart.tsx",
+      "lineRange": [
+        29,
+        38
+      ],
+      "summary": "Function calculatePercentile defined in ProbabilisticNowcastChart.tsx.",
+      "tags": [
+        "function",
+        "code"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:core/src/components/ProbabilisticNowcastChart.tsx:ProbabilisticNowcastChart",
+      "type": "function",
+      "name": "ProbabilisticNowcastChart",
+      "filePath": "core/src/components/ProbabilisticNowcastChart.tsx",
+      "lineRange": [
+        40,
+        207
+      ],
+      "summary": "Function ProbabilisticNowcastChart defined in ProbabilisticNowcastChart.tsx.",
+      "tags": [
+        "function",
+        "code"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:core/src/components/StarTopographyMap.tsx",
+      "type": "file",
+      "name": "StarTopographyMap.tsx",
+      "filePath": "core/src/components/StarTopographyMap.tsx",
+      "summary": "Source module (StarTopographyMap.tsx) implementing 1 functions (313 lines).",
+      "tags": [
+        "code"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:core/src/components/StarTopographyMap.tsx:StarTopographyMap",
+      "type": "function",
+      "name": "StarTopographyMap",
+      "filePath": "core/src/components/StarTopographyMap.tsx",
+      "lineRange": [
+        84,
+        311
+      ],
+      "summary": "Function StarTopographyMap defined in StarTopographyMap.tsx.",
+      "tags": [
+        "function",
+        "code"
+      ],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:api/routers/dashboard.py",
+      "target": "function:api/routers/dashboard.py:get_live_dashboard",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:api/routers/metrics.py",
+      "target": "function:api/routers/metrics.py:get_metrics_summary",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/scripts/plot_week_timeseries.py",
+      "target": "function:core/scripts/plot_week_timeseries.py:plot_week",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/src/components/HistoricalAnalogsExplorer.tsx",
+      "target": "function:core/src/components/HistoricalAnalogsExplorer.tsx:HistoricalAnalogsExplorer",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/src/components/ProbabilisticNowcastChart.tsx",
+      "target": "function:core/src/components/ProbabilisticNowcastChart.tsx:calculatePercentile",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/src/components/ProbabilisticNowcastChart.tsx",
+      "target": "function:core/src/components/ProbabilisticNowcastChart.tsx:ProbabilisticNowcastChart",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/src/components/StarTopographyMap.tsx",
+      "target": "function:core/src/components/StarTopographyMap.tsx:StarTopographyMap",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    }
+  ]
+}

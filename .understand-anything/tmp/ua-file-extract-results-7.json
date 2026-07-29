@@ -1,0 +1,427 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 20,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": ".playwright-mcp/page-2026-07-23T15-24-36-550Z.yml",
+      "language": "yaml",
+      "fileCategory": "config",
+      "totalLines": 267,
+      "nonEmptyLines": 267,
+      "sections": [
+        {
+          "heading": "[0]",
+          "level": 1,
+          "line": 1
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 1
+      }
+    },
+    {
+      "path": ".playwright-mcp/page-2026-07-23T15-29-58-129Z.yml",
+      "language": "yaml",
+      "fileCategory": "config",
+      "totalLines": 315,
+      "nonEmptyLines": 315,
+      "sections": [
+        {
+          "heading": "[0]",
+          "level": 1,
+          "line": 1
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 1
+      }
+    },
+    {
+      "path": ".playwright-mcp/page-2026-07-23T15-32-15-980Z.yml",
+      "language": "yaml",
+      "fileCategory": "config",
+      "totalLines": 308,
+      "nonEmptyLines": 308,
+      "sections": [
+        {
+          "heading": "[0]",
+          "level": 1,
+          "line": 1
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 1
+      }
+    },
+    {
+      "path": ".playwright-mcp/page-2026-07-23T15-38-58-550Z.yml",
+      "language": "yaml",
+      "fileCategory": "config",
+      "totalLines": 331,
+      "nonEmptyLines": 331,
+      "sections": [
+        {
+          "heading": "[0]",
+          "level": 1,
+          "line": 1
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 1
+      }
+    },
+    {
+      "path": ".playwright-mcp/page-2026-07-23T15-49-01-726Z.yml",
+      "language": "yaml",
+      "fileCategory": "config",
+      "totalLines": 301,
+      "nonEmptyLines": 301,
+      "sections": [
+        {
+          "heading": "[0]",
+          "level": 1,
+          "line": 1
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 1
+      }
+    },
+    {
+      "path": ".playwright-mcp/page-2026-07-23T15-52-22-830Z.yml",
+      "language": "yaml",
+      "fileCategory": "config",
+      "totalLines": 301,
+      "nonEmptyLines": 301,
+      "sections": [
+        {
+          "heading": "[0]",
+          "level": 1,
+          "line": 1
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 1
+      }
+    },
+    {
+      "path": ".playwright-mcp/page-2026-07-23T15-52-52-300Z.yml",
+      "language": "yaml",
+      "fileCategory": "config",
+      "totalLines": 301,
+      "nonEmptyLines": 301,
+      "sections": [
+        {
+          "heading": "[0]",
+          "level": 1,
+          "line": 1
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 1
+      }
+    },
+    {
+      "path": ".playwright-mcp/page-2026-07-23T16-05-28-509Z.yml",
+      "language": "yaml",
+      "fileCategory": "config",
+      "totalLines": 301,
+      "nonEmptyLines": 301,
+      "sections": [
+        {
+          "heading": "[0]",
+          "level": 1,
+          "line": 1
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 1
+      }
+    },
+    {
+      "path": ".playwright-mcp/page-2026-07-23T16-10-59-213Z.yml",
+      "language": "yaml",
+      "fileCategory": "config",
+      "totalLines": 301,
+      "nonEmptyLines": 301,
+      "sections": [
+        {
+          "heading": "[0]",
+          "level": 1,
+          "line": 1
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 1
+      }
+    },
+    {
+      "path": ".playwright-mcp/page-2026-07-23T17-33-57-740Z.yml",
+      "language": "yaml",
+      "fileCategory": "config",
+      "totalLines": 275,
+      "nonEmptyLines": 275,
+      "sections": [
+        {
+          "heading": "[0]",
+          "level": 1,
+          "line": 1
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 1
+      }
+    },
+    {
+      "path": ".playwright-mcp/page-2026-07-23T17-34-58-551Z.yml",
+      "language": "yaml",
+      "fileCategory": "config",
+      "totalLines": 275,
+      "nonEmptyLines": 275,
+      "sections": [
+        {
+          "heading": "[0]",
+          "level": 1,
+          "line": 1
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 1
+      }
+    },
+    {
+      "path": ".playwright-mcp/page-2026-07-23T17-39-58-381Z.yml",
+      "language": "yaml",
+      "fileCategory": "config",
+      "totalLines": 297,
+      "nonEmptyLines": 297,
+      "sections": [
+        {
+          "heading": "[0]",
+          "level": 1,
+          "line": 1
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 1
+      }
+    },
+    {
+      "path": ".playwright-mcp/page-2026-07-23T17-41-01-041Z.yml",
+      "language": "yaml",
+      "fileCategory": "config",
+      "totalLines": 297,
+      "nonEmptyLines": 297,
+      "sections": [
+        {
+          "heading": "[0]",
+          "level": 1,
+          "line": 1
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 1
+      }
+    },
+    {
+      "path": ".playwright-mcp/page-2026-07-23T17-43-30-075Z.yml",
+      "language": "yaml",
+      "fileCategory": "config",
+      "totalLines": 261,
+      "nonEmptyLines": 261,
+      "sections": [
+        {
+          "heading": "[0]",
+          "level": 1,
+          "line": 1
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 1
+      }
+    },
+    {
+      "path": ".playwright-mcp/page-2026-07-23T17-44-11-116Z.yml",
+      "language": "yaml",
+      "fileCategory": "config",
+      "totalLines": 276,
+      "nonEmptyLines": 276,
+      "sections": [
+        {
+          "heading": "[0]",
+          "level": 1,
+          "line": 1
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 1
+      }
+    },
+    {
+      "path": ".playwright-mcp/page-2026-07-23T18-03-42-144Z.yml",
+      "language": "yaml",
+      "fileCategory": "config",
+      "totalLines": 292,
+      "nonEmptyLines": 292,
+      "sections": [
+        {
+          "heading": "[0]",
+          "level": 1,
+          "line": 1
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 1
+      }
+    },
+    {
+      "path": ".playwright-mcp/page-2026-07-23T18-16-56-500Z.yml",
+      "language": "yaml",
+      "fileCategory": "config",
+      "totalLines": 293,
+      "nonEmptyLines": 293,
+      "sections": [
+        {
+          "heading": "[0]",
+          "level": 1,
+          "line": 1
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 1
+      }
+    },
+    {
+      "path": ".playwright-mcp/page-2026-07-23T18-17-30-745Z.yml",
+      "language": "yaml",
+      "fileCategory": "config",
+      "totalLines": 293,
+      "nonEmptyLines": 293,
+      "sections": [
+        {
+          "heading": "[0]",
+          "level": 1,
+          "line": 1
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 1
+      }
+    },
+    {
+      "path": ".playwright-mcp/page-2026-07-24T04-44-30-132Z.yml",
+      "language": "yaml",
+      "fileCategory": "config",
+      "totalLines": 293,
+      "nonEmptyLines": 293,
+      "sections": [
+        {
+          "heading": "[0]",
+          "level": 1,
+          "line": 1
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 1
+      }
+    },
+    {
+      "path": ".playwright-mcp/page-2026-07-24T05-17-57-302Z.yml",
+      "language": "yaml",
+      "fileCategory": "config",
+      "totalLines": 272,
+      "nonEmptyLines": 272,
+      "sections": [
+        {
+          "heading": "[0]",
+          "level": 1,
+          "line": 1
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 1
+      }
+    }
+  ]
+}

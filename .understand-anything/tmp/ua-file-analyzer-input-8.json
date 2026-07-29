@@ -1,0 +1,63 @@
+{
+  "projectRoot": "/media/DiskE/SKRIPSI/Skripsi_Bevan",
+  "batchFiles": [
+    {
+      "path": ".playwright-mcp/page-2026-07-24T05-38-49-212Z.yml",
+      "language": "yaml",
+      "sizeLines": 277,
+      "fileCategory": "config"
+    },
+    {
+      "path": ".playwright-mcp/page-2026-07-24T07-59-08-603Z.yml",
+      "language": "yaml",
+      "sizeLines": 139,
+      "fileCategory": "config"
+    },
+    {
+      "path": ".playwright-mcp/page-2026-07-24T08-04-14-089Z.yml",
+      "language": "yaml",
+      "sizeLines": 132,
+      "fileCategory": "config"
+    },
+    {
+      "path": ".playwright-mcp/page-2026-07-24T08-04-41-926Z.yml",
+      "language": "yaml",
+      "sizeLines": 139,
+      "fileCategory": "config"
+    },
+    {
+      "path": ".playwright-mcp/page-2026-07-24T09-28-31-476Z.yml",
+      "language": "yaml",
+      "sizeLines": 110,
+      "fileCategory": "config"
+    },
+    {
+      "path": ".playwright-mcp/page-2026-07-24T09-28-56-489Z.yml",
+      "language": "yaml",
+      "sizeLines": 135,
+      "fileCategory": "config"
+    },
+    {
+      "path": ".playwright-mcp/page-2026-07-24T10-20-16-605Z.yml",
+      "language": "yaml",
+      "sizeLines": 135,
+      "fileCategory": "config"
+    },
+    {
+      "path": ".playwright-mcp/page-2026-07-24T10-20-42-890Z.yml",
+      "language": "yaml",
+      "sizeLines": 139,
+      "fileCategory": "config"
+    }
+  ],
+  "batchImportData": {
+    ".playwright-mcp/page-2026-07-24T05-38-49-212Z.yml": [],
+    ".playwright-mcp/page-2026-07-24T07-59-08-603Z.yml": [],
+    ".playwright-mcp/page-2026-07-24T08-04-14-089Z.yml": [],
+    ".playwright-mcp/page-2026-07-24T08-04-41-926Z.yml": [],
+    ".playwright-mcp/page-2026-07-24T09-28-31-476Z.yml": [],
+    ".playwright-mcp/page-2026-07-24T09-28-56-489Z.yml": [],
+    ".playwright-mcp/page-2026-07-24T10-20-16-605Z.yml": [],
+    ".playwright-mcp/page-2026-07-24T10-20-42-890Z.yml": []
+  }
+}

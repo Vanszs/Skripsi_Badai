@@ -1,0 +1,164 @@
+{
+  "projectRoot": "/media/DiskE/SKRIPSI/Skripsi_Bevan",
+  "batchFiles": [
+    {
+      "path": "web/src/App.tsx",
+      "language": "typescript",
+      "sizeLines": 68,
+      "fileCategory": "code"
+    },
+    {
+      "path": "web/src/components/ForecastChart.tsx",
+      "language": "typescript",
+      "sizeLines": 198,
+      "fileCategory": "code"
+    },
+    {
+      "path": "web/src/components/MapView.tsx",
+      "language": "typescript",
+      "sizeLines": 15,
+      "fileCategory": "code"
+    },
+    {
+      "path": "web/src/components/ModelPerformancePanel.tsx",
+      "language": "typescript",
+      "sizeLines": 13,
+      "fileCategory": "code"
+    },
+    {
+      "path": "web/src/components/NodeDetailModal.tsx",
+      "language": "typescript",
+      "sizeLines": 13,
+      "fileCategory": "code"
+    },
+    {
+      "path": "web/src/components/RetrievalAnalogsPanel.tsx",
+      "language": "typescript",
+      "sizeLines": 10,
+      "fileCategory": "code"
+    },
+    {
+      "path": "web/src/components/RiskAssessmentPanel.tsx",
+      "language": "typescript",
+      "sizeLines": 7,
+      "fileCategory": "code"
+    },
+    {
+      "path": "web/src/components/SideNav.tsx",
+      "language": "typescript",
+      "sizeLines": 5,
+      "fileCategory": "code"
+    },
+    {
+      "path": "web/src/components/TimelineScrubber.tsx",
+      "language": "typescript",
+      "sizeLines": 70,
+      "fileCategory": "code"
+    },
+    {
+      "path": "web/src/components/TopAppBar.tsx",
+      "language": "typescript",
+      "sizeLines": 10,
+      "fileCategory": "code"
+    },
+    {
+      "path": "web/src/components/TopologyGraphOverlay.tsx",
+      "language": "typescript",
+      "sizeLines": 13,
+      "fileCategory": "code"
+    },
+    {
+      "path": "web/src/data/historicalAnalogs.ts",
+      "language": "typescript",
+      "sizeLines": 7,
+      "fileCategory": "code"
+    },
+    {
+      "path": "web/src/data/nodesData.ts",
+      "language": "typescript",
+      "sizeLines": 50,
+      "fileCategory": "code"
+    },
+    {
+      "path": "web/src/main.tsx",
+      "language": "typescript",
+      "sizeLines": 10,
+      "fileCategory": "code"
+    },
+    {
+      "path": "web/src/services/dashboardLive.ts",
+      "language": "typescript",
+      "sizeLines": 29,
+      "fileCategory": "code"
+    },
+    {
+      "path": "web/src/types.ts",
+      "language": "typescript",
+      "sizeLines": 88,
+      "fileCategory": "code"
+    }
+  ],
+  "batchImportData": {
+    "web/src/App.tsx": [
+      "web/src/components/ForecastChart.tsx",
+      "web/src/components/MapView.tsx",
+      "web/src/components/ModelPerformancePanel.tsx",
+      "web/src/components/NodeDetailModal.tsx",
+      "web/src/components/RetrievalAnalogsPanel.tsx",
+      "web/src/components/RiskAssessmentPanel.tsx",
+      "web/src/components/SideNav.tsx",
+      "web/src/components/TimelineScrubber.tsx",
+      "web/src/components/TopAppBar.tsx",
+      "web/src/components/TopologyGraphOverlay.tsx",
+      "web/src/data/nodesData.ts",
+      "web/src/services/dashboardLive.ts",
+      "web/src/types.ts"
+    ],
+    "web/src/components/ForecastChart.tsx": [
+      "web/src/data/nodesData.ts",
+      "web/src/types.ts"
+    ],
+    "web/src/components/MapView.tsx": [
+      "web/src/data/nodesData.ts",
+      "web/src/types.ts"
+    ],
+    "web/src/components/ModelPerformancePanel.tsx": [
+      "web/src/types.ts"
+    ],
+    "web/src/components/NodeDetailModal.tsx": [
+      "web/src/data/nodesData.ts",
+      "web/src/types.ts"
+    ],
+    "web/src/components/RetrievalAnalogsPanel.tsx": [
+      "web/src/data/historicalAnalogs.ts",
+      "web/src/types.ts"
+    ],
+    "web/src/components/RiskAssessmentPanel.tsx": [],
+    "web/src/components/SideNav.tsx": [
+      "web/src/types.ts"
+    ],
+    "web/src/components/TimelineScrubber.tsx": [],
+    "web/src/components/TopAppBar.tsx": [
+      "web/src/data/nodesData.ts",
+      "web/src/types.ts"
+    ],
+    "web/src/components/TopologyGraphOverlay.tsx": [
+      "web/src/data/nodesData.ts",
+      "web/src/types.ts"
+    ],
+    "web/src/data/historicalAnalogs.ts": [
+      "web/src/types.ts"
+    ],
+    "web/src/data/nodesData.ts": [
+      "web/src/types.ts"
+    ],
+    "web/src/main.tsx": [
+      "web/src/App.tsx",
+      "web/src/index.css"
+    ],
+    "web/src/services/dashboardLive.ts": [
+      "web/src/types.ts"
+    ],
+    "web/src/types.ts": []
+  }
+}

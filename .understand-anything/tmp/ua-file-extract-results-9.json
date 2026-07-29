@@ -1,0 +1,146 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 4,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": ".understand-anything/config.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 1,
+      "nonEmptyLines": 1,
+      "sections": [
+        {
+          "heading": "outputLanguage",
+          "level": 1,
+          "line": 1
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 1
+      }
+    },
+    {
+      "path": ".understand-anything/fingerprints.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 3044,
+      "nonEmptyLines": 3044,
+      "sections": [
+        {
+          "heading": "version",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "gitCommitHash",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "generatedAt",
+          "level": 1,
+          "line": 4
+        },
+        {
+          "heading": "files",
+          "level": 1,
+          "line": 5
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 4
+      }
+    },
+    {
+      "path": ".understand-anything/knowledge-graph.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 5268,
+      "nonEmptyLines": 5268,
+      "sections": [
+        {
+          "heading": "version",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "projectName",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "projectDescription",
+          "level": 1,
+          "line": 4
+        },
+        {
+          "heading": "nodes",
+          "level": 1,
+          "line": 5
+        },
+        {
+          "heading": "edges",
+          "level": 1,
+          "line": 4313
+        },
+        {
+          "heading": "updatedAt",
+          "level": 1,
+          "line": 5267
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 6
+      }
+    },
+    {
+      "path": ".understand-anything/meta.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 6,
+      "nonEmptyLines": 6,
+      "sections": [
+        {
+          "heading": "gitCommitHash",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "updatedAt",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "nodeCount",
+          "level": 1,
+          "line": 4
+        },
+        {
+          "heading": "edgeCount",
+          "level": 1,
+          "line": 5
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 4
+      }
+    }
+  ]
+}

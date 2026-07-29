@@ -1,0 +1,76 @@
+{
+  "nodes": [
+    {
+      "id": "config:web/.env.example",
+      "type": "config",
+      "name": ".env.example",
+      "filePath": "web/.env.example",
+      "summary": "Configuration file (.env.example) specifying project settings, environment, or build properties.",
+      "tags": [
+        "configuration",
+        "build-system"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:web/README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "web/README.md",
+      "summary": "Documentation file (README.md) covering project architecture, specs, or guidelines.",
+      "tags": [
+        "spec",
+        "documentation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:web/index.html",
+      "type": "file",
+      "name": "index.html",
+      "filePath": "web/index.html",
+      "summary": "Source module (index.html) implementing helper logic (15 lines).",
+      "tags": [
+        "code"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:web/metadata.json",
+      "type": "config",
+      "name": "metadata.json",
+      "filePath": "web/metadata.json",
+      "summary": "Configuration file (metadata.json) specifying project settings, environment, or build properties.",
+      "tags": [
+        "configuration",
+        "build-system"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:web/package.json",
+      "type": "config",
+      "name": "package.json",
+      "filePath": "web/package.json",
+      "summary": "Configuration file (package.json) specifying project settings, environment, or build properties.",
+      "tags": [
+        "configuration",
+        "build-system"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:web/tsconfig.json",
+      "type": "config",
+      "name": "tsconfig.json",
+      "filePath": "web/tsconfig.json",
+      "summary": "Configuration file (tsconfig.json) specifying project settings, environment, or build properties.",
+      "tags": [
+        "configuration",
+        "build-system"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": []
+}

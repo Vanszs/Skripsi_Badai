@@ -4,10 +4,10 @@ export interface ObservationNode {
   id: NodeId;
   name: string;
   locationName: string;
-  role: 'Target Utama Prediksi' | 'Konteks Lereng Utara' | 'Konteks Lereng Selatan' | 'Konteks Lereng Barat' | 'Konteks Lereng Timur';
+  role: 'Target Utama Prediksi' | 'Konteks Utara' | 'Konteks Selatan' | 'Konteks Barat' | 'Konteks Timur';
   lat: number;
   lng: number;
-  elevation: number; // mdpl
+  elevation: number;
   isTarget: boolean;
   color: string;
 }
@@ -16,69 +16,57 @@ export interface NodeTelemetry {
   nodeId: NodeId;
   tempCelsius: number;
   dewPointCelsius: number;
-  rainIntensityMmH: number; // mm/h
+  rainIntensityMmH: number;
   humidityPercent: number;
   windSpeedKmh: number;
   windDirectionDeg: number;
   pressureHpa: number;
-  confidencePercent: number;
-  spatialWeightToMain: number; // ST-GNN spatial attention weight (0 to 1)
 }
 
-export interface ForecastPoint {
-  timeLabel: string;
-  timestamp: string;
-  p10: number; // Lower bound mm/h
-  p25?: number; // 25th percentile mm/h
-  p50: number; // Median mm/h
-  p75?: number; // 75th percentile mm/h
-  p90: number; // Upper bound mm/h
-  observed?: number;
+export interface NowcastDistribution {
+  horizon: 'T+1h';
+  validAtWib: string;
+  samples: number[];
+  mean: number;
+  p10: number;
+  p25: number;
+  p50: number;
+  p75: number;
+  p90: number;
+  observedNow?: number;
+  unit: string;
+  variable: 'precipitation' | 'wind_speed_10m' | 'relative_humidity_2m';
 }
-
-export type TimelineOffset = 'T-2h' | 'T-1h' | 'Now' | 'T+1h' | 'T+2h';
-
-export type RiskLevel = 'LOW' | 'MODERATE' | 'MEDIUM' | 'HIGH' | 'CRITICAL' | 'EXTREME';
 
 export interface TimelineFrame {
-  offset: TimelineOffset;
+  offset: 'Now';
   timeWib: string;
   description: string;
-  // ponytail: retained while static sample frames exist; remove when API replaces frame fixtures.
-  radarIntensityFactor: number;
   telemetries: Partial<Record<NodeId, NodeTelemetry>>;
 }
 
 export type DashboardDataSource = 'live' | 'sample';
-
-/** Payload contract for GET VITE_DASHBOARD_LIVE_URL (default: /api/v1/dashboard/live). */
+export type NowcastVariableSet = {
+  precipitation: NowcastDistribution;
+  wind_speed_10m: NowcastDistribution;
+  relative_humidity_2m: NowcastDistribution;
+};
 export interface DashboardLiveSnapshot {
   source: DashboardDataSource;
   generatedAt: string;
   frame: TimelineFrame;
-  mainForecast: ForecastPoint[];
-  riskMetrics?: RiskMetrics;
-}
-
-export interface RiskMetrics {
-  hypothermiaRiskLevel: RiskLevel;
-  hypothermiaElevationMin: number;
-  windChillCelsius: number;
-  apparentTempCelsius: number;
-  orographicAlert: string;
-  slopeInstabilityRisk: RiskLevel;
+  nowcast: NowcastVariableSet;
 }
 
 export interface ModelMetrics {
-  csi: number; // Critical Success Index
-  pod: number; // Probability of Detection
-  far: number; // False Alarm Ratio
-  reliabilityPercent: number;
+  csi: number;
+  pod: number;
+  far: number;
   rmse: number;
-  mae?: number;
-  crps?: number;
-  brierScore?: number;
-  corr?: number;
+  mae: number;
+  crps: number;
+  brierScore: number;
+  corr: number;
 }
 
 export interface HistoricalAnalog {
@@ -95,7 +83,6 @@ export interface HistoricalAnalog {
   humidityPercent?: number;
   pressureHpa?: number;
   outcomeSummary: string;
-  radarSnapshotUrl?: string;
 }
 
-export type ActiveTab = 'map' | 'forecast' | 'risk' | 'retrieval' | 'eval' | 'topology';
+export type ActiveTab = 'map' | 'forecast' | 'comparison' | 'eval' | 'topology';

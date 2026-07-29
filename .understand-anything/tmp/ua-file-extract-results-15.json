@@ -1,0 +1,1005 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 11,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "docs/ACTIVE_5NODE_STAR_MAIN.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 53,
+      "nonEmptyLines": 36,
+      "sections": [
+        {
+          "heading": "Canonical Active System (5-Node Star, Main-Node Target)",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Data Source and Grid Policy",
+          "level": 2,
+          "line": 5
+        },
+        {
+          "heading": "Canonical Node Set and Order",
+          "level": 2,
+          "line": 12
+        },
+        {
+          "heading": "Graph Topology",
+          "level": 2,
+          "line": 32
+        },
+        {
+          "heading": "Target and Context Policy",
+          "level": 2,
+          "line": 38
+        },
+        {
+          "heading": "Active Dataset Artifacts",
+          "level": 2,
+          "line": 44
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 6
+      }
+    },
+    {
+      "path": "docs/AUDIT_FIX_PLAN.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 216,
+      "nonEmptyLines": 164,
+      "sections": [
+        {
+          "heading": "RENCANA PERBAIKAN ROBUST — Audit Skripsi RA-Diffusion 5-Node Star",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "0. Prinsip & batasan",
+          "level": 2,
+          "line": 12
+        },
+        {
+          "heading": "1. Ringkasan isu → keputusan perbaikan",
+          "level": 2,
+          "line": 21
+        },
+        {
+          "heading": "2. Perubahan per-file (apa yang diedit + logika)",
+          "level": 2,
+          "line": 42
+        },
+        {
+          "heading": "FIX #1 — Retrieval mengembalikan OUTCOME, bukan fitur (KRITIS)",
+          "level": 3,
+          "line": 44
+        },
+        {
+          "heading": "FIX #6 — edge_attr (jarak) masuk ke GAT (MAYOR)",
+          "level": 3,
+          "line": 63
+        },
+        {
+          "heading": "FIX #3 + #4 — Alignment & hourly (KRITIS)",
+          "level": 3,
+          "line": 77
+        },
+        {
+          "heading": "FIX #5 — Rain gate anti-degenerate (KRITIS)",
+          "level": 3,
+          "line": 84
+        },
+        {
+          "heading": "FIX #8/#9/#10 — Reproducibility artefak (MAYOR)",
+          "level": 3,
+          "line": 91
+        },
+        {
+          "heading": "FIX #11 — CRPS benar (MINOR)",
+          "level": 3,
+          "line": 101
+        },
+        {
+          "heading": "FIX #13/#12 — Pelabelan jujur (MINOR)",
+          "level": 3,
+          "line": 108
+        },
+        {
+          "heading": "FIX #14 — Regresi numerik (MINOR)",
+          "level": 3,
+          "line": 112
+        },
+        {
+          "heading": "FIX #15 — Sinkronisasi dokumen (MINOR)",
+          "level": 3,
+          "line": 119
+        },
+        {
+          "heading": "3. Matriks dampak file",
+          "level": 2,
+          "line": 127
+        },
+        {
+          "heading": "4. Urutan eksekusi (dependensi)",
+          "level": 2,
+          "line": 150
+        },
+        {
+          "heading": "5. Risiko & mitigasi",
+          "level": 2,
+          "line": 187
+        },
+        {
+          "heading": "6. Definition of Done (kriteria robust)",
+          "level": 2,
+          "line": 199
+        },
+        {
+          "heading": "7. Catatan integritas",
+          "level": 2,
+          "line": 214
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 18
+      }
+    },
+    {
+      "path": "docs/AUDIT_SESSION_CONTEXT.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 450,
+      "nonEmptyLines": 361,
+      "sections": [
+        {
+          "heading": "Konteks Sesi Audit & Perbaikan — RA-Diffusion 5-Node Star",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "1. Permintaan user (kronologis)",
+          "level": 2,
+          "line": 12
+        },
+        {
+          "heading": "2. Sistem & lingkungan (terverifikasi)",
+          "level": 2,
+          "line": 30
+        },
+        {
+          "heading": "3. AUDIT AWAL — 15 isu (ringkas)",
+          "level": 2,
+          "line": 42
+        },
+        {
+          "heading": "4. RENCANA PERBAIKAN",
+          "level": 2,
+          "line": 77
+        },
+        {
+          "heading": "5. PERBAIKAN YANG DILAKUKAN USER (git changes — terverifikasi sesuai plan)",
+          "level": 2,
+          "line": 85
+        },
+        {
+          "heading": "6. RETRAIN #1 (checkpoint 20:02) & RE-EVAL (eval_step=11, 3189 sampel, menutupi semua jam + rentang penuh)",
+          "level": 2,
+          "line": 109
+        },
+        {
+          "heading": "🔴 REGRESI BARU (#16) — lebih buruk dari sebelumnya",
+          "level": 3,
+          "line": 128
+        },
+        {
+          "heading": "7. KESIMPULAN AUDIT (kode vs judul/algoritma) — apa adanya",
+          "level": 2,
+          "line": 137
+        },
+        {
+          "heading": "8. STATUS TERKINI (saat dokumen ini ditulis)",
+          "level": 2,
+          "line": 158
+        },
+        {
+          "heading": "LANGKAH SETELAH TRAINING SELESAI (TODO Tahap D→E ulang)",
+          "level": 3,
+          "line": 171
+        },
+        {
+          "heading": "8b. RETRAIN #2 (cond-dropout) & RE-AUDIT FINAL — #16 RESOLVED",
+          "level": 2,
+          "line": 181
+        },
+        {
+          "heading": "9. File kunci",
+          "level": 2,
+          "line": 225
+        },
+        {
+          "heading": "8c. AUDIT INTEGRITAS (cheating check) + PNG mingguan — 2026-05-30 ~23:48",
+          "level": 2,
+          "line": 236
+        },
+        {
+          "heading": "8d. AUDIT PENUH SUB-AGENT (persistence + MLP + main) + 3 FIX BARU — 2026-05-31 ~00:10",
+          "level": 2,
+          "line": 257
+        },
+        {
+          "heading": "FIX #11b (MAYOR, terkonfirmasi numerik) — bug formula CRPS",
+          "level": 3,
+          "line": 268
+        },
+        {
+          "heading": "FIX (MLP eval) — MC-dropout diganti deterministik",
+          "level": 3,
+          "line": 277
+        },
+        {
+          "heading": "FIX #6b — edge_attr dibuat INFORMATIF (sebelumnya konstan 0.25)",
+          "level": 3,
+          "line": 283
+        },
+        {
+          "heading": "RETRAIN #3 (edge_dim=2) — SEDANG BERJALAN",
+          "level": 3,
+          "line": 296
+        },
+        {
+          "heading": "LANGKAH SETELAH RETRAIN #3 SELESAI",
+          "level": 3,
+          "line": 301
+        },
+        {
+          "heading": "Catatan integritas (dikonfirmasi BERSIH)",
+          "level": 3,
+          "line": 309
+        },
+        {
+          "heading": "8e. FIX 3 ISU + REPRODUCIBILITY — FINAL (2026-05-31 ~02:xx)",
+          "level": 2,
+          "line": 313
+        },
+        {
+          "heading": "FIX CRPS (#11b) — SELESAI, terverifikasi",
+          "level": 3,
+          "line": 317
+        },
+        {
+          "heading": "FIX MLP eval — SELESAI",
+          "level": 3,
+          "line": 322
+        },
+        {
+          "heading": "FIX edge_attr (#6b) — DICOBA elevasi, GAGAL, DI-REVERT (jujur)",
+          "level": 3,
+          "line": 326
+        },
+        {
+          "heading": "TEMUAN BARU PENTING: training NON-DETERMINISTIK & seed-sensitive",
+          "level": 3,
+          "line": 333
+        },
+        {
+          "heading": "CHECKPOINT FINAL (reproducible)",
+          "level": 3,
+          "line": 342
+        },
+        {
+          "heading": "HASIL EVAL FINAL (eval_step=11, 3189 sampel) — checkpoint reproducible",
+          "level": 3,
+          "line": 347
+        },
+        {
+          "heading": "STATUS: kode jujur & faithful ke judul; hasil dilaporkan apa adanya (tidak dicurangi).",
+          "level": 3,
+          "line": 360
+        },
+        {
+          "heading": "8f. SWARM AUDIT (8 agen) — KRITIS BUG DITEMUKAN & DIFIX: elevation normalization (2026-05-31)",
+          "level": 2,
+          "line": 362
+        },
+        {
+          "heading": "KRITIS — elevation std=0 → input GNN ~1e8 (INILAH penyebab grad spike, bukan weighted loss)",
+          "level": 3,
+          "line": 367
+        },
+        {
+          "heading": "FIX",
+          "level": 3,
+          "line": 376
+        },
+        {
+          "heading": "RETRAIN (elevfix, seed 1, reproducible) — HASIL TERBAIK & SEHAT",
+          "level": 3,
+          "line": 382
+        },
+        {
+          "heading": "HASIL EVAL FINAL (eval_step=11, 3189 sampel) — checkpoint elevfix",
+          "level": 3,
+          "line": 386
+        },
+        {
+          "heading": "TEMUAN LAIN SWARM (MINOR, belum difix - bukan blocker):",
+          "level": 3,
+          "line": 406
+        },
+        {
+          "heading": "STATUS: bug KRITIS elevasi DIFIX → model kini sehat, reproducible, GNN berfungsi, hasil membaik & jujur.",
+          "level": 3,
+          "line": 417
+        },
+        {
+          "heading": "8g. SWARM AUDIT ROUND 2 (5 agen) — NO KRITIS/MAYOR; konsistensi minor difix (2026-05-31)",
+          "level": 2,
+          "line": 419
+        },
+        {
+          "heading": "HASIL: TIDAK ada KRITIS/MAYOR baru. Parity & protocol BERSIH (terverifikasi):",
+          "level": 3,
+          "line": 424
+        },
+        {
+          "heading": "Konsistensi MINOR yang DIFIX round ini:",
+          "level": 3,
+          "line": 435
+        },
+        {
+          "heading": "Catatan (tidak difix - by design / cosmetic / non-blocker):",
+          "level": 3,
+          "line": 441
+        },
+        {
+          "heading": "VERDICT round 2: CODE FAITHFUL ke judul, no cheating/dummy/hardcode/parity-break/leakage.",
+          "level": 3,
+          "line": 449
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 41
+      }
+    },
+    {
+      "path": "docs/HANDOVER_PRODUCTION_INTEGRATION_PLAN.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 158,
+      "nonEmptyLines": 125,
+      "sections": [
+        {
+          "heading": "📦 HANDOVER & PRODUCTION INTEGRATION PLAN",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "1. Setup Komponen & Panduan Lokal (Development)",
+          "level": 2,
+          "line": 7
+        },
+        {
+          "heading": "A. FastAPI Backend Setup",
+          "level": 3,
+          "line": 9
+        },
+        {
+          "heading": "B. Vite React Frontend Setup",
+          "level": 3,
+          "line": 28
+        },
+        {
+          "heading": "2. Docker Compose Orchestration (Production Stack)",
+          "level": 2,
+          "line": 48
+        },
+        {
+          "heading": "File: `docker-compose.yml`",
+          "level": 3,
+          "line": 52
+        },
+        {
+          "heading": "File: `docker/nginx.conf`",
+          "level": 3,
+          "line": 96
+        },
+        {
+          "heading": "3. Arsitektur OpenAPI & Spesifikasi Kontrak API",
+          "level": 2,
+          "line": 119
+        },
+        {
+          "heading": "4. Panduan Serah Terima (Handover Guide) Pengelola TNGGP / Peneliti",
+          "level": 2,
+          "line": 132
+        },
+        {
+          "heading": "5. Checklist Verifikasi Akhir Anti-Slop & Kepatuhan Taste-Skill",
+          "level": 2,
+          "line": 149
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 10
+      }
+    },
+    {
+      "path": "docs/KNOWLEDGE.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 446,
+      "nonEmptyLines": 348,
+      "sections": [
+        {
+          "heading": "KNOWLEDGE.md — Pemahaman Penuh Proyek Skripsi",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Nowcasting probabilistik presipitasi untuk mitigasi resiko pendaki di gunung gede-pangrango dengan menggunakan retrieval augemented difussion model dengan spatio temporal graph conditioning",
+          "level": 2,
+          "line": 2
+        },
+        {
+          "heading": "Nowcasting probabilistik presipitasi untuk mitigasi resiko pendaki di gunung gede-pangrango dengan menggunakan retrieval augemented difussion model dengan spatio temporal graph conditioning",
+          "level": 3,
+          "line": 3
+        },
+        {
+          "heading": "0. RINGKASAN SATU PARAGRAF (elevator pitch)",
+          "level": 2,
+          "line": 11
+        },
+        {
+          "heading": "1. IDENTITAS PROYEK",
+          "level": 2,
+          "line": 25
+        },
+        {
+          "heading": "2. GLOSARIUM ISTILAH (wajib hafal)",
+          "level": 2,
+          "line": 41
+        },
+        {
+          "heading": "3. DATA — sumber, struktur, alasan",
+          "level": 2,
+          "line": 74
+        },
+        {
+          "heading": "3.1 Sumber & alasan ERA5",
+          "level": 3,
+          "line": 76
+        },
+        {
+          "heading": "3.2 Dataset aktif",
+          "level": 3,
+          "line": 82
+        },
+        {
+          "heading": "3.3 Node kanonik (urutan WAJIB tetap: [MAIN, UP, DOWN, LEFT, RIGHT])",
+          "level": 3,
+          "line": 87
+        },
+        {
+          "heading": "3.4 Fitur (9) & target (3)",
+          "level": 3,
+          "line": 99
+        },
+        {
+          "heading": "3.5 Split temporal (kronologis, anti-leakage)",
+          "level": 3,
+          "line": 107
+        },
+        {
+          "heading": "4. NORMALISASI & TRANSFORMASI (detail + alasan)",
+          "level": 2,
+          "line": 115
+        },
+        {
+          "heading": "5. ARSITEKTUR MODEL UTAMA (3 komponen + cara kerja)",
+          "level": 2,
+          "line": 132
+        },
+        {
+          "heading": "5.1 Spatio-Temporal GNN — `src/models/gnn.py`",
+          "level": 3,
+          "line": 137
+        },
+        {
+          "heading": "5.2 Retrieval-Augmented Memory — `src/retrieval/base.py` + precompute di `train.py`",
+          "level": 3,
+          "line": 153
+        },
+        {
+          "heading": "5.3 Conditional Diffusion Model — `src/models/diffusion.py`",
+          "level": 3,
+          "line": 169
+        },
+        {
+          "heading": "6. BASELINE PEMBANDING",
+          "level": 2,
+          "line": 209
+        },
+        {
+          "heading": "6.1 Persistence",
+          "level": 3,
+          "line": 211
+        },
+        {
+          "heading": "6.2 MLP baseline — `src/models/mlp_baseline.py`, `src/train_baseline.py`",
+          "level": 3,
+          "line": 216
+        },
+        {
+          "heading": "7. FLOW END-TO-END (pipeline)",
+          "level": 2,
+          "line": 225
+        },
+        {
+          "heading": "8. 6 SKENARIO EVALUASI (ablation)",
+          "level": 2,
+          "line": 248
+        },
+        {
+          "heading": "9. METRIK EVALUASI (rumus + arti)",
+          "level": 2,
+          "line": 265
+        },
+        {
+          "heading": "10. HASIL (jujur, checkpoint reproducible seed=1, eval_step=11)",
+          "level": 2,
+          "line": 283
+        },
+        {
+          "heading": "11. KETERBATASAN (wajib tahu — juga di private.note)",
+          "level": 2,
+          "line": 303
+        },
+        {
+          "heading": "12. PARAMETER PENTING (cheat-sheet)",
+          "level": 2,
+          "line": 323
+        },
+        {
+          "heading": "13. CARA MENJALANKAN",
+          "level": 2,
+          "line": 349
+        },
+        {
+          "heading": "14. ANTISIPASI PERTANYAAN ACAK (Q&A)",
+          "level": 2,
+          "line": 376
+        },
+        {
+          "heading": "15. RIWAYAT AUDIT (kenapa kode bisa dipercaya)",
+          "level": 2,
+          "line": 429
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 29
+      }
+    },
+    {
+      "path": "docs/METODE_PENELITIAN_PROYEK.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 320,
+      "nonEmptyLines": 262,
+      "sections": [
+        {
+          "heading": "Dokumentasi Metode Penelitian Proyek",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Nowcasting probabilistik presipitasi untuk mitigasi resiko pendaki di gunung gede-pangrango dengan menggunakan retrieval augemented difussion model dengan spatio temporal graph conditioning",
+          "level": 2,
+          "line": 2
+        },
+        {
+          "heading": "1. Objek dan Lingkup Proyek",
+          "level": 3,
+          "line": 6
+        },
+        {
+          "heading": "2. Jenis dan Sumber Data",
+          "level": 3,
+          "line": 15
+        },
+        {
+          "heading": "3. Tahapan Proyek (End-to-End Pipeline)",
+          "level": 3,
+          "line": 57
+        },
+        {
+          "heading": "3.1 Pengumpulan Data",
+          "level": 4,
+          "line": 60
+        },
+        {
+          "heading": "3.2 Preprocessing Data",
+          "level": 4,
+          "line": 69
+        },
+        {
+          "heading": "3.3 Pemilihan Metode dan Alasan",
+          "level": 4,
+          "line": 88
+        },
+        {
+          "heading": "3.4 Implementasi Sistem/Program",
+          "level": 4,
+          "line": 108
+        },
+        {
+          "heading": "3.5 Proses Analisis/Prediksi",
+          "level": 4,
+          "line": 124
+        },
+        {
+          "heading": "3.6 Evaluasi dan Validasi Hasil",
+          "level": 4,
+          "line": 136
+        },
+        {
+          "heading": "4. Metode Analisis Data",
+          "level": 3,
+          "line": 151
+        },
+        {
+          "heading": "4.1 Formulasi Masalah",
+          "level": 4,
+          "line": 154
+        },
+        {
+          "heading": "4.2 Normalisasi dan Transformasi",
+          "level": 4,
+          "line": 165
+        },
+        {
+          "heading": "4.3 Komponen Spasial-Temporal (STGNN)",
+          "level": 4,
+          "line": 175
+        },
+        {
+          "heading": "4.4 Retrieval-Augmented Memory",
+          "level": 4,
+          "line": 195
+        },
+        {
+          "heading": "4.5 Conditional Diffusion Forecasting",
+          "level": 4,
+          "line": 208
+        },
+        {
+          "heading": "4.6 Cara Output Digunakan",
+          "level": 4,
+          "line": 255
+        },
+        {
+          "heading": "5. Validasi dan Evaluasi",
+          "level": 2,
+          "line": 266
+        },
+        {
+          "heading": "5.1 Validasi Struktural",
+          "level": 2,
+          "line": 269
+        },
+        {
+          "heading": "5.2 Metrik Evaluasi",
+          "level": 2,
+          "line": 279
+        },
+        {
+          "heading": "5.3 Kriteria Keberhasilan Sistem",
+          "level": 2,
+          "line": 309
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 22
+      }
+    },
+    {
+      "path": "docs/MIGRATION_CHECKLIST_STATUS.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 163,
+      "nonEmptyLines": 120,
+      "sections": [
+        {
+          "heading": "Migration Checklist Status (Verified)",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "A. CONFIG",
+          "level": 2,
+          "line": 7
+        },
+        {
+          "heading": "B. DATA",
+          "level": 2,
+          "line": 15
+        },
+        {
+          "heading": "C. GRAPH",
+          "level": 2,
+          "line": 22
+        },
+        {
+          "heading": "D. LOADER",
+          "level": 2,
+          "line": 28
+        },
+        {
+          "heading": "E. TRAINING",
+          "level": 2,
+          "line": 34
+        },
+        {
+          "heading": "F. INFERENCE",
+          "level": 2,
+          "line": 41
+        },
+        {
+          "heading": "G. EVALUATION",
+          "level": 2,
+          "line": 47
+        },
+        {
+          "heading": "H. DOCS",
+          "level": 2,
+          "line": 53
+        },
+        {
+          "heading": "I. VALIDITY",
+          "level": 2,
+          "line": 59
+        },
+        {
+          "heading": "J. QUALITY",
+          "level": 2,
+          "line": 65
+        },
+        {
+          "heading": "Runtime Evidence Artifacts",
+          "level": 2,
+          "line": 72
+        },
+        {
+          "heading": "K. DATASET + TRAIN/VAL/TEST CROSSCHECK (Split, Normalization, Leakage)",
+          "level": 2,
+          "line": 87
+        },
+        {
+          "heading": "Internet Best-Practice References (checked `2026-04-20`)",
+          "level": 3,
+          "line": 99
+        },
+        {
+          "heading": "L. ALGORITHM FORMULA CROSSCHECK (3 COMPONENTS)",
+          "level": 2,
+          "line": 105
+        },
+        {
+          "heading": "L1. Spatio-Temporal Graph (GAT + Temporal Attention)",
+          "level": 3,
+          "line": 107
+        },
+        {
+          "heading": "L2. Retrieval Module (kNN + External Memory)",
+          "level": 3,
+          "line": 114
+        },
+        {
+          "heading": "L3. Retrieval-Augmented Diffusion Model",
+          "level": 3,
+          "line": 121
+        },
+        {
+          "heading": "L4. Correlation and Train/Val/Test Relation",
+          "level": 3,
+          "line": 129
+        },
+        {
+          "heading": "Formula References From Primary Sources (checked `2026-04-20`)",
+          "level": 3,
+          "line": 135
+        },
+        {
+          "heading": "M. RAIN-SPECIALIZED ROBUST CROSSCHECK (checked `2026-04-21`)",
+          "level": 2,
+          "line": 147
+        },
+        {
+          "heading": "Rain-Method Research References (primary)",
+          "level": 3,
+          "line": 156
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 22
+      }
+    },
+    {
+      "path": "docs/README.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 13,
+      "nonEmptyLines": 8,
+      "sections": [
+        {
+          "heading": "Active Documentation Index",
+          "level": 1,
+          "line": 1
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 1
+      }
+    },
+    {
+      "path": "docs/dataset_sample.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 16,
+      "nonEmptyLines": 14,
+      "sections": [
+        {
+          "heading": "Sampel Dataset Skripsi Gede–Pangrango (10 Baris Pertama)",
+          "level": 1,
+          "line": 1
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 1
+      }
+    },
+    {
+      "path": "docs/extracted_pdf_text.txt",
+      "language": "txt",
+      "fileCategory": "docs",
+      "totalLines": 2572,
+      "nonEmptyLines": 2371,
+      "metrics": {}
+    },
+    {
+      "path": "docs/project.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 152,
+      "nonEmptyLines": 121,
+      "sections": [
+        {
+          "heading": "PROJECT OVERVIEW: SKRIPSI NOWCASTING PRESIPITASI OROGRAFIS GUNUNG GEDE-PANGRANGO",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "1. Tentang Proyek Ini (Apa dan Bagaimana)",
+          "level": 2,
+          "line": 9
+        },
+        {
+          "heading": "Masalah Utama yang Dihadapi:",
+          "level": 3,
+          "line": 13
+        },
+        {
+          "heading": "Cara Kerja Sistem (Bagaimana Model Bekerja):",
+          "level": 3,
+          "line": 18
+        },
+        {
+          "heading": "2. Tujuan Proyek",
+          "level": 2,
+          "line": 26
+        },
+        {
+          "heading": "Tujuan Ilmiah & Teknis:",
+          "level": 3,
+          "line": 28
+        },
+        {
+          "heading": "Tujuan Praktis & Keselamatan Pendaki:",
+          "level": 3,
+          "line": 33
+        },
+        {
+          "heading": "3. Arsitektur Sistem & Komponen Pembentuk",
+          "level": 2,
+          "line": 39
+        },
+        {
+          "heading": "4. Rincian Arsitektur & Persamaan Matematika",
+          "level": 2,
+          "line": 71
+        },
+        {
+          "heading": "A. Topologi Graf Star 5 Node",
+          "level": 3,
+          "line": 73
+        },
+        {
+          "heading": "B. Preprocessing Data (Eq 3.1 - 3.3)",
+          "level": 3,
+          "line": 83
+        },
+        {
+          "heading": "C. Spatio-Temporal Graph Neural Network (ST-GNN) (Eq 3.4 - 3.7)",
+          "level": 3,
+          "line": 91
+        },
+        {
+          "heading": "D. Retrieval-Augmented Historical Analogs (FAISS L2) (Eq 2.4 & 3.8)",
+          "level": 3,
+          "line": 101
+        },
+        {
+          "heading": "E. Conditional Denoising Diffusion Model (Eq 2.2, 2.3, 3.9 - 3.11)",
+          "level": 3,
+          "line": 108
+        },
+        {
+          "heading": "5. Ringkasan Skenario Eksperimen Ablation Study (6 Skenario)",
+          "level": 2,
+          "line": 123
+        },
+        {
+          "heading": "6. Struktur Direktori Repository",
+          "level": 2,
+          "line": 138
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 16
+      }
+    }
+  ]
+}

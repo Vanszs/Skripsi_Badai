@@ -1,0 +1,137 @@
+{
+  "nodes": [
+    {
+      "id": "document:docs/ACTIVE_5NODE_STAR_MAIN.md",
+      "type": "document",
+      "name": "ACTIVE_5NODE_STAR_MAIN.md",
+      "filePath": "docs/ACTIVE_5NODE_STAR_MAIN.md",
+      "summary": "Documentation file (ACTIVE_5NODE_STAR_MAIN.md) covering project architecture, specs, or guidelines.",
+      "tags": [
+        "spec",
+        "documentation"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:docs/AUDIT_FIX_PLAN.md",
+      "type": "document",
+      "name": "AUDIT_FIX_PLAN.md",
+      "filePath": "docs/AUDIT_FIX_PLAN.md",
+      "summary": "Documentation file (AUDIT_FIX_PLAN.md) covering project architecture, specs, or guidelines.",
+      "tags": [
+        "spec",
+        "documentation"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:docs/AUDIT_SESSION_CONTEXT.md",
+      "type": "document",
+      "name": "AUDIT_SESSION_CONTEXT.md",
+      "filePath": "docs/AUDIT_SESSION_CONTEXT.md",
+      "summary": "Documentation file (AUDIT_SESSION_CONTEXT.md) covering project architecture, specs, or guidelines.",
+      "tags": [
+        "spec",
+        "documentation"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:docs/HANDOVER_PRODUCTION_INTEGRATION_PLAN.md",
+      "type": "document",
+      "name": "HANDOVER_PRODUCTION_INTEGRATION_PLAN.md",
+      "filePath": "docs/HANDOVER_PRODUCTION_INTEGRATION_PLAN.md",
+      "summary": "Documentation file (HANDOVER_PRODUCTION_INTEGRATION_PLAN.md) covering project architecture, specs, or guidelines.",
+      "tags": [
+        "spec",
+        "documentation"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:docs/KNOWLEDGE.md",
+      "type": "document",
+      "name": "KNOWLEDGE.md",
+      "filePath": "docs/KNOWLEDGE.md",
+      "summary": "Documentation file (KNOWLEDGE.md) covering project architecture, specs, or guidelines.",
+      "tags": [
+        "spec",
+        "documentation"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:docs/METODE_PENELITIAN_PROYEK.md",
+      "type": "document",
+      "name": "METODE_PENELITIAN_PROYEK.md",
+      "filePath": "docs/METODE_PENELITIAN_PROYEK.md",
+      "summary": "Documentation file (METODE_PENELITIAN_PROYEK.md) covering project architecture, specs, or guidelines.",
+      "tags": [
+        "spec",
+        "documentation"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:docs/MIGRATION_CHECKLIST_STATUS.md",
+      "type": "document",
+      "name": "MIGRATION_CHECKLIST_STATUS.md",
+      "filePath": "docs/MIGRATION_CHECKLIST_STATUS.md",
+      "summary": "Documentation file (MIGRATION_CHECKLIST_STATUS.md) covering project architecture, specs, or guidelines.",
+      "tags": [
+        "spec",
+        "documentation"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:docs/README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "docs/README.md",
+      "summary": "Documentation file (README.md) covering project architecture, specs, or guidelines.",
+      "tags": [
+        "spec",
+        "documentation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:docs/dataset_sample.md",
+      "type": "document",
+      "name": "dataset_sample.md",
+      "filePath": "docs/dataset_sample.md",
+      "summary": "Documentation file (dataset_sample.md) covering project architecture, specs, or guidelines.",
+      "tags": [
+        "spec",
+        "documentation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:docs/extracted_pdf_text.txt",
+      "type": "document",
+      "name": "extracted_pdf_text.txt",
+      "filePath": "docs/extracted_pdf_text.txt",
+      "summary": "Documentation file (extracted_pdf_text.txt) covering project architecture, specs, or guidelines.",
+      "tags": [
+        "spec",
+        "documentation"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:docs/project.md",
+      "type": "document",
+      "name": "project.md",
+      "filePath": "docs/project.md",
+      "summary": "Documentation file (project.md) covering project architecture, specs, or guidelines.",
+      "tags": [
+        "spec",
+        "documentation"
+      ],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": []
+}

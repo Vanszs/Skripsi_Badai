@@ -1,0 +1,42 @@
+{
+  "projectRoot": "/media/DiskE/SKRIPSI/Skripsi_Bevan",
+  "batchFiles": [
+    {
+      "path": "core/results/result_test/nowcasting_hourly_week/driest_week_actual_vs_pred.csv",
+      "language": "csv",
+      "sizeLines": 163,
+      "fileCategory": "data"
+    },
+    {
+      "path": "core/results/result_test/nowcasting_hourly_week/median_week_actual_vs_pred.csv",
+      "language": "csv",
+      "sizeLines": 163,
+      "fileCategory": "data"
+    },
+    {
+      "path": "core/results/result_test/nowcasting_hourly_week/weekly_crosscheck_3var.csv",
+      "language": "csv",
+      "sizeLines": 4,
+      "fileCategory": "data"
+    },
+    {
+      "path": "core/results/result_test/nowcasting_hourly_week/weekly_crosscheck_3var_meta.json",
+      "language": "json",
+      "sizeLines": 261,
+      "fileCategory": "config"
+    },
+    {
+      "path": "core/results/result_test/nowcasting_hourly_week/wettest_week_actual_vs_pred.csv",
+      "language": "csv",
+      "sizeLines": 163,
+      "fileCategory": "data"
+    }
+  ],
+  "batchImportData": {
+    "core/results/result_test/nowcasting_hourly_week/driest_week_actual_vs_pred.csv": [],
+    "core/results/result_test/nowcasting_hourly_week/median_week_actual_vs_pred.csv": [],
+    "core/results/result_test/nowcasting_hourly_week/weekly_crosscheck_3var.csv": [],
+    "core/results/result_test/nowcasting_hourly_week/weekly_crosscheck_3var_meta.json": [],
+    "core/results/result_test/nowcasting_hourly_week/wettest_week_actual_vs_pred.csv": []
+  }
+}

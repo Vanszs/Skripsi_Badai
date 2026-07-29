@@ -1,0 +1,8 @@
+# Ignore dependencies, build outputs, and large data/weights
+.venv/
+__pycache__/
+*.pyc
+data/raw/
+models/*.pth
+results/
+.git/

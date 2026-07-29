@@ -1,0 +1,101 @@
+{
+  "nodes": [
+    {
+      "id": "document:.kimchi/docs/ALL_IN_ONE_AUDIT_REPORT.md",
+      "type": "document",
+      "name": "ALL_IN_ONE_AUDIT_REPORT.md",
+      "filePath": ".kimchi/docs/ALL_IN_ONE_AUDIT_REPORT.md",
+      "summary": "Documentation file (ALL_IN_ONE_AUDIT_REPORT.md) covering project architecture, specs, or guidelines.",
+      "tags": [
+        "spec",
+        "documentation"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:.kimchi/docs/bab2_landasan_teori_lengkap.md",
+      "type": "document",
+      "name": "bab2_landasan_teori_lengkap.md",
+      "filePath": ".kimchi/docs/bab2_landasan_teori_lengkap.md",
+      "summary": "Documentation file (bab2_landasan_teori_lengkap.md) covering project architecture, specs, or guidelines.",
+      "tags": [
+        "spec",
+        "documentation"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:.kimchi/docs/cross_slope_orographic_mechanisms.md",
+      "type": "document",
+      "name": "cross_slope_orographic_mechanisms.md",
+      "filePath": ".kimchi/docs/cross_slope_orographic_mechanisms.md",
+      "summary": "Documentation file (cross_slope_orographic_mechanisms.md) covering project architecture, specs, or guidelines.",
+      "tags": [
+        "spec",
+        "documentation"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:.kimchi/docs/guidance_bab2_output_architecture.md",
+      "type": "document",
+      "name": "guidance_bab2_output_architecture.md",
+      "filePath": ".kimchi/docs/guidance_bab2_output_architecture.md",
+      "summary": "Documentation file (guidance_bab2_output_architecture.md) covering project architecture, specs, or guidelines.",
+      "tags": [
+        "spec",
+        "documentation"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:.kimchi/docs/guidance_batasan_masalah_update.md",
+      "type": "document",
+      "name": "guidance_batasan_masalah_update.md",
+      "filePath": ".kimchi/docs/guidance_batasan_masalah_update.md",
+      "summary": "Documentation file (guidance_batasan_masalah_update.md) covering project architecture, specs, or guidelines.",
+      "tags": [
+        "spec",
+        "documentation"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:.kimchi/docs/solusi_penelitian_penjelasan_ulang.md",
+      "type": "document",
+      "name": "solusi_penelitian_penjelasan_ulang.md",
+      "filePath": ".kimchi/docs/solusi_penelitian_penjelasan_ulang.md",
+      "summary": "Documentation file (solusi_penelitian_penjelasan_ulang.md) covering project architecture, specs, or guidelines.",
+      "tags": [
+        "spec",
+        "documentation"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:.kimchi/docs/variabilitas_spasial_penjelasan.md",
+      "type": "document",
+      "name": "variabilitas_spasial_penjelasan.md",
+      "filePath": ".kimchi/docs/variabilitas_spasial_penjelasan.md",
+      "summary": "Documentation file (variabilitas_spasial_penjelasan.md) covering project architecture, specs, or guidelines.",
+      "tags": [
+        "spec",
+        "documentation"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:.kimchi/docs/variabilitas_temporal_heavy_tailed.md",
+      "type": "document",
+      "name": "variabilitas_temporal_heavy_tailed.md",
+      "filePath": ".kimchi/docs/variabilitas_temporal_heavy_tailed.md",
+      "summary": "Documentation file (variabilitas_temporal_heavy_tailed.md) covering project architecture, specs, or guidelines.",
+      "tags": [
+        "spec",
+        "documentation"
+      ],
+      "complexity": "complex"
+    }
+  ],
+  "edges": []
+}

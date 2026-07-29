@@ -1,0 +1,578 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 3,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "api/routers/nowcast.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 122,
+      "nonEmptyLines": 110,
+      "functions": [
+        {
+          "name": "_calculate_risk_level",
+          "startLine": 33,
+          "endLine": 41,
+          "params": [
+            "rain_median",
+            "wind_median",
+            "humidity_median"
+          ]
+        },
+        {
+          "name": "np_random_lognormal",
+          "startLine": 43,
+          "endLine": 44,
+          "params": [
+            "mean",
+            "sigma"
+          ]
+        },
+        {
+          "name": "predict_nowcast",
+          "startLine": 47,
+          "endLine": 122,
+          "params": [
+            "req"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "_calculate_risk_level",
+          "line": 33,
+          "isDefault": false
+        },
+        {
+          "name": "np_random_lognormal",
+          "line": 43,
+          "isDefault": false
+        },
+        {
+          "name": "predict_nowcast",
+          "line": 46,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "np_random_lognormal",
+          "callee": "math.exp",
+          "lineNumber": 44
+        },
+        {
+          "caller": "np_random_lognormal",
+          "callee": "random.gauss",
+          "lineNumber": 44
+        },
+        {
+          "caller": "predict_nowcast",
+          "callee": "datetime.now",
+          "lineNumber": 58
+        },
+        {
+          "caller": "predict_nowcast",
+          "callee": "random.random",
+          "lineNumber": 60
+        },
+        {
+          "caller": "predict_nowcast",
+          "callee": "range",
+          "lineNumber": 62
+        },
+        {
+          "caller": "predict_nowcast",
+          "callee": "max",
+          "lineNumber": 64
+        },
+        {
+          "caller": "predict_nowcast",
+          "callee": "float",
+          "lineNumber": 64
+        },
+        {
+          "caller": "predict_nowcast",
+          "callee": "np_random_lognormal",
+          "lineNumber": 64
+        },
+        {
+          "caller": "predict_nowcast",
+          "callee": "max",
+          "lineNumber": 66
+        },
+        {
+          "caller": "predict_nowcast",
+          "callee": "float",
+          "lineNumber": 66
+        },
+        {
+          "caller": "predict_nowcast",
+          "callee": "random.gauss",
+          "lineNumber": 66
+        },
+        {
+          "caller": "predict_nowcast",
+          "callee": "random.random",
+          "lineNumber": 66
+        },
+        {
+          "caller": "predict_nowcast",
+          "callee": "rain_samples.append",
+          "lineNumber": 67
+        },
+        {
+          "caller": "predict_nowcast",
+          "callee": "round",
+          "lineNumber": 67
+        },
+        {
+          "caller": "predict_nowcast",
+          "callee": "round",
+          "lineNumber": 69
+        },
+        {
+          "caller": "predict_nowcast",
+          "callee": "float",
+          "lineNumber": 69
+        },
+        {
+          "caller": "predict_nowcast",
+          "callee": "sorted",
+          "lineNumber": 69
+        },
+        {
+          "caller": "predict_nowcast",
+          "callee": "round",
+          "lineNumber": 70
+        },
+        {
+          "caller": "predict_nowcast",
+          "callee": "float",
+          "lineNumber": 70
+        },
+        {
+          "caller": "predict_nowcast",
+          "callee": "sorted",
+          "lineNumber": 70
+        },
+        {
+          "caller": "predict_nowcast",
+          "callee": "int",
+          "lineNumber": 70
+        },
+        {
+          "caller": "predict_nowcast",
+          "callee": "round",
+          "lineNumber": 71
+        },
+        {
+          "caller": "predict_nowcast",
+          "callee": "float",
+          "lineNumber": 71
+        },
+        {
+          "caller": "predict_nowcast",
+          "callee": "sorted",
+          "lineNumber": 71
+        },
+        {
+          "caller": "predict_nowcast",
+          "callee": "int",
+          "lineNumber": 71
+        },
+        {
+          "caller": "predict_nowcast",
+          "callee": "round",
+          "lineNumber": 74
+        },
+        {
+          "caller": "predict_nowcast",
+          "callee": "max",
+          "lineNumber": 74
+        },
+        {
+          "caller": "predict_nowcast",
+          "callee": "random.gauss",
+          "lineNumber": 74
+        },
+        {
+          "caller": "predict_nowcast",
+          "callee": "range",
+          "lineNumber": 75
+        },
+        {
+          "caller": "predict_nowcast",
+          "callee": "round",
+          "lineNumber": 77
+        },
+        {
+          "caller": "predict_nowcast",
+          "callee": "float",
+          "lineNumber": 77
+        },
+        {
+          "caller": "predict_nowcast",
+          "callee": "sorted",
+          "lineNumber": 77
+        },
+        {
+          "caller": "predict_nowcast",
+          "callee": "round",
+          "lineNumber": 78
+        },
+        {
+          "caller": "predict_nowcast",
+          "callee": "float",
+          "lineNumber": 78
+        },
+        {
+          "caller": "predict_nowcast",
+          "callee": "sorted",
+          "lineNumber": 78
+        },
+        {
+          "caller": "predict_nowcast",
+          "callee": "int",
+          "lineNumber": 78
+        },
+        {
+          "caller": "predict_nowcast",
+          "callee": "round",
+          "lineNumber": 79
+        },
+        {
+          "caller": "predict_nowcast",
+          "callee": "float",
+          "lineNumber": 79
+        },
+        {
+          "caller": "predict_nowcast",
+          "callee": "sorted",
+          "lineNumber": 79
+        },
+        {
+          "caller": "predict_nowcast",
+          "callee": "int",
+          "lineNumber": 79
+        },
+        {
+          "caller": "predict_nowcast",
+          "callee": "round",
+          "lineNumber": 82
+        },
+        {
+          "caller": "predict_nowcast",
+          "callee": "min",
+          "lineNumber": 82
+        },
+        {
+          "caller": "predict_nowcast",
+          "callee": "max",
+          "lineNumber": 82
+        },
+        {
+          "caller": "predict_nowcast",
+          "callee": "random.gauss",
+          "lineNumber": 82
+        },
+        {
+          "caller": "predict_nowcast",
+          "callee": "range",
+          "lineNumber": 83
+        },
+        {
+          "caller": "predict_nowcast",
+          "callee": "round",
+          "lineNumber": 85
+        },
+        {
+          "caller": "predict_nowcast",
+          "callee": "float",
+          "lineNumber": 85
+        },
+        {
+          "caller": "predict_nowcast",
+          "callee": "sorted",
+          "lineNumber": 85
+        },
+        {
+          "caller": "predict_nowcast",
+          "callee": "round",
+          "lineNumber": 86
+        },
+        {
+          "caller": "predict_nowcast",
+          "callee": "float",
+          "lineNumber": 86
+        },
+        {
+          "caller": "predict_nowcast",
+          "callee": "sorted",
+          "lineNumber": 86
+        },
+        {
+          "caller": "predict_nowcast",
+          "callee": "int",
+          "lineNumber": 86
+        },
+        {
+          "caller": "predict_nowcast",
+          "callee": "round",
+          "lineNumber": 87
+        },
+        {
+          "caller": "predict_nowcast",
+          "callee": "float",
+          "lineNumber": 87
+        },
+        {
+          "caller": "predict_nowcast",
+          "callee": "sorted",
+          "lineNumber": 87
+        },
+        {
+          "caller": "predict_nowcast",
+          "callee": "int",
+          "lineNumber": 87
+        },
+        {
+          "caller": "predict_nowcast",
+          "callee": "_calculate_risk_level",
+          "lineNumber": 89
+        },
+        {
+          "caller": "predict_nowcast",
+          "callee": "NowcastResponse",
+          "lineNumber": 91
+        },
+        {
+          "caller": "predict_nowcast",
+          "callee": "now.isoformat",
+          "lineNumber": 93
+        },
+        {
+          "caller": "predict_nowcast",
+          "callee": "VariableForecast",
+          "lineNumber": 98
+        },
+        {
+          "caller": "predict_nowcast",
+          "callee": "VariableForecast",
+          "lineNumber": 105
+        },
+        {
+          "caller": "predict_nowcast",
+          "callee": "VariableForecast",
+          "lineNumber": 112
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 3,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "api/routers/stations.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 39,
+      "nonEmptyLines": 36,
+      "functions": [
+        {
+          "name": "get_stations",
+          "startLine": 37,
+          "endLine": 39,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "get_stations",
+          "line": 36,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "get_stations",
+          "callee": "StationListResponse",
+          "lineNumber": 39
+        },
+        {
+          "caller": "get_stations",
+          "callee": "len",
+          "lineNumber": 39
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "api/schemas.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 57,
+      "nonEmptyLines": 49,
+      "classes": [
+        {
+          "name": "StationInfo",
+          "startLine": 4,
+          "endLine": 11,
+          "methods": [],
+          "properties": [
+            "id",
+            "name",
+            "latitude",
+            "longitude",
+            "elevation_mdpl",
+            "role",
+            "era5_grid"
+          ]
+        },
+        {
+          "name": "StationListResponse",
+          "startLine": 13,
+          "endLine": 15,
+          "methods": [],
+          "properties": [
+            "total",
+            "stations"
+          ]
+        },
+        {
+          "name": "TargetMetrics",
+          "startLine": 17,
+          "endLine": 20,
+          "methods": [],
+          "properties": [
+            "rmse",
+            "mae",
+            "correlation"
+          ]
+        },
+        {
+          "name": "ProbabilisticMetrics",
+          "startLine": 22,
+          "endLine": 27,
+          "methods": [],
+          "properties": [
+            "crps",
+            "brier",
+            "pod",
+            "far",
+            "csi"
+          ]
+        },
+        {
+          "name": "WeatherMetricsSummary",
+          "startLine": 29,
+          "endLine": 35,
+          "methods": [],
+          "properties": [
+            "model_name",
+            "analyzed_at",
+            "test_period",
+            "deterministic",
+            "probabilistic",
+            "threshold_sensitivity_precip"
+          ]
+        },
+        {
+          "name": "NowcastRequest",
+          "startLine": 37,
+          "endLine": 40,
+          "methods": [],
+          "properties": [
+            "station_id",
+            "num_samples",
+            "ddim_steps"
+          ]
+        },
+        {
+          "name": "VariableForecast",
+          "startLine": 42,
+          "endLine": 47,
+          "methods": [],
+          "properties": [
+            "unit",
+            "median",
+            "p10",
+            "p90",
+            "samples"
+          ]
+        },
+        {
+          "name": "NowcastResponse",
+          "startLine": 49,
+          "endLine": 57,
+          "methods": [],
+          "properties": [
+            "station_id",
+            "timestamp",
+            "forecast_step_hours",
+            "ensemble_size",
+            "ddim_steps",
+            "targets",
+            "risk_level",
+            "risk_summary"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "StationInfo",
+          "line": 4,
+          "isDefault": false
+        },
+        {
+          "name": "StationListResponse",
+          "line": 13,
+          "isDefault": false
+        },
+        {
+          "name": "TargetMetrics",
+          "line": 17,
+          "isDefault": false
+        },
+        {
+          "name": "ProbabilisticMetrics",
+          "line": 22,
+          "isDefault": false
+        },
+        {
+          "name": "WeatherMetricsSummary",
+          "line": 29,
+          "isDefault": false
+        },
+        {
+          "name": "NowcastRequest",
+          "line": 37,
+          "isDefault": false
+        },
+        {
+          "name": "VariableForecast",
+          "line": 42,
+          "isDefault": false
+        },
+        {
+          "name": "NowcastResponse",
+          "line": 49,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 8,
+        "functionCount": 0,
+        "classCount": 8
+      }
+    }
+  ]
+}

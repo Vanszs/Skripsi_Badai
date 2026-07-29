@@ -1,0 +1,63 @@
+{
+  "projectRoot": "/media/DiskE/SKRIPSI/Skripsi_Bevan",
+  "batchFiles": [
+    {
+      "path": ".kimchi/docs/ALL_IN_ONE_AUDIT_REPORT.md",
+      "language": "markdown",
+      "sizeLines": 504,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".kimchi/docs/bab2_landasan_teori_lengkap.md",
+      "language": "markdown",
+      "sizeLines": 529,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".kimchi/docs/cross_slope_orographic_mechanisms.md",
+      "language": "markdown",
+      "sizeLines": 187,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".kimchi/docs/guidance_bab2_output_architecture.md",
+      "language": "markdown",
+      "sizeLines": 79,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".kimchi/docs/guidance_batasan_masalah_update.md",
+      "language": "markdown",
+      "sizeLines": 208,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".kimchi/docs/solusi_penelitian_penjelasan_ulang.md",
+      "language": "markdown",
+      "sizeLines": 286,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".kimchi/docs/variabilitas_spasial_penjelasan.md",
+      "language": "markdown",
+      "sizeLines": 161,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".kimchi/docs/variabilitas_temporal_heavy_tailed.md",
+      "language": "markdown",
+      "sizeLines": 280,
+      "fileCategory": "docs"
+    }
+  ],
+  "batchImportData": {
+    ".kimchi/docs/ALL_IN_ONE_AUDIT_REPORT.md": [],
+    ".kimchi/docs/bab2_landasan_teori_lengkap.md": [],
+    ".kimchi/docs/cross_slope_orographic_mechanisms.md": [],
+    ".kimchi/docs/guidance_bab2_output_architecture.md": [],
+    ".kimchi/docs/guidance_batasan_masalah_update.md": [],
+    ".kimchi/docs/solusi_penelitian_penjelasan_ulang.md": [],
+    ".kimchi/docs/variabilitas_spasial_penjelasan.md": [],
+    ".kimchi/docs/variabilitas_temporal_heavy_tailed.md": []
+  }
+}

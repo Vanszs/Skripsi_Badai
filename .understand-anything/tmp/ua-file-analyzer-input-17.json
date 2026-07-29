@@ -1,0 +1,182 @@
+{
+  "projectRoot": "/media/DiskE/SKRIPSI/Skripsi_Bevan",
+  "batchFiles": [
+    {
+      "path": ".agent/rules/respon.md",
+      "language": "markdown",
+      "sizeLines": 422,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".agent/skills/thesis-sentinel/scripts/health_check.py",
+      "language": "python",
+      "sizeLines": 91,
+      "fileCategory": "code"
+    },
+    {
+      "path": ".agent/skills/thesis-sentinel/SKILL.md",
+      "language": "markdown",
+      "sizeLines": 52,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".agents/skills/brandkit/SKILL.md",
+      "language": "markdown",
+      "sizeLines": 798,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".agents/skills/design-taste-frontend-v1/SKILL.md",
+      "language": "markdown",
+      "sizeLines": 226,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".agents/skills/design-taste-frontend/SKILL.md",
+      "language": "markdown",
+      "sizeLines": 1206,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".agents/skills/full-output-enforcement/SKILL.md",
+      "language": "markdown",
+      "sizeLines": 49,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".agents/skills/gpt-taste/SKILL.md",
+      "language": "markdown",
+      "sizeLines": 74,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".agents/skills/high-end-visual-design/SKILL.md",
+      "language": "markdown",
+      "sizeLines": 98,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".agents/skills/image-to-code/SKILL.md",
+      "language": "markdown",
+      "sizeLines": 1228,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".agents/skills/imagegen-frontend-mobile/SKILL.md",
+      "language": "markdown",
+      "sizeLines": 1465,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".agents/skills/imagegen-frontend-web/SKILL.md",
+      "language": "markdown",
+      "sizeLines": 987,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".agents/skills/industrial-brutalist-ui/SKILL.md",
+      "language": "markdown",
+      "sizeLines": 92,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".agents/skills/minimalist-ui/SKILL.md",
+      "language": "markdown",
+      "sizeLines": 85,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".agents/skills/redesign-existing-projects/SKILL.md",
+      "language": "markdown",
+      "sizeLines": 178,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".agents/skills/stitch-design-taste/DESIGN.md",
+      "language": "markdown",
+      "sizeLines": 121,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".agents/skills/stitch-design-taste/SKILL.md",
+      "language": "markdown",
+      "sizeLines": 184,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".github/agents/independent-verification-auditor.agent.md",
+      "language": "markdown",
+      "sizeLines": 175,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".github/rules/respon.md",
+      "language": "markdown",
+      "sizeLines": 432,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".github/skills/thesis-sentinel/scripts/health_check.py",
+      "language": "python",
+      "sizeLines": 91,
+      "fileCategory": "code"
+    },
+    {
+      "path": ".github/skills/thesis-sentinel/SKILL.md",
+      "language": "markdown",
+      "sizeLines": 52,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".kiro/settings/lsp.json",
+      "language": "json",
+      "sizeLines": 204,
+      "fileCategory": "config"
+    },
+    {
+      "path": ".ua/.understandignore",
+      "language": "unknown",
+      "sizeLines": 8,
+      "fileCategory": "code"
+    },
+    {
+      "path": ".ua/intermediate/scan-result.json",
+      "language": "json",
+      "sizeLines": 1026,
+      "fileCategory": "config"
+    },
+    {
+      "path": ".understand-anything/.understandignore",
+      "language": "unknown",
+      "sizeLines": 37,
+      "fileCategory": "code"
+    }
+  ],
+  "batchImportData": {
+    ".agent/rules/respon.md": [],
+    ".agent/skills/thesis-sentinel/scripts/health_check.py": [],
+    ".agent/skills/thesis-sentinel/SKILL.md": [],
+    ".agents/skills/brandkit/SKILL.md": [],
+    ".agents/skills/design-taste-frontend-v1/SKILL.md": [],
+    ".agents/skills/design-taste-frontend/SKILL.md": [],
+    ".agents/skills/full-output-enforcement/SKILL.md": [],
+    ".agents/skills/gpt-taste/SKILL.md": [],
+    ".agents/skills/high-end-visual-design/SKILL.md": [],
+    ".agents/skills/image-to-code/SKILL.md": [],
+    ".agents/skills/imagegen-frontend-mobile/SKILL.md": [],
+    ".agents/skills/imagegen-frontend-web/SKILL.md": [],
+    ".agents/skills/industrial-brutalist-ui/SKILL.md": [],
+    ".agents/skills/minimalist-ui/SKILL.md": [],
+    ".agents/skills/redesign-existing-projects/SKILL.md": [],
+    ".agents/skills/stitch-design-taste/DESIGN.md": [],
+    ".agents/skills/stitch-design-taste/SKILL.md": [],
+    ".github/agents/independent-verification-auditor.agent.md": [],
+    ".github/rules/respon.md": [],
+    ".github/skills/thesis-sentinel/scripts/health_check.py": [],
+    ".github/skills/thesis-sentinel/SKILL.md": [],
+    ".kiro/settings/lsp.json": [],
+    ".ua/.understandignore": [],
+    ".ua/intermediate/scan-result.json": [],
+    ".understand-anything/.understandignore": []
+  }
+}

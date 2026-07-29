@@ -1,0 +1,549 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 8,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "core/src/evaluation/__init__.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 3,
+      "nonEmptyLines": 3,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "core/src/services/api.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 189,
+      "nonEmptyLines": 169,
+      "functions": [
+        {
+          "name": "pseudorand",
+          "startLine": 75,
+          "endLine": 78,
+          "params": [
+            "seed"
+          ]
+        },
+        {
+          "name": "generateSamplePrecip",
+          "startLine": 81,
+          "endLine": 87,
+          "params": [
+            "seed"
+          ]
+        },
+        {
+          "name": "generateMockNowcast",
+          "startLine": 89,
+          "endLine": 166,
+          "params": [
+            "targetTimestamp"
+          ]
+        },
+        {
+          "name": "fetchNowcast",
+          "startLine": 169,
+          "endLine": 180,
+          "params": [
+            "timestamp"
+          ]
+        },
+        {
+          "name": "useNowcastQuery",
+          "startLine": 183,
+          "endLine": 189,
+          "params": [
+            "timestamp"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "PANGRANGO_NODES",
+          "line": 57,
+          "isDefault": false
+        },
+        {
+          "name": "apiClient",
+          "line": 67,
+          "isDefault": false
+        },
+        {
+          "name": "generateMockNowcast",
+          "line": 89,
+          "isDefault": false
+        },
+        {
+          "name": "fetchNowcast",
+          "line": 169,
+          "isDefault": false
+        },
+        {
+          "name": "useNowcastQuery",
+          "line": 183,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "pseudorand",
+          "callee": "Math.sin",
+          "lineNumber": 76
+        },
+        {
+          "caller": "pseudorand",
+          "callee": "Math.floor",
+          "lineNumber": 77
+        },
+        {
+          "caller": "generateSamplePrecip",
+          "callee": "pseudorand",
+          "lineNumber": 82
+        },
+        {
+          "caller": "generateSamplePrecip",
+          "callee": "pseudorand",
+          "lineNumber": 84
+        },
+        {
+          "caller": "generateSamplePrecip",
+          "callee": "Math.expm1",
+          "lineNumber": 85
+        },
+        {
+          "caller": "generateSamplePrecip",
+          "callee": "Math.min",
+          "lineNumber": 86
+        },
+        {
+          "caller": "generateSamplePrecip",
+          "callee": "Math.round",
+          "lineNumber": 86
+        },
+        {
+          "caller": "generateMockNowcast",
+          "callee": "now.getTime",
+          "lineNumber": 91
+        },
+        {
+          "caller": "generateMockNowcast",
+          "callee": "PANGRANGO_NODES.map",
+          "lineNumber": 95
+        },
+        {
+          "caller": "generateMockNowcast",
+          "callee": "new Date(baseTime - i * 3600 * 1000).toISOString",
+          "lineNumber": 98
+        },
+        {
+          "caller": "generateMockNowcast",
+          "callee": "historical.push",
+          "lineNumber": 99
+        },
+        {
+          "caller": "generateMockNowcast",
+          "callee": "generateSamplePrecip",
+          "lineNumber": 101
+        },
+        {
+          "caller": "generateMockNowcast",
+          "callee": "Math.round",
+          "lineNumber": 102
+        },
+        {
+          "caller": "generateMockNowcast",
+          "callee": "pseudorand",
+          "lineNumber": 102
+        },
+        {
+          "caller": "generateMockNowcast",
+          "callee": "Math.round",
+          "lineNumber": 103
+        },
+        {
+          "caller": "generateMockNowcast",
+          "callee": "pseudorand",
+          "lineNumber": 103
+        },
+        {
+          "caller": "generateMockNowcast",
+          "callee": "Math.round",
+          "lineNumber": 104
+        },
+        {
+          "caller": "generateMockNowcast",
+          "callee": "pseudorand",
+          "lineNumber": 104
+        },
+        {
+          "caller": "generateMockNowcast",
+          "callee": "prec.push",
+          "lineNumber": 122
+        },
+        {
+          "caller": "generateMockNowcast",
+          "callee": "generateSamplePrecip",
+          "lineNumber": 122
+        },
+        {
+          "caller": "generateMockNowcast",
+          "callee": "wind.push",
+          "lineNumber": 123
+        },
+        {
+          "caller": "generateMockNowcast",
+          "callee": "Math.round",
+          "lineNumber": 123
+        },
+        {
+          "caller": "generateMockNowcast",
+          "callee": "pseudorand",
+          "lineNumber": 123
+        },
+        {
+          "caller": "generateMockNowcast",
+          "callee": "rh.push",
+          "lineNumber": 124
+        },
+        {
+          "caller": "generateMockNowcast",
+          "callee": "Math.round",
+          "lineNumber": 124
+        },
+        {
+          "caller": "generateMockNowcast",
+          "callee": "pseudorand",
+          "lineNumber": 124
+        },
+        {
+          "caller": "generateMockNowcast",
+          "callee": "ensemble_predictions.push",
+          "lineNumber": 126
+        },
+        {
+          "caller": "generateMockNowcast",
+          "callee": "ensemble_predictions.map((e) => e.precipitation[h]).sort",
+          "lineNumber": 140
+        },
+        {
+          "caller": "generateMockNowcast",
+          "callee": "ensemble_predictions.map",
+          "lineNumber": 140
+        },
+        {
+          "caller": "generateMockNowcast",
+          "callee": "prec_p10.push",
+          "lineNumber": 141
+        },
+        {
+          "caller": "generateMockNowcast",
+          "callee": "Math.floor",
+          "lineNumber": 141
+        },
+        {
+          "caller": "generateMockNowcast",
+          "callee": "prec_median.push",
+          "lineNumber": 142
+        },
+        {
+          "caller": "generateMockNowcast",
+          "callee": "Math.floor",
+          "lineNumber": 142
+        },
+        {
+          "caller": "generateMockNowcast",
+          "callee": "prec_p90.push",
+          "lineNumber": 143
+        },
+        {
+          "caller": "generateMockNowcast",
+          "callee": "Math.floor",
+          "lineNumber": 143
+        },
+        {
+          "caller": "generateMockNowcast",
+          "callee": "[1, 2, 3].map",
+          "lineNumber": 147
+        },
+        {
+          "caller": "generateMockNowcast",
+          "callee": "Math.round",
+          "lineNumber": 149
+        },
+        {
+          "caller": "generateMockNowcast",
+          "callee": "pseudorand",
+          "lineNumber": 149
+        },
+        {
+          "caller": "generateMockNowcast",
+          "callee": "new Date(baseTime - (365 * k + 12) * 24 * 3600 * 1000).toISOString",
+          "lineNumber": 150
+        },
+        {
+          "caller": "generateMockNowcast",
+          "callee": "Array.from",
+          "lineNumber": 151
+        },
+        {
+          "caller": "generateMockNowcast",
+          "callee": "generateSamplePrecip",
+          "lineNumber": 151
+        },
+        {
+          "caller": "generateMockNowcast",
+          "callee": "now.toISOString",
+          "lineNumber": 155
+        },
+        {
+          "caller": "fetchNowcast",
+          "callee": "await apiClient.get",
+          "lineNumber": 171
+        },
+        {
+          "caller": "fetchNowcast",
+          "callee": "setTimeout",
+          "lineNumber": 177
+        },
+        {
+          "caller": "fetchNowcast",
+          "callee": "generateMockNowcast",
+          "lineNumber": 178
+        },
+        {
+          "caller": "useNowcastQuery",
+          "callee": "useQuery",
+          "lineNumber": 184
+        },
+        {
+          "caller": "useNowcastQuery",
+          "callee": "fetchNowcast",
+          "lineNumber": 186
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 5,
+        "functionCount": 5,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "core/tests/test_checkpoint_contract.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 33,
+      "nonEmptyLines": 29,
+      "classes": [
+        {
+          "name": "CheckpointContractTest",
+          "startLine": 7,
+          "endLine": 33,
+          "methods": [
+            "test_diffusion_checkpoint_metadata_contract"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "CheckpointContractTest",
+          "line": 7,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "test_diffusion_checkpoint_metadata_contract",
+          "callee": "self.assertTrue",
+          "lineNumber": 10
+        },
+        {
+          "caller": "test_diffusion_checkpoint_metadata_contract",
+          "callee": "os.path.exists",
+          "lineNumber": 10
+        },
+        {
+          "caller": "test_diffusion_checkpoint_metadata_contract",
+          "callee": "torch.load",
+          "lineNumber": 11
+        },
+        {
+          "caller": "test_diffusion_checkpoint_metadata_contract",
+          "callee": "self.assertFalse",
+          "lineNumber": 25
+        },
+        {
+          "caller": "test_diffusion_checkpoint_metadata_contract",
+          "callee": "self.assertEqual",
+          "lineNumber": 26
+        },
+        {
+          "caller": "test_diffusion_checkpoint_metadata_contract",
+          "callee": "self.assertEqual",
+          "lineNumber": 27
+        },
+        {
+          "caller": "test_diffusion_checkpoint_metadata_contract",
+          "callee": "self.assertEqual",
+          "lineNumber": 28
+        },
+        {
+          "caller": "test_diffusion_checkpoint_metadata_contract",
+          "callee": "cfg.get",
+          "lineNumber": 32
+        },
+        {
+          "caller": "test_diffusion_checkpoint_metadata_contract",
+          "callee": "len",
+          "lineNumber": 32
+        },
+        {
+          "caller": "test_diffusion_checkpoint_metadata_contract",
+          "callee": "cfg.get",
+          "lineNumber": 32
+        },
+        {
+          "caller": "test_diffusion_checkpoint_metadata_contract",
+          "callee": "self.assertEqual",
+          "lineNumber": 33
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "docs/private.note",
+      "language": "note",
+      "fileCategory": "code",
+      "totalLines": 164,
+      "nonEmptyLines": 128,
+      "metrics": {}
+    },
+    {
+      "path": "main.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 59,
+      "nonEmptyLines": 51,
+      "functions": [
+        {
+          "name": "root",
+          "startLine": 44,
+          "endLine": 55,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "root",
+          "line": 43,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "web/src/index.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 232,
+      "nonEmptyLines": 221,
+      "metrics": {}
+    },
+    {
+      "path": "web/src/vite-env.d.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 1,
+      "nonEmptyLines": 1,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "web/vite.config.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 53,
+      "nonEmptyLines": 52,
+      "callGraph": [
+        {
+          "caller": "manualChunks",
+          "callee": "id.includes",
+          "lineNumber": 28
+        },
+        {
+          "caller": "manualChunks",
+          "callee": "id.includes",
+          "lineNumber": 30
+        },
+        {
+          "caller": "manualChunks",
+          "callee": "id.includes",
+          "lineNumber": 31
+        },
+        {
+          "caller": "manualChunks",
+          "callee": "id.includes",
+          "lineNumber": 32
+        },
+        {
+          "caller": "manualChunks",
+          "callee": "id.includes",
+          "lineNumber": 33
+        },
+        {
+          "caller": "manualChunks",
+          "callee": "id.includes",
+          "lineNumber": 34
+        },
+        {
+          "caller": "manualChunks",
+          "callee": "id.includes",
+          "lineNumber": 38
+        },
+        {
+          "caller": "manualChunks",
+          "callee": "id.includes",
+          "lineNumber": 38
+        },
+        {
+          "caller": "manualChunks",
+          "callee": "id.includes",
+          "lineNumber": 41
+        },
+        {
+          "caller": "manualChunks",
+          "callee": "id.includes",
+          "lineNumber": 44
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    }
+  ]
+}

@@ -1,0 +1,480 @@
+{
+  "nodes": [
+    {
+      "id": "file:core/src/inference.py",
+      "type": "file",
+      "name": "inference.py",
+      "filePath": "core/src/inference.py",
+      "summary": "Source module (inference.py) implementing 4 functions, 1 classes (301 lines).",
+      "tags": [
+        "code"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:core/src/inference.py:_build_edge_index_from_config",
+      "type": "function",
+      "name": "_build_edge_index_from_config",
+      "filePath": "core/src/inference.py",
+      "lineRange": [
+        28,
+        43
+      ],
+      "summary": "Function _build_edge_index_from_config defined in inference.py.",
+      "tags": [
+        "function",
+        "code"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:core/src/inference.py:create_inference_graphs",
+      "type": "function",
+      "name": "create_inference_graphs",
+      "filePath": "core/src/inference.py",
+      "lineRange": [
+        46,
+        73
+      ],
+      "summary": "Function create_inference_graphs defined in inference.py.",
+      "tags": [
+        "function",
+        "code"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:core/src/inference.py:load_model_and_stats",
+      "type": "function",
+      "name": "load_model_and_stats",
+      "filePath": "core/src/inference.py",
+      "lineRange": [
+        95,
+        209
+      ],
+      "summary": "Function load_model_and_stats defined in inference.py.",
+      "tags": [
+        "function",
+        "code"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:core/src/inference.py:run_inference_real",
+      "type": "function",
+      "name": "run_inference_real",
+      "filePath": "core/src/inference.py",
+      "lineRange": [
+        212,
+        301
+      ],
+      "summary": "Function run_inference_real defined in inference.py.",
+      "tags": [
+        "function",
+        "code"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:core/src/inference.py:InferenceModelWrapper",
+      "type": "class",
+      "name": "InferenceModelWrapper",
+      "filePath": "core/src/inference.py",
+      "lineRange": [
+        76,
+        92
+      ],
+      "summary": "Class InferenceModelWrapper defined in inference.py.",
+      "tags": [
+        "class",
+        "code"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:core/src/models/gnn.py",
+      "type": "file",
+      "name": "gnn.py",
+      "filePath": "core/src/models/gnn.py",
+      "summary": "Source module (gnn.py) implementing 3 classes (161 lines).",
+      "tags": [
+        "code",
+        "deep-learning",
+        "architecture"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:core/src/models/gnn.py:TemporalAttention",
+      "type": "class",
+      "name": "TemporalAttention",
+      "filePath": "core/src/models/gnn.py",
+      "lineRange": [
+        14,
+        61
+      ],
+      "summary": "Class TemporalAttention defined in gnn.py.",
+      "tags": [
+        "class",
+        "code",
+        "deep-learning",
+        "architecture"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:core/src/models/gnn.py:SpatialGNN",
+      "type": "class",
+      "name": "SpatialGNN",
+      "filePath": "core/src/models/gnn.py",
+      "lineRange": [
+        64,
+        96
+      ],
+      "summary": "Class SpatialGNN defined in gnn.py.",
+      "tags": [
+        "class",
+        "code",
+        "deep-learning",
+        "architecture"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:core/src/models/gnn.py:SpatioTemporalGNN",
+      "type": "class",
+      "name": "SpatioTemporalGNN",
+      "filePath": "core/src/models/gnn.py",
+      "lineRange": [
+        99,
+        161
+      ],
+      "summary": "Class SpatioTemporalGNN defined in gnn.py.",
+      "tags": [
+        "class",
+        "code",
+        "deep-learning",
+        "architecture"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:core/src/retrieval/base.py",
+      "type": "file",
+      "name": "base.py",
+      "filePath": "core/src/retrieval/base.py",
+      "summary": "Source module (base.py) implementing 1 classes (73 lines).",
+      "tags": [
+        "code",
+        "similarity-search",
+        "retrieval"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:core/src/retrieval/base.py:RetrievalDatabase",
+      "type": "class",
+      "name": "RetrievalDatabase",
+      "filePath": "core/src/retrieval/base.py",
+      "lineRange": [
+        5,
+        73
+      ],
+      "summary": "Class RetrievalDatabase defined in base.py.",
+      "tags": [
+        "class",
+        "code",
+        "similarity-search",
+        "retrieval"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:core/tests/test_gnn_edge_attr.py",
+      "type": "file",
+      "name": "test_gnn_edge_attr.py",
+      "filePath": "core/tests/test_gnn_edge_attr.py",
+      "summary": "Source module (test_gnn_edge_attr.py) implementing 1 classes (36 lines).",
+      "tags": [
+        "code",
+        "deep-learning",
+        "architecture",
+        "test"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:core/tests/test_gnn_edge_attr.py:GNNEdgeAttrTest",
+      "type": "class",
+      "name": "GNNEdgeAttrTest",
+      "filePath": "core/tests/test_gnn_edge_attr.py",
+      "lineRange": [
+        11,
+        36
+      ],
+      "summary": "Class GNNEdgeAttrTest defined in test_gnn_edge_attr.py.",
+      "tags": [
+        "class",
+        "code",
+        "deep-learning",
+        "architecture",
+        "test"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:core/tests/test_inference_graphs.py",
+      "type": "file",
+      "name": "test_inference_graphs.py",
+      "filePath": "core/tests/test_inference_graphs.py",
+      "summary": "Source module (test_inference_graphs.py) implementing 1 classes (40 lines).",
+      "tags": [
+        "code",
+        "test"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:core/tests/test_inference_graphs.py:InferenceGraphsTest",
+      "type": "class",
+      "name": "InferenceGraphsTest",
+      "filePath": "core/tests/test_inference_graphs.py",
+      "lineRange": [
+        10,
+        40
+      ],
+      "summary": "Class InferenceGraphsTest defined in test_inference_graphs.py.",
+      "tags": [
+        "class",
+        "code",
+        "test"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:core/tests/test_inference_smoke.py",
+      "type": "file",
+      "name": "test_inference_smoke.py",
+      "filePath": "core/tests/test_inference_smoke.py",
+      "summary": "Source module (test_inference_smoke.py) implementing 1 classes (48 lines).",
+      "tags": [
+        "code",
+        "test"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:core/tests/test_inference_smoke.py:InferenceSmokeTest",
+      "type": "class",
+      "name": "InferenceSmokeTest",
+      "filePath": "core/tests/test_inference_smoke.py",
+      "lineRange": [
+        8,
+        48
+      ],
+      "summary": "Class InferenceSmokeTest defined in test_inference_smoke.py.",
+      "tags": [
+        "class",
+        "code",
+        "test"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:core/tests/test_retrieval.py",
+      "type": "file",
+      "name": "test_retrieval.py",
+      "filePath": "core/tests/test_retrieval.py",
+      "summary": "Source module (test_retrieval.py) implementing 1 classes (56 lines).",
+      "tags": [
+        "code",
+        "similarity-search",
+        "retrieval",
+        "test"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:core/tests/test_retrieval.py:RetrievalDatabaseTest",
+      "type": "class",
+      "name": "RetrievalDatabaseTest",
+      "filePath": "core/tests/test_retrieval.py",
+      "lineRange": [
+        10,
+        56
+      ],
+      "summary": "Class RetrievalDatabaseTest defined in test_retrieval.py.",
+      "tags": [
+        "class",
+        "code",
+        "similarity-search",
+        "retrieval",
+        "test"
+      ],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:core/src/inference.py",
+      "target": "function:core/src/inference.py:_build_edge_index_from_config",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/src/inference.py",
+      "target": "function:core/src/inference.py:create_inference_graphs",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/src/inference.py",
+      "target": "function:core/src/inference.py:load_model_and_stats",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/src/inference.py",
+      "target": "function:core/src/inference.py:run_inference_real",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/src/inference.py",
+      "target": "class:core/src/inference.py:InferenceModelWrapper",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/src/inference.py",
+      "target": "file:core/src/config.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:core/src/inference.py",
+      "target": "file:core/src/models/diffusion.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:core/src/inference.py",
+      "target": "file:core/src/models/gnn.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:core/src/inference.py",
+      "target": "file:core/src/retrieval/base.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:core/src/models/gnn.py",
+      "target": "class:core/src/models/gnn.py:TemporalAttention",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/src/models/gnn.py",
+      "target": "class:core/src/models/gnn.py:SpatialGNN",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/src/models/gnn.py",
+      "target": "class:core/src/models/gnn.py:SpatioTemporalGNN",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/src/retrieval/base.py",
+      "target": "class:core/src/retrieval/base.py:RetrievalDatabase",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/tests/test_gnn_edge_attr.py",
+      "target": "class:core/tests/test_gnn_edge_attr.py:GNNEdgeAttrTest",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/tests/test_gnn_edge_attr.py",
+      "target": "file:core/src/config.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:core/tests/test_gnn_edge_attr.py",
+      "target": "file:core/src/models/gnn.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:core/tests/test_inference_graphs.py",
+      "target": "class:core/tests/test_inference_graphs.py:InferenceGraphsTest",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/tests/test_inference_graphs.py",
+      "target": "file:core/src/config.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:core/tests/test_inference_graphs.py",
+      "target": "file:core/src/inference.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:core/tests/test_inference_smoke.py",
+      "target": "class:core/tests/test_inference_smoke.py:InferenceSmokeTest",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/tests/test_inference_smoke.py",
+      "target": "file:core/src/inference.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:core/tests/test_retrieval.py",
+      "target": "class:core/tests/test_retrieval.py:RetrievalDatabaseTest",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/tests/test_retrieval.py",
+      "target": "file:core/src/retrieval/base.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    }
+  ]
+}

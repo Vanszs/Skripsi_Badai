@@ -1,0 +1,101 @@
+{
+  "nodes": [
+    {
+      "id": "config:.understand-anything/tmp/ua-file-extract-results-2.json",
+      "type": "config",
+      "name": "ua-file-extract-results-2.json",
+      "filePath": ".understand-anything/tmp/ua-file-extract-results-2.json",
+      "summary": "Configuration file (ua-file-extract-results-2.json) specifying project settings, environment, or build properties.",
+      "tags": [
+        "configuration",
+        "build-system"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "config:.understand-anything/tmp/ua-file-extract-results-3.json",
+      "type": "config",
+      "name": "ua-file-extract-results-3.json",
+      "filePath": ".understand-anything/tmp/ua-file-extract-results-3.json",
+      "summary": "Configuration file (ua-file-extract-results-3.json) specifying project settings, environment, or build properties.",
+      "tags": [
+        "configuration",
+        "build-system"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "config:.understand-anything/tmp/ua-file-extract-results-4.json",
+      "type": "config",
+      "name": "ua-file-extract-results-4.json",
+      "filePath": ".understand-anything/tmp/ua-file-extract-results-4.json",
+      "summary": "Configuration file (ua-file-extract-results-4.json) specifying project settings, environment, or build properties.",
+      "tags": [
+        "configuration",
+        "build-system"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "config:.understand-anything/tmp/ua-file-extract-results-5.json",
+      "type": "config",
+      "name": "ua-file-extract-results-5.json",
+      "filePath": ".understand-anything/tmp/ua-file-extract-results-5.json",
+      "summary": "Configuration file (ua-file-extract-results-5.json) specifying project settings, environment, or build properties.",
+      "tags": [
+        "configuration",
+        "build-system"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:.understand-anything/tmp/ua-file-extract-results-6.json",
+      "type": "config",
+      "name": "ua-file-extract-results-6.json",
+      "filePath": ".understand-anything/tmp/ua-file-extract-results-6.json",
+      "summary": "Configuration file (ua-file-extract-results-6.json) specifying project settings, environment, or build properties.",
+      "tags": [
+        "configuration",
+        "build-system"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "config:.understand-anything/tmp/ua-file-extract-results-7.json",
+      "type": "config",
+      "name": "ua-file-extract-results-7.json",
+      "filePath": ".understand-anything/tmp/ua-file-extract-results-7.json",
+      "summary": "Configuration file (ua-file-extract-results-7.json) specifying project settings, environment, or build properties.",
+      "tags": [
+        "configuration",
+        "build-system"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "config:.understand-anything/tmp/ua-file-extract-results-8.json",
+      "type": "config",
+      "name": "ua-file-extract-results-8.json",
+      "filePath": ".understand-anything/tmp/ua-file-extract-results-8.json",
+      "summary": "Configuration file (ua-file-extract-results-8.json) specifying project settings, environment, or build properties.",
+      "tags": [
+        "configuration",
+        "build-system"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "config:.understand-anything/tmp/ua-file-extract-results-9.json",
+      "type": "config",
+      "name": "ua-file-extract-results-9.json",
+      "filePath": ".understand-anything/tmp/ua-file-extract-results-9.json",
+      "summary": "Configuration file (ua-file-extract-results-9.json) specifying project settings, environment, or build properties.",
+      "tags": [
+        "configuration",
+        "build-system"
+      ],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": []
+}

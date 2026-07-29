@@ -1,0 +1,2207 @@
+{
+  "schemaVersion": 1,
+  "algorithm": "louvain",
+  "totalFiles": 210,
+  "totalBatches": 19,
+  "exportsByPath": {
+    ".agent/skills/thesis-sentinel/scripts/health_check.py": [
+      "run_health_check"
+    ],
+    ".github/skills/thesis-sentinel/scripts/health_check.py": [
+      "run_health_check"
+    ],
+    ".ua/.understandignore": [],
+    ".understand-anything/.understandignore": [],
+    "api/routers/dashboard.py": [
+      "get_live_dashboard"
+    ],
+    "api/routers/metrics.py": [
+      "get_metrics_summary"
+    ],
+    "api/routers/nowcast.py": [
+      "_calculate_risk_level",
+      "np_random_lognormal",
+      "predict_nowcast"
+    ],
+    "api/routers/stations.py": [
+      "get_stations"
+    ],
+    "api/schemas.py": [
+      "StationInfo",
+      "StationListResponse",
+      "TargetMetrics",
+      "ProbabilisticMetrics",
+      "WeatherMetricsSummary",
+      "NowcastRequest",
+      "VariableForecast",
+      "NowcastResponse"
+    ],
+    "core/data/raw/pangrango_era5_5node_2005_2025.parquet": [],
+    "core/data/raw/pangrango_era5_5node_2024_2024.parquet": [],
+    "core/models/diffusion_chkpt.pth": [],
+    "core/models/mlp_baseline_chkpt.pth": [],
+    "core/notebooks/evaluasi_model.ipynb": [],
+    "core/scripts/eval_rain_robust.py": [
+      "WeekWindow",
+      "_seed_everything",
+      "_corr",
+      "_event_metrics",
+      "_pick_week_windows",
+      "_build_test_frames",
+      "_get_per_node_sequence",
+      "_load_mlp",
+      "run_crosscheck",
+      "parse_args"
+    ],
+    "core/scripts/plot_week_timeseries.py": [
+      "plot_week"
+    ],
+    "core/scripts/run_eval_final.py": [
+      "load_test_data",
+      "get_per_node_sequence",
+      "_eval_indices",
+      "run_persistence",
+      "run_mlp_baseline",
+      "run_diffusion_scenario",
+      "compute_scenario_metrics",
+      "plot_bar_chart",
+      "plot_scatter",
+      "plot_time_series",
+      "plot_reliability",
+      "plot_crps_comparison",
+      "plot_ablation",
+      "main",
+      "parse_args"
+    ],
+    "core/src/components/HistoricalAnalogsExplorer.tsx": [
+      "HistoricalAnalogsExplorer"
+    ],
+    "core/src/components/ProbabilisticNowcastChart.tsx": [
+      "ProbabilisticNowcastChart"
+    ],
+    "core/src/components/StarTopographyMap.tsx": [
+      "CANONICAL_NODES",
+      "STAR_EDGES",
+      "StarTopographyMap"
+    ],
+    "core/src/config.py": [
+      "harmonize_weather_columns",
+      "validate_feature_schema",
+      "validate_feature_values",
+      "get_node_dataframe",
+      "get_node_index_map",
+      "build_star_edge_index",
+      "build_star_edge_attr",
+      "get_checkpoint_node_metadata"
+    ],
+    "core/src/data/ingest.py": [
+      "get_node_definitions_df",
+      "fetch_elevation",
+      "derive_land_sea_mask",
+      "_extract_hourly_response",
+      "_validate_grid_identity",
+      "_write_grid_validation_report",
+      "fetch_era5_data",
+      "get_node_metadata"
+    ],
+    "core/src/data/temporal_loader.py": [
+      "TemporalGraphDataset",
+      "collate_temporal_graphs",
+      "create_temporal_dataloader",
+      "crosscheck_temporal_loader"
+    ],
+    "core/src/evaluation/__init__.py": [],
+    "core/src/evaluation/probabilistic_metrics.py": [
+      "compute_rmse",
+      "compute_mae",
+      "compute_correlation",
+      "compute_crps",
+      "compute_brier_score",
+      "compute_pod",
+      "compute_far",
+      "compute_csi",
+      "compute_all_metrics",
+      "compute_reliability_data"
+    ],
+    "core/src/inference.py": [
+      "_build_edge_index_from_config",
+      "create_inference_graphs",
+      "InferenceModelWrapper",
+      "load_model_and_stats",
+      "run_inference_real"
+    ],
+    "core/src/models/diffusion.py": [
+      "SinusoidalPositionEmbeddings",
+      "ConditionalDiffusionModel",
+      "RainForecaster"
+    ],
+    "core/src/models/gnn.py": [
+      "TemporalAttention",
+      "SpatialGNN",
+      "SpatioTemporalGNN"
+    ],
+    "core/src/models/mlp_baseline.py": [
+      "MLPBaseline"
+    ],
+    "core/src/retrieval/base.py": [
+      "RetrievalDatabase"
+    ],
+    "core/src/services/api.ts": [
+      "PANGRANGO_NODES",
+      "apiClient",
+      "generateMockNowcast",
+      "fetchNowcast",
+      "useNowcastQuery"
+    ],
+    "core/src/train_baseline.py": [
+      "MLPDataset",
+      "train_mlp_baseline",
+      "_parse_args"
+    ],
+    "core/src/train.py": [
+      "temporal_split",
+      "compute_stats_from_training",
+      "_build_precomputed_retrieval",
+      "_tensor_corrcoef",
+      "_extract_precip_mm_from_normalized_targets",
+      "_binary_event_metrics",
+      "_calibrate_wet_probability_threshold",
+      "train_pipeline",
+      "_parse_args"
+    ],
+    "core/tests/test_checkpoint_contract.py": [
+      "CheckpointContractTest"
+    ],
+    "core/tests/test_config_topology.py": [
+      "ConfigTopologyTest",
+      "CRPSNumericTest"
+    ],
+    "core/tests/test_gnn_edge_attr.py": [
+      "GNNEdgeAttrTest"
+    ],
+    "core/tests/test_inference_graphs.py": [
+      "InferenceGraphsTest"
+    ],
+    "core/tests/test_inference_smoke.py": [
+      "InferenceSmokeTest"
+    ],
+    "core/tests/test_loader_contract.py": [
+      "_make_rows",
+      "_build_df",
+      "LoaderContractTest"
+    ],
+    "core/tests/test_retrieval.py": [
+      "RetrievalDatabaseTest"
+    ],
+    "docs/private.note": [],
+    "main.py": [
+      "root"
+    ],
+    "web/src/App.tsx": [
+      "App"
+    ],
+    "web/src/components/ForecastChart.tsx": [
+      "ForecastChart"
+    ],
+    "web/src/components/MapView.tsx": [
+      "MapView"
+    ],
+    "web/src/components/ModelPerformancePanel.tsx": [
+      "ModelPerformancePanel"
+    ],
+    "web/src/components/NodeDetailModal.tsx": [
+      "NodeDetailModal"
+    ],
+    "web/src/components/RetrievalAnalogsPanel.tsx": [
+      "RetrievalAnalogsPanel"
+    ],
+    "web/src/components/RiskAssessmentPanel.tsx": [
+      "RiskAssessmentPanel"
+    ],
+    "web/src/components/SideNav.tsx": [
+      "SideNav"
+    ],
+    "web/src/components/TimelineScrubber.tsx": [
+      "TimelineScrubber"
+    ],
+    "web/src/components/TopAppBar.tsx": [
+      "TopAppBar"
+    ],
+    "web/src/components/TopologyGraphOverlay.tsx": [
+      "TopologyGraphOverlay"
+    ],
+    "web/src/data/historicalAnalogs.ts": [
+      "HISTORICAL_ANALOGS"
+    ],
+    "web/src/data/nodesData.ts": [
+      "NODES_LIST",
+      "TIMELINE_FRAMES",
+      "SAMPLE_NOWCAST",
+      "CURRENT_MODEL_METRICS"
+    ],
+    "web/src/main.tsx": [],
+    "web/src/services/dashboardLive.ts": [
+      "fetchDashboardLive"
+    ],
+    "web/src/types.ts": [],
+    "web/src/vite-env.d.ts": [],
+    "web/vite.config.ts": []
+  },
+  "batches": [
+    {
+      "batchIndex": 1,
+      "files": [
+        {
+          "path": "web/src/App.tsx",
+          "language": "typescript",
+          "sizeLines": 68,
+          "fileCategory": "code"
+        },
+        {
+          "path": "web/src/components/ForecastChart.tsx",
+          "language": "typescript",
+          "sizeLines": 198,
+          "fileCategory": "code"
+        },
+        {
+          "path": "web/src/components/MapView.tsx",
+          "language": "typescript",
+          "sizeLines": 15,
+          "fileCategory": "code"
+        },
+        {
+          "path": "web/src/components/ModelPerformancePanel.tsx",
+          "language": "typescript",
+          "sizeLines": 13,
+          "fileCategory": "code"
+        },
+        {
+          "path": "web/src/components/NodeDetailModal.tsx",
+          "language": "typescript",
+          "sizeLines": 13,
+          "fileCategory": "code"
+        },
+        {
+          "path": "web/src/components/RetrievalAnalogsPanel.tsx",
+          "language": "typescript",
+          "sizeLines": 10,
+          "fileCategory": "code"
+        },
+        {
+          "path": "web/src/components/RiskAssessmentPanel.tsx",
+          "language": "typescript",
+          "sizeLines": 7,
+          "fileCategory": "code"
+        },
+        {
+          "path": "web/src/components/SideNav.tsx",
+          "language": "typescript",
+          "sizeLines": 5,
+          "fileCategory": "code"
+        },
+        {
+          "path": "web/src/components/TimelineScrubber.tsx",
+          "language": "typescript",
+          "sizeLines": 70,
+          "fileCategory": "code"
+        },
+        {
+          "path": "web/src/components/TopAppBar.tsx",
+          "language": "typescript",
+          "sizeLines": 10,
+          "fileCategory": "code"
+        },
+        {
+          "path": "web/src/components/TopologyGraphOverlay.tsx",
+          "language": "typescript",
+          "sizeLines": 13,
+          "fileCategory": "code"
+        },
+        {
+          "path": "web/src/data/historicalAnalogs.ts",
+          "language": "typescript",
+          "sizeLines": 7,
+          "fileCategory": "code"
+        },
+        {
+          "path": "web/src/data/nodesData.ts",
+          "language": "typescript",
+          "sizeLines": 50,
+          "fileCategory": "code"
+        },
+        {
+          "path": "web/src/main.tsx",
+          "language": "typescript",
+          "sizeLines": 10,
+          "fileCategory": "code"
+        },
+        {
+          "path": "web/src/services/dashboardLive.ts",
+          "language": "typescript",
+          "sizeLines": 29,
+          "fileCategory": "code"
+        },
+        {
+          "path": "web/src/types.ts",
+          "language": "typescript",
+          "sizeLines": 88,
+          "fileCategory": "code"
+        }
+      ],
+      "batchImportData": {
+        "web/src/App.tsx": [
+          "web/src/components/ForecastChart.tsx",
+          "web/src/components/MapView.tsx",
+          "web/src/components/ModelPerformancePanel.tsx",
+          "web/src/components/NodeDetailModal.tsx",
+          "web/src/components/RetrievalAnalogsPanel.tsx",
+          "web/src/components/RiskAssessmentPanel.tsx",
+          "web/src/components/SideNav.tsx",
+          "web/src/components/TimelineScrubber.tsx",
+          "web/src/components/TopAppBar.tsx",
+          "web/src/components/TopologyGraphOverlay.tsx",
+          "web/src/data/nodesData.ts",
+          "web/src/services/dashboardLive.ts",
+          "web/src/types.ts"
+        ],
+        "web/src/components/ForecastChart.tsx": [
+          "web/src/data/nodesData.ts",
+          "web/src/types.ts"
+        ],
+        "web/src/components/MapView.tsx": [
+          "web/src/data/nodesData.ts",
+          "web/src/types.ts"
+        ],
+        "web/src/components/ModelPerformancePanel.tsx": [
+          "web/src/types.ts"
+        ],
+        "web/src/components/NodeDetailModal.tsx": [
+          "web/src/data/nodesData.ts",
+          "web/src/types.ts"
+        ],
+        "web/src/components/RetrievalAnalogsPanel.tsx": [
+          "web/src/data/historicalAnalogs.ts",
+          "web/src/types.ts"
+        ],
+        "web/src/components/RiskAssessmentPanel.tsx": [],
+        "web/src/components/SideNav.tsx": [
+          "web/src/types.ts"
+        ],
+        "web/src/components/TimelineScrubber.tsx": [],
+        "web/src/components/TopAppBar.tsx": [
+          "web/src/data/nodesData.ts",
+          "web/src/types.ts"
+        ],
+        "web/src/components/TopologyGraphOverlay.tsx": [
+          "web/src/data/nodesData.ts",
+          "web/src/types.ts"
+        ],
+        "web/src/data/historicalAnalogs.ts": [
+          "web/src/types.ts"
+        ],
+        "web/src/data/nodesData.ts": [
+          "web/src/types.ts"
+        ],
+        "web/src/main.tsx": [
+          "web/src/App.tsx",
+          "web/src/index.css"
+        ],
+        "web/src/services/dashboardLive.ts": [
+          "web/src/types.ts"
+        ],
+        "web/src/types.ts": []
+      },
+      "neighborMap": {
+        "web/src/main.tsx": [
+          {
+            "path": "web/src/index.css",
+            "batchIndex": 19,
+            "symbols": []
+          }
+        ]
+      }
+    },
+    {
+      "batchIndex": 2,
+      "files": [
+        {
+          "path": "core/scripts/eval_rain_robust.py",
+          "language": "python",
+          "sizeLines": 373,
+          "fileCategory": "code"
+        },
+        {
+          "path": "core/scripts/run_eval_final.py",
+          "language": "python",
+          "sizeLines": 628,
+          "fileCategory": "code"
+        },
+        {
+          "path": "core/src/config.py",
+          "language": "python",
+          "sizeLines": 224,
+          "fileCategory": "code"
+        },
+        {
+          "path": "core/src/data/ingest.py",
+          "language": "python",
+          "sizeLines": 270,
+          "fileCategory": "code"
+        },
+        {
+          "path": "core/src/data/temporal_loader.py",
+          "language": "python",
+          "sizeLines": 317,
+          "fileCategory": "code"
+        },
+        {
+          "path": "core/src/evaluation/probabilistic_metrics.py",
+          "language": "python",
+          "sizeLines": 344,
+          "fileCategory": "code"
+        },
+        {
+          "path": "core/src/models/diffusion.py",
+          "language": "python",
+          "sizeLines": 271,
+          "fileCategory": "code"
+        },
+        {
+          "path": "core/src/models/mlp_baseline.py",
+          "language": "python",
+          "sizeLines": 61,
+          "fileCategory": "code"
+        },
+        {
+          "path": "core/src/train.py",
+          "language": "python",
+          "sizeLines": 922,
+          "fileCategory": "code"
+        },
+        {
+          "path": "core/src/train_baseline.py",
+          "language": "python",
+          "sizeLines": 301,
+          "fileCategory": "code"
+        },
+        {
+          "path": "core/tests/test_config_topology.py",
+          "language": "python",
+          "sizeLines": 53,
+          "fileCategory": "code"
+        },
+        {
+          "path": "core/tests/test_loader_contract.py",
+          "language": "python",
+          "sizeLines": 50,
+          "fileCategory": "code"
+        }
+      ],
+      "batchImportData": {
+        "core/scripts/eval_rain_robust.py": [
+          "core/src/config.py",
+          "core/src/data/ingest.py",
+          "core/src/inference.py",
+          "core/src/models/mlp_baseline.py",
+          "core/src/train.py"
+        ],
+        "core/scripts/run_eval_final.py": [
+          "core/src/config.py",
+          "core/src/data/ingest.py",
+          "core/src/evaluation/probabilistic_metrics.py",
+          "core/src/inference.py",
+          "core/src/models/mlp_baseline.py",
+          "core/src/train.py"
+        ],
+        "core/src/config.py": [],
+        "core/src/data/ingest.py": [
+          "core/src/config.py"
+        ],
+        "core/src/data/temporal_loader.py": [
+          "core/src/config.py"
+        ],
+        "core/src/evaluation/probabilistic_metrics.py": [],
+        "core/src/models/diffusion.py": [
+          "core/src/config.py"
+        ],
+        "core/src/models/mlp_baseline.py": [
+          "core/src/config.py"
+        ],
+        "core/src/train.py": [
+          "core/src/config.py",
+          "core/src/data/ingest.py",
+          "core/src/data/temporal_loader.py",
+          "core/src/models/diffusion.py",
+          "core/src/models/gnn.py",
+          "core/src/retrieval/base.py"
+        ],
+        "core/src/train_baseline.py": [
+          "core/src/config.py",
+          "core/src/data/ingest.py",
+          "core/src/models/mlp_baseline.py",
+          "core/src/train.py"
+        ],
+        "core/tests/test_config_topology.py": [
+          "core/src/config.py",
+          "core/src/evaluation/probabilistic_metrics.py"
+        ],
+        "core/tests/test_loader_contract.py": [
+          "core/src/config.py",
+          "core/src/data/temporal_loader.py"
+        ]
+      },
+      "neighborMap": {
+        "core/scripts/eval_rain_robust.py": [
+          {
+            "path": "core/src/inference.py",
+            "batchIndex": 3,
+            "symbols": [
+              "_build_edge_index_from_config",
+              "create_inference_graphs",
+              "InferenceModelWrapper",
+              "load_model_and_stats",
+              "run_inference_real"
+            ]
+          }
+        ],
+        "core/scripts/run_eval_final.py": [
+          {
+            "path": "core/src/inference.py",
+            "batchIndex": 3,
+            "symbols": [
+              "_build_edge_index_from_config",
+              "create_inference_graphs",
+              "InferenceModelWrapper",
+              "load_model_and_stats",
+              "run_inference_real"
+            ]
+          }
+        ],
+        "core/src/config.py": [
+          {
+            "path": "core/src/inference.py",
+            "batchIndex": 3,
+            "symbols": [
+              "_build_edge_index_from_config",
+              "create_inference_graphs",
+              "InferenceModelWrapper",
+              "load_model_and_stats",
+              "run_inference_real"
+            ]
+          },
+          {
+            "path": "core/tests/test_gnn_edge_attr.py",
+            "batchIndex": 3,
+            "symbols": [
+              "GNNEdgeAttrTest"
+            ]
+          },
+          {
+            "path": "core/tests/test_inference_graphs.py",
+            "batchIndex": 3,
+            "symbols": [
+              "InferenceGraphsTest"
+            ]
+          }
+        ],
+        "core/src/models/diffusion.py": [
+          {
+            "path": "core/src/inference.py",
+            "batchIndex": 3,
+            "symbols": [
+              "_build_edge_index_from_config",
+              "create_inference_graphs",
+              "InferenceModelWrapper",
+              "load_model_and_stats",
+              "run_inference_real"
+            ]
+          }
+        ],
+        "core/src/train.py": [
+          {
+            "path": "core/src/models/gnn.py",
+            "batchIndex": 3,
+            "symbols": [
+              "TemporalAttention",
+              "SpatialGNN",
+              "SpatioTemporalGNN"
+            ]
+          },
+          {
+            "path": "core/src/retrieval/base.py",
+            "batchIndex": 3,
+            "symbols": [
+              "RetrievalDatabase"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "batchIndex": 3,
+      "files": [
+        {
+          "path": "core/src/inference.py",
+          "language": "python",
+          "sizeLines": 301,
+          "fileCategory": "code"
+        },
+        {
+          "path": "core/src/models/gnn.py",
+          "language": "python",
+          "sizeLines": 161,
+          "fileCategory": "code"
+        },
+        {
+          "path": "core/src/retrieval/base.py",
+          "language": "python",
+          "sizeLines": 73,
+          "fileCategory": "code"
+        },
+        {
+          "path": "core/tests/test_gnn_edge_attr.py",
+          "language": "python",
+          "sizeLines": 36,
+          "fileCategory": "code"
+        },
+        {
+          "path": "core/tests/test_inference_graphs.py",
+          "language": "python",
+          "sizeLines": 40,
+          "fileCategory": "code"
+        },
+        {
+          "path": "core/tests/test_inference_smoke.py",
+          "language": "python",
+          "sizeLines": 48,
+          "fileCategory": "code"
+        },
+        {
+          "path": "core/tests/test_retrieval.py",
+          "language": "python",
+          "sizeLines": 56,
+          "fileCategory": "code"
+        }
+      ],
+      "batchImportData": {
+        "core/src/inference.py": [
+          "core/src/config.py",
+          "core/src/models/diffusion.py",
+          "core/src/models/gnn.py",
+          "core/src/retrieval/base.py"
+        ],
+        "core/src/models/gnn.py": [],
+        "core/src/retrieval/base.py": [],
+        "core/tests/test_gnn_edge_attr.py": [
+          "core/src/config.py",
+          "core/src/models/gnn.py"
+        ],
+        "core/tests/test_inference_graphs.py": [
+          "core/src/config.py",
+          "core/src/inference.py"
+        ],
+        "core/tests/test_inference_smoke.py": [
+          "core/src/inference.py"
+        ],
+        "core/tests/test_retrieval.py": [
+          "core/src/retrieval/base.py"
+        ]
+      },
+      "neighborMap": {
+        "core/src/inference.py": [
+          {
+            "path": "core/src/config.py",
+            "batchIndex": 2,
+            "symbols": [
+              "harmonize_weather_columns",
+              "validate_feature_schema",
+              "validate_feature_values",
+              "get_node_dataframe",
+              "get_node_index_map",
+              "build_star_edge_index",
+              "build_star_edge_attr",
+              "get_checkpoint_node_metadata"
+            ]
+          },
+          {
+            "path": "core/src/models/diffusion.py",
+            "batchIndex": 2,
+            "symbols": [
+              "SinusoidalPositionEmbeddings",
+              "ConditionalDiffusionModel",
+              "RainForecaster"
+            ]
+          },
+          {
+            "path": "core/scripts/eval_rain_robust.py",
+            "batchIndex": 2,
+            "symbols": [
+              "WeekWindow",
+              "_seed_everything",
+              "_corr",
+              "_event_metrics",
+              "_pick_week_windows",
+              "_build_test_frames",
+              "_get_per_node_sequence",
+              "_load_mlp",
+              "run_crosscheck",
+              "parse_args"
+            ]
+          },
+          {
+            "path": "core/scripts/run_eval_final.py",
+            "batchIndex": 2,
+            "symbols": [
+              "load_test_data",
+              "get_per_node_sequence",
+              "_eval_indices",
+              "run_persistence",
+              "run_mlp_baseline",
+              "run_diffusion_scenario",
+              "compute_scenario_metrics",
+              "plot_bar_chart",
+              "plot_scatter",
+              "plot_time_series",
+              "plot_reliability",
+              "plot_crps_comparison",
+              "plot_ablation",
+              "main",
+              "parse_args"
+            ]
+          }
+        ],
+        "core/src/models/gnn.py": [
+          {
+            "path": "core/src/train.py",
+            "batchIndex": 2,
+            "symbols": [
+              "temporal_split",
+              "compute_stats_from_training",
+              "_build_precomputed_retrieval",
+              "_tensor_corrcoef",
+              "_extract_precip_mm_from_normalized_targets",
+              "_binary_event_metrics",
+              "_calibrate_wet_probability_threshold",
+              "train_pipeline",
+              "_parse_args"
+            ]
+          }
+        ],
+        "core/src/retrieval/base.py": [
+          {
+            "path": "core/src/train.py",
+            "batchIndex": 2,
+            "symbols": [
+              "temporal_split",
+              "compute_stats_from_training",
+              "_build_precomputed_retrieval",
+              "_tensor_corrcoef",
+              "_extract_precip_mm_from_normalized_targets",
+              "_binary_event_metrics",
+              "_calibrate_wet_probability_threshold",
+              "train_pipeline",
+              "_parse_args"
+            ]
+          }
+        ],
+        "core/tests/test_gnn_edge_attr.py": [
+          {
+            "path": "core/src/config.py",
+            "batchIndex": 2,
+            "symbols": [
+              "harmonize_weather_columns",
+              "validate_feature_schema",
+              "validate_feature_values",
+              "get_node_dataframe",
+              "get_node_index_map",
+              "build_star_edge_index",
+              "build_star_edge_attr",
+              "get_checkpoint_node_metadata"
+            ]
+          }
+        ],
+        "core/tests/test_inference_graphs.py": [
+          {
+            "path": "core/src/config.py",
+            "batchIndex": 2,
+            "symbols": [
+              "harmonize_weather_columns",
+              "validate_feature_schema",
+              "validate_feature_values",
+              "get_node_dataframe",
+              "get_node_index_map",
+              "build_star_edge_index",
+              "build_star_edge_attr",
+              "get_checkpoint_node_metadata"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "batchIndex": 4,
+      "files": [
+        {
+          "path": "api/routers/nowcast.py",
+          "language": "python",
+          "sizeLines": 122,
+          "fileCategory": "code"
+        },
+        {
+          "path": "api/routers/stations.py",
+          "language": "python",
+          "sizeLines": 39,
+          "fileCategory": "code"
+        },
+        {
+          "path": "api/schemas.py",
+          "language": "python",
+          "sizeLines": 57,
+          "fileCategory": "code"
+        }
+      ],
+      "batchImportData": {
+        "api/routers/nowcast.py": [
+          "api/schemas.py"
+        ],
+        "api/routers/stations.py": [
+          "api/schemas.py"
+        ],
+        "api/schemas.py": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 5,
+      "files": [
+        {
+          "path": ".github/hooks/rtk-hook.ps1",
+          "language": "powershell",
+          "sizeLines": 77,
+          "fileCategory": "script"
+        },
+        {
+          "path": ".github/hooks/rtk-session.ps1",
+          "language": "powershell",
+          "sizeLines": 16,
+          "fileCategory": "script"
+        },
+        {
+          "path": ".github/hooks/rtk.json",
+          "language": "json",
+          "sizeLines": 19,
+          "fileCategory": "config"
+        }
+      ],
+      "batchImportData": {
+        ".github/hooks/rtk-hook.ps1": [],
+        ".github/hooks/rtk-session.ps1": [],
+        ".github/hooks/rtk.json": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 6,
+      "files": [
+        {
+          "path": ".kimchi/docs/ALL_IN_ONE_AUDIT_REPORT.md",
+          "language": "markdown",
+          "sizeLines": 504,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".kimchi/docs/bab2_landasan_teori_lengkap.md",
+          "language": "markdown",
+          "sizeLines": 529,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".kimchi/docs/cross_slope_orographic_mechanisms.md",
+          "language": "markdown",
+          "sizeLines": 187,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".kimchi/docs/guidance_bab2_output_architecture.md",
+          "language": "markdown",
+          "sizeLines": 79,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".kimchi/docs/guidance_batasan_masalah_update.md",
+          "language": "markdown",
+          "sizeLines": 208,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".kimchi/docs/solusi_penelitian_penjelasan_ulang.md",
+          "language": "markdown",
+          "sizeLines": 286,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".kimchi/docs/variabilitas_spasial_penjelasan.md",
+          "language": "markdown",
+          "sizeLines": 161,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".kimchi/docs/variabilitas_temporal_heavy_tailed.md",
+          "language": "markdown",
+          "sizeLines": 280,
+          "fileCategory": "docs"
+        }
+      ],
+      "batchImportData": {
+        ".kimchi/docs/ALL_IN_ONE_AUDIT_REPORT.md": [],
+        ".kimchi/docs/bab2_landasan_teori_lengkap.md": [],
+        ".kimchi/docs/cross_slope_orographic_mechanisms.md": [],
+        ".kimchi/docs/guidance_bab2_output_architecture.md": [],
+        ".kimchi/docs/guidance_batasan_masalah_update.md": [],
+        ".kimchi/docs/solusi_penelitian_penjelasan_ulang.md": [],
+        ".kimchi/docs/variabilitas_spasial_penjelasan.md": [],
+        ".kimchi/docs/variabilitas_temporal_heavy_tailed.md": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 7,
+      "files": [
+        {
+          "path": ".playwright-mcp/page-2026-07-23T15-24-36-550Z.yml",
+          "language": "yaml",
+          "sizeLines": 266,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".playwright-mcp/page-2026-07-23T15-29-58-129Z.yml",
+          "language": "yaml",
+          "sizeLines": 314,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".playwright-mcp/page-2026-07-23T15-32-15-980Z.yml",
+          "language": "yaml",
+          "sizeLines": 307,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".playwright-mcp/page-2026-07-23T15-38-58-550Z.yml",
+          "language": "yaml",
+          "sizeLines": 330,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".playwright-mcp/page-2026-07-23T15-49-01-726Z.yml",
+          "language": "yaml",
+          "sizeLines": 300,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".playwright-mcp/page-2026-07-23T15-52-22-830Z.yml",
+          "language": "yaml",
+          "sizeLines": 300,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".playwright-mcp/page-2026-07-23T15-52-52-300Z.yml",
+          "language": "yaml",
+          "sizeLines": 300,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".playwright-mcp/page-2026-07-23T16-05-28-509Z.yml",
+          "language": "yaml",
+          "sizeLines": 300,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".playwright-mcp/page-2026-07-23T16-10-59-213Z.yml",
+          "language": "yaml",
+          "sizeLines": 300,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".playwright-mcp/page-2026-07-23T17-33-57-740Z.yml",
+          "language": "yaml",
+          "sizeLines": 274,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".playwright-mcp/page-2026-07-23T17-34-58-551Z.yml",
+          "language": "yaml",
+          "sizeLines": 274,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".playwright-mcp/page-2026-07-23T17-39-58-381Z.yml",
+          "language": "yaml",
+          "sizeLines": 296,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".playwright-mcp/page-2026-07-23T17-41-01-041Z.yml",
+          "language": "yaml",
+          "sizeLines": 296,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".playwright-mcp/page-2026-07-23T17-43-30-075Z.yml",
+          "language": "yaml",
+          "sizeLines": 260,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".playwright-mcp/page-2026-07-23T17-44-11-116Z.yml",
+          "language": "yaml",
+          "sizeLines": 275,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".playwright-mcp/page-2026-07-23T18-03-42-144Z.yml",
+          "language": "yaml",
+          "sizeLines": 291,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".playwright-mcp/page-2026-07-23T18-16-56-500Z.yml",
+          "language": "yaml",
+          "sizeLines": 292,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".playwright-mcp/page-2026-07-23T18-17-30-745Z.yml",
+          "language": "yaml",
+          "sizeLines": 292,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".playwright-mcp/page-2026-07-24T04-44-30-132Z.yml",
+          "language": "yaml",
+          "sizeLines": 292,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".playwright-mcp/page-2026-07-24T05-17-57-302Z.yml",
+          "language": "yaml",
+          "sizeLines": 271,
+          "fileCategory": "config"
+        }
+      ],
+      "batchImportData": {
+        ".playwright-mcp/page-2026-07-23T15-24-36-550Z.yml": [],
+        ".playwright-mcp/page-2026-07-23T15-29-58-129Z.yml": [],
+        ".playwright-mcp/page-2026-07-23T15-32-15-980Z.yml": [],
+        ".playwright-mcp/page-2026-07-23T15-38-58-550Z.yml": [],
+        ".playwright-mcp/page-2026-07-23T15-49-01-726Z.yml": [],
+        ".playwright-mcp/page-2026-07-23T15-52-22-830Z.yml": [],
+        ".playwright-mcp/page-2026-07-23T15-52-52-300Z.yml": [],
+        ".playwright-mcp/page-2026-07-23T16-05-28-509Z.yml": [],
+        ".playwright-mcp/page-2026-07-23T16-10-59-213Z.yml": [],
+        ".playwright-mcp/page-2026-07-23T17-33-57-740Z.yml": [],
+        ".playwright-mcp/page-2026-07-23T17-34-58-551Z.yml": [],
+        ".playwright-mcp/page-2026-07-23T17-39-58-381Z.yml": [],
+        ".playwright-mcp/page-2026-07-23T17-41-01-041Z.yml": [],
+        ".playwright-mcp/page-2026-07-23T17-43-30-075Z.yml": [],
+        ".playwright-mcp/page-2026-07-23T17-44-11-116Z.yml": [],
+        ".playwright-mcp/page-2026-07-23T18-03-42-144Z.yml": [],
+        ".playwright-mcp/page-2026-07-23T18-16-56-500Z.yml": [],
+        ".playwright-mcp/page-2026-07-23T18-17-30-745Z.yml": [],
+        ".playwright-mcp/page-2026-07-24T04-44-30-132Z.yml": [],
+        ".playwright-mcp/page-2026-07-24T05-17-57-302Z.yml": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 8,
+      "files": [
+        {
+          "path": ".playwright-mcp/page-2026-07-24T05-38-49-212Z.yml",
+          "language": "yaml",
+          "sizeLines": 277,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".playwright-mcp/page-2026-07-24T07-59-08-603Z.yml",
+          "language": "yaml",
+          "sizeLines": 139,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".playwright-mcp/page-2026-07-24T08-04-14-089Z.yml",
+          "language": "yaml",
+          "sizeLines": 132,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".playwright-mcp/page-2026-07-24T08-04-41-926Z.yml",
+          "language": "yaml",
+          "sizeLines": 139,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".playwright-mcp/page-2026-07-24T09-28-31-476Z.yml",
+          "language": "yaml",
+          "sizeLines": 110,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".playwright-mcp/page-2026-07-24T09-28-56-489Z.yml",
+          "language": "yaml",
+          "sizeLines": 135,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".playwright-mcp/page-2026-07-24T10-20-16-605Z.yml",
+          "language": "yaml",
+          "sizeLines": 135,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".playwright-mcp/page-2026-07-24T10-20-42-890Z.yml",
+          "language": "yaml",
+          "sizeLines": 139,
+          "fileCategory": "config"
+        }
+      ],
+      "batchImportData": {
+        ".playwright-mcp/page-2026-07-24T05-38-49-212Z.yml": [],
+        ".playwright-mcp/page-2026-07-24T07-59-08-603Z.yml": [],
+        ".playwright-mcp/page-2026-07-24T08-04-14-089Z.yml": [],
+        ".playwright-mcp/page-2026-07-24T08-04-41-926Z.yml": [],
+        ".playwright-mcp/page-2026-07-24T09-28-31-476Z.yml": [],
+        ".playwright-mcp/page-2026-07-24T09-28-56-489Z.yml": [],
+        ".playwright-mcp/page-2026-07-24T10-20-16-605Z.yml": [],
+        ".playwright-mcp/page-2026-07-24T10-20-42-890Z.yml": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 9,
+      "files": [
+        {
+          "path": ".understand-anything/config.json",
+          "language": "json",
+          "sizeLines": 1,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".understand-anything/fingerprints.json",
+          "language": "json",
+          "sizeLines": 3043,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".understand-anything/knowledge-graph.json",
+          "language": "json",
+          "sizeLines": 5267,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".understand-anything/meta.json",
+          "language": "json",
+          "sizeLines": 5,
+          "fileCategory": "config"
+        }
+      ],
+      "batchImportData": {
+        ".understand-anything/config.json": [],
+        ".understand-anything/fingerprints.json": [],
+        ".understand-anything/knowledge-graph.json": [],
+        ".understand-anything/meta.json": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 10,
+      "files": [
+        {
+          "path": ".understand-anything/intermediate/assembled-graph.json",
+          "language": "json",
+          "sizeLines": 5263,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".understand-anything/intermediate/batch-1.json",
+          "language": "json",
+          "sizeLines": 38,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".understand-anything/intermediate/batch-10.json",
+          "language": "json",
+          "sizeLines": 75,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".understand-anything/intermediate/batch-11.json",
+          "language": "json",
+          "sizeLines": 347,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".understand-anything/intermediate/batch-12.json",
+          "language": "json",
+          "sizeLines": 883,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".understand-anything/intermediate/batch-13.json",
+          "language": "json",
+          "sizeLines": 2485,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".understand-anything/intermediate/batch-14.json",
+          "language": "json",
+          "sizeLines": 705,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".understand-anything/intermediate/batch-2.json",
+          "language": "json",
+          "sizeLines": 100,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".understand-anything/intermediate/batch-3.json",
+          "language": "json",
+          "sizeLines": 244,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".understand-anything/intermediate/batch-4.json",
+          "language": "json",
+          "sizeLines": 100,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".understand-anything/intermediate/batch-5.json",
+          "language": "json",
+          "sizeLines": 52,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".understand-anything/intermediate/batch-6.json",
+          "language": "json",
+          "sizeLines": 40,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".understand-anything/intermediate/batch-7.json",
+          "language": "json",
+          "sizeLines": 61,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".understand-anything/intermediate/batch-8.json",
+          "language": "json",
+          "sizeLines": 52,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".understand-anything/intermediate/batch-9.json",
+          "language": "json",
+          "sizeLines": 136,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".understand-anything/intermediate/batches.json",
+          "language": "json",
+          "sizeLines": 1539,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".understand-anything/intermediate/scan-result.json",
+          "language": "json",
+          "sizeLines": 1044,
+          "fileCategory": "config"
+        }
+      ],
+      "batchImportData": {
+        ".understand-anything/intermediate/assembled-graph.json": [],
+        ".understand-anything/intermediate/batch-1.json": [],
+        ".understand-anything/intermediate/batch-10.json": [],
+        ".understand-anything/intermediate/batch-11.json": [],
+        ".understand-anything/intermediate/batch-12.json": [],
+        ".understand-anything/intermediate/batch-13.json": [],
+        ".understand-anything/intermediate/batch-14.json": [],
+        ".understand-anything/intermediate/batch-2.json": [],
+        ".understand-anything/intermediate/batch-3.json": [],
+        ".understand-anything/intermediate/batch-4.json": [],
+        ".understand-anything/intermediate/batch-5.json": [],
+        ".understand-anything/intermediate/batch-6.json": [],
+        ".understand-anything/intermediate/batch-7.json": [],
+        ".understand-anything/intermediate/batch-8.json": [],
+        ".understand-anything/intermediate/batch-9.json": [],
+        ".understand-anything/intermediate/batches.json": [],
+        ".understand-anything/intermediate/scan-result.json": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 11,
+      "files": [
+        {
+          "path": ".understand-anything/tmp/ua-file-analyzer-input-1.json",
+          "language": "json",
+          "sizeLines": 27,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".understand-anything/tmp/ua-file-analyzer-input-10.json",
+          "language": "json",
+          "sizeLines": 48,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".understand-anything/tmp/ua-file-analyzer-input-11.json",
+          "language": "json",
+          "sizeLines": 181,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".understand-anything/tmp/ua-file-analyzer-input-12.json",
+          "language": "json",
+          "sizeLines": 181,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".understand-anything/tmp/ua-file-analyzer-input-13.json",
+          "language": "json",
+          "sizeLines": 181,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".understand-anything/tmp/ua-file-analyzer-input-14.json",
+          "language": "json",
+          "sizeLines": 153,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".understand-anything/tmp/ua-file-analyzer-input-2.json",
+          "language": "json",
+          "sizeLines": 62,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".understand-anything/tmp/ua-file-analyzer-input-3.json",
+          "language": "json",
+          "sizeLines": 146,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".understand-anything/tmp/ua-file-analyzer-input-4.json",
+          "language": "json",
+          "sizeLines": 62,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".understand-anything/tmp/ua-file-analyzer-input-5.json",
+          "language": "json",
+          "sizeLines": 34,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".understand-anything/tmp/ua-file-analyzer-input-6.json",
+          "language": "json",
+          "sizeLines": 27,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".understand-anything/tmp/ua-file-analyzer-input-7.json",
+          "language": "json",
+          "sizeLines": 41,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".understand-anything/tmp/ua-file-analyzer-input-8.json",
+          "language": "json",
+          "sizeLines": 34,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".understand-anything/tmp/ua-file-analyzer-input-9.json",
+          "language": "json",
+          "sizeLines": 83,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".understand-anything/tmp/ua-file-extract-results-1.json",
+          "language": "json",
+          "sizeLines": 43,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".understand-anything/tmp/ua-file-extract-results-10.json",
+          "language": "json",
+          "sizeLines": 183,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".understand-anything/tmp/ua-file-extract-results-11.json",
+          "language": "json",
+          "sizeLines": 3863,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".understand-anything/tmp/ua-file-extract-results-12.json",
+          "language": "json",
+          "sizeLines": 2179,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".understand-anything/tmp/ua-file-extract-results-13.json",
+          "language": "json",
+          "sizeLines": 11836,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".understand-anything/tmp/ua-file-extract-results-14.json",
+          "language": "json",
+          "sizeLines": 1696,
+          "fileCategory": "config"
+        }
+      ],
+      "batchImportData": {
+        ".understand-anything/tmp/ua-file-analyzer-input-1.json": [],
+        ".understand-anything/tmp/ua-file-analyzer-input-10.json": [],
+        ".understand-anything/tmp/ua-file-analyzer-input-11.json": [],
+        ".understand-anything/tmp/ua-file-analyzer-input-12.json": [],
+        ".understand-anything/tmp/ua-file-analyzer-input-13.json": [],
+        ".understand-anything/tmp/ua-file-analyzer-input-14.json": [],
+        ".understand-anything/tmp/ua-file-analyzer-input-2.json": [],
+        ".understand-anything/tmp/ua-file-analyzer-input-3.json": [],
+        ".understand-anything/tmp/ua-file-analyzer-input-4.json": [],
+        ".understand-anything/tmp/ua-file-analyzer-input-5.json": [],
+        ".understand-anything/tmp/ua-file-analyzer-input-6.json": [],
+        ".understand-anything/tmp/ua-file-analyzer-input-7.json": [],
+        ".understand-anything/tmp/ua-file-analyzer-input-8.json": [],
+        ".understand-anything/tmp/ua-file-analyzer-input-9.json": [],
+        ".understand-anything/tmp/ua-file-extract-results-1.json": [],
+        ".understand-anything/tmp/ua-file-extract-results-10.json": [],
+        ".understand-anything/tmp/ua-file-extract-results-11.json": [],
+        ".understand-anything/tmp/ua-file-extract-results-12.json": [],
+        ".understand-anything/tmp/ua-file-extract-results-13.json": [],
+        ".understand-anything/tmp/ua-file-extract-results-14.json": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 12,
+      "files": [
+        {
+          "path": ".understand-anything/tmp/ua-file-extract-results-2.json",
+          "language": "json",
+          "sizeLines": 1374,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".understand-anything/tmp/ua-file-extract-results-3.json",
+          "language": "json",
+          "sizeLines": 426,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".understand-anything/tmp/ua-file-extract-results-4.json",
+          "language": "json",
+          "sizeLines": 174,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".understand-anything/tmp/ua-file-extract-results-5.json",
+          "language": "json",
+          "sizeLines": 145,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".understand-anything/tmp/ua-file-extract-results-6.json",
+          "language": "json",
+          "sizeLines": 124,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".understand-anything/tmp/ua-file-extract-results-7.json",
+          "language": "json",
+          "sizeLines": 119,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".understand-anything/tmp/ua-file-extract-results-8.json",
+          "language": "json",
+          "sizeLines": 102,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".understand-anything/tmp/ua-file-extract-results-9.json",
+          "language": "json",
+          "sizeLines": 1004,
+          "fileCategory": "config"
+        }
+      ],
+      "batchImportData": {
+        ".understand-anything/tmp/ua-file-extract-results-2.json": [],
+        ".understand-anything/tmp/ua-file-extract-results-3.json": [],
+        ".understand-anything/tmp/ua-file-extract-results-4.json": [],
+        ".understand-anything/tmp/ua-file-extract-results-5.json": [],
+        ".understand-anything/tmp/ua-file-extract-results-6.json": [],
+        ".understand-anything/tmp/ua-file-extract-results-7.json": [],
+        ".understand-anything/tmp/ua-file-extract-results-8.json": [],
+        ".understand-anything/tmp/ua-file-extract-results-9.json": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 13,
+      "files": [
+        {
+          "path": "core/results/result_test/nowcasting_hourly_week/driest_week_actual_vs_pred.csv",
+          "language": "csv",
+          "sizeLines": 163,
+          "fileCategory": "data"
+        },
+        {
+          "path": "core/results/result_test/nowcasting_hourly_week/median_week_actual_vs_pred.csv",
+          "language": "csv",
+          "sizeLines": 163,
+          "fileCategory": "data"
+        },
+        {
+          "path": "core/results/result_test/nowcasting_hourly_week/weekly_crosscheck_3var.csv",
+          "language": "csv",
+          "sizeLines": 4,
+          "fileCategory": "data"
+        },
+        {
+          "path": "core/results/result_test/nowcasting_hourly_week/weekly_crosscheck_3var_meta.json",
+          "language": "json",
+          "sizeLines": 261,
+          "fileCategory": "config"
+        },
+        {
+          "path": "core/results/result_test/nowcasting_hourly_week/wettest_week_actual_vs_pred.csv",
+          "language": "csv",
+          "sizeLines": 163,
+          "fileCategory": "data"
+        }
+      ],
+      "batchImportData": {
+        "core/results/result_test/nowcasting_hourly_week/driest_week_actual_vs_pred.csv": [],
+        "core/results/result_test/nowcasting_hourly_week/median_week_actual_vs_pred.csv": [],
+        "core/results/result_test/nowcasting_hourly_week/weekly_crosscheck_3var.csv": [],
+        "core/results/result_test/nowcasting_hourly_week/weekly_crosscheck_3var_meta.json": [],
+        "core/results/result_test/nowcasting_hourly_week/wettest_week_actual_vs_pred.csv": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 14,
+      "files": [
+        {
+          "path": "design.md",
+          "language": "markdown",
+          "sizeLines": 315,
+          "fileCategory": "docs"
+        },
+        {
+          "path": "package.json",
+          "language": "json",
+          "sizeLines": 13,
+          "fileCategory": "config"
+        },
+        {
+          "path": "requirements.txt",
+          "language": "txt",
+          "sizeLines": 15,
+          "fileCategory": "docs"
+        },
+        {
+          "path": "skills-lock.json",
+          "language": "json",
+          "sizeLines": 83,
+          "fileCategory": "config"
+        }
+      ],
+      "batchImportData": {
+        "design.md": [],
+        "package.json": [],
+        "requirements.txt": [],
+        "skills-lock.json": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 15,
+      "files": [
+        {
+          "path": "docs/ACTIVE_5NODE_STAR_MAIN.md",
+          "language": "markdown",
+          "sizeLines": 53,
+          "fileCategory": "docs"
+        },
+        {
+          "path": "docs/AUDIT_FIX_PLAN.md",
+          "language": "markdown",
+          "sizeLines": 216,
+          "fileCategory": "docs"
+        },
+        {
+          "path": "docs/AUDIT_SESSION_CONTEXT.md",
+          "language": "markdown",
+          "sizeLines": 450,
+          "fileCategory": "docs"
+        },
+        {
+          "path": "docs/HANDOVER_PRODUCTION_INTEGRATION_PLAN.md",
+          "language": "markdown",
+          "sizeLines": 158,
+          "fileCategory": "docs"
+        },
+        {
+          "path": "docs/KNOWLEDGE.md",
+          "language": "markdown",
+          "sizeLines": 446,
+          "fileCategory": "docs"
+        },
+        {
+          "path": "docs/METODE_PENELITIAN_PROYEK.md",
+          "language": "markdown",
+          "sizeLines": 320,
+          "fileCategory": "docs"
+        },
+        {
+          "path": "docs/MIGRATION_CHECKLIST_STATUS.md",
+          "language": "markdown",
+          "sizeLines": 163,
+          "fileCategory": "docs"
+        },
+        {
+          "path": "docs/README.md",
+          "language": "markdown",
+          "sizeLines": 13,
+          "fileCategory": "docs"
+        },
+        {
+          "path": "docs/dataset_sample.md",
+          "language": "markdown",
+          "sizeLines": 16,
+          "fileCategory": "docs"
+        },
+        {
+          "path": "docs/extracted_pdf_text.txt",
+          "language": "txt",
+          "sizeLines": 2571,
+          "fileCategory": "docs"
+        },
+        {
+          "path": "docs/project.md",
+          "language": "markdown",
+          "sizeLines": 152,
+          "fileCategory": "docs"
+        }
+      ],
+      "batchImportData": {
+        "docs/ACTIVE_5NODE_STAR_MAIN.md": [],
+        "docs/AUDIT_FIX_PLAN.md": [],
+        "docs/AUDIT_SESSION_CONTEXT.md": [],
+        "docs/HANDOVER_PRODUCTION_INTEGRATION_PLAN.md": [],
+        "docs/KNOWLEDGE.md": [],
+        "docs/METODE_PENELITIAN_PROYEK.md": [],
+        "docs/MIGRATION_CHECKLIST_STATUS.md": [],
+        "docs/README.md": [],
+        "docs/dataset_sample.md": [],
+        "docs/extracted_pdf_text.txt": [],
+        "docs/project.md": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 16,
+      "files": [
+        {
+          "path": "web/.env.example",
+          "language": "config",
+          "sizeLines": 9,
+          "fileCategory": "config"
+        },
+        {
+          "path": "web/README.md",
+          "language": "markdown",
+          "sizeLines": 20,
+          "fileCategory": "docs"
+        },
+        {
+          "path": "web/index.html",
+          "language": "html",
+          "sizeLines": 15,
+          "fileCategory": "markup"
+        },
+        {
+          "path": "web/metadata.json",
+          "language": "json",
+          "sizeLines": 6,
+          "fileCategory": "config"
+        },
+        {
+          "path": "web/package.json",
+          "language": "json",
+          "sizeLines": 38,
+          "fileCategory": "config"
+        },
+        {
+          "path": "web/tsconfig.json",
+          "language": "json",
+          "sizeLines": 31,
+          "fileCategory": "config"
+        }
+      ],
+      "batchImportData": {
+        "web/.env.example": [],
+        "web/README.md": [],
+        "web/index.html": [],
+        "web/metadata.json": [],
+        "web/package.json": [],
+        "web/tsconfig.json": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 17,
+      "files": [
+        {
+          "path": ".agent/rules/respon.md",
+          "language": "markdown",
+          "sizeLines": 422,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".agent/skills/thesis-sentinel/scripts/health_check.py",
+          "language": "python",
+          "sizeLines": 91,
+          "fileCategory": "code"
+        },
+        {
+          "path": ".agent/skills/thesis-sentinel/SKILL.md",
+          "language": "markdown",
+          "sizeLines": 52,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".agents/skills/brandkit/SKILL.md",
+          "language": "markdown",
+          "sizeLines": 798,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".agents/skills/design-taste-frontend-v1/SKILL.md",
+          "language": "markdown",
+          "sizeLines": 226,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".agents/skills/design-taste-frontend/SKILL.md",
+          "language": "markdown",
+          "sizeLines": 1206,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".agents/skills/full-output-enforcement/SKILL.md",
+          "language": "markdown",
+          "sizeLines": 49,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".agents/skills/gpt-taste/SKILL.md",
+          "language": "markdown",
+          "sizeLines": 74,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".agents/skills/high-end-visual-design/SKILL.md",
+          "language": "markdown",
+          "sizeLines": 98,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".agents/skills/image-to-code/SKILL.md",
+          "language": "markdown",
+          "sizeLines": 1228,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".agents/skills/imagegen-frontend-mobile/SKILL.md",
+          "language": "markdown",
+          "sizeLines": 1465,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".agents/skills/imagegen-frontend-web/SKILL.md",
+          "language": "markdown",
+          "sizeLines": 987,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".agents/skills/industrial-brutalist-ui/SKILL.md",
+          "language": "markdown",
+          "sizeLines": 92,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".agents/skills/minimalist-ui/SKILL.md",
+          "language": "markdown",
+          "sizeLines": 85,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".agents/skills/redesign-existing-projects/SKILL.md",
+          "language": "markdown",
+          "sizeLines": 178,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".agents/skills/stitch-design-taste/DESIGN.md",
+          "language": "markdown",
+          "sizeLines": 121,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".agents/skills/stitch-design-taste/SKILL.md",
+          "language": "markdown",
+          "sizeLines": 184,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".github/agents/independent-verification-auditor.agent.md",
+          "language": "markdown",
+          "sizeLines": 175,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".github/rules/respon.md",
+          "language": "markdown",
+          "sizeLines": 432,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".github/skills/thesis-sentinel/scripts/health_check.py",
+          "language": "python",
+          "sizeLines": 91,
+          "fileCategory": "code"
+        },
+        {
+          "path": ".github/skills/thesis-sentinel/SKILL.md",
+          "language": "markdown",
+          "sizeLines": 52,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".kiro/settings/lsp.json",
+          "language": "json",
+          "sizeLines": 204,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".ua/.understandignore",
+          "language": "unknown",
+          "sizeLines": 8,
+          "fileCategory": "code"
+        },
+        {
+          "path": ".ua/intermediate/scan-result.json",
+          "language": "json",
+          "sizeLines": 1026,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".understand-anything/.understandignore",
+          "language": "unknown",
+          "sizeLines": 37,
+          "fileCategory": "code"
+        }
+      ],
+      "batchImportData": {
+        ".agent/rules/respon.md": [],
+        ".agent/skills/thesis-sentinel/scripts/health_check.py": [],
+        ".agent/skills/thesis-sentinel/SKILL.md": [],
+        ".agents/skills/brandkit/SKILL.md": [],
+        ".agents/skills/design-taste-frontend-v1/SKILL.md": [],
+        ".agents/skills/design-taste-frontend/SKILL.md": [],
+        ".agents/skills/full-output-enforcement/SKILL.md": [],
+        ".agents/skills/gpt-taste/SKILL.md": [],
+        ".agents/skills/high-end-visual-design/SKILL.md": [],
+        ".agents/skills/image-to-code/SKILL.md": [],
+        ".agents/skills/imagegen-frontend-mobile/SKILL.md": [],
+        ".agents/skills/imagegen-frontend-web/SKILL.md": [],
+        ".agents/skills/industrial-brutalist-ui/SKILL.md": [],
+        ".agents/skills/minimalist-ui/SKILL.md": [],
+        ".agents/skills/redesign-existing-projects/SKILL.md": [],
+        ".agents/skills/stitch-design-taste/DESIGN.md": [],
+        ".agents/skills/stitch-design-taste/SKILL.md": [],
+        ".github/agents/independent-verification-auditor.agent.md": [],
+        ".github/rules/respon.md": [],
+        ".github/skills/thesis-sentinel/scripts/health_check.py": [],
+        ".github/skills/thesis-sentinel/SKILL.md": [],
+        ".kiro/settings/lsp.json": [],
+        ".ua/.understandignore": [],
+        ".ua/intermediate/scan-result.json": [],
+        ".understand-anything/.understandignore": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 18,
+      "files": [
+        {
+          "path": "api/routers/dashboard.py",
+          "language": "python",
+          "sizeLines": 17,
+          "fileCategory": "code"
+        },
+        {
+          "path": "api/routers/metrics.py",
+          "language": "python",
+          "sizeLines": 18,
+          "fileCategory": "code"
+        },
+        {
+          "path": "core/data/raw/pangrango_era5_5node_2005_2025.parquet",
+          "language": "parquet",
+          "sizeLines": 99594,
+          "fileCategory": "code"
+        },
+        {
+          "path": "core/data/raw/pangrango_era5_5node_2024_2024.parquet",
+          "language": "parquet",
+          "sizeLines": 3817,
+          "fileCategory": "code"
+        },
+        {
+          "path": "core/data/raw/pangrango_era5_5node_grid_validation.json",
+          "language": "json",
+          "sizeLines": 68,
+          "fileCategory": "config"
+        },
+        {
+          "path": "core/data/raw/README.md",
+          "language": "markdown",
+          "sizeLines": 11,
+          "fileCategory": "docs"
+        },
+        {
+          "path": "core/models/diffusion_chkpt.pth",
+          "language": "pth",
+          "sizeLines": 4568,
+          "fileCategory": "code"
+        },
+        {
+          "path": "core/models/mlp_baseline_chkpt.pth",
+          "language": "pth",
+          "sizeLines": 362,
+          "fileCategory": "code"
+        },
+        {
+          "path": "core/notebooks/evaluasi_model.ipynb",
+          "language": "ipynb",
+          "sizeLines": 66,
+          "fileCategory": "code"
+        },
+        {
+          "path": "core/results/baseline_results/baseline_metrics.json",
+          "language": "json",
+          "sizeLines": 29,
+          "fileCategory": "config"
+        },
+        {
+          "path": "core/results/README.md",
+          "language": "markdown",
+          "sizeLines": 12,
+          "fileCategory": "docs"
+        },
+        {
+          "path": "core/results/result_test/comparison/comparison_summary.csv",
+          "language": "csv",
+          "sizeLines": 19,
+          "fileCategory": "data"
+        },
+        {
+          "path": "core/results/result_test/comparison/comparison_summary.json",
+          "language": "json",
+          "sizeLines": 225,
+          "fileCategory": "config"
+        },
+        {
+          "path": "core/results/result_test/diff_gnn/metrics.json",
+          "language": "json",
+          "sizeLines": 63,
+          "fileCategory": "config"
+        },
+        {
+          "path": "core/results/result_test/diff_only/metrics.json",
+          "language": "json",
+          "sizeLines": 63,
+          "fileCategory": "config"
+        },
+        {
+          "path": "core/results/result_test/diff_retrieval/metrics.json",
+          "language": "json",
+          "sizeLines": 63,
+          "fileCategory": "config"
+        },
+        {
+          "path": "core/results/result_test/EVALUATION_REPORT.md",
+          "language": "markdown",
+          "sizeLines": 90,
+          "fileCategory": "docs"
+        },
+        {
+          "path": "core/results/result_test/full_model/metrics.json",
+          "language": "json",
+          "sizeLines": 63,
+          "fileCategory": "config"
+        },
+        {
+          "path": "core/results/result_test/mlp_baseline/metrics.json",
+          "language": "json",
+          "sizeLines": 63,
+          "fileCategory": "config"
+        },
+        {
+          "path": "core/results/result_test/persistence/metrics.json",
+          "language": "json",
+          "sizeLines": 63,
+          "fileCategory": "config"
+        },
+        {
+          "path": "core/results/result_test/README.md",
+          "language": "markdown",
+          "sizeLines": 18,
+          "fileCategory": "docs"
+        },
+        {
+          "path": "core/scripts/plot_week_timeseries.py",
+          "language": "python",
+          "sizeLines": 58,
+          "fileCategory": "code"
+        },
+        {
+          "path": "core/src/components/HistoricalAnalogsExplorer.tsx",
+          "language": "typescript",
+          "sizeLines": 245,
+          "fileCategory": "code"
+        },
+        {
+          "path": "core/src/components/ProbabilisticNowcastChart.tsx",
+          "language": "typescript",
+          "sizeLines": 207,
+          "fileCategory": "code"
+        },
+        {
+          "path": "core/src/components/StarTopographyMap.tsx",
+          "language": "typescript",
+          "sizeLines": 313,
+          "fileCategory": "code"
+        }
+      ],
+      "batchImportData": {
+        "api/routers/dashboard.py": [],
+        "api/routers/metrics.py": [],
+        "core/data/raw/pangrango_era5_5node_2005_2025.parquet": [],
+        "core/data/raw/pangrango_era5_5node_2024_2024.parquet": [],
+        "core/data/raw/pangrango_era5_5node_grid_validation.json": [],
+        "core/data/raw/README.md": [],
+        "core/models/diffusion_chkpt.pth": [],
+        "core/models/mlp_baseline_chkpt.pth": [],
+        "core/notebooks/evaluasi_model.ipynb": [],
+        "core/results/baseline_results/baseline_metrics.json": [],
+        "core/results/README.md": [],
+        "core/results/result_test/comparison/comparison_summary.csv": [],
+        "core/results/result_test/comparison/comparison_summary.json": [],
+        "core/results/result_test/diff_gnn/metrics.json": [],
+        "core/results/result_test/diff_only/metrics.json": [],
+        "core/results/result_test/diff_retrieval/metrics.json": [],
+        "core/results/result_test/EVALUATION_REPORT.md": [],
+        "core/results/result_test/full_model/metrics.json": [],
+        "core/results/result_test/mlp_baseline/metrics.json": [],
+        "core/results/result_test/persistence/metrics.json": [],
+        "core/results/result_test/README.md": [],
+        "core/scripts/plot_week_timeseries.py": [],
+        "core/src/components/HistoricalAnalogsExplorer.tsx": [],
+        "core/src/components/ProbabilisticNowcastChart.tsx": [],
+        "core/src/components/StarTopographyMap.tsx": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 19,
+      "files": [
+        {
+          "path": "core/src/evaluation/__init__.py",
+          "language": "python",
+          "sizeLines": 3,
+          "fileCategory": "code"
+        },
+        {
+          "path": "core/src/services/api.ts",
+          "language": "typescript",
+          "sizeLines": 189,
+          "fileCategory": "code"
+        },
+        {
+          "path": "core/tests/test_checkpoint_contract.py",
+          "language": "python",
+          "sizeLines": 33,
+          "fileCategory": "code"
+        },
+        {
+          "path": "docs/private.note",
+          "language": "note",
+          "sizeLines": 164,
+          "fileCategory": "code"
+        },
+        {
+          "path": "main.py",
+          "language": "python",
+          "sizeLines": 59,
+          "fileCategory": "code"
+        },
+        {
+          "path": "web/src/index.css",
+          "language": "css",
+          "sizeLines": 232,
+          "fileCategory": "markup"
+        },
+        {
+          "path": "web/src/vite-env.d.ts",
+          "language": "typescript",
+          "sizeLines": 1,
+          "fileCategory": "code"
+        },
+        {
+          "path": "web/vite.config.ts",
+          "language": "typescript",
+          "sizeLines": 53,
+          "fileCategory": "code"
+        }
+      ],
+      "batchImportData": {
+        "core/src/evaluation/__init__.py": [],
+        "core/src/services/api.ts": [],
+        "core/tests/test_checkpoint_contract.py": [],
+        "docs/private.note": [],
+        "main.py": [],
+        "web/src/index.css": [],
+        "web/src/vite-env.d.ts": [],
+        "web/vite.config.ts": []
+      },
+      "neighborMap": {
+        "web/src/index.css": [
+          {
+            "path": "web/src/main.tsx",
+            "batchIndex": 1,
+            "symbols": []
+          }
+        ]
+      }
+    }
+  ]
+}

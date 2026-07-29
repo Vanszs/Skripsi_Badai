@@ -1,0 +1,329 @@
+{
+  "nodes": [
+    {
+      "id": "file:api/routers/nowcast.py",
+      "type": "file",
+      "name": "nowcast.py",
+      "filePath": "api/routers/nowcast.py",
+      "summary": "Source module (nowcast.py) implementing 3 functions (122 lines).",
+      "tags": [
+        "code"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:api/routers/nowcast.py:_calculate_risk_level",
+      "type": "function",
+      "name": "_calculate_risk_level",
+      "filePath": "api/routers/nowcast.py",
+      "lineRange": [
+        33,
+        41
+      ],
+      "summary": "Function _calculate_risk_level defined in nowcast.py.",
+      "tags": [
+        "function",
+        "code"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:api/routers/nowcast.py:np_random_lognormal",
+      "type": "function",
+      "name": "np_random_lognormal",
+      "filePath": "api/routers/nowcast.py",
+      "lineRange": [
+        43,
+        44
+      ],
+      "summary": "Function np_random_lognormal defined in nowcast.py.",
+      "tags": [
+        "function",
+        "code"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:api/routers/nowcast.py:predict_nowcast",
+      "type": "function",
+      "name": "predict_nowcast",
+      "filePath": "api/routers/nowcast.py",
+      "lineRange": [
+        47,
+        122
+      ],
+      "summary": "Function predict_nowcast defined in nowcast.py.",
+      "tags": [
+        "function",
+        "code"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:api/routers/stations.py",
+      "type": "file",
+      "name": "stations.py",
+      "filePath": "api/routers/stations.py",
+      "summary": "Source module (stations.py) implementing 1 functions (39 lines).",
+      "tags": [
+        "code"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:api/routers/stations.py:get_stations",
+      "type": "function",
+      "name": "get_stations",
+      "filePath": "api/routers/stations.py",
+      "lineRange": [
+        37,
+        39
+      ],
+      "summary": "Function get_stations defined in stations.py.",
+      "tags": [
+        "function",
+        "code"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:api/schemas.py",
+      "type": "file",
+      "name": "schemas.py",
+      "filePath": "api/schemas.py",
+      "summary": "Source module (schemas.py) implementing 8 classes (57 lines).",
+      "tags": [
+        "code"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:api/schemas.py:StationInfo",
+      "type": "class",
+      "name": "StationInfo",
+      "filePath": "api/schemas.py",
+      "lineRange": [
+        4,
+        11
+      ],
+      "summary": "Class StationInfo defined in schemas.py.",
+      "tags": [
+        "class",
+        "code"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:api/schemas.py:StationListResponse",
+      "type": "class",
+      "name": "StationListResponse",
+      "filePath": "api/schemas.py",
+      "lineRange": [
+        13,
+        15
+      ],
+      "summary": "Class StationListResponse defined in schemas.py.",
+      "tags": [
+        "class",
+        "code"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:api/schemas.py:TargetMetrics",
+      "type": "class",
+      "name": "TargetMetrics",
+      "filePath": "api/schemas.py",
+      "lineRange": [
+        17,
+        20
+      ],
+      "summary": "Class TargetMetrics defined in schemas.py.",
+      "tags": [
+        "class",
+        "code"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:api/schemas.py:ProbabilisticMetrics",
+      "type": "class",
+      "name": "ProbabilisticMetrics",
+      "filePath": "api/schemas.py",
+      "lineRange": [
+        22,
+        27
+      ],
+      "summary": "Class ProbabilisticMetrics defined in schemas.py.",
+      "tags": [
+        "class",
+        "code"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:api/schemas.py:WeatherMetricsSummary",
+      "type": "class",
+      "name": "WeatherMetricsSummary",
+      "filePath": "api/schemas.py",
+      "lineRange": [
+        29,
+        35
+      ],
+      "summary": "Class WeatherMetricsSummary defined in schemas.py.",
+      "tags": [
+        "class",
+        "code"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:api/schemas.py:NowcastRequest",
+      "type": "class",
+      "name": "NowcastRequest",
+      "filePath": "api/schemas.py",
+      "lineRange": [
+        37,
+        40
+      ],
+      "summary": "Class NowcastRequest defined in schemas.py.",
+      "tags": [
+        "class",
+        "code"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:api/schemas.py:VariableForecast",
+      "type": "class",
+      "name": "VariableForecast",
+      "filePath": "api/schemas.py",
+      "lineRange": [
+        42,
+        47
+      ],
+      "summary": "Class VariableForecast defined in schemas.py.",
+      "tags": [
+        "class",
+        "code"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:api/schemas.py:NowcastResponse",
+      "type": "class",
+      "name": "NowcastResponse",
+      "filePath": "api/schemas.py",
+      "lineRange": [
+        49,
+        57
+      ],
+      "summary": "Class NowcastResponse defined in schemas.py.",
+      "tags": [
+        "class",
+        "code"
+      ],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:api/routers/nowcast.py",
+      "target": "function:api/routers/nowcast.py:_calculate_risk_level",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:api/routers/nowcast.py",
+      "target": "function:api/routers/nowcast.py:np_random_lognormal",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:api/routers/nowcast.py",
+      "target": "function:api/routers/nowcast.py:predict_nowcast",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:api/routers/nowcast.py",
+      "target": "file:api/schemas.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:api/routers/stations.py",
+      "target": "function:api/routers/stations.py:get_stations",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:api/routers/stations.py",
+      "target": "file:api/schemas.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:api/schemas.py",
+      "target": "class:api/schemas.py:StationInfo",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:api/schemas.py",
+      "target": "class:api/schemas.py:StationListResponse",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:api/schemas.py",
+      "target": "class:api/schemas.py:TargetMetrics",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:api/schemas.py",
+      "target": "class:api/schemas.py:ProbabilisticMetrics",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:api/schemas.py",
+      "target": "class:api/schemas.py:WeatherMetricsSummary",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:api/schemas.py",
+      "target": "class:api/schemas.py:NowcastRequest",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:api/schemas.py",
+      "target": "class:api/schemas.py:VariableForecast",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:api/schemas.py",
+      "target": "class:api/schemas.py:NowcastResponse",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    }
+  ]
+}

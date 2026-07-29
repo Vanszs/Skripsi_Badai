@@ -1,0 +1,49 @@
+{
+  "projectRoot": "/media/DiskE/SKRIPSI/Skripsi_Bevan",
+  "batchFiles": [
+    {
+      "path": "web/.env.example",
+      "language": "config",
+      "sizeLines": 9,
+      "fileCategory": "config"
+    },
+    {
+      "path": "web/README.md",
+      "language": "markdown",
+      "sizeLines": 20,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "web/index.html",
+      "language": "html",
+      "sizeLines": 15,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "web/metadata.json",
+      "language": "json",
+      "sizeLines": 6,
+      "fileCategory": "config"
+    },
+    {
+      "path": "web/package.json",
+      "language": "json",
+      "sizeLines": 38,
+      "fileCategory": "config"
+    },
+    {
+      "path": "web/tsconfig.json",
+      "language": "json",
+      "sizeLines": 31,
+      "fileCategory": "config"
+    }
+  ],
+  "batchImportData": {
+    "web/.env.example": [],
+    "web/README.md": [],
+    "web/index.html": [],
+    "web/metadata.json": [],
+    "web/package.json": [],
+    "web/tsconfig.json": []
+  }
+}

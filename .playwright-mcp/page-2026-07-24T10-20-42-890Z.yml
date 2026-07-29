@@ -1,0 +1,140 @@
+- generic [ref=f68e1]:
+  - generic [ref=f68e3]:
+    - link "Langsung ke peta dan analisis" [ref=f68e4] [cursor=pointer]:
+      - /url: "#workspace"
+    - complementary "Navigasi utama" [ref=f68e5]:
+      - button "NusaPantau, halaman utama" [ref=f68e6] [cursor=pointer]:
+        - generic [ref=f68e10]: NP
+      - navigation [ref=f68e11]:
+        - button "Peta" [ref=f68e12] [cursor=pointer]
+        - button "Prediksi" [active] [ref=f68e16] [cursor=pointer]
+        - button "Risiko" [ref=f68e20] [cursor=pointer]
+        - button "Metode" [ref=f68e24] [cursor=pointer]
+    - banner [ref=f68e28]:
+      - generic [ref=f68e29]:
+        - button [ref=f68e30] [cursor=pointer]:
+          - strong [ref=f68e31]: NusaPantau Kekeringan
+          - text: Proyeksi SPEI Jawa Timur
+        - generic [ref=f68e32]: DATA PENELITIAN
+      - generic [ref=f68e33]:
+        - textbox "Cari kabupaten" [ref=f68e38]
+        - button "Unduh laporan" [ref=f68e39] [cursor=pointer]
+    - main [ref=f68e43]:
+      - generic [ref=f68e253]:
+        - generic [ref=f68e254]:
+          - text: PREDIKSI PROBABILISTIK
+          - heading "Prediksi lima wilayah studi" [level=1] [ref=f68e255]
+          - paragraph [ref=f68e256]: Pilih kabupaten untuk membaca lintasan SPEI, rentang kemungkinan, dan grid sumber model.
+        - generic [ref=f68e257]:
+          - complementary "Daftar wilayah dan grid penelitian" [ref=f68e258]:
+            - generic [ref=f68e259]:
+              - strong [ref=f68e260]: WILAYAH STUDI
+              - generic [ref=f68e261]: 5 kabupaten
+            - generic [ref=f68e262]:
+              - button "Bojonegoro Normal SPEI 0.96 · 5 grid" [pressed] [ref=f68e263] [cursor=pointer]:
+                - generic [ref=f68e264]:
+                  - strong [ref=f68e265]: Bojonegoro
+                  - generic [ref=f68e266]: Normal
+                - generic [ref=f68e267]: SPEI 0.96 · 5 grid
+              - button "Lamongan Normal SPEI 1.14 · 5 grid" [ref=f68e268] [cursor=pointer]:
+                - generic [ref=f68e269]:
+                  - strong [ref=f68e270]: Lamongan
+                  - generic [ref=f68e271]: Normal
+                - generic [ref=f68e272]: SPEI 1.14 · 5 grid
+              - button "Nganjuk Normal SPEI 0.96 · 5 grid" [ref=f68e273] [cursor=pointer]:
+                - generic [ref=f68e274]:
+                  - strong [ref=f68e275]: Nganjuk
+                  - generic [ref=f68e276]: Normal
+                - generic [ref=f68e277]: SPEI 0.96 · 5 grid
+              - button "Ngawi Normal SPEI 0.97 · 5 grid" [ref=f68e278] [cursor=pointer]:
+                - generic [ref=f68e279]:
+                  - strong [ref=f68e280]: Ngawi
+                  - generic [ref=f68e281]: Normal
+                - generic [ref=f68e282]: SPEI 0.97 · 5 grid
+              - button "Tuban Normal SPEI 0.97 · 5 grid" [ref=f68e283] [cursor=pointer]:
+                - generic [ref=f68e284]:
+                  - strong [ref=f68e285]: Tuban
+                  - generic [ref=f68e286]: Normal
+                - generic [ref=f68e287]: SPEI 0.97 · 5 grid
+            - generic [ref=f68e288]:
+              - generic [ref=f68e289]:
+                - strong [ref=f68e290]: GRID BOJONEGORO
+                - generic [ref=f68e291]: 5 cell
+              - generic [ref=f68e292]:
+                - button "Area 1 -7.155, 111.880 0.17" [pressed] [ref=f68e293] [cursor=pointer]:
+                  - generic [ref=f68e294]:
+                    - generic [ref=f68e295]: Area 1
+                    - generic [ref=f68e296]: "-7.155, 111.880"
+                  - strong [ref=f68e297]: "0.17"
+                - button "Area 2 -7.235, 111.800 0.17" [ref=f68e298] [cursor=pointer]:
+                  - generic [ref=f68e299]:
+                    - generic [ref=f68e300]: Area 2
+                    - generic [ref=f68e301]: "-7.235, 111.800"
+                  - strong [ref=f68e302]: "0.17"
+                - button "Area 3 -7.155, 111.760 0.17" [ref=f68e303] [cursor=pointer]:
+                  - generic [ref=f68e304]:
+                    - generic [ref=f68e305]: Area 3
+                    - generic [ref=f68e306]: "-7.155, 111.760"
+                  - strong [ref=f68e307]: "0.17"
+                - button "Area 4 -7.235, 111.960 0.17" [ref=f68e308] [cursor=pointer]:
+                  - generic [ref=f68e309]:
+                    - generic [ref=f68e310]: Area 4
+                    - generic [ref=f68e311]: "-7.235, 111.960"
+                  - strong [ref=f68e312]: "0.17"
+                - button "Area 5 -7.075, 111.800 0.17" [ref=f68e313] [cursor=pointer]:
+                  - generic [ref=f68e314]:
+                    - generic [ref=f68e315]: Area 5
+                    - generic [ref=f68e316]: "-7.075, 111.800"
+                  - strong [ref=f68e317]: "0.17"
+          - generic [ref=f68e318]:
+            - generic [ref=f68e319]:
+              - strong [ref=f68e320]: Area 1
+              - generic [ref=f68e321]: Forecast model tersedia pada level kabupaten; nilai area menunjukkan cell sumber · SPEI 0.17.
+            - generic [ref=f68e322]:
+              - generic [ref=f68e323]:
+                - generic [ref=f68e324]:
+                  - heading "Prediksi SPEI dengan rentang kemungkinan (Kab. Bojonegoro)" [level=3] [ref=f68e327]
+                  - paragraph [ref=f68e328]: Garis putus-putus = nilai tengah; pita = rentang kemungkinan 80%.
+                - generic [ref=f68e329]:
+                  - generic [ref=f68e330]:
+                    - button "+1M" [ref=f68e331] [cursor=pointer]
+                    - button "+3M" [ref=f68e332] [cursor=pointer]
+                    - button "+6M" [ref=f68e333] [cursor=pointer]
+                    - button "+12M" [ref=f68e334] [cursor=pointer]
+                  - button "PITA" [ref=f68e335] [cursor=pointer]
+              - img [ref=f68e339]:
+                - generic [ref=f68e343]:
+                  - generic [ref=f68e344]: 28 Dec 2025
+                  - generic [ref=f68e346]: 30 Dec 2025
+                  - generic [ref=f68e348]: 01 Jan 2026
+                  - generic [ref=f68e350]: Aug (+2M)
+                  - generic [ref=f68e352]: Oct (+4M)
+                  - generic [ref=f68e354]: Dec (+6M)
+                  - generic [ref=f68e356]: Feb+1 (+8M)
+                  - generic [ref=f68e358]: Apr+1 (+10M)
+                  - generic [ref=f68e360]: Jun+1 (+12M)
+                - generic [ref=f68e363]:
+                  - generic [ref=f68e364]: "-2.5"
+                  - generic [ref=f68e366]: "-1.5"
+                  - generic [ref=f68e368]: "0"
+                  - generic [ref=f68e370]: "1"
+                - generic [ref=f68e372]: EXTREME (-2.0)
+                - generic [ref=f68e374]: SEVERE (-1.5)
+                - generic [ref=f68e376]: MODERATE (-0.5)
+              - generic [ref=f68e395]:
+                - generic [ref=f68e396]:
+                  - generic [ref=f68e397]: Historical SPEI
+                  - generic [ref=f68e399]: q50 Median
+                  - generic [ref=f68e401]: q10 - q90 Fan (80% CI)
+                - generic [ref=f68e403]:
+                  - generic [ref=f68e404]: "Hasil +3 bulan:"
+                  - generic [ref=f68e405]: "q10: 0.81"
+                  - generic [ref=f68e406]: "|"
+                  - generic [ref=f68e407]: "q50: 0.96"
+                  - generic [ref=f68e408]: "|"
+                  - generic [ref=f68e409]: "q90: 1.12"
+      - generic [ref=f68e186]:
+        - generic [ref=f68e187]: 5 kabupaten studi
+        - generic [ref=f68e188]: 0 wilayah berada di atas status normal pada contoh ini
+        - generic [ref=f68e189]: Riset TFT-SPEI · 2026
+  - generic [ref=f68e190]: (+2M)

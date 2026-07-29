@@ -1,0 +1,62 @@
+{
+  "nodes": [
+    {
+      "id": "schema:core/results/result_test/nowcasting_hourly_week/driest_week_actual_vs_pred.csv",
+      "type": "schema",
+      "name": "driest_week_actual_vs_pred.csv",
+      "filePath": "core/results/result_test/nowcasting_hourly_week/driest_week_actual_vs_pred.csv",
+      "summary": "Data schema or table definition (driest_week_actual_vs_pred.csv).",
+      "tags": [
+        "code"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "schema:core/results/result_test/nowcasting_hourly_week/median_week_actual_vs_pred.csv",
+      "type": "schema",
+      "name": "median_week_actual_vs_pred.csv",
+      "filePath": "core/results/result_test/nowcasting_hourly_week/median_week_actual_vs_pred.csv",
+      "summary": "Data schema or table definition (median_week_actual_vs_pred.csv).",
+      "tags": [
+        "code"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "schema:core/results/result_test/nowcasting_hourly_week/weekly_crosscheck_3var.csv",
+      "type": "schema",
+      "name": "weekly_crosscheck_3var.csv",
+      "filePath": "core/results/result_test/nowcasting_hourly_week/weekly_crosscheck_3var.csv",
+      "summary": "Data schema or table definition (weekly_crosscheck_3var.csv).",
+      "tags": [
+        "code"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:core/results/result_test/nowcasting_hourly_week/weekly_crosscheck_3var_meta.json",
+      "type": "config",
+      "name": "weekly_crosscheck_3var_meta.json",
+      "filePath": "core/results/result_test/nowcasting_hourly_week/weekly_crosscheck_3var_meta.json",
+      "summary": "Configuration file (weekly_crosscheck_3var_meta.json) specifying project settings, environment, or build properties.",
+      "tags": [
+        "configuration",
+        "build-system"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "schema:core/results/result_test/nowcasting_hourly_week/wettest_week_actual_vs_pred.csv",
+      "type": "schema",
+      "name": "wettest_week_actual_vs_pred.csv",
+      "filePath": "core/results/result_test/nowcasting_hourly_week/wettest_week_actual_vs_pred.csv",
+      "summary": "Data schema or table definition (wettest_week_actual_vs_pred.csv).",
+      "tags": [
+        "code",
+        "test"
+      ],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": []
+}

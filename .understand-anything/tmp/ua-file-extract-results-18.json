@@ -1,0 +1,958 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 25,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "api/routers/dashboard.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 17,
+      "nonEmptyLines": 13,
+      "functions": [
+        {
+          "name": "get_live_dashboard",
+          "startLine": 7,
+          "endLine": 17,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "get_live_dashboard",
+          "line": 6,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "get_live_dashboard",
+          "callee": "HTTPException",
+          "lineNumber": 14
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "api/routers/metrics.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 18,
+      "nonEmptyLines": 13,
+      "functions": [
+        {
+          "name": "get_metrics_summary",
+          "startLine": 10,
+          "endLine": 18,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "get_metrics_summary",
+          "line": 9,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "get_metrics_summary",
+          "callee": "os.path.exists",
+          "lineNumber": 12
+        },
+        {
+          "caller": "get_metrics_summary",
+          "callee": "HTTPException",
+          "lineNumber": 13
+        },
+        {
+          "caller": "get_metrics_summary",
+          "callee": "open",
+          "lineNumber": 15
+        },
+        {
+          "caller": "get_metrics_summary",
+          "callee": "json.load",
+          "lineNumber": 16
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "core/data/raw/pangrango_era5_5node_2005_2025.parquet",
+      "language": "parquet",
+      "fileCategory": "code",
+      "totalLines": 99595,
+      "nonEmptyLines": 97101,
+      "metrics": {}
+    },
+    {
+      "path": "core/data/raw/pangrango_era5_5node_2024_2024.parquet",
+      "language": "parquet",
+      "fileCategory": "code",
+      "totalLines": 3818,
+      "nonEmptyLines": 3793,
+      "metrics": {}
+    },
+    {
+      "path": "core/data/raw/pangrango_era5_5node_grid_validation.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 69,
+      "nonEmptyLines": 69,
+      "sections": [
+        {
+          "heading": "canonical_nodes",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "node_roles",
+          "level": 1,
+          "line": 9
+        },
+        {
+          "heading": "main_node",
+          "level": 1,
+          "line": 16
+        },
+        {
+          "heading": "main_node_identifier",
+          "level": 1,
+          "line": 17
+        },
+        {
+          "heading": "model_mode",
+          "level": 1,
+          "line": 21
+        },
+        {
+          "heading": "grid_policy",
+          "level": 1,
+          "line": 22
+        },
+        {
+          "heading": "nodes",
+          "level": 1,
+          "line": 23
+        },
+        {
+          "heading": "notes",
+          "level": 1,
+          "line": 65
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 8
+      }
+    },
+    {
+      "path": "core/data/raw/README.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 11,
+      "nonEmptyLines": 7,
+      "sections": [
+        {
+          "heading": "Active Raw Data Artifacts",
+          "level": 1,
+          "line": 1
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 1
+      }
+    },
+    {
+      "path": "core/models/diffusion_chkpt.pth",
+      "language": "pth",
+      "fileCategory": "code",
+      "totalLines": 4569,
+      "nonEmptyLines": 4554,
+      "metrics": {}
+    },
+    {
+      "path": "core/models/mlp_baseline_chkpt.pth",
+      "language": "pth",
+      "fileCategory": "code",
+      "totalLines": 363,
+      "nonEmptyLines": 362,
+      "metrics": {}
+    },
+    {
+      "path": "core/notebooks/evaluasi_model.ipynb",
+      "language": "ipynb",
+      "fileCategory": "code",
+      "totalLines": 66,
+      "nonEmptyLines": 66,
+      "metrics": {}
+    },
+    {
+      "path": "core/results/baseline_results/baseline_metrics.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 30,
+      "nonEmptyLines": 30,
+      "sections": [
+        {
+          "heading": "metadata",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "metrics",
+          "level": 1,
+          "line": 13
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 2
+      }
+    },
+    {
+      "path": "core/results/README.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 12,
+      "nonEmptyLines": 7,
+      "sections": [
+        {
+          "heading": "Active Results Folder",
+          "level": 1,
+          "line": 1
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 1
+      }
+    },
+    {
+      "path": "core/results/result_test/comparison/comparison_summary.csv",
+      "language": "csv",
+      "fileCategory": "data",
+      "totalLines": 19,
+      "nonEmptyLines": 19,
+      "metrics": {}
+    },
+    {
+      "path": "core/results/result_test/comparison/comparison_summary.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 226,
+      "nonEmptyLines": 226,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 0
+      }
+    },
+    {
+      "path": "core/results/result_test/diff_gnn/metrics.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 64,
+      "nonEmptyLines": 64,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 0
+      }
+    },
+    {
+      "path": "core/results/result_test/diff_only/metrics.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 64,
+      "nonEmptyLines": 64,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 0
+      }
+    },
+    {
+      "path": "core/results/result_test/diff_retrieval/metrics.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 64,
+      "nonEmptyLines": 64,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 0
+      }
+    },
+    {
+      "path": "core/results/result_test/EVALUATION_REPORT.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 90,
+      "nonEmptyLines": 75,
+      "sections": [
+        {
+          "heading": "Evaluation Report - Main Node Only",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "PRECIPITATION",
+          "level": 2,
+          "line": 23
+        },
+        {
+          "heading": "WIND_SPEED",
+          "level": 2,
+          "line": 34
+        },
+        {
+          "heading": "HUMIDITY",
+          "level": 2,
+          "line": 45
+        },
+        {
+          "heading": "Precipitation Threshold Metrics",
+          "level": 2,
+          "line": 56
+        },
+        {
+          "heading": "Threshold 2.0 mm",
+          "level": 3,
+          "line": 58
+        },
+        {
+          "heading": "Threshold 5.0 mm",
+          "level": 3,
+          "line": 69
+        },
+        {
+          "heading": "Threshold 10.0 mm",
+          "level": 3,
+          "line": 80
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 8
+      }
+    },
+    {
+      "path": "core/results/result_test/full_model/metrics.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 64,
+      "nonEmptyLines": 64,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 0
+      }
+    },
+    {
+      "path": "core/results/result_test/mlp_baseline/metrics.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 64,
+      "nonEmptyLines": 64,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 0
+      }
+    },
+    {
+      "path": "core/results/result_test/persistence/metrics.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 64,
+      "nonEmptyLines": 64,
+      "sections": [
+        {
+          "heading": "metadata",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "metrics",
+          "level": 1,
+          "line": 32
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 2
+      }
+    },
+    {
+      "path": "core/results/result_test/README.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 18,
+      "nonEmptyLines": 13,
+      "sections": [
+        {
+          "heading": "Active Evaluation Outputs",
+          "level": 1,
+          "line": 1
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 1
+      }
+    },
+    {
+      "path": "core/scripts/plot_week_timeseries.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 58,
+      "nonEmptyLines": 50,
+      "functions": [
+        {
+          "name": "plot_week",
+          "startLine": 24,
+          "endLine": 45,
+          "params": [
+            "window"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "plot_week",
+          "line": 24,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "plot_week",
+          "callee": "os.path.join",
+          "lineNumber": 25
+        },
+        {
+          "caller": "plot_week",
+          "callee": "pd.read_csv",
+          "lineNumber": 26
+        },
+        {
+          "caller": "plot_week",
+          "callee": "plt.subplots",
+          "lineNumber": 28
+        },
+        {
+          "caller": "plot_week",
+          "callee": "zip",
+          "lineNumber": 29
+        },
+        {
+          "caller": "plot_week",
+          "callee": "ax.plot",
+          "lineNumber": 30
+        },
+        {
+          "caller": "plot_week",
+          "callee": "ax.plot",
+          "lineNumber": 31
+        },
+        {
+          "caller": "plot_week",
+          "callee": "ax.plot",
+          "lineNumber": 32
+        },
+        {
+          "caller": "plot_week",
+          "callee": "df[f\"pred_mlp_{var}\"].notna().any",
+          "lineNumber": 33
+        },
+        {
+          "caller": "plot_week",
+          "callee": "df[f\"pred_mlp_{var}\"].notna",
+          "lineNumber": 33
+        },
+        {
+          "caller": "plot_week",
+          "callee": "ax.plot",
+          "lineNumber": 34
+        },
+        {
+          "caller": "plot_week",
+          "callee": "ax.set_ylabel",
+          "lineNumber": 35
+        },
+        {
+          "caller": "plot_week",
+          "callee": "ax.grid",
+          "lineNumber": 36
+        },
+        {
+          "caller": "plot_week",
+          "callee": "ax.legend",
+          "lineNumber": 37
+        },
+        {
+          "caller": "plot_week",
+          "callee": "axes[0].set_title",
+          "lineNumber": 38
+        },
+        {
+          "caller": "plot_week",
+          "callee": "axes[-1].set_xlabel",
+          "lineNumber": 39
+        },
+        {
+          "caller": "plot_week",
+          "callee": "fig.autofmt_xdate",
+          "lineNumber": 40
+        },
+        {
+          "caller": "plot_week",
+          "callee": "plt.tight_layout",
+          "lineNumber": 41
+        },
+        {
+          "caller": "plot_week",
+          "callee": "os.path.join",
+          "lineNumber": 42
+        },
+        {
+          "caller": "plot_week",
+          "callee": "plt.savefig",
+          "lineNumber": 43
+        },
+        {
+          "caller": "plot_week",
+          "callee": "plt.close",
+          "lineNumber": 44
+        },
+        {
+          "caller": "plot_week",
+          "callee": "print",
+          "lineNumber": 45
+        },
+        {
+          "caller": "plot_week",
+          "callee": "len",
+          "lineNumber": 45
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "core/src/components/HistoricalAnalogsExplorer.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 245,
+      "nonEmptyLines": 232,
+      "functions": [
+        {
+          "name": "HistoricalAnalogsExplorer",
+          "startLine": 88,
+          "endLine": 243,
+          "params": [
+            "{\n  currentQueryState = DEFAULT_CURRENT_QUERY,\n  analogs = DEFAULT_ANALOGS,\n}"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "HistoricalAnalogsExplorer",
+          "line": 88,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "HistoricalAnalogsExplorer",
+          "callee": "useState",
+          "lineNumber": 92
+        },
+        {
+          "caller": "HistoricalAnalogsExplorer",
+          "callee": "analogs.find",
+          "lineNumber": 94
+        },
+        {
+          "caller": "HistoricalAnalogsExplorer",
+          "callee": "analogs.map",
+          "lineNumber": 113
+        },
+        {
+          "caller": "HistoricalAnalogsExplorer",
+          "callee": "setSelectedAnalogId",
+          "lineNumber": 118
+        },
+        {
+          "caller": "HistoricalAnalogsExplorer",
+          "callee": "item.distanceL2.toFixed",
+          "lineNumber": 133
+        },
+        {
+          "caller": "HistoricalAnalogsExplorer",
+          "callee": "[\n                  { label: 'Precipitation (mm/h)', key: 'tp', unit: '' },\n                  { label: 'Temp 2m (K)', key: 't2m', unit: '' },\n                  { label: 'RH 850hPa (%)', key: 'r850', unit: '' },\n                  { label: 'Wind U10 (m/s)', key: 'u10', unit: '' },\n                  { label: 'Wind V10 (m/s)', key: 'v10', unit: '' },\n                  { label: 'CAPE (J/kg)', key: 'cape', unit: '' },\n                ].map",
+          "lineNumber": 166
+        },
+        {
+          "caller": "HistoricalAnalogsExplorer",
+          "callee": "diff.toFixed",
+          "lineNumber": 183
+        },
+        {
+          "caller": "HistoricalAnalogsExplorer",
+          "callee": "diff.toFixed",
+          "lineNumber": 183
+        },
+        {
+          "caller": "HistoricalAnalogsExplorer",
+          "callee": "selectedAnalog.rainEvolution.map",
+          "lineNumber": 198
+        },
+        {
+          "caller": "HistoricalAnalogsExplorer",
+          "callee": "Math.min",
+          "lineNumber": 199
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "core/src/components/ProbabilisticNowcastChart.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 207,
+      "nonEmptyLines": 190,
+      "functions": [
+        {
+          "name": "calculatePercentile",
+          "startLine": 29,
+          "endLine": 38,
+          "params": [
+            "arr",
+            "q"
+          ]
+        },
+        {
+          "name": "ProbabilisticNowcastChart",
+          "startLine": 40,
+          "endLine": 207,
+          "params": [
+            "{\n  data,\n  selectedStepIndex = 0\n}"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "ProbabilisticNowcastChart",
+          "line": 40,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "calculatePercentile",
+          "callee": "[...arr].sort",
+          "lineNumber": 30
+        },
+        {
+          "caller": "calculatePercentile",
+          "callee": "Math.floor",
+          "lineNumber": 32
+        },
+        {
+          "caller": "ProbabilisticNowcastChart",
+          "callee": "useState",
+          "lineNumber": 44
+        },
+        {
+          "caller": "ProbabilisticNowcastChart",
+          "callee": "useState",
+          "lineNumber": 45
+        },
+        {
+          "caller": "ProbabilisticNowcastChart",
+          "callee": "useMemo",
+          "lineNumber": 48
+        },
+        {
+          "caller": "ProbabilisticNowcastChart",
+          "callee": "data.map",
+          "lineNumber": 49
+        },
+        {
+          "caller": "ProbabilisticNowcastChart",
+          "callee": "calculatePercentile",
+          "lineNumber": 50
+        },
+        {
+          "caller": "ProbabilisticNowcastChart",
+          "callee": "calculatePercentile",
+          "lineNumber": 51
+        },
+        {
+          "caller": "ProbabilisticNowcastChart",
+          "callee": "calculatePercentile",
+          "lineNumber": 52
+        },
+        {
+          "caller": "ProbabilisticNowcastChart",
+          "callee": "calculatePercentile",
+          "lineNumber": 53
+        },
+        {
+          "caller": "ProbabilisticNowcastChart",
+          "callee": "calculatePercentile",
+          "lineNumber": 54
+        },
+        {
+          "caller": "ProbabilisticNowcastChart",
+          "callee": "item.samples.filter",
+          "lineNumber": 57
+        },
+        {
+          "caller": "ProbabilisticNowcastChart",
+          "callee": "useMemo",
+          "lineNumber": 78
+        },
+        {
+          "caller": "ProbabilisticNowcastChart",
+          "callee": "Math.min",
+          "lineNumber": 82
+        },
+        {
+          "caller": "ProbabilisticNowcastChart",
+          "callee": "Math.max",
+          "lineNumber": 83
+        },
+        {
+          "caller": "ProbabilisticNowcastChart",
+          "callee": "Math.max",
+          "lineNumber": 85
+        },
+        {
+          "caller": "ProbabilisticNowcastChart",
+          "callee": "Array.from",
+          "lineNumber": 87
+        },
+        {
+          "caller": "ProbabilisticNowcastChart",
+          "callee": "start.toFixed",
+          "lineNumber": 91
+        },
+        {
+          "caller": "ProbabilisticNowcastChart",
+          "callee": "end.toFixed",
+          "lineNumber": 91
+        },
+        {
+          "caller": "ProbabilisticNowcastChart",
+          "callee": "activeSamples.forEach",
+          "lineNumber": 97
+        },
+        {
+          "caller": "ProbabilisticNowcastChart",
+          "callee": "Math.min",
+          "lineNumber": 98
+        },
+        {
+          "caller": "ProbabilisticNowcastChart",
+          "callee": "Math.floor",
+          "lineNumber": 99
+        },
+        {
+          "caller": "ProbabilisticNowcastChart",
+          "callee": "[2, 5, 10].map",
+          "lineNumber": 117
+        },
+        {
+          "caller": "ProbabilisticNowcastChart",
+          "callee": "setThreshold",
+          "lineNumber": 120
+        },
+        {
+          "caller": "ProbabilisticNowcastChart",
+          "callee": "setActiveStepIdx",
+          "lineNumber": 182
+        },
+        {
+          "caller": "ProbabilisticNowcastChart",
+          "callee": "Number",
+          "lineNumber": 182
+        },
+        {
+          "caller": "ProbabilisticNowcastChart",
+          "callee": "data.map",
+          "lineNumber": 185
+        },
+        {
+          "caller": "ProbabilisticNowcastChart",
+          "callee": "chartData[idx]?.exceedanceProb.toFixed",
+          "lineNumber": 187
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "core/src/components/StarTopographyMap.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 313,
+      "nonEmptyLines": 296,
+      "functions": [
+        {
+          "name": "StarTopographyMap",
+          "startLine": 84,
+          "endLine": 311,
+          "params": [
+            "{\n  nodes = CANONICAL_NODES,\n  selectedNode,\n  onSelectNode,\n  width = \"100%\",\n  height = \"500px\",\n}"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "CANONICAL_NODES",
+          "line": 25,
+          "isDefault": false
+        },
+        {
+          "name": "STAR_EDGES",
+          "line": 73,
+          "isDefault": false
+        },
+        {
+          "name": "StarTopographyMap",
+          "line": 84,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "StarTopographyMap",
+          "callee": "useState",
+          "lineNumber": 91
+        },
+        {
+          "caller": "StarTopographyMap",
+          "callee": "nodes.find",
+          "lineNumber": 92
+        },
+        {
+          "caller": "StarTopographyMap",
+          "callee": "useEffect",
+          "lineNumber": 95
+        },
+        {
+          "caller": "StarTopographyMap",
+          "callee": "nodes.find",
+          "lineNumber": 97
+        },
+        {
+          "caller": "StarTopographyMap",
+          "callee": "setActiveNode",
+          "lineNumber": 98
+        },
+        {
+          "caller": "handleMarkerClick",
+          "callee": "setActiveNode",
+          "lineNumber": 103
+        },
+        {
+          "caller": "handleMarkerClick",
+          "callee": "onSelectNode",
+          "lineNumber": 104
+        },
+        {
+          "caller": "StarTopographyMap",
+          "callee": "nodes.find",
+          "lineNumber": 107
+        },
+        {
+          "caller": "StarTopographyMap",
+          "callee": "nodes.filter",
+          "lineNumber": 108
+        },
+        {
+          "caller": "StarTopographyMap",
+          "callee": "surroundingNodes.map",
+          "lineNumber": 159
+        },
+        {
+          "caller": "StarTopographyMap",
+          "callee": "nodes.map",
+          "lineNumber": 199
+        },
+        {
+          "caller": "StarTopographyMap",
+          "callee": "handleMarkerClick",
+          "lineNumber": 216
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 3,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    }
+  ]
+}

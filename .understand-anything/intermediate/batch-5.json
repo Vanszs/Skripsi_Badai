@@ -1,0 +1,39 @@
+{
+  "nodes": [
+    {
+      "id": "file:.github/hooks/rtk-hook.ps1",
+      "type": "file",
+      "name": "rtk-hook.ps1",
+      "filePath": ".github/hooks/rtk-hook.ps1",
+      "summary": "Source module (rtk-hook.ps1) implementing helper logic (77 lines).",
+      "tags": [
+        "code"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:.github/hooks/rtk-session.ps1",
+      "type": "file",
+      "name": "rtk-session.ps1",
+      "filePath": ".github/hooks/rtk-session.ps1",
+      "summary": "Source module (rtk-session.ps1) implementing helper logic (16 lines).",
+      "tags": [
+        "code"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:.github/hooks/rtk.json",
+      "type": "config",
+      "name": "rtk.json",
+      "filePath": ".github/hooks/rtk.json",
+      "summary": "Configuration file (rtk.json) specifying project settings, environment, or build properties.",
+      "tags": [
+        "configuration",
+        "build-system"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": []
+}

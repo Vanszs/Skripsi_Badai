@@ -1,0 +1,348 @@
+{
+  "nodes": [
+    {
+      "id": "document:.agent/rules/respon.md",
+      "type": "document",
+      "name": "respon.md",
+      "filePath": ".agent/rules/respon.md",
+      "summary": "Documentation file (respon.md) covering project architecture, specs, or guidelines.",
+      "tags": [
+        "spec",
+        "documentation"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:.agent/skills/thesis-sentinel/scripts/health_check.py",
+      "type": "file",
+      "name": "health_check.py",
+      "filePath": ".agent/skills/thesis-sentinel/scripts/health_check.py",
+      "summary": "Source module (health_check.py) implementing 1 functions (91 lines).",
+      "tags": [
+        "code"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:.agent/skills/thesis-sentinel/scripts/health_check.py:run_health_check",
+      "type": "function",
+      "name": "run_health_check",
+      "filePath": ".agent/skills/thesis-sentinel/scripts/health_check.py",
+      "lineRange": [
+        16,
+        88
+      ],
+      "summary": "Function run_health_check defined in health_check.py.",
+      "tags": [
+        "function",
+        "code"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:.agent/skills/thesis-sentinel/SKILL.md",
+      "type": "document",
+      "name": "SKILL.md",
+      "filePath": ".agent/skills/thesis-sentinel/SKILL.md",
+      "summary": "Documentation file (SKILL.md) covering project architecture, specs, or guidelines.",
+      "tags": [
+        "spec",
+        "documentation"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:.agents/skills/brandkit/SKILL.md",
+      "type": "document",
+      "name": "SKILL.md",
+      "filePath": ".agents/skills/brandkit/SKILL.md",
+      "summary": "Documentation file (SKILL.md) covering project architecture, specs, or guidelines.",
+      "tags": [
+        "spec",
+        "documentation"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:.agents/skills/design-taste-frontend-v1/SKILL.md",
+      "type": "document",
+      "name": "SKILL.md",
+      "filePath": ".agents/skills/design-taste-frontend-v1/SKILL.md",
+      "summary": "Documentation file (SKILL.md) covering project architecture, specs, or guidelines.",
+      "tags": [
+        "spec",
+        "documentation"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:.agents/skills/design-taste-frontend/SKILL.md",
+      "type": "document",
+      "name": "SKILL.md",
+      "filePath": ".agents/skills/design-taste-frontend/SKILL.md",
+      "summary": "Documentation file (SKILL.md) covering project architecture, specs, or guidelines.",
+      "tags": [
+        "spec",
+        "documentation"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:.agents/skills/full-output-enforcement/SKILL.md",
+      "type": "document",
+      "name": "SKILL.md",
+      "filePath": ".agents/skills/full-output-enforcement/SKILL.md",
+      "summary": "Documentation file (SKILL.md) covering project architecture, specs, or guidelines.",
+      "tags": [
+        "spec",
+        "documentation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:.agents/skills/gpt-taste/SKILL.md",
+      "type": "document",
+      "name": "SKILL.md",
+      "filePath": ".agents/skills/gpt-taste/SKILL.md",
+      "summary": "Documentation file (SKILL.md) covering project architecture, specs, or guidelines.",
+      "tags": [
+        "spec",
+        "documentation"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:.agents/skills/high-end-visual-design/SKILL.md",
+      "type": "document",
+      "name": "SKILL.md",
+      "filePath": ".agents/skills/high-end-visual-design/SKILL.md",
+      "summary": "Documentation file (SKILL.md) covering project architecture, specs, or guidelines.",
+      "tags": [
+        "spec",
+        "documentation"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:.agents/skills/image-to-code/SKILL.md",
+      "type": "document",
+      "name": "SKILL.md",
+      "filePath": ".agents/skills/image-to-code/SKILL.md",
+      "summary": "Documentation file (SKILL.md) covering project architecture, specs, or guidelines.",
+      "tags": [
+        "spec",
+        "documentation"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:.agents/skills/imagegen-frontend-mobile/SKILL.md",
+      "type": "document",
+      "name": "SKILL.md",
+      "filePath": ".agents/skills/imagegen-frontend-mobile/SKILL.md",
+      "summary": "Documentation file (SKILL.md) covering project architecture, specs, or guidelines.",
+      "tags": [
+        "spec",
+        "documentation"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:.agents/skills/imagegen-frontend-web/SKILL.md",
+      "type": "document",
+      "name": "SKILL.md",
+      "filePath": ".agents/skills/imagegen-frontend-web/SKILL.md",
+      "summary": "Documentation file (SKILL.md) covering project architecture, specs, or guidelines.",
+      "tags": [
+        "spec",
+        "documentation"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:.agents/skills/industrial-brutalist-ui/SKILL.md",
+      "type": "document",
+      "name": "SKILL.md",
+      "filePath": ".agents/skills/industrial-brutalist-ui/SKILL.md",
+      "summary": "Documentation file (SKILL.md) covering project architecture, specs, or guidelines.",
+      "tags": [
+        "spec",
+        "documentation"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:.agents/skills/minimalist-ui/SKILL.md",
+      "type": "document",
+      "name": "SKILL.md",
+      "filePath": ".agents/skills/minimalist-ui/SKILL.md",
+      "summary": "Documentation file (SKILL.md) covering project architecture, specs, or guidelines.",
+      "tags": [
+        "spec",
+        "documentation"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:.agents/skills/redesign-existing-projects/SKILL.md",
+      "type": "document",
+      "name": "SKILL.md",
+      "filePath": ".agents/skills/redesign-existing-projects/SKILL.md",
+      "summary": "Documentation file (SKILL.md) covering project architecture, specs, or guidelines.",
+      "tags": [
+        "spec",
+        "documentation"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:.agents/skills/stitch-design-taste/DESIGN.md",
+      "type": "document",
+      "name": "DESIGN.md",
+      "filePath": ".agents/skills/stitch-design-taste/DESIGN.md",
+      "summary": "Documentation file (DESIGN.md) covering project architecture, specs, or guidelines.",
+      "tags": [
+        "spec",
+        "documentation"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:.agents/skills/stitch-design-taste/SKILL.md",
+      "type": "document",
+      "name": "SKILL.md",
+      "filePath": ".agents/skills/stitch-design-taste/SKILL.md",
+      "summary": "Documentation file (SKILL.md) covering project architecture, specs, or guidelines.",
+      "tags": [
+        "spec",
+        "documentation"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:.github/agents/independent-verification-auditor.agent.md",
+      "type": "document",
+      "name": "independent-verification-auditor.agent.md",
+      "filePath": ".github/agents/independent-verification-auditor.agent.md",
+      "summary": "Documentation file (independent-verification-auditor.agent.md) covering project architecture, specs, or guidelines.",
+      "tags": [
+        "spec",
+        "documentation"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:.github/rules/respon.md",
+      "type": "document",
+      "name": "respon.md",
+      "filePath": ".github/rules/respon.md",
+      "summary": "Documentation file (respon.md) covering project architecture, specs, or guidelines.",
+      "tags": [
+        "spec",
+        "documentation"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:.github/skills/thesis-sentinel/scripts/health_check.py",
+      "type": "file",
+      "name": "health_check.py",
+      "filePath": ".github/skills/thesis-sentinel/scripts/health_check.py",
+      "summary": "Source module (health_check.py) implementing 1 functions (91 lines).",
+      "tags": [
+        "code"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:.github/skills/thesis-sentinel/scripts/health_check.py:run_health_check",
+      "type": "function",
+      "name": "run_health_check",
+      "filePath": ".github/skills/thesis-sentinel/scripts/health_check.py",
+      "lineRange": [
+        16,
+        88
+      ],
+      "summary": "Function run_health_check defined in health_check.py.",
+      "tags": [
+        "function",
+        "code"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:.github/skills/thesis-sentinel/SKILL.md",
+      "type": "document",
+      "name": "SKILL.md",
+      "filePath": ".github/skills/thesis-sentinel/SKILL.md",
+      "summary": "Documentation file (SKILL.md) covering project architecture, specs, or guidelines.",
+      "tags": [
+        "spec",
+        "documentation"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "config:.kiro/settings/lsp.json",
+      "type": "config",
+      "name": "lsp.json",
+      "filePath": ".kiro/settings/lsp.json",
+      "summary": "Configuration file (lsp.json) specifying project settings, environment, or build properties.",
+      "tags": [
+        "configuration",
+        "build-system"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:.ua/.understandignore",
+      "type": "file",
+      "name": ".understandignore",
+      "filePath": ".ua/.understandignore",
+      "summary": "Source module (.understandignore) implementing helper logic (8 lines).",
+      "tags": [
+        "code"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:.ua/intermediate/scan-result.json",
+      "type": "config",
+      "name": "scan-result.json",
+      "filePath": ".ua/intermediate/scan-result.json",
+      "summary": "Configuration file (scan-result.json) specifying project settings, environment, or build properties.",
+      "tags": [
+        "configuration",
+        "build-system"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:.understand-anything/.understandignore",
+      "type": "file",
+      "name": ".understandignore",
+      "filePath": ".understand-anything/.understandignore",
+      "summary": "Source module (.understandignore) implementing helper logic (37 lines).",
+      "tags": [
+        "code"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:.agent/skills/thesis-sentinel/scripts/health_check.py",
+      "target": "function:.agent/skills/thesis-sentinel/scripts/health_check.py:run_health_check",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:.github/skills/thesis-sentinel/scripts/health_check.py",
+      "target": "function:.github/skills/thesis-sentinel/scripts/health_check.py:run_health_check",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    }
+  ]
+}

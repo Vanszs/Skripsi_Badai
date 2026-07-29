@@ -1,0 +1,2216 @@
+{
+  "nodes": [
+    {
+      "id": "file:core/scripts/eval_rain_robust.py",
+      "type": "file",
+      "name": "eval_rain_robust.py",
+      "filePath": "core/scripts/eval_rain_robust.py",
+      "summary": "Source module (eval_rain_robust.py) implementing 9 functions, 1 classes (373 lines).",
+      "tags": [
+        "code",
+        "metrics",
+        "evaluation"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:core/scripts/eval_rain_robust.py:_seed_everything",
+      "type": "function",
+      "name": "_seed_everything",
+      "filePath": "core/scripts/eval_rain_robust.py",
+      "lineRange": [
+        59,
+        63
+      ],
+      "summary": "Function _seed_everything defined in eval_rain_robust.py.",
+      "tags": [
+        "function",
+        "code",
+        "metrics",
+        "evaluation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:core/scripts/eval_rain_robust.py:_corr",
+      "type": "function",
+      "name": "_corr",
+      "filePath": "core/scripts/eval_rain_robust.py",
+      "lineRange": [
+        66,
+        74
+      ],
+      "summary": "Function _corr defined in eval_rain_robust.py.",
+      "tags": [
+        "function",
+        "code",
+        "metrics",
+        "evaluation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:core/scripts/eval_rain_robust.py:_event_metrics",
+      "type": "function",
+      "name": "_event_metrics",
+      "filePath": "core/scripts/eval_rain_robust.py",
+      "lineRange": [
+        77,
+        90
+      ],
+      "summary": "Function _event_metrics defined in eval_rain_robust.py.",
+      "tags": [
+        "function",
+        "code",
+        "metrics",
+        "evaluation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:core/scripts/eval_rain_robust.py:_pick_week_windows",
+      "type": "function",
+      "name": "_pick_week_windows",
+      "filePath": "core/scripts/eval_rain_robust.py",
+      "lineRange": [
+        93,
+        114
+      ],
+      "summary": "Function _pick_week_windows defined in eval_rain_robust.py.",
+      "tags": [
+        "function",
+        "code",
+        "metrics",
+        "evaluation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:core/scripts/eval_rain_robust.py:_build_test_frames",
+      "type": "function",
+      "name": "_build_test_frames",
+      "filePath": "core/scripts/eval_rain_robust.py",
+      "lineRange": [
+        117,
+        153
+      ],
+      "summary": "Function _build_test_frames defined in eval_rain_robust.py.",
+      "tags": [
+        "function",
+        "code",
+        "metrics",
+        "evaluation"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:core/scripts/eval_rain_robust.py:_get_per_node_sequence",
+      "type": "function",
+      "name": "_get_per_node_sequence",
+      "filePath": "core/scripts/eval_rain_robust.py",
+      "lineRange": [
+        156,
+        169
+      ],
+      "summary": "Function _get_per_node_sequence defined in eval_rain_robust.py.",
+      "tags": [
+        "function",
+        "code",
+        "metrics",
+        "evaluation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:core/scripts/eval_rain_robust.py:_load_mlp",
+      "type": "function",
+      "name": "_load_mlp",
+      "filePath": "core/scripts/eval_rain_robust.py",
+      "lineRange": [
+        172,
+        183
+      ],
+      "summary": "Function _load_mlp defined in eval_rain_robust.py.",
+      "tags": [
+        "function",
+        "code",
+        "metrics",
+        "evaluation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:core/scripts/eval_rain_robust.py:run_crosscheck",
+      "type": "function",
+      "name": "run_crosscheck",
+      "filePath": "core/scripts/eval_rain_robust.py",
+      "lineRange": [
+        186,
+        354
+      ],
+      "summary": "Function run_crosscheck defined in eval_rain_robust.py.",
+      "tags": [
+        "function",
+        "code",
+        "metrics",
+        "evaluation"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:core/scripts/eval_rain_robust.py:parse_args",
+      "type": "function",
+      "name": "parse_args",
+      "filePath": "core/scripts/eval_rain_robust.py",
+      "lineRange": [
+        357,
+        363
+      ],
+      "summary": "Function parse_args defined in eval_rain_robust.py.",
+      "tags": [
+        "function",
+        "code",
+        "metrics",
+        "evaluation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:core/scripts/eval_rain_robust.py:WeekWindow",
+      "type": "class",
+      "name": "WeekWindow",
+      "filePath": "core/scripts/eval_rain_robust.py",
+      "lineRange": [
+        52,
+        56
+      ],
+      "summary": "Class WeekWindow defined in eval_rain_robust.py.",
+      "tags": [
+        "class",
+        "code",
+        "metrics",
+        "evaluation"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:core/scripts/run_eval_final.py",
+      "type": "file",
+      "name": "run_eval_final.py",
+      "filePath": "core/scripts/run_eval_final.py",
+      "summary": "Source module (run_eval_final.py) implementing 15 functions (628 lines).",
+      "tags": [
+        "code"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:core/scripts/run_eval_final.py:load_test_data",
+      "type": "function",
+      "name": "load_test_data",
+      "filePath": "core/scripts/run_eval_final.py",
+      "lineRange": [
+        60,
+        99
+      ],
+      "summary": "Function load_test_data defined in run_eval_final.py.",
+      "tags": [
+        "function",
+        "code"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:core/scripts/run_eval_final.py:get_per_node_sequence",
+      "type": "function",
+      "name": "get_per_node_sequence",
+      "filePath": "core/scripts/run_eval_final.py",
+      "lineRange": [
+        102,
+        119
+      ],
+      "summary": "Function get_per_node_sequence defined in run_eval_final.py.",
+      "tags": [
+        "function",
+        "code"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:core/scripts/run_eval_final.py:_eval_indices",
+      "type": "function",
+      "name": "_eval_indices",
+      "filePath": "core/scripts/run_eval_final.py",
+      "lineRange": [
+        122,
+        130
+      ],
+      "summary": "Function _eval_indices defined in run_eval_final.py.",
+      "tags": [
+        "function",
+        "code"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:core/scripts/run_eval_final.py:run_persistence",
+      "type": "function",
+      "name": "run_persistence",
+      "filePath": "core/scripts/run_eval_final.py",
+      "lineRange": [
+        133,
+        144
+      ],
+      "summary": "Function run_persistence defined in run_eval_final.py.",
+      "tags": [
+        "function",
+        "code"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:core/scripts/run_eval_final.py:run_mlp_baseline",
+      "type": "function",
+      "name": "run_mlp_baseline",
+      "filePath": "core/scripts/run_eval_final.py",
+      "lineRange": [
+        147,
+        183
+      ],
+      "summary": "Function run_mlp_baseline defined in run_eval_final.py.",
+      "tags": [
+        "function",
+        "code"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:core/scripts/run_eval_final.py:run_diffusion_scenario",
+      "type": "function",
+      "name": "run_diffusion_scenario",
+      "filePath": "core/scripts/run_eval_final.py",
+      "lineRange": [
+        186,
+        283
+      ],
+      "summary": "Function run_diffusion_scenario defined in run_eval_final.py.",
+      "tags": [
+        "function",
+        "code"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:core/scripts/run_eval_final.py:compute_scenario_metrics",
+      "type": "function",
+      "name": "compute_scenario_metrics",
+      "filePath": "core/scripts/run_eval_final.py",
+      "lineRange": [
+        286,
+        305
+      ],
+      "summary": "Function compute_scenario_metrics defined in run_eval_final.py.",
+      "tags": [
+        "function",
+        "code"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:core/scripts/run_eval_final.py:plot_bar_chart",
+      "type": "function",
+      "name": "plot_bar_chart",
+      "filePath": "core/scripts/run_eval_final.py",
+      "lineRange": [
+        308,
+        324
+      ],
+      "summary": "Function plot_bar_chart defined in run_eval_final.py.",
+      "tags": [
+        "function",
+        "code"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:core/scripts/run_eval_final.py:plot_scatter",
+      "type": "function",
+      "name": "plot_scatter",
+      "filePath": "core/scripts/run_eval_final.py",
+      "lineRange": [
+        327,
+        344
+      ],
+      "summary": "Function plot_scatter defined in run_eval_final.py.",
+      "tags": [
+        "function",
+        "code"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:core/scripts/run_eval_final.py:plot_time_series",
+      "type": "function",
+      "name": "plot_time_series",
+      "filePath": "core/scripts/run_eval_final.py",
+      "lineRange": [
+        347,
+        368
+      ],
+      "summary": "Function plot_time_series defined in run_eval_final.py.",
+      "tags": [
+        "function",
+        "code"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:core/scripts/run_eval_final.py:plot_reliability",
+      "type": "function",
+      "name": "plot_reliability",
+      "filePath": "core/scripts/run_eval_final.py",
+      "lineRange": [
+        371,
+        397
+      ],
+      "summary": "Function plot_reliability defined in run_eval_final.py.",
+      "tags": [
+        "function",
+        "code"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:core/scripts/run_eval_final.py:plot_crps_comparison",
+      "type": "function",
+      "name": "plot_crps_comparison",
+      "filePath": "core/scripts/run_eval_final.py",
+      "lineRange": [
+        400,
+        413
+      ],
+      "summary": "Function plot_crps_comparison defined in run_eval_final.py.",
+      "tags": [
+        "function",
+        "code"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:core/scripts/run_eval_final.py:plot_ablation",
+      "type": "function",
+      "name": "plot_ablation",
+      "filePath": "core/scripts/run_eval_final.py",
+      "lineRange": [
+        416,
+        433
+      ],
+      "summary": "Function plot_ablation defined in run_eval_final.py.",
+      "tags": [
+        "function",
+        "code"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:core/scripts/run_eval_final.py:main",
+      "type": "function",
+      "name": "main",
+      "filePath": "core/scripts/run_eval_final.py",
+      "lineRange": [
+        436,
+        603
+      ],
+      "summary": "Function main defined in run_eval_final.py.",
+      "tags": [
+        "function",
+        "code"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:core/scripts/run_eval_final.py:parse_args",
+      "type": "function",
+      "name": "parse_args",
+      "filePath": "core/scripts/run_eval_final.py",
+      "lineRange": [
+        606,
+        616
+      ],
+      "summary": "Function parse_args defined in run_eval_final.py.",
+      "tags": [
+        "function",
+        "code"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:core/src/config.py",
+      "type": "file",
+      "name": "config.py",
+      "filePath": "core/src/config.py",
+      "summary": "Source module (config.py) implementing 8 functions (224 lines).",
+      "tags": [
+        "code"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:core/src/config.py:harmonize_weather_columns",
+      "type": "function",
+      "name": "harmonize_weather_columns",
+      "filePath": "core/src/config.py",
+      "lineRange": [
+        115,
+        122
+      ],
+      "summary": "Function harmonize_weather_columns defined in config.py.",
+      "tags": [
+        "function",
+        "code"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:core/src/config.py:validate_feature_schema",
+      "type": "function",
+      "name": "validate_feature_schema",
+      "filePath": "core/src/config.py",
+      "lineRange": [
+        125,
+        133
+      ],
+      "summary": "Function validate_feature_schema defined in config.py.",
+      "tags": [
+        "function",
+        "code"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:core/src/config.py:validate_feature_values",
+      "type": "function",
+      "name": "validate_feature_values",
+      "filePath": "core/src/config.py",
+      "lineRange": [
+        136,
+        143
+      ],
+      "summary": "Function validate_feature_values defined in config.py.",
+      "tags": [
+        "function",
+        "code"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:core/src/config.py:get_node_dataframe",
+      "type": "function",
+      "name": "get_node_dataframe",
+      "filePath": "core/src/config.py",
+      "lineRange": [
+        146,
+        150
+      ],
+      "summary": "Function get_node_dataframe defined in config.py.",
+      "tags": [
+        "function",
+        "code"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:core/src/config.py:get_node_index_map",
+      "type": "function",
+      "name": "get_node_index_map",
+      "filePath": "core/src/config.py",
+      "lineRange": [
+        153,
+        158
+      ],
+      "summary": "Function get_node_index_map defined in config.py.",
+      "tags": [
+        "function",
+        "code"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:core/src/config.py:build_star_edge_index",
+      "type": "function",
+      "name": "build_star_edge_index",
+      "filePath": "core/src/config.py",
+      "lineRange": [
+        161,
+        177
+      ],
+      "summary": "Function build_star_edge_index defined in config.py.",
+      "tags": [
+        "function",
+        "code"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:core/src/config.py:build_star_edge_attr",
+      "type": "function",
+      "name": "build_star_edge_attr",
+      "filePath": "core/src/config.py",
+      "lineRange": [
+        180,
+        205
+      ],
+      "summary": "Function build_star_edge_attr defined in config.py.",
+      "tags": [
+        "function",
+        "code"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:core/src/config.py:get_checkpoint_node_metadata",
+      "type": "function",
+      "name": "get_checkpoint_node_metadata",
+      "filePath": "core/src/config.py",
+      "lineRange": [
+        208,
+        223
+      ],
+      "summary": "Function get_checkpoint_node_metadata defined in config.py.",
+      "tags": [
+        "function",
+        "code"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:core/src/data/ingest.py",
+      "type": "file",
+      "name": "ingest.py",
+      "filePath": "core/src/data/ingest.py",
+      "summary": "Source module (ingest.py) implementing 8 functions (270 lines).",
+      "tags": [
+        "code",
+        "loader",
+        "data-pipeline"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:core/src/data/ingest.py:get_node_definitions_df",
+      "type": "function",
+      "name": "get_node_definitions_df",
+      "filePath": "core/src/data/ingest.py",
+      "lineRange": [
+        30,
+        34
+      ],
+      "summary": "Function get_node_definitions_df defined in ingest.py.",
+      "tags": [
+        "function",
+        "code",
+        "loader",
+        "data-pipeline"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:core/src/data/ingest.py:fetch_elevation",
+      "type": "function",
+      "name": "fetch_elevation",
+      "filePath": "core/src/data/ingest.py",
+      "lineRange": [
+        37,
+        49
+      ],
+      "summary": "Function fetch_elevation defined in ingest.py.",
+      "tags": [
+        "function",
+        "code",
+        "loader",
+        "data-pipeline"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:core/src/data/ingest.py:derive_land_sea_mask",
+      "type": "function",
+      "name": "derive_land_sea_mask",
+      "filePath": "core/src/data/ingest.py",
+      "lineRange": [
+        52,
+        53
+      ],
+      "summary": "Function derive_land_sea_mask defined in ingest.py.",
+      "tags": [
+        "function",
+        "code",
+        "loader",
+        "data-pipeline"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:core/src/data/ingest.py:_extract_hourly_response",
+      "type": "function",
+      "name": "_extract_hourly_response",
+      "filePath": "core/src/data/ingest.py",
+      "lineRange": [
+        56,
+        76
+      ],
+      "summary": "Function _extract_hourly_response defined in ingest.py.",
+      "tags": [
+        "function",
+        "code",
+        "loader",
+        "data-pipeline"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:core/src/data/ingest.py:_validate_grid_identity",
+      "type": "function",
+      "name": "_validate_grid_identity",
+      "filePath": "core/src/data/ingest.py",
+      "lineRange": [
+        79,
+        127
+      ],
+      "summary": "Function _validate_grid_identity defined in ingest.py.",
+      "tags": [
+        "function",
+        "code",
+        "loader",
+        "data-pipeline"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:core/src/data/ingest.py:_write_grid_validation_report",
+      "type": "function",
+      "name": "_write_grid_validation_report",
+      "filePath": "core/src/data/ingest.py",
+      "lineRange": [
+        130,
+        146
+      ],
+      "summary": "Function _write_grid_validation_report defined in ingest.py.",
+      "tags": [
+        "function",
+        "code",
+        "loader",
+        "data-pipeline"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:core/src/data/ingest.py:fetch_era5_data",
+      "type": "function",
+      "name": "fetch_era5_data",
+      "filePath": "core/src/data/ingest.py",
+      "lineRange": [
+        149,
+        250
+      ],
+      "summary": "Function fetch_era5_data defined in ingest.py.",
+      "tags": [
+        "function",
+        "code",
+        "loader",
+        "data-pipeline"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:core/src/data/ingest.py:get_node_metadata",
+      "type": "function",
+      "name": "get_node_metadata",
+      "filePath": "core/src/data/ingest.py",
+      "lineRange": [
+        253,
+        266
+      ],
+      "summary": "Function get_node_metadata defined in ingest.py.",
+      "tags": [
+        "function",
+        "code",
+        "loader",
+        "data-pipeline"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:core/src/data/temporal_loader.py",
+      "type": "file",
+      "name": "temporal_loader.py",
+      "filePath": "core/src/data/temporal_loader.py",
+      "summary": "Source module (temporal_loader.py) implementing 3 functions, 1 classes (317 lines).",
+      "tags": [
+        "code",
+        "loader",
+        "data-pipeline"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:core/src/data/temporal_loader.py:collate_temporal_graphs",
+      "type": "function",
+      "name": "collate_temporal_graphs",
+      "filePath": "core/src/data/temporal_loader.py",
+      "lineRange": [
+        212,
+        235
+      ],
+      "summary": "Function collate_temporal_graphs defined in temporal_loader.py.",
+      "tags": [
+        "function",
+        "code",
+        "loader",
+        "data-pipeline"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:core/src/data/temporal_loader.py:create_temporal_dataloader",
+      "type": "function",
+      "name": "create_temporal_dataloader",
+      "filePath": "core/src/data/temporal_loader.py",
+      "lineRange": [
+        238,
+        260
+      ],
+      "summary": "Function create_temporal_dataloader defined in temporal_loader.py.",
+      "tags": [
+        "function",
+        "code",
+        "loader",
+        "data-pipeline"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:core/src/data/temporal_loader.py:crosscheck_temporal_loader",
+      "type": "function",
+      "name": "crosscheck_temporal_loader",
+      "filePath": "core/src/data/temporal_loader.py",
+      "lineRange": [
+        263,
+        313
+      ],
+      "summary": "Function crosscheck_temporal_loader defined in temporal_loader.py.",
+      "tags": [
+        "function",
+        "code",
+        "loader",
+        "data-pipeline"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:core/src/data/temporal_loader.py:TemporalGraphDataset",
+      "type": "class",
+      "name": "TemporalGraphDataset",
+      "filePath": "core/src/data/temporal_loader.py",
+      "lineRange": [
+        25,
+        209
+      ],
+      "summary": "Class TemporalGraphDataset defined in temporal_loader.py.",
+      "tags": [
+        "class",
+        "code",
+        "loader",
+        "data-pipeline"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:core/src/evaluation/probabilistic_metrics.py",
+      "type": "file",
+      "name": "probabilistic_metrics.py",
+      "filePath": "core/src/evaluation/probabilistic_metrics.py",
+      "summary": "Source module (probabilistic_metrics.py) implementing 10 functions (344 lines).",
+      "tags": [
+        "code",
+        "metrics",
+        "evaluation"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:core/src/evaluation/probabilistic_metrics.py:compute_rmse",
+      "type": "function",
+      "name": "compute_rmse",
+      "filePath": "core/src/evaluation/probabilistic_metrics.py",
+      "lineRange": [
+        29,
+        34
+      ],
+      "summary": "Function compute_rmse defined in probabilistic_metrics.py.",
+      "tags": [
+        "function",
+        "code",
+        "metrics",
+        "evaluation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:core/src/evaluation/probabilistic_metrics.py:compute_mae",
+      "type": "function",
+      "name": "compute_mae",
+      "filePath": "core/src/evaluation/probabilistic_metrics.py",
+      "lineRange": [
+        37,
+        42
+      ],
+      "summary": "Function compute_mae defined in probabilistic_metrics.py.",
+      "tags": [
+        "function",
+        "code",
+        "metrics",
+        "evaluation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:core/src/evaluation/probabilistic_metrics.py:compute_correlation",
+      "type": "function",
+      "name": "compute_correlation",
+      "filePath": "core/src/evaluation/probabilistic_metrics.py",
+      "lineRange": [
+        45,
+        53
+      ],
+      "summary": "Function compute_correlation defined in probabilistic_metrics.py.",
+      "tags": [
+        "function",
+        "code",
+        "metrics",
+        "evaluation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:core/src/evaluation/probabilistic_metrics.py:compute_crps",
+      "type": "function",
+      "name": "compute_crps",
+      "filePath": "core/src/evaluation/probabilistic_metrics.py",
+      "lineRange": [
+        60,
+        112
+      ],
+      "summary": "Function compute_crps defined in probabilistic_metrics.py.",
+      "tags": [
+        "function",
+        "code",
+        "metrics",
+        "evaluation"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:core/src/evaluation/probabilistic_metrics.py:compute_brier_score",
+      "type": "function",
+      "name": "compute_brier_score",
+      "filePath": "core/src/evaluation/probabilistic_metrics.py",
+      "lineRange": [
+        115,
+        150
+      ],
+      "summary": "Function compute_brier_score defined in probabilistic_metrics.py.",
+      "tags": [
+        "function",
+        "code",
+        "metrics",
+        "evaluation"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:core/src/evaluation/probabilistic_metrics.py:compute_pod",
+      "type": "function",
+      "name": "compute_pod",
+      "filePath": "core/src/evaluation/probabilistic_metrics.py",
+      "lineRange": [
+        153,
+        186
+      ],
+      "summary": "Function compute_pod defined in probabilistic_metrics.py.",
+      "tags": [
+        "function",
+        "code",
+        "metrics",
+        "evaluation"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:core/src/evaluation/probabilistic_metrics.py:compute_far",
+      "type": "function",
+      "name": "compute_far",
+      "filePath": "core/src/evaluation/probabilistic_metrics.py",
+      "lineRange": [
+        189,
+        222
+      ],
+      "summary": "Function compute_far defined in probabilistic_metrics.py.",
+      "tags": [
+        "function",
+        "code",
+        "metrics",
+        "evaluation"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:core/src/evaluation/probabilistic_metrics.py:compute_csi",
+      "type": "function",
+      "name": "compute_csi",
+      "filePath": "core/src/evaluation/probabilistic_metrics.py",
+      "lineRange": [
+        225,
+        261
+      ],
+      "summary": "Function compute_csi defined in probabilistic_metrics.py.",
+      "tags": [
+        "function",
+        "code",
+        "metrics",
+        "evaluation"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:core/src/evaluation/probabilistic_metrics.py:compute_all_metrics",
+      "type": "function",
+      "name": "compute_all_metrics",
+      "filePath": "core/src/evaluation/probabilistic_metrics.py",
+      "lineRange": [
+        268,
+        303
+      ],
+      "summary": "Function compute_all_metrics defined in probabilistic_metrics.py.",
+      "tags": [
+        "function",
+        "code",
+        "metrics",
+        "evaluation"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:core/src/evaluation/probabilistic_metrics.py:compute_reliability_data",
+      "type": "function",
+      "name": "compute_reliability_data",
+      "filePath": "core/src/evaluation/probabilistic_metrics.py",
+      "lineRange": [
+        306,
+        344
+      ],
+      "summary": "Function compute_reliability_data defined in probabilistic_metrics.py.",
+      "tags": [
+        "function",
+        "code",
+        "metrics",
+        "evaluation"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:core/src/models/diffusion.py",
+      "type": "file",
+      "name": "diffusion.py",
+      "filePath": "core/src/models/diffusion.py",
+      "summary": "Source module (diffusion.py) implementing 3 classes (271 lines).",
+      "tags": [
+        "code",
+        "deep-learning",
+        "architecture"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:core/src/models/diffusion.py:SinusoidalPositionEmbeddings",
+      "type": "class",
+      "name": "SinusoidalPositionEmbeddings",
+      "filePath": "core/src/models/diffusion.py",
+      "lineRange": [
+        8,
+        20
+      ],
+      "summary": "Class SinusoidalPositionEmbeddings defined in diffusion.py.",
+      "tags": [
+        "class",
+        "code",
+        "deep-learning",
+        "architecture"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:core/src/models/diffusion.py:ConditionalDiffusionModel",
+      "type": "class",
+      "name": "ConditionalDiffusionModel",
+      "filePath": "core/src/models/diffusion.py",
+      "lineRange": [
+        22,
+        159
+      ],
+      "summary": "Class ConditionalDiffusionModel defined in diffusion.py.",
+      "tags": [
+        "class",
+        "code",
+        "deep-learning",
+        "architecture"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:core/src/models/diffusion.py:RainForecaster",
+      "type": "class",
+      "name": "RainForecaster",
+      "filePath": "core/src/models/diffusion.py",
+      "lineRange": [
+        161,
+        270
+      ],
+      "summary": "Class RainForecaster defined in diffusion.py.",
+      "tags": [
+        "class",
+        "code",
+        "deep-learning",
+        "architecture"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:core/src/models/mlp_baseline.py",
+      "type": "file",
+      "name": "mlp_baseline.py",
+      "filePath": "core/src/models/mlp_baseline.py",
+      "summary": "Source module (mlp_baseline.py) implementing 1 classes (61 lines).",
+      "tags": [
+        "code",
+        "deep-learning",
+        "architecture"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:core/src/models/mlp_baseline.py:MLPBaseline",
+      "type": "class",
+      "name": "MLPBaseline",
+      "filePath": "core/src/models/mlp_baseline.py",
+      "lineRange": [
+        22,
+        61
+      ],
+      "summary": "Class MLPBaseline defined in mlp_baseline.py.",
+      "tags": [
+        "class",
+        "code",
+        "deep-learning",
+        "architecture"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:core/src/train.py",
+      "type": "file",
+      "name": "train.py",
+      "filePath": "core/src/train.py",
+      "summary": "Source module (train.py) implementing 9 functions (922 lines).",
+      "tags": [
+        "code",
+        "entry-point",
+        "training"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:core/src/train.py:temporal_split",
+      "type": "function",
+      "name": "temporal_split",
+      "filePath": "core/src/train.py",
+      "lineRange": [
+        49,
+        60
+      ],
+      "summary": "Function temporal_split defined in train.py.",
+      "tags": [
+        "function",
+        "code",
+        "entry-point",
+        "training"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:core/src/train.py:compute_stats_from_training",
+      "type": "function",
+      "name": "compute_stats_from_training",
+      "filePath": "core/src/train.py",
+      "lineRange": [
+        63,
+        113
+      ],
+      "summary": "Function compute_stats_from_training defined in train.py.",
+      "tags": [
+        "function",
+        "code",
+        "entry-point",
+        "training"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:core/src/train.py:_build_precomputed_retrieval",
+      "type": "function",
+      "name": "_build_precomputed_retrieval",
+      "filePath": "core/src/train.py",
+      "lineRange": [
+        116,
+        194
+      ],
+      "summary": "Function _build_precomputed_retrieval defined in train.py.",
+      "tags": [
+        "function",
+        "code",
+        "entry-point",
+        "training"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:core/src/train.py:_tensor_corrcoef",
+      "type": "function",
+      "name": "_tensor_corrcoef",
+      "filePath": "core/src/train.py",
+      "lineRange": [
+        197,
+        211
+      ],
+      "summary": "Function _tensor_corrcoef defined in train.py.",
+      "tags": [
+        "function",
+        "code",
+        "entry-point",
+        "training"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:core/src/train.py:_extract_precip_mm_from_normalized_targets",
+      "type": "function",
+      "name": "_extract_precip_mm_from_normalized_targets",
+      "filePath": "core/src/train.py",
+      "lineRange": [
+        214,
+        225
+      ],
+      "summary": "Function _extract_precip_mm_from_normalized_targets defined in train.py.",
+      "tags": [
+        "function",
+        "code",
+        "entry-point",
+        "training"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:core/src/train.py:_binary_event_metrics",
+      "type": "function",
+      "name": "_binary_event_metrics",
+      "filePath": "core/src/train.py",
+      "lineRange": [
+        228,
+        237
+      ],
+      "summary": "Function _binary_event_metrics defined in train.py.",
+      "tags": [
+        "function",
+        "code",
+        "entry-point",
+        "training"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:core/src/train.py:_calibrate_wet_probability_threshold",
+      "type": "function",
+      "name": "_calibrate_wet_probability_threshold",
+      "filePath": "core/src/train.py",
+      "lineRange": [
+        240,
+        252
+      ],
+      "summary": "Function _calibrate_wet_probability_threshold defined in train.py.",
+      "tags": [
+        "function",
+        "code",
+        "entry-point",
+        "training"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:core/src/train.py:train_pipeline",
+      "type": "function",
+      "name": "train_pipeline",
+      "filePath": "core/src/train.py",
+      "lineRange": [
+        255,
+        855
+      ],
+      "summary": "Function train_pipeline defined in train.py.",
+      "tags": [
+        "function",
+        "code",
+        "entry-point",
+        "training"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:core/src/train.py:_parse_args",
+      "type": "function",
+      "name": "_parse_args",
+      "filePath": "core/src/train.py",
+      "lineRange": [
+        858,
+        890
+      ],
+      "summary": "Function _parse_args defined in train.py.",
+      "tags": [
+        "function",
+        "code",
+        "entry-point",
+        "training"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:core/src/train_baseline.py",
+      "type": "file",
+      "name": "train_baseline.py",
+      "filePath": "core/src/train_baseline.py",
+      "summary": "Source module (train_baseline.py) implementing 2 functions, 1 classes (301 lines).",
+      "tags": [
+        "code",
+        "entry-point",
+        "training"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:core/src/train_baseline.py:train_mlp_baseline",
+      "type": "function",
+      "name": "train_mlp_baseline",
+      "filePath": "core/src/train_baseline.py",
+      "lineRange": [
+        88,
+        272
+      ],
+      "summary": "Function train_mlp_baseline defined in train_baseline.py.",
+      "tags": [
+        "function",
+        "code",
+        "entry-point",
+        "training"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:core/src/train_baseline.py:_parse_args",
+      "type": "function",
+      "name": "_parse_args",
+      "filePath": "core/src/train_baseline.py",
+      "lineRange": [
+        275,
+        286
+      ],
+      "summary": "Function _parse_args defined in train_baseline.py.",
+      "tags": [
+        "function",
+        "code",
+        "entry-point",
+        "training"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:core/src/train_baseline.py:MLPDataset",
+      "type": "class",
+      "name": "MLPDataset",
+      "filePath": "core/src/train_baseline.py",
+      "lineRange": [
+        43,
+        85
+      ],
+      "summary": "Class MLPDataset defined in train_baseline.py.",
+      "tags": [
+        "class",
+        "code",
+        "entry-point",
+        "training"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:core/tests/test_config_topology.py",
+      "type": "file",
+      "name": "test_config_topology.py",
+      "filePath": "core/tests/test_config_topology.py",
+      "summary": "Source module (test_config_topology.py) implementing 2 classes (53 lines).",
+      "tags": [
+        "code",
+        "test"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:core/tests/test_config_topology.py:ConfigTopologyTest",
+      "type": "class",
+      "name": "ConfigTopologyTest",
+      "filePath": "core/tests/test_config_topology.py",
+      "lineRange": [
+        17,
+        35
+      ],
+      "summary": "Class ConfigTopologyTest defined in test_config_topology.py.",
+      "tags": [
+        "class",
+        "code",
+        "test"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:core/tests/test_config_topology.py:CRPSNumericTest",
+      "type": "class",
+      "name": "CRPSNumericTest",
+      "filePath": "core/tests/test_config_topology.py",
+      "lineRange": [
+        38,
+        53
+      ],
+      "summary": "Class CRPSNumericTest defined in test_config_topology.py.",
+      "tags": [
+        "class",
+        "code",
+        "test"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:core/tests/test_loader_contract.py",
+      "type": "file",
+      "name": "test_loader_contract.py",
+      "filePath": "core/tests/test_loader_contract.py",
+      "summary": "Source module (test_loader_contract.py) implementing 2 functions, 1 classes (50 lines).",
+      "tags": [
+        "code",
+        "loader",
+        "data-pipeline",
+        "test"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:core/tests/test_loader_contract.py:_make_rows",
+      "type": "function",
+      "name": "_make_rows",
+      "filePath": "core/tests/test_loader_contract.py",
+      "lineRange": [
+        8,
+        22
+      ],
+      "summary": "Function _make_rows defined in test_loader_contract.py.",
+      "tags": [
+        "function",
+        "code",
+        "loader",
+        "data-pipeline",
+        "test"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:core/tests/test_loader_contract.py:_build_df",
+      "type": "function",
+      "name": "_build_df",
+      "filePath": "core/tests/test_loader_contract.py",
+      "lineRange": [
+        25,
+        33
+      ],
+      "summary": "Function _build_df defined in test_loader_contract.py.",
+      "tags": [
+        "function",
+        "code",
+        "loader",
+        "data-pipeline",
+        "test"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:core/tests/test_loader_contract.py:LoaderContractTest",
+      "type": "class",
+      "name": "LoaderContractTest",
+      "filePath": "core/tests/test_loader_contract.py",
+      "lineRange": [
+        36,
+        50
+      ],
+      "summary": "Class LoaderContractTest defined in test_loader_contract.py.",
+      "tags": [
+        "class",
+        "code",
+        "loader",
+        "data-pipeline",
+        "test"
+      ],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:core/scripts/eval_rain_robust.py",
+      "target": "function:core/scripts/eval_rain_robust.py:_seed_everything",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/scripts/eval_rain_robust.py",
+      "target": "function:core/scripts/eval_rain_robust.py:_corr",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/scripts/eval_rain_robust.py",
+      "target": "function:core/scripts/eval_rain_robust.py:_event_metrics",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/scripts/eval_rain_robust.py",
+      "target": "function:core/scripts/eval_rain_robust.py:_pick_week_windows",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/scripts/eval_rain_robust.py",
+      "target": "function:core/scripts/eval_rain_robust.py:_build_test_frames",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/scripts/eval_rain_robust.py",
+      "target": "function:core/scripts/eval_rain_robust.py:_get_per_node_sequence",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/scripts/eval_rain_robust.py",
+      "target": "function:core/scripts/eval_rain_robust.py:_load_mlp",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/scripts/eval_rain_robust.py",
+      "target": "function:core/scripts/eval_rain_robust.py:run_crosscheck",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/scripts/eval_rain_robust.py",
+      "target": "function:core/scripts/eval_rain_robust.py:parse_args",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/scripts/eval_rain_robust.py",
+      "target": "class:core/scripts/eval_rain_robust.py:WeekWindow",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/scripts/eval_rain_robust.py",
+      "target": "file:core/src/config.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:core/scripts/eval_rain_robust.py",
+      "target": "file:core/src/data/ingest.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:core/scripts/eval_rain_robust.py",
+      "target": "file:core/src/inference.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:core/scripts/eval_rain_robust.py",
+      "target": "file:core/src/models/mlp_baseline.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:core/scripts/eval_rain_robust.py",
+      "target": "file:core/src/train.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:core/scripts/run_eval_final.py",
+      "target": "function:core/scripts/run_eval_final.py:load_test_data",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/scripts/run_eval_final.py",
+      "target": "function:core/scripts/run_eval_final.py:get_per_node_sequence",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/scripts/run_eval_final.py",
+      "target": "function:core/scripts/run_eval_final.py:_eval_indices",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/scripts/run_eval_final.py",
+      "target": "function:core/scripts/run_eval_final.py:run_persistence",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/scripts/run_eval_final.py",
+      "target": "function:core/scripts/run_eval_final.py:run_mlp_baseline",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/scripts/run_eval_final.py",
+      "target": "function:core/scripts/run_eval_final.py:run_diffusion_scenario",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/scripts/run_eval_final.py",
+      "target": "function:core/scripts/run_eval_final.py:compute_scenario_metrics",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/scripts/run_eval_final.py",
+      "target": "function:core/scripts/run_eval_final.py:plot_bar_chart",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/scripts/run_eval_final.py",
+      "target": "function:core/scripts/run_eval_final.py:plot_scatter",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/scripts/run_eval_final.py",
+      "target": "function:core/scripts/run_eval_final.py:plot_time_series",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/scripts/run_eval_final.py",
+      "target": "function:core/scripts/run_eval_final.py:plot_reliability",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/scripts/run_eval_final.py",
+      "target": "function:core/scripts/run_eval_final.py:plot_crps_comparison",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/scripts/run_eval_final.py",
+      "target": "function:core/scripts/run_eval_final.py:plot_ablation",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/scripts/run_eval_final.py",
+      "target": "function:core/scripts/run_eval_final.py:main",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/scripts/run_eval_final.py",
+      "target": "function:core/scripts/run_eval_final.py:parse_args",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/scripts/run_eval_final.py",
+      "target": "file:core/src/config.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:core/scripts/run_eval_final.py",
+      "target": "file:core/src/data/ingest.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:core/scripts/run_eval_final.py",
+      "target": "file:core/src/evaluation/probabilistic_metrics.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:core/scripts/run_eval_final.py",
+      "target": "file:core/src/inference.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:core/scripts/run_eval_final.py",
+      "target": "file:core/src/models/mlp_baseline.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:core/scripts/run_eval_final.py",
+      "target": "file:core/src/train.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:core/src/config.py",
+      "target": "function:core/src/config.py:harmonize_weather_columns",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/src/config.py",
+      "target": "function:core/src/config.py:validate_feature_schema",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/src/config.py",
+      "target": "function:core/src/config.py:validate_feature_values",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/src/config.py",
+      "target": "function:core/src/config.py:get_node_dataframe",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/src/config.py",
+      "target": "function:core/src/config.py:get_node_index_map",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/src/config.py",
+      "target": "function:core/src/config.py:build_star_edge_index",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/src/config.py",
+      "target": "function:core/src/config.py:build_star_edge_attr",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/src/config.py",
+      "target": "function:core/src/config.py:get_checkpoint_node_metadata",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/src/data/ingest.py",
+      "target": "function:core/src/data/ingest.py:get_node_definitions_df",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/src/data/ingest.py",
+      "target": "function:core/src/data/ingest.py:fetch_elevation",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/src/data/ingest.py",
+      "target": "function:core/src/data/ingest.py:derive_land_sea_mask",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/src/data/ingest.py",
+      "target": "function:core/src/data/ingest.py:_extract_hourly_response",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/src/data/ingest.py",
+      "target": "function:core/src/data/ingest.py:_validate_grid_identity",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/src/data/ingest.py",
+      "target": "function:core/src/data/ingest.py:_write_grid_validation_report",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/src/data/ingest.py",
+      "target": "function:core/src/data/ingest.py:fetch_era5_data",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/src/data/ingest.py",
+      "target": "function:core/src/data/ingest.py:get_node_metadata",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/src/data/ingest.py",
+      "target": "file:core/src/config.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:core/src/data/temporal_loader.py",
+      "target": "function:core/src/data/temporal_loader.py:collate_temporal_graphs",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/src/data/temporal_loader.py",
+      "target": "function:core/src/data/temporal_loader.py:create_temporal_dataloader",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/src/data/temporal_loader.py",
+      "target": "function:core/src/data/temporal_loader.py:crosscheck_temporal_loader",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/src/data/temporal_loader.py",
+      "target": "class:core/src/data/temporal_loader.py:TemporalGraphDataset",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/src/data/temporal_loader.py",
+      "target": "file:core/src/config.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:core/src/evaluation/probabilistic_metrics.py",
+      "target": "function:core/src/evaluation/probabilistic_metrics.py:compute_rmse",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/src/evaluation/probabilistic_metrics.py",
+      "target": "function:core/src/evaluation/probabilistic_metrics.py:compute_mae",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/src/evaluation/probabilistic_metrics.py",
+      "target": "function:core/src/evaluation/probabilistic_metrics.py:compute_correlation",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/src/evaluation/probabilistic_metrics.py",
+      "target": "function:core/src/evaluation/probabilistic_metrics.py:compute_crps",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/src/evaluation/probabilistic_metrics.py",
+      "target": "function:core/src/evaluation/probabilistic_metrics.py:compute_brier_score",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/src/evaluation/probabilistic_metrics.py",
+      "target": "function:core/src/evaluation/probabilistic_metrics.py:compute_pod",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/src/evaluation/probabilistic_metrics.py",
+      "target": "function:core/src/evaluation/probabilistic_metrics.py:compute_far",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/src/evaluation/probabilistic_metrics.py",
+      "target": "function:core/src/evaluation/probabilistic_metrics.py:compute_csi",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/src/evaluation/probabilistic_metrics.py",
+      "target": "function:core/src/evaluation/probabilistic_metrics.py:compute_all_metrics",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/src/evaluation/probabilistic_metrics.py",
+      "target": "function:core/src/evaluation/probabilistic_metrics.py:compute_reliability_data",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/src/models/diffusion.py",
+      "target": "class:core/src/models/diffusion.py:SinusoidalPositionEmbeddings",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/src/models/diffusion.py",
+      "target": "class:core/src/models/diffusion.py:ConditionalDiffusionModel",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/src/models/diffusion.py",
+      "target": "class:core/src/models/diffusion.py:RainForecaster",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/src/models/diffusion.py",
+      "target": "file:core/src/config.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:core/src/models/mlp_baseline.py",
+      "target": "class:core/src/models/mlp_baseline.py:MLPBaseline",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/src/models/mlp_baseline.py",
+      "target": "file:core/src/config.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:core/src/train.py",
+      "target": "function:core/src/train.py:temporal_split",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/src/train.py",
+      "target": "function:core/src/train.py:compute_stats_from_training",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/src/train.py",
+      "target": "function:core/src/train.py:_build_precomputed_retrieval",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/src/train.py",
+      "target": "function:core/src/train.py:_tensor_corrcoef",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/src/train.py",
+      "target": "function:core/src/train.py:_extract_precip_mm_from_normalized_targets",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/src/train.py",
+      "target": "function:core/src/train.py:_binary_event_metrics",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/src/train.py",
+      "target": "function:core/src/train.py:_calibrate_wet_probability_threshold",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/src/train.py",
+      "target": "function:core/src/train.py:train_pipeline",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/src/train.py",
+      "target": "function:core/src/train.py:_parse_args",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/src/train.py",
+      "target": "file:core/src/config.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:core/src/train.py",
+      "target": "file:core/src/data/ingest.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:core/src/train.py",
+      "target": "file:core/src/data/temporal_loader.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:core/src/train.py",
+      "target": "file:core/src/models/diffusion.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:core/src/train.py",
+      "target": "file:core/src/models/gnn.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:core/src/train.py",
+      "target": "file:core/src/retrieval/base.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:core/src/train_baseline.py",
+      "target": "function:core/src/train_baseline.py:train_mlp_baseline",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/src/train_baseline.py",
+      "target": "function:core/src/train_baseline.py:_parse_args",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/src/train_baseline.py",
+      "target": "class:core/src/train_baseline.py:MLPDataset",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/src/train_baseline.py",
+      "target": "file:core/src/config.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:core/src/train_baseline.py",
+      "target": "file:core/src/data/ingest.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:core/src/train_baseline.py",
+      "target": "file:core/src/models/mlp_baseline.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:core/src/train_baseline.py",
+      "target": "file:core/src/train.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:core/tests/test_config_topology.py",
+      "target": "class:core/tests/test_config_topology.py:ConfigTopologyTest",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/tests/test_config_topology.py",
+      "target": "class:core/tests/test_config_topology.py:CRPSNumericTest",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/tests/test_config_topology.py",
+      "target": "file:core/src/config.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:core/tests/test_config_topology.py",
+      "target": "file:core/src/evaluation/probabilistic_metrics.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:core/tests/test_loader_contract.py",
+      "target": "function:core/tests/test_loader_contract.py:_make_rows",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/tests/test_loader_contract.py",
+      "target": "function:core/tests/test_loader_contract.py:_build_df",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/tests/test_loader_contract.py",
+      "target": "class:core/tests/test_loader_contract.py:LoaderContractTest",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/tests/test_loader_contract.py",
+      "target": "file:core/src/config.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:core/tests/test_loader_contract.py",
+      "target": "file:core/src/data/temporal_loader.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    }
+  ]
+}

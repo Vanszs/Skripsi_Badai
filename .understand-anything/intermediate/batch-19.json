@@ -1,0 +1,258 @@
+{
+  "nodes": [
+    {
+      "id": "file:core/src/evaluation/__init__.py",
+      "type": "file",
+      "name": "__init__.py",
+      "filePath": "core/src/evaluation/__init__.py",
+      "summary": "Source module (__init__.py) implementing helper logic (3 lines).",
+      "tags": [
+        "code"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:core/src/services/api.ts",
+      "type": "file",
+      "name": "api.ts",
+      "filePath": "core/src/services/api.ts",
+      "summary": "Source module (api.ts) implementing 5 functions (189 lines).",
+      "tags": [
+        "code"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:core/src/services/api.ts:pseudorand",
+      "type": "function",
+      "name": "pseudorand",
+      "filePath": "core/src/services/api.ts",
+      "lineRange": [
+        75,
+        78
+      ],
+      "summary": "Function pseudorand defined in api.ts.",
+      "tags": [
+        "function",
+        "code"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:core/src/services/api.ts:generateSamplePrecip",
+      "type": "function",
+      "name": "generateSamplePrecip",
+      "filePath": "core/src/services/api.ts",
+      "lineRange": [
+        81,
+        87
+      ],
+      "summary": "Function generateSamplePrecip defined in api.ts.",
+      "tags": [
+        "function",
+        "code"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:core/src/services/api.ts:generateMockNowcast",
+      "type": "function",
+      "name": "generateMockNowcast",
+      "filePath": "core/src/services/api.ts",
+      "lineRange": [
+        89,
+        166
+      ],
+      "summary": "Function generateMockNowcast defined in api.ts.",
+      "tags": [
+        "function",
+        "code"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:core/src/services/api.ts:fetchNowcast",
+      "type": "function",
+      "name": "fetchNowcast",
+      "filePath": "core/src/services/api.ts",
+      "lineRange": [
+        169,
+        180
+      ],
+      "summary": "Function fetchNowcast defined in api.ts.",
+      "tags": [
+        "function",
+        "code"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:core/src/services/api.ts:useNowcastQuery",
+      "type": "function",
+      "name": "useNowcastQuery",
+      "filePath": "core/src/services/api.ts",
+      "lineRange": [
+        183,
+        189
+      ],
+      "summary": "Function useNowcastQuery defined in api.ts.",
+      "tags": [
+        "function",
+        "code"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:core/tests/test_checkpoint_contract.py",
+      "type": "file",
+      "name": "test_checkpoint_contract.py",
+      "filePath": "core/tests/test_checkpoint_contract.py",
+      "summary": "Source module (test_checkpoint_contract.py) implementing 1 classes (33 lines).",
+      "tags": [
+        "code",
+        "test"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:core/tests/test_checkpoint_contract.py:CheckpointContractTest",
+      "type": "class",
+      "name": "CheckpointContractTest",
+      "filePath": "core/tests/test_checkpoint_contract.py",
+      "lineRange": [
+        7,
+        33
+      ],
+      "summary": "Class CheckpointContractTest defined in test_checkpoint_contract.py.",
+      "tags": [
+        "class",
+        "code",
+        "test"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:docs/private.note",
+      "type": "document",
+      "name": "private.note",
+      "filePath": "docs/private.note",
+      "summary": "Documentation file (private.note) covering project architecture, specs, or guidelines.",
+      "tags": [
+        "spec",
+        "documentation"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:main.py",
+      "type": "file",
+      "name": "main.py",
+      "filePath": "main.py",
+      "summary": "Source module (main.py) implementing 1 functions (59 lines).",
+      "tags": [
+        "code"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:main.py:root",
+      "type": "function",
+      "name": "root",
+      "filePath": "main.py",
+      "lineRange": [
+        44,
+        55
+      ],
+      "summary": "Function root defined in main.py.",
+      "tags": [
+        "function",
+        "code"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:web/src/index.css",
+      "type": "file",
+      "name": "index.css",
+      "filePath": "web/src/index.css",
+      "summary": "Source module (index.css) implementing helper logic (232 lines).",
+      "tags": [
+        "code"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:web/src/vite-env.d.ts",
+      "type": "file",
+      "name": "vite-env.d.ts",
+      "filePath": "web/src/vite-env.d.ts",
+      "summary": "Source module (vite-env.d.ts) implementing helper logic (1 lines).",
+      "tags": [
+        "code"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:web/vite.config.ts",
+      "type": "file",
+      "name": "vite.config.ts",
+      "filePath": "web/vite.config.ts",
+      "summary": "Source module (vite.config.ts) implementing helper logic (53 lines).",
+      "tags": [
+        "code"
+      ],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:core/src/services/api.ts",
+      "target": "function:core/src/services/api.ts:pseudorand",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/src/services/api.ts",
+      "target": "function:core/src/services/api.ts:generateSamplePrecip",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/src/services/api.ts",
+      "target": "function:core/src/services/api.ts:generateMockNowcast",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/src/services/api.ts",
+      "target": "function:core/src/services/api.ts:fetchNowcast",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/src/services/api.ts",
+      "target": "function:core/src/services/api.ts:useNowcastQuery",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:core/tests/test_checkpoint_contract.py",
+      "target": "class:core/tests/test_checkpoint_contract.py:CheckpointContractTest",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:main.py",
+      "target": "function:main.py:root",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    }
+  ]
+}

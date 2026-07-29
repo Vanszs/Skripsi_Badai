@@ -1,0 +1,101 @@
+{
+  "nodes": [
+    {
+      "id": "config:.playwright-mcp/page-2026-07-24T05-38-49-212Z.yml",
+      "type": "config",
+      "name": "page-2026-07-24T05-38-49-212Z.yml",
+      "filePath": ".playwright-mcp/page-2026-07-24T05-38-49-212Z.yml",
+      "summary": "Configuration file (page-2026-07-24T05-38-49-212Z.yml) specifying project settings, environment, or build properties.",
+      "tags": [
+        "configuration",
+        "build-system"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "config:.playwright-mcp/page-2026-07-24T07-59-08-603Z.yml",
+      "type": "config",
+      "name": "page-2026-07-24T07-59-08-603Z.yml",
+      "filePath": ".playwright-mcp/page-2026-07-24T07-59-08-603Z.yml",
+      "summary": "Configuration file (page-2026-07-24T07-59-08-603Z.yml) specifying project settings, environment, or build properties.",
+      "tags": [
+        "configuration",
+        "build-system"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "config:.playwright-mcp/page-2026-07-24T08-04-14-089Z.yml",
+      "type": "config",
+      "name": "page-2026-07-24T08-04-14-089Z.yml",
+      "filePath": ".playwright-mcp/page-2026-07-24T08-04-14-089Z.yml",
+      "summary": "Configuration file (page-2026-07-24T08-04-14-089Z.yml) specifying project settings, environment, or build properties.",
+      "tags": [
+        "configuration",
+        "build-system"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "config:.playwright-mcp/page-2026-07-24T08-04-41-926Z.yml",
+      "type": "config",
+      "name": "page-2026-07-24T08-04-41-926Z.yml",
+      "filePath": ".playwright-mcp/page-2026-07-24T08-04-41-926Z.yml",
+      "summary": "Configuration file (page-2026-07-24T08-04-41-926Z.yml) specifying project settings, environment, or build properties.",
+      "tags": [
+        "configuration",
+        "build-system"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "config:.playwright-mcp/page-2026-07-24T09-28-31-476Z.yml",
+      "type": "config",
+      "name": "page-2026-07-24T09-28-31-476Z.yml",
+      "filePath": ".playwright-mcp/page-2026-07-24T09-28-31-476Z.yml",
+      "summary": "Configuration file (page-2026-07-24T09-28-31-476Z.yml) specifying project settings, environment, or build properties.",
+      "tags": [
+        "configuration",
+        "build-system"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "config:.playwright-mcp/page-2026-07-24T09-28-56-489Z.yml",
+      "type": "config",
+      "name": "page-2026-07-24T09-28-56-489Z.yml",
+      "filePath": ".playwright-mcp/page-2026-07-24T09-28-56-489Z.yml",
+      "summary": "Configuration file (page-2026-07-24T09-28-56-489Z.yml) specifying project settings, environment, or build properties.",
+      "tags": [
+        "configuration",
+        "build-system"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "config:.playwright-mcp/page-2026-07-24T10-20-16-605Z.yml",
+      "type": "config",
+      "name": "page-2026-07-24T10-20-16-605Z.yml",
+      "filePath": ".playwright-mcp/page-2026-07-24T10-20-16-605Z.yml",
+      "summary": "Configuration file (page-2026-07-24T10-20-16-605Z.yml) specifying project settings, environment, or build properties.",
+      "tags": [
+        "configuration",
+        "build-system"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "config:.playwright-mcp/page-2026-07-24T10-20-42-890Z.yml",
+      "type": "config",
+      "name": "page-2026-07-24T10-20-42-890Z.yml",
+      "filePath": ".playwright-mcp/page-2026-07-24T10-20-42-890Z.yml",
+      "summary": "Configuration file (page-2026-07-24T10-20-42-890Z.yml) specifying project settings, environment, or build properties.",
+      "tags": [
+        "configuration",
+        "build-system"
+      ],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": []
+}

@@ -1,0 +1,28 @@
+{
+  "projectRoot": "/media/DiskE/SKRIPSI/Skripsi_Bevan",
+  "batchFiles": [
+    {
+      "path": ".github/hooks/rtk-hook.ps1",
+      "language": "powershell",
+      "sizeLines": 77,
+      "fileCategory": "script"
+    },
+    {
+      "path": ".github/hooks/rtk-session.ps1",
+      "language": "powershell",
+      "sizeLines": 16,
+      "fileCategory": "script"
+    },
+    {
+      "path": ".github/hooks/rtk.json",
+      "language": "json",
+      "sizeLines": 19,
+      "fileCategory": "config"
+    }
+  ],
+  "batchImportData": {
+    ".github/hooks/rtk-hook.ps1": [],
+    ".github/hooks/rtk-session.ps1": [],
+    ".github/hooks/rtk.json": []
+  }
+}

@@ -1,0 +1,147 @@
+{
+  "projectRoot": "/media/DiskE/SKRIPSI/Skripsi_Bevan",
+  "batchFiles": [
+    {
+      "path": ".understand-anything/tmp/ua-file-analyzer-input-1.json",
+      "language": "json",
+      "sizeLines": 27,
+      "fileCategory": "config"
+    },
+    {
+      "path": ".understand-anything/tmp/ua-file-analyzer-input-10.json",
+      "language": "json",
+      "sizeLines": 48,
+      "fileCategory": "config"
+    },
+    {
+      "path": ".understand-anything/tmp/ua-file-analyzer-input-11.json",
+      "language": "json",
+      "sizeLines": 181,
+      "fileCategory": "config"
+    },
+    {
+      "path": ".understand-anything/tmp/ua-file-analyzer-input-12.json",
+      "language": "json",
+      "sizeLines": 181,
+      "fileCategory": "config"
+    },
+    {
+      "path": ".understand-anything/tmp/ua-file-analyzer-input-13.json",
+      "language": "json",
+      "sizeLines": 181,
+      "fileCategory": "config"
+    },
+    {
+      "path": ".understand-anything/tmp/ua-file-analyzer-input-14.json",
+      "language": "json",
+      "sizeLines": 153,
+      "fileCategory": "config"
+    },
+    {
+      "path": ".understand-anything/tmp/ua-file-analyzer-input-2.json",
+      "language": "json",
+      "sizeLines": 62,
+      "fileCategory": "config"
+    },
+    {
+      "path": ".understand-anything/tmp/ua-file-analyzer-input-3.json",
+      "language": "json",
+      "sizeLines": 146,
+      "fileCategory": "config"
+    },
+    {
+      "path": ".understand-anything/tmp/ua-file-analyzer-input-4.json",
+      "language": "json",
+      "sizeLines": 62,
+      "fileCategory": "config"
+    },
+    {
+      "path": ".understand-anything/tmp/ua-file-analyzer-input-5.json",
+      "language": "json",
+      "sizeLines": 34,
+      "fileCategory": "config"
+    },
+    {
+      "path": ".understand-anything/tmp/ua-file-analyzer-input-6.json",
+      "language": "json",
+      "sizeLines": 27,
+      "fileCategory": "config"
+    },
+    {
+      "path": ".understand-anything/tmp/ua-file-analyzer-input-7.json",
+      "language": "json",
+      "sizeLines": 41,
+      "fileCategory": "config"
+    },
+    {
+      "path": ".understand-anything/tmp/ua-file-analyzer-input-8.json",
+      "language": "json",
+      "sizeLines": 34,
+      "fileCategory": "config"
+    },
+    {
+      "path": ".understand-anything/tmp/ua-file-analyzer-input-9.json",
+      "language": "json",
+      "sizeLines": 83,
+      "fileCategory": "config"
+    },
+    {
+      "path": ".understand-anything/tmp/ua-file-extract-results-1.json",
+      "language": "json",
+      "sizeLines": 43,
+      "fileCategory": "config"
+    },
+    {
+      "path": ".understand-anything/tmp/ua-file-extract-results-10.json",
+      "language": "json",
+      "sizeLines": 183,
+      "fileCategory": "config"
+    },
+    {
+      "path": ".understand-anything/tmp/ua-file-extract-results-11.json",
+      "language": "json",
+      "sizeLines": 3863,
+      "fileCategory": "config"
+    },
+    {
+      "path": ".understand-anything/tmp/ua-file-extract-results-12.json",
+      "language": "json",
+      "sizeLines": 2179,
+      "fileCategory": "config"
+    },
+    {
+      "path": ".understand-anything/tmp/ua-file-extract-results-13.json",
+      "language": "json",
+      "sizeLines": 11836,
+      "fileCategory": "config"
+    },
+    {
+      "path": ".understand-anything/tmp/ua-file-extract-results-14.json",
+      "language": "json",
+      "sizeLines": 1696,
+      "fileCategory": "config"
+    }
+  ],
+  "batchImportData": {
+    ".understand-anything/tmp/ua-file-analyzer-input-1.json": [],
+    ".understand-anything/tmp/ua-file-analyzer-input-10.json": [],
+    ".understand-anything/tmp/ua-file-analyzer-input-11.json": [],
+    ".understand-anything/tmp/ua-file-analyzer-input-12.json": [],
+    ".understand-anything/tmp/ua-file-analyzer-input-13.json": [],
+    ".understand-anything/tmp/ua-file-analyzer-input-14.json": [],
+    ".understand-anything/tmp/ua-file-analyzer-input-2.json": [],
+    ".understand-anything/tmp/ua-file-analyzer-input-3.json": [],
+    ".understand-anything/tmp/ua-file-analyzer-input-4.json": [],
+    ".understand-anything/tmp/ua-file-analyzer-input-5.json": [],
+    ".understand-anything/tmp/ua-file-analyzer-input-6.json": [],
+    ".understand-anything/tmp/ua-file-analyzer-input-7.json": [],
+    ".understand-anything/tmp/ua-file-analyzer-input-8.json": [],
+    ".understand-anything/tmp/ua-file-analyzer-input-9.json": [],
+    ".understand-anything/tmp/ua-file-extract-results-1.json": [],
+    ".understand-anything/tmp/ua-file-extract-results-10.json": [],
+    ".understand-anything/tmp/ua-file-extract-results-11.json": [],
+    ".understand-anything/tmp/ua-file-extract-results-12.json": [],
+    ".understand-anything/tmp/ua-file-extract-results-13.json": [],
+    ".understand-anything/tmp/ua-file-extract-results-14.json": []
+  }
+}

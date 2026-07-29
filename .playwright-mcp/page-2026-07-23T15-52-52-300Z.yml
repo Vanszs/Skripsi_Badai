@@ -1,0 +1,301 @@
+- generic [ref=f13e1]:
+  - generic [ref=f13e3]:
+    - navigation "Navigasi Utama" [ref=f13e4]:
+      - button "AeroCast Gede - Main Dashboard" [ref=f13e5] [cursor=pointer]:
+        - generic [ref=f13e9]: PANG
+      - generic [ref=f13e10]:
+        - button "Map" [ref=f13e11]
+        - button "Fcst" [ref=f13e15]
+        - button "Risk" [ref=f13e20]
+        - button "Rtrv" [ref=f13e24]
+        - button "Eval" [ref=f13e30]
+        - button "Buka Topologi Graf ST-GNN 5 Simpul" [ref=f13e35]:
+          - generic [ref=f13e41]: Graph
+    - banner [ref=f13e42]:
+      - generic [ref=f13e43]:
+        - button "AeroCast Gede Dashboard" [ref=f13e44] [cursor=pointer]:
+          - heading "Pangrango Weather Desk" [level=1] [ref=f13e45]
+          - generic [ref=f13e46]: SIMULASI ST-GNN
+        - generic [ref=f13e47]:
+          - generic [ref=f13e48]: ERA5 demo dataset
+          - generic [ref=f13e49]: Data statis
+      - generic [ref=f13e50]:
+        - button "SEL ERA5 (5)" [active] [ref=f13e51]
+        - button "SIMPUL GRAPH" [pressed] [ref=f13e53]
+        - button "Lihat Topologi Graf 5 Simpul" [ref=f13e57]: TOPOLOGI
+      - generic [ref=f13e58]:
+        - combobox "Cari simpul observasi atau lokasi" [ref=f13e64]
+        - button "Peringatan Dini Cuaca" [ref=f13e66]
+        - generic "Profil Pengguna" [ref=f13e71]
+    - main [ref=f13e75]:
+      - generic [ref=f13e76]:
+        - generic [ref=f13e77]:
+          - region "Peta grid ERA5 dan topologi ST-GNN Pangrango" [ref=f13e78]:
+            - generic [ref=f13e79]:
+              - generic:
+                - generic:
+                  - button "MAIN 14.8 mm/jam" [ref=f13e80] [cursor=pointer]
+                  - button "UP 6.4 mm/jam" [ref=f13e84] [cursor=pointer]
+                  - button "DOWN 16.5 mm/jam" [ref=f13e88] [cursor=pointer]
+                  - button "LEFT 18.2 mm/jam" [ref=f13e92] [cursor=pointer]
+                  - button "RIGHT 5.0 mm/jam" [ref=f13e96] [cursor=pointer]
+                - generic:
+                  - 'tooltip "Atensi UP ke MAIN: 27%"'
+                  - 'tooltip "Atensi DOWN ke MAIN: 41%"'
+                  - 'tooltip "Atensi LEFT ke MAIN: 34%"'
+                  - 'tooltip "Atensi RIGHT ke MAIN: 20%"'
+              - generic [ref=f13e100]:
+                - link "Leaflet" [ref=f13e101] [cursor=pointer]:
+                  - /url: https://leafletjs.com
+                - text: "| ©"
+                - link "CARTO" [ref=f13e106] [cursor=pointer]:
+                  - /url: https://carto.com/
+                - text: © OpenStreetMap
+            - generic:
+              - generic:
+                - paragraph: Grid ERA5 0.25°
+                - paragraph: Lima sel input graph. Bukan radar.
+                - paragraph: Warna menunjukkan presipitasi sample per sel. Model hanya memprediksi MAIN.
+              - generic "Legenda curah hujan per sel ERA5":
+                - text: Presipitasi sample
+                - generic: < 2
+                - generic: 2-10
+                - generic: ≥ 10 mm/jam
+          - generic:
+            - generic:
+              - generic: Tampilan grid ERA5
+              - paragraph: Lima sel kondisi untuk graph.
+              - paragraph: Nilai peta adalah sample statis. Prediksi model berlaku untuk simpul MAIN saja.
+          - region "Kontrol Garis Waktu Simulasi Nowcast" [ref=f13e108]:
+            - generic "Kontrol Pemutaran Animasi" [ref=f13e109]:
+              - button "Langkah Sebelumnya" [ref=f13e110]
+              - button "Jalankan Animasi Nowcast" [ref=f13e114]
+              - button "Langkah Selanjutnya" [ref=f13e117]
+            - tablist "Pilih Offset Waktu Timeline" [ref=f13e124]:
+              - tab "Offset waktu T-2h" [ref=f13e125]:
+                - generic [ref=f13e127]: T-2h
+              - tab "Offset waktu T-1h" [ref=f13e128]:
+                - generic [ref=f13e130]: T-1h
+              - tab "Offset waktu Now" [selected] [ref=f13e131]:
+                - generic [ref=f13e134]: Now
+              - tab "Offset waktu T+1h" [ref=f13e135]:
+                - generic [ref=f13e137]: T+1h
+              - tab "Offset waktu T+2h" [ref=f13e138]:
+                - generic [ref=f13e140]: T+2h
+            - generic [ref=f13e141]:
+              - generic [ref=f13e142]: Puncak intensitas hujan konvektif di Puncak Pangrango (3,008m)
+              - generic [ref=f13e144]: 14:30 WIB
+        - generic [ref=f13e149]:
+          - generic [ref=f13e150]:
+            - heading "Analisis hujan dan pembanding historis" [level=2] [ref=f13e151]
+            - generic [ref=f13e154]:
+              - button "Unduh Laporan JSON" [ref=f13e155]
+              - button "Perbesar Topologi Graf" [ref=f13e159]
+          - generic [ref=f13e165]:
+            - generic [ref=f13e167]:
+              - generic [ref=f13e168]:
+                - generic [ref=f13e169]:
+                  - heading "PREDIKSI UNCERTAINTY HUJAN (30-MEMBER ENSEMBLE)" [level=3] [ref=f13e170]
+                  - generic [ref=f13e171]: 30 Members • DDIM 20s
+                - tablist "Pilih simpul observasi untuk grafik forecast" [ref=f13e172]:
+                  - tab "Simpul MAIN" [selected] [ref=f13e173]: MAIN
+                  - tab "Simpul UP" [ref=f13e174]: UP
+                  - tab "Simpul DOWN" [ref=f13e175]: DOWN
+                  - tab "Simpul LEFT" [ref=f13e176]: LEFT
+                  - tab "Simpul RIGHT" [ref=f13e177]: RIGHT
+              - img "Grafik Prediksi Uncertainty Hujan 30-Member Ensemble" [ref=f13e178]:
+                - application [ref=f13e181]:
+                  - generic [ref=f13e233]:
+                    - generic [ref=f13e234]:
+                      - generic [ref=f13e235]: 12:00
+                      - generic [ref=f13e237]: 12:30
+                      - generic [ref=f13e239]: 13:00
+                      - generic [ref=f13e241]: 13:30
+                      - generic [ref=f13e243]: 14:00
+                      - generic [ref=f13e245]: 14:30
+                      - generic [ref=f13e247]: 15:00
+                      - generic [ref=f13e249]: 15:30
+                      - generic [ref=f13e251]: 16:00
+                      - generic [ref=f13e253]: 16:30
+                      - generic [ref=f13e255]: 17:00
+                    - generic [ref=f13e257]:
+                      - generic [ref=f13e258]: "0"
+                      - generic [ref=f13e260]: "6"
+                      - generic [ref=f13e262]: "12"
+                      - generic [ref=f13e264]: "18"
+                      - generic [ref=f13e266]: "24"
+              - generic [ref=f13e268]:
+                - generic [ref=f13e269]:
+                  - generic [ref=f13e270]: P50 (Median)
+                  - generic [ref=f13e272]: Band P25–P75
+                  - generic [ref=f13e274]: Band P10–P90
+                  - generic [ref=f13e276]: Observasi
+                - generic [ref=f13e278]: Sel ERA5 target
+            - region "Panel Penilaian Risiko Gunung Pangrango" [ref=f13e280]:
+              - generic [ref=f13e281]:
+                - heading "PENILAIAN RISIKO GUNUNG" [level=3] [ref=f13e282]
+                - button "Lihat Detail & Matriks Penilaian Risiko Gunung" [ref=f13e285] [cursor=pointer]: Detail & Matriks
+              - generic [ref=f13e288]:
+                - generic [ref=f13e289]:
+                  - generic [ref=f13e305]:
+                    - generic [ref=f13e306]: RISIKO HIPOTERMIA
+                    - generic [ref=f13e307]: Elev > 2500 mdpl
+                  - generic [ref=f13e308]: HIGH
+                - generic [ref=f13e312]:
+                  - generic [ref=f13e319]:
+                    - generic [ref=f13e320]: INDEKS WIND CHILL
+                    - generic [ref=f13e321]: "-2.4°C Apparent"
+                  - generic [ref=f13e324]: Pembekuan Angin
+                - generic [ref=f13e325]:
+                  - generic [ref=f13e330]:
+                    - generic [ref=f13e331]: KERENTANAN LONGSOR
+                    - generic [ref=f13e332]: Lereng Orografis
+                  - generic [ref=f13e333]: HIGH
+              - generic [ref=f13e337]:
+                - generic [ref=f13e338]:
+                  - generic [ref=f13e339]: PANDUAN KESELAMATAN PENDAKIAN
+                  - generic [ref=f13e347]: Pos Kandang Badak
+                - paragraph [ref=f13e348]: "🚨 Peringatan Bahaya Ekstrem: Tunda pendakian ke puncak! Hujan orografis lebat & wind chill di bawah 0°C. Siapkan thermal blanket & perlindungan hypothermia."
+            - region "Panel Performa Model ST-GNN" [ref=f13e350]:
+              - generic [ref=f13e351]:
+                - heading "PERFORMA MODEL ST-GNN (T+1h)" [level=3] [ref=f13e354]
+                - button "Buka Halaman Evaluasi Metrik Model Lengkap" [ref=f13e355] [cursor=pointer]: Metrik Lengkap →
+              - generic [ref=f13e356]:
+                - generic [ref=f13e357]:
+                  - generic [ref=f13e358]: ■
+                  - text: Metrik Deterministik
+                - generic [ref=f13e359]:
+                  - generic [ref=f13e360]:
+                    - generic [ref=f13e361]: RMSE
+                    - generic [ref=f13e362]:
+                      - generic [ref=f13e363]: "0.792"
+                      - generic [ref=f13e364]: mm/h
+                  - generic [ref=f13e365]:
+                    - generic [ref=f13e366]: MAE
+                    - generic [ref=f13e367]:
+                      - generic [ref=f13e368]: "0.353"
+                      - generic [ref=f13e369]: mm/h
+                  - generic [ref=f13e370]:
+                    - generic [ref=f13e371]: Korelasi (r)
+                    - generic [ref=f13e372]: "0.639"
+              - generic [ref=f13e373]:
+                - generic [ref=f13e374]:
+                  - generic [ref=f13e375]: ■
+                  - text: Metrik Probabilistik & Sinyal Ekstrem
+                - generic [ref=f13e376]:
+                  - generic [ref=f13e377]:
+                    - generic [ref=f13e378]: CRPS
+                    - generic [ref=f13e379]: "0.252"
+                  - generic [ref=f13e380]:
+                    - generic [ref=f13e381]: Brier Score
+                    - generic [ref=f13e382]: "0.0494"
+                  - generic [ref=f13e383]:
+                    - generic [ref=f13e384]: Reliability
+                    - generic [ref=f13e385]: 74%
+                - generic [ref=f13e386]:
+                  - generic [ref=f13e387]:
+                    - generic [ref=f13e388]: CSI (Success)
+                    - generic [ref=f13e389]: "0.2661"
+                  - generic [ref=f13e390]:
+                    - generic [ref=f13e391]: POD (Detect)
+                    - generic [ref=f13e392]: "0.7398"
+                  - generic [ref=f13e393]:
+                    - generic [ref=f13e394]: FAR (False Alm)
+                    - generic [ref=f13e395]: "0.7065"
+            - generic [ref=f13e397]:
+              - generic [ref=f13e398]:
+                - generic [ref=f13e405]:
+                  - heading "FAISS RETRIEVAL ANALOGS (k=3 NEAREST HISTORICAL STATES) IndexIVFFlat" [level=3] [ref=f13e406]:
+                    - text: FAISS RETRIEVAL ANALOGS (k=3 NEAREST HISTORICAL STATES)
+                    - generic [ref=f13e407]: IndexIVFFlat
+                  - paragraph [ref=f13e408]: Top-3 vektor kondisi atmosfer paling mirip dari database ERA5 (2005–2021)
+                - button "Lihat Semua Database (4 Analogs)" [ref=f13e409]: Lihat Semua Database (4)
+              - generic [ref=f13e417]:
+                - 'button "Analogi FAISS #1 14 Nov 2023 15:00 WIB Kemiripan 94.2 persen" [ref=f13e418] [cursor=pointer]':
+                  - generic [ref=f13e419]:
+                    - generic [ref=f13e420]:
+                      - generic [ref=f13e421]: "#1 FAISS ANALOG"
+                      - generic [ref=f13e426]: 14 Nov 2023 15:00 WIB
+                    - generic [ref=f13e427]: Heavy Convective Orographic
+                    - generic [ref=f13e430]:
+                      - generic [ref=f13e431]:
+                        - generic [ref=f13e432]: "Kemiripan:"
+                        - generic [ref=f13e433]: 94.2%
+                      - generic [ref=f13e434]:
+                        - text: "L2 Dist:"
+                        - strong [ref=f13e435]: "0.142"
+                    - generic [ref=f13e438]:
+                      - generic [ref=f13e442]:
+                        - generic [ref=f13e443]: Curah Hujan
+                        - generic [ref=f13e444]: 18.5 mm/jam
+                      - generic [ref=f13e450]:
+                        - generic [ref=f13e451]: Kec. Angin
+                        - generic [ref=f13e452]: 42 km/jam
+                      - generic [ref=f13e456]:
+                        - generic [ref=f13e457]: Suhu Puncak
+                        - generic [ref=f13e458]: 16.2°C
+                      - generic [ref=f13e463]:
+                        - generic [ref=f13e464]: Kelembapan
+                        - generic [ref=f13e465]: 95%
+                  - generic [ref=f13e466]:
+                    - paragraph [ref=f13e467]: Inisiasi hujan badai dari lereng barat (Puncak Pass) menyatu di Mandalawangi dalam rentang 45 menit. Penurunan suhu puncak hingga 5.4°C.
+                    - generic [ref=f13e468]: Detail
+                - 'button "Analogi FAISS #2 02 Apr 2022 14:30 WIB Kemiripan 88.7 persen" [ref=f13e472] [cursor=pointer]':
+                  - generic [ref=f13e473]:
+                    - generic [ref=f13e474]:
+                      - generic [ref=f13e475]: "#2 FAISS ANALOG"
+                      - generic [ref=f13e480]: 02 Apr 2022 14:30 WIB
+                    - generic [ref=f13e481]: Orographic Lift & Wind Shear
+                    - generic [ref=f13e484]:
+                      - generic [ref=f13e485]:
+                        - generic [ref=f13e486]: "Kemiripan:"
+                        - generic [ref=f13e487]: 88.7%
+                      - generic [ref=f13e488]:
+                        - text: "L2 Dist:"
+                        - strong [ref=f13e489]: "0.285"
+                    - generic [ref=f13e492]:
+                      - generic [ref=f13e496]:
+                        - generic [ref=f13e497]: Curah Hujan
+                        - generic [ref=f13e498]: 12.8 mm/jam
+                      - generic [ref=f13e504]:
+                        - generic [ref=f13e505]: Kec. Angin
+                        - generic [ref=f13e506]: 38 km/jam
+                      - generic [ref=f13e510]:
+                        - generic [ref=f13e511]: Suhu Puncak
+                        - generic [ref=f13e512]: 17.8°C
+                      - generic [ref=f13e517]:
+                        - generic [ref=f13e518]: Kelembapan
+                        - generic [ref=f13e519]: 92%
+                  - generic [ref=f13e520]:
+                    - paragraph [ref=f13e521]: Angin monsun barat daya mendorong adveksi kelembapan dari Lereng Selatan (Sukabumi) menuju target utama Pangrango.
+                    - generic [ref=f13e522]: Detail
+                - 'button "Analogi FAISS #3 08 Jan 2024 16:00 WIB Kemiripan 81.5 persen" [ref=f13e526] [cursor=pointer]':
+                  - generic [ref=f13e527]:
+                    - generic [ref=f13e528]:
+                      - generic [ref=f13e529]: "#3 FAISS ANALOG"
+                      - generic [ref=f13e534]: 08 Jan 2024 16:00 WIB
+                    - generic [ref=f13e535]: Frontal System Trajectory
+                    - generic [ref=f13e538]:
+                      - generic [ref=f13e539]:
+                        - generic [ref=f13e540]: "Kemiripan:"
+                        - generic [ref=f13e541]: 81.5%
+                      - generic [ref=f13e542]:
+                        - text: "L2 Dist:"
+                        - strong [ref=f13e543]: "0.419"
+                    - generic [ref=f13e546]:
+                      - generic [ref=f13e550]:
+                        - generic [ref=f13e551]: Curah Hujan
+                        - generic [ref=f13e552]: 9.4 mm/jam
+                      - generic [ref=f13e558]:
+                        - generic [ref=f13e559]: Kec. Angin
+                        - generic [ref=f13e560]: 35 km/jam
+                      - generic [ref=f13e564]:
+                        - generic [ref=f13e565]: Suhu Puncak
+                        - generic [ref=f13e566]: 18.5°C
+                      - generic [ref=f13e571]:
+                        - generic [ref=f13e572]: Kelembapan
+                        - generic [ref=f13e573]: 89%
+                  - generic [ref=f13e574]:
+                    - paragraph [ref=f13e575]: Pergerakan sistem awan konvektif melewati node LEFT ke MAIN, kemudian meluruh menuju lereng timur (Cipanas).
+                    - generic [ref=f13e576]: Detail
+  - generic [ref=f13e580]: "0"

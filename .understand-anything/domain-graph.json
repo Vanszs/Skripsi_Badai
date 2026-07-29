@@ -1,0 +1,470 @@
+{
+  "version": "1.0.0",
+  "project": {
+    "name": "Skripsi_Bevan",
+    "languages": [
+      "Python",
+      "TypeScript",
+      "Shell"
+    ],
+    "frameworks": [
+      "PyTorch",
+      "PyTorch Geometric",
+      "Diffusers",
+      "FAISS",
+      "FastAPI",
+      "React"
+    ],
+    "description": "Nowcasting Probabilistik Cuaca Multi-Variabel Gunung Gede-Pangrango Menggunakan Retrieval-Augmented Diffusion Model dengan Spatio-Temporal Graph Conditioning",
+    "analyzedAt": "2026-07-28T17:17:00Z",
+    "gitCommitHash": "2e6d14426db9792ea8e2132a9cbce7656e7e975c"
+  },
+  "nodes": [
+    {
+      "id": "domain:weather-data-ingestion",
+      "type": "domain",
+      "name": "Weather Data Ingestion & Normalization",
+      "summary": "Handles fetching ERA5 hourly weather archives from Open-Meteo API, sliding window formation, log1p transformation, and Z-score normalization.",
+      "tags": [
+        "data-pipeline",
+        "era5",
+        "normalization"
+      ],
+      "complexity": "moderate",
+      "domainMeta": {
+        "entities": [
+          "ERA5 Archive Parquet",
+          "Station Node Grid",
+          "Temporal DataLoader"
+        ],
+        "businessRules": [
+          "Log1p transform for precipitation",
+          "Strict temporal train/val/test split to prevent leakage"
+        ],
+        "crossDomainInteractions": [
+          "Provides normalized features to FAISS Retrieval Engine and SpatioTemporal GNN"
+        ]
+      }
+    },
+    {
+      "id": "flow:ingest-era5-data",
+      "type": "flow",
+      "name": "Ingest ERA5 Weather Archive",
+      "summary": "Downloads 20-year hourly data for Pangrango nodes and builds parquet archive.",
+      "tags": [
+        "ingestion",
+        "open-meteo"
+      ],
+      "complexity": "simple",
+      "domainMeta": {
+        "entryPoint": "python -m src.data.ingest",
+        "entryType": "cli"
+      }
+    },
+    {
+      "id": "step:ingest-era5-data:fetch-api",
+      "type": "step",
+      "name": "Fetch Open-Meteo API",
+      "summary": "Download 8 dynamic + 2 static features for 3 observation nodes.",
+      "tags": [
+        "api",
+        "download"
+      ],
+      "complexity": "simple",
+      "filePath": "core/src/data/ingest.py",
+      "lineRange": [
+        1,
+        50
+      ]
+    },
+    {
+      "id": "step:ingest-era5-data:normalize-features",
+      "type": "step",
+      "name": "Feature Normalization & Lag Creation",
+      "summary": "Apply log1p for rain, z-score normalization, and compute 1h/3h precipitation lags.",
+      "tags": [
+        "preprocessing",
+        "normalization"
+      ],
+      "complexity": "moderate",
+      "filePath": "core/src/data/temporal_loader.py",
+      "lineRange": [
+        1,
+        100
+      ]
+    },
+    {
+      "id": "domain:retrieval-engine",
+      "type": "domain",
+      "name": "FAISS Similarity Retrieval Engine",
+      "summary": "Retrieves top k=3 historical weather analog states using FAISS L2 distance index to condition the diffusion model.",
+      "tags": [
+        "retrieval",
+        "faiss",
+        "analog-matching"
+      ],
+      "complexity": "moderate",
+      "domainMeta": {
+        "entities": [
+          "FAISS IndexFlatL2",
+          "Weather State Encoder"
+        ],
+        "businessRules": [
+          "Index trained strictly on historical training set",
+          "k=3 nearest neighbors returned"
+        ],
+        "crossDomainInteractions": [
+          "Injects retrieval embeddings into Conditional Diffusion Model"
+        ]
+      }
+    },
+    {
+      "id": "flow:retrieve-analogs",
+      "type": "flow",
+      "name": "Retrieve Nearest Weather Analogs",
+      "summary": "Encodes current window features and queries FAISS index for top 3 matches.",
+      "tags": [
+        "faiss",
+        "search"
+      ],
+      "complexity": "simple",
+      "domainMeta": {
+        "entryPoint": "RetrievalDatabase.query()",
+        "entryType": "manual"
+      }
+    },
+    {
+      "id": "step:retrieve-analogs:faiss-search",
+      "type": "step",
+      "name": "FAISS Vector Search",
+      "summary": "Query IndexFlatL2 for top k nearest historical states.",
+      "tags": [
+        "faiss",
+        "query"
+      ],
+      "complexity": "simple",
+      "filePath": "core/src/retrieval/base.py",
+      "lineRange": [
+        1,
+        60
+      ]
+    },
+    {
+      "id": "domain:spatiotemporal-diffusion",
+      "type": "domain",
+      "name": "Spatio-Temporal GNN & Diffusion Model Engine",
+      "summary": "Core probabilistic nowcasting model fusing 2-layer GAT spatial message passing, temporal multihead attention, and DDPM/DDIM reverse diffusion sampling.",
+      "tags": [
+        "deep-learning",
+        "diffusion",
+        "gnn"
+      ],
+      "complexity": "complex",
+      "domainMeta": {
+        "entities": [
+          "SpatioTemporalGNN",
+          "ConditionalDiffusionModel",
+          "DDPMScheduler",
+          "DDIMScheduler"
+        ],
+        "businessRules": [
+          "Predicts 3 multi-variable targets",
+          "30 ensemble members sampled for uncertainty quantification"
+        ],
+        "crossDomainInteractions": [
+          "Consumes GNN conditioning and FAISS analogs to generate probabilistic ensemble predictions"
+        ]
+      }
+    },
+    {
+      "id": "flow:train-diffusion-model",
+      "type": "flow",
+      "name": "Train GNN-Diffusion Pipeline",
+      "summary": "Jointly optimizes GNN feature encoder and conditional U-Net MLP diffusion noise predictor.",
+      "tags": [
+        "training",
+        "optimization"
+      ],
+      "complexity": "complex",
+      "domainMeta": {
+        "entryPoint": "python -m src.train",
+        "entryType": "cli"
+      }
+    },
+    {
+      "id": "step:train-diffusion-model:gnn-encode",
+      "type": "step",
+      "name": "GAT + Temporal Attention Encoding",
+      "summary": "Extract spatio-temporal graph embeddings over 3 mountain stations across 6 timesteps.",
+      "tags": [
+        "gnn",
+        "gat"
+      ],
+      "complexity": "moderate",
+      "filePath": "core/src/models/gnn.py",
+      "lineRange": [
+        1,
+        120
+      ]
+    },
+    {
+      "id": "step:train-diffusion-model:diffusion-sample",
+      "type": "step",
+      "name": "DDIM Reverse Diffusion Sampling",
+      "summary": "Iterative 20-step DDIM reverse sampling over 30 ensemble members.",
+      "tags": [
+        "diffusion",
+        "ddim"
+      ],
+      "complexity": "complex",
+      "filePath": "core/src/models/diffusion.py",
+      "lineRange": [
+        1,
+        150
+      ]
+    },
+    {
+      "id": "domain:probabilistic-evaluation",
+      "type": "domain",
+      "name": "Probabilistic Metrics & Hike Risk Assessment",
+      "summary": "Evaluates probabilistic nowcasting performance (CRPS, Brier, POD, FAR, CSI) and translates predictions into risk levels for hiking safety.",
+      "tags": [
+        "evaluation",
+        "probabilistic-metrics",
+        "risk-mitigation"
+      ],
+      "complexity": "moderate",
+      "domainMeta": {
+        "entities": [
+          "CRPS Calculator",
+          "Brier Score",
+          "Contingency Table (POD/FAR/CSI)",
+          "Hike Risk Calculator"
+        ],
+        "businessRules": [
+          "Thresholds set at 2/5/10 mm/jam for rain",
+          "Risk levels: Low, Moderate, High, Extreme"
+        ],
+        "crossDomainInteractions": [
+          "Consumes model ensemble outputs to produce hiking safety advisories"
+        ]
+      }
+    },
+    {
+      "id": "flow:evaluate-metrics-and-risk",
+      "type": "flow",
+      "name": "Evaluate Model & Calculate Risk",
+      "summary": "Computes deterministic and probabilistic skill scores and evaluates threshold sensitivity.",
+      "tags": [
+        "metrics",
+        "evaluation"
+      ],
+      "complexity": "moderate",
+      "domainMeta": {
+        "entryPoint": "python -m notebooks.evaluasi_model",
+        "entryType": "cli"
+      }
+    },
+    {
+      "id": "step:evaluate-metrics-and-risk:compute-crps",
+      "type": "step",
+      "name": "Compute CRPS & Brier Score",
+      "summary": "Calculate Continuous Ranked Probability Score across ensemble predictions.",
+      "tags": [
+        "crps",
+        "brier"
+      ],
+      "complexity": "moderate",
+      "filePath": "core/src/evaluation/probabilistic_metrics.py",
+      "lineRange": [
+        1,
+        100
+      ]
+    },
+    {
+      "id": "domain:web-dashboard-api",
+      "type": "domain",
+      "name": "Web Visualizer & REST API Service",
+      "summary": "Exposes live nowcasting predictions and interactive 3D/2D topology graph visualization for mountain climbers.",
+      "tags": [
+        "fastapi",
+        "react",
+        "dashboard"
+      ],
+      "complexity": "moderate",
+      "domainMeta": {
+        "entities": [
+          "FastAPI Routers",
+          "Topology Overlay Component",
+          "Metrics Dashboard"
+        ],
+        "businessRules": [
+          "Live API CORS enabled",
+          "Real-time station telemetry streaming"
+        ],
+        "crossDomainInteractions": [
+          "Serves trained model predictions to web frontend"
+        ]
+      }
+    },
+    {
+      "id": "flow:serve-nowcast-api",
+      "type": "flow",
+      "name": "Serve Weather Nowcast & Station Telemetry",
+      "summary": "Handles GET /api/nowcast and streams 3-node weather predictions.",
+      "tags": [
+        "api",
+        "fastapi"
+      ],
+      "complexity": "simple",
+      "domainMeta": {
+        "entryPoint": "GET /api/nowcast",
+        "entryType": "http"
+      }
+    },
+    {
+      "id": "step:serve-nowcast-api:predict-endpoint",
+      "type": "step",
+      "name": "Predict Nowcast Endpoint Handler",
+      "summary": "Execute inference engine and return JSON response with risk advisories.",
+      "tags": [
+        "handler",
+        "response"
+      ],
+      "complexity": "simple",
+      "filePath": "api/routers/nowcast.py",
+      "lineRange": [
+        1,
+        80
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "domain:weather-data-ingestion",
+      "target": "flow:ingest-era5-data",
+      "type": "contains_flow",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "flow:ingest-era5-data",
+      "target": "step:ingest-era5-data:fetch-api",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "flow:ingest-era5-data",
+      "target": "step:ingest-era5-data:normalize-features",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "domain:retrieval-engine",
+      "target": "flow:retrieve-analogs",
+      "type": "contains_flow",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "flow:retrieve-analogs",
+      "target": "step:retrieve-analogs:faiss-search",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "domain:spatiotemporal-diffusion",
+      "target": "flow:train-diffusion-model",
+      "type": "contains_flow",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "flow:train-diffusion-model",
+      "target": "step:train-diffusion-model:gnn-encode",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "flow:train-diffusion-model",
+      "target": "step:train-diffusion-model:diffusion-sample",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "domain:probabilistic-evaluation",
+      "target": "flow:evaluate-metrics-and-risk",
+      "type": "contains_flow",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "flow:evaluate-metrics-and-risk",
+      "target": "step:evaluate-metrics-and-risk:compute-crps",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "domain:web-dashboard-api",
+      "target": "flow:serve-nowcast-api",
+      "type": "contains_flow",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "flow:serve-nowcast-api",
+      "target": "step:serve-nowcast-api:predict-endpoint",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "domain:weather-data-ingestion",
+      "target": "domain:retrieval-engine",
+      "type": "cross_domain",
+      "direction": "forward",
+      "description": "Feeds normalized training features to populate FAISS IndexFlatL2",
+      "weight": 0.8
+    },
+    {
+      "source": "domain:retrieval-engine",
+      "target": "domain:spatiotemporal-diffusion",
+      "type": "cross_domain",
+      "direction": "forward",
+      "description": "Injects top k=3 historical weather analogs into diffusion conditioning vector",
+      "weight": 0.9
+    },
+    {
+      "source": "domain:weather-data-ingestion",
+      "target": "domain:spatiotemporal-diffusion",
+      "type": "cross_domain",
+      "direction": "forward",
+      "description": "Passes sequence feature windows to SpatioTemporalGNN",
+      "weight": 0.9
+    },
+    {
+      "source": "domain:spatiotemporal-diffusion",
+      "target": "domain:probabilistic-evaluation",
+      "type": "cross_domain",
+      "direction": "forward",
+      "description": "Provides 30 ensemble predictions for CRPS, Brier, POD/FAR/CSI evaluation",
+      "weight": 0.9
+    },
+    {
+      "source": "domain:spatiotemporal-diffusion",
+      "target": "domain:web-dashboard-api",
+      "type": "cross_domain",
+      "direction": "forward",
+      "description": "Powers live inference endpoints for web dashboard",
+      "weight": 0.8
+    }
+  ],
+  "layers": [],
+  "tour": []
+}

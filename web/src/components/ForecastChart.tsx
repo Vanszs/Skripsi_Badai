@@ -1,239 +1,195 @@
-import React, { useMemo, useId } from 'react';
-import {
-  ResponsiveContainer,
-  ComposedChart,
-  Area,
-  Line,
-  XAxis,
-  YAxis,
-  Tooltip,
-  CartesianGrid,
-} from 'recharts';
-import { ForecastPoint, NodeId } from '../types';
-import { PROBABILISTIC_FORECAST_DATA, NODES_LIST } from '../data/nodesData';
+import React, { useMemo } from 'react';
+import { CloudRain, Wind, Droplets, Activity } from 'lucide-react';
+import { NowcastDistribution } from '../types';
+import { SAMPLE_NOWCAST } from '../data/nodesData';
 
 interface ForecastChartProps {
-  selectedNodeId: NodeId;
-  forecastData?: ForecastPoint[];
+  precipitation?: NowcastDistribution;
+  wind?: NowcastDistribution;
+  humidity?: NowcastDistribution;
 }
 
-// Custom tooltip with zero-rain handling & portal z-index safety
-const CustomTooltip = React.memo(({ active, payload, label, nodeName }: any) => {
-  if (!active || !payload || !payload.length) return null;
-  const data = payload.find((p: any) => p?.payload)?.payload;
-  if (!data) return null;
+/**
+ * One-step nowcast (T+1h) panel.
+ * Truth-of-source: the diffusion model emits 50 samples for 3 variables at a single horizon.
+ * We render each variable as a percentile band + observed-now marker, NOT a multi-step line.
+ */
+const ForecastChartComponent: React.FC<ForecastChartProps> = ({
+  precipitation,
+  wind,
+  humidity,
+}) => {
+  const rows = useMemo(
+    () => [
+      {
+        key: 'precip',
+        label: 'Curah Hujan',
+        icon: CloudRain,
+        accent: '#1f6056',
+        data: precipitation ?? SAMPLE_NOWCAST.precipitation,
+        observedLabel: 'Obs. sekarang',
+      },
+      {
+        key: 'wind',
+        label: 'Angin 10m',
+        icon: Wind,
+        accent: '#fed639',
+        data: wind ?? SAMPLE_NOWCAST.wind_speed_10m,
+      },
+      {
+        key: 'humidity',
+        label: 'Kelembapan 2m',
+        icon: Droplets,
+        accent: '#7df4ff',
+        data: humidity ?? SAMPLE_NOWCAST.relative_humidity_2m,
+        observedLabel: 'Obs. sekarang',
+      },
+    ],
+    [precipitation, wind, humidity],
+  );
 
-  const isZeroRain = data.p90 === 0 && data.p10 === 0;
+  const horizonLabel = rows[0]?.data.horizon ?? 'T+1h';
+  const validAt = rows[0]?.data.validAtWib ?? '';
 
   return (
-    <div className="glass-panel p-2.5 rounded-xl border border-[#1f6056]/40 shadow-2xl font-mono-data text-xs space-y-1 min-w-[210px] pointer-events-none bg-[#0b1326]/95 backdrop-blur-md">
-      <div className="flex justify-between items-center text-[#1f6056] font-bold border-b border-white/10 pb-1 mb-1">
-        <span>Pukul {label} WIB</span>
-        <span className="text-[10px] text-[#849495]">{nodeName}</span>
-      </div>
-      <div className="flex justify-between gap-4 text-[#ffb4ab]">
-        <span className="text-[#849495]">Kemungkinan tertinggi:</span>
-        <span className="font-bold">{data.p90.toFixed(1)} mm/jam</span>
-      </div>
-      <div className="flex justify-between gap-4 text-[#7df4ff]">
-        <span className="text-[#849495]">Kemungkinan atas:</span>
-        <span>{data.p75.toFixed(1)} mm/jam</span>
-      </div>
-      <div className="flex justify-between gap-4 text-[#1f6056] font-bold">
-        <span>Perkiraan utama:</span>
-        <span>{data.p50.toFixed(1)} mm/jam</span>
-      </div>
-      <div className="flex justify-between gap-4 text-[#7df4ff]">
-        <span className="text-[#849495]">Kemungkinan bawah:</span>
-        <span>{data.p25.toFixed(1)} mm/jam</span>
-      </div>
-      <div className="flex justify-between gap-4 text-[#006970]">
-        <span className="text-[#849495]">Kemungkinan terendah:</span>
-        <span>{data.p10.toFixed(1)} mm/jam</span>
-      </div>
-      {data.observed !== undefined && (
-        <div className="flex justify-between gap-4 text-[#fed639] border-t border-white/10 pt-1 mt-1 font-bold">
-          <span>Hujan yang terukur:</span>
-          <span>{data.observed.toFixed(1)} mm/jam</span>
+    <div className="w-full h-full flex flex-col gap-2">
+      {/* Header */}
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <div className="flex items-center gap-2 flex-wrap">
+          <h3 className="font-mono-data text-xs font-bold text-[#b9cacb] uppercase tracking-wider">
+            Nowcast {horizonLabel} (50 Sampel Difusi)
+          </h3>
+          <span className="text-[10px] font-mono-data text-[#1f6056] bg-[#1f6056]/10 px-2 py-0.5 rounded border border-[#1f6056]/30">
+            Berlaku {validAt}
+          </span>
         </div>
-      )}
-      <div className="flex justify-between gap-4 text-[10px] text-[#849495] border-t border-white/5 pt-1">
-        <span>Selisih kemungkinan:</span>
-        <span className="text-white font-semibold">
-          {isZeroRain ? '0.0 mm/jam (Kering)' : `±${(data.spread / 2).toFixed(1)} mm/jam`}
+        <span className="text-[10px] font-mono-data font-bold text-[#1f6056] bg-[#dbeae3] px-2 py-1 border border-[#1f6056]">
+          AREA MAIN
         </span>
+      </div>
+
+      {/* Rows */}
+      <div className="flex flex-col gap-2 flex-1 justify-center">
+        {rows.map((row) => (
+          <NowcastRow key={row.key} {...row} />
+        ))}
+      </div>
+
+      {/* Footer legend */}
+      <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1.5 text-[10px] font-mono-data text-[#849495] pt-2 border-t border-white/5">
+        <div className="flex items-center gap-2.5 flex-wrap">
+          <span className="flex items-center gap-1 whitespace-nowrap">
+            <span className="w-2.5 h-2.5 bg-[#1f6056]/15 border border-[#1f6056]/40 inline-block" />
+            P10–P90
+          </span>
+          <span className="flex items-center gap-1 whitespace-nowrap">
+            <span className="w-2.5 h-2.5 bg-[#1f6056]/40 border border-[#1f6056]/70 inline-block" />
+            P25–P75
+          </span>
+          <span className="flex items-center gap-1 whitespace-nowrap">
+            <span className="w-3 h-0.5 bg-[#1f6056] inline-block" />
+            Median (P50)
+          </span>
+          <span className="flex items-center gap-1 whitespace-nowrap">
+            <Activity className="w-3 h-3 text-[#fed639]" />
+            Observasi
+          </span>
+        </div>
       </div>
     </div>
   );
-});
+};
 
-const ForecastChartComponent: React.FC<ForecastChartProps> = ({
-  selectedNodeId,
-  forecastData,
-}) => {
-  const baseId = useId().replace(/:/g, '');
-  const band1090Id = `band1090-${baseId}`;
-  const band2575Id = `band2575-${baseId}`;
+interface NowcastRowProps {
+  label: string;
+  icon: React.ComponentType<{ className?: string }>;
+  accent: string;
+  data: NowcastDistribution;
+  observedLabel?: string;
+}
 
-  const rawData = forecastData ?? PROBABILISTIC_FORECAST_DATA[selectedNodeId] ?? PROBABILISTIC_FORECAST_DATA.MAIN;
-  const currentNode = NODES_LIST[selectedNodeId];
-
-  // Process data with strict monotonic quantile validation & non-negative clamping
-  const chartData = useMemo(() => {
-    return rawData.map((d) => {
-      const p10 = Math.max(0, d.p10);
-      const p50 = Math.max(p10, d.p50);
-      const p90 = Math.max(p50, d.p90);
-
-      // Quantile P25 and P75 with strict monotonic bound enforcement
-      const rawP25 = d.p25 ?? Number((p10 + 0.25 * (p90 - p10)).toFixed(1));
-      const rawP75 = d.p75 ?? Number((p10 + 0.75 * (p90 - p10)).toFixed(1));
-
-      const safeP25 = Math.max(p10, Math.min(p50, rawP25));
-      const safeP75 = Math.max(p50, Math.min(p90, rawP75));
-
-      const observed = d.observed !== undefined ? Math.max(0, d.observed) : undefined;
-      const rawSpread = p90 - p10;
-      const spread = Number(rawSpread.toFixed(1));
-
-      return {
-        ...d,
-        p10: Number(p10.toFixed(1)),
-        p25: Number(safeP25.toFixed(1)),
-        p50: Number(p50.toFixed(1)),
-        p75: Number(safeP75.toFixed(1)),
-        p90: Number(p90.toFixed(1)),
-        observed: observed !== undefined ? Number(observed.toFixed(1)) : undefined,
-        range10_90: [Number(p10.toFixed(1)), Number(p90.toFixed(1))],
-        range25_75: [Number(safeP25.toFixed(1)), Number(safeP75.toFixed(1))],
-        spread,
-      };
-    });
-  }, [rawData]);
+const NowcastRow: React.FC<NowcastRowProps> = ({ label, icon: Icon, accent, data, observedLabel }) => {
+  const min = Math.min(data.p10, data.observedNow ?? data.p10);
+  const max = Math.max(data.p90, data.observedNow ?? data.p90);
+  const span = Math.max(0.01, max - min);
+  const pct = (v: number) => Math.max(0, Math.min(100, ((v - min) / span) * 100));
 
   return (
-    <div className="w-full h-full flex flex-col justify-between gap-1">
-      {/* Chart Header & Node Selector */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-1">
-        <div className="flex items-center gap-2 flex-wrap">
-          <h3 className="font-mono-data text-xs font-bold text-[#b9cacb] uppercase tracking-wider">
-            PERKIRAAN HUJAN DI AREA UTAMA
-          </h3>
-          <span className="text-[10px] font-mono-data text-[#1f6056] bg-[#1f6056]/10 px-2 py-0.5 rounded border border-[#1f6056]/30">
-            Rentang kemungkinan hujan
+    <div className="bg-[#0b1326]/40 border border-white/10 rounded-lg p-2.5">
+      <div className="flex items-center justify-between mb-1.5">
+        <div className="flex items-center gap-2">
+          <Icon className="w-3.5 h-3.5" style={{ color: accent }} />
+          <span className="font-mono-data text-[11px] font-bold text-[#dae2fd] uppercase tracking-wider">
+            {label}
+          </span>
+          <span className="text-[9px] font-mono-data text-[#849495]">{data.unit}</span>
+        </div>
+        <div className="flex items-center gap-3 text-[10px] font-mono-data">
+          <span className="text-[#849495]">
+            P50 <span className="font-bold text-[#dae2fd]">{data.p50}</span>
+          </span>
+          <span className="text-[#849495]">
+            μ <span className="font-bold text-[#dae2fd]">{data.mean}</span>
           </span>
         </div>
-
-        <span className="text-[10px] font-mono-data font-bold text-[#1f6056] bg-[#dbeae3] px-2 py-1 border border-[#1f6056]">AREA MAIN</span>
       </div>
 
-      {/* Main Recharts Container with responsive height & safe margins */}
-      <div className="w-full h-[210px] sm:h-[230px] relative" role="img" aria-label="Grafik perkiraan hujan area utama">
-        <ResponsiveContainer width="100%" height="100%">
-          <ComposedChart data={chartData} margin={{ top: 10, right: 15, left: 5, bottom: 5 }}>
-            <defs>
-              <linearGradient id={band1090Id} x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#1f6056" stopOpacity={0.18} />
-                <stop offset="95%" stopColor="#1f6056" stopOpacity={0.02} />
-              </linearGradient>
-              <linearGradient id={band2575Id} x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#1f6056" stopOpacity={0.40} />
-                <stop offset="95%" stopColor="#1f6056" stopOpacity={0.08} />
-              </linearGradient>
-            </defs>
+      <div className="relative h-7 w-full">
+        {/* Track */}
+        <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-2 bg-[#070d18] rounded-full border border-white/10" />
 
-            <CartesianGrid strokeDasharray="3 3" stroke="#d8d4c8" />
-            <XAxis
-              dataKey="timeLabel"
-              tick={{ fill: '#5f685e', fontSize: 10, fontFamily: 'IBM Plex Mono' }}
-              axisLine={{ stroke: '#d8d4c8' }}
-              tickLine={{ stroke: '#d8d4c8' }}
-              minTickGap={15}
-              interval="preserveStartEnd"
-            />
-            <YAxis
-              tick={{ fill: '#5f685e', fontSize: 10, fontFamily: 'IBM Plex Mono' }}
-              axisLine={{ stroke: '#d8d4c8' }}
-              tickLine={{ stroke: '#d8d4c8' }}
-              tickFormatter={(val: number) => `${val}`}
-              domain={[0, 'auto']}
-              allowDataOverflow={false}
-              width={35}
-            />
-            <Tooltip
-              content={<CustomTooltip nodeName={currentNode.name} />}
-              wrapperStyle={{ zIndex: 1000, pointerEvents: 'none', outline: 'none' }}
-              allowEscapeViewBox={{ x: true, y: true }}
-              offset={12}
-              isAnimationActive={false}
-              cursor={{ stroke: '#1f6056', strokeWidth: 1, strokeDasharray: '3 3' }}
-            />
+        {/* P10-P90 band */}
+        <div
+          className="absolute top-1/2 -translate-y-1/2 h-2 rounded-full border"
+          style={{
+            left: `${pct(data.p10)}%`,
+            width: `${pct(data.p90) - pct(data.p10)}%`,
+            background: `${accent}25`,
+            borderColor: `${accent}50`,
+          }}
+        />
 
-            {/* P10-P90 Outer Ensemble Spread Band */}
-            <Area
-              type="monotone"
-              dataKey="range10_90"
-              stroke="#1f6056"
-              strokeWidth={1}
-              strokeDasharray="2 2"
-              fill={`url(#${band1090Id})`}
-              isAnimationActive={false}
-            />
+        {/* P25-P75 band */}
+        <div
+          className="absolute top-1/2 -translate-y-1/2 h-2 rounded-full border"
+          style={{
+            left: `${pct(data.p25)}%`,
+            width: `${pct(data.p75) - pct(data.p25)}%`,
+            background: `${accent}55`,
+            borderColor: `${accent}90`,
+          }}
+        />
 
-            {/* P25-P75 Inner IQR Band */}
-            <Area
-              type="monotone"
-              dataKey="range25_75"
-              stroke="rgba(31, 96, 86, 0.38)"
-              strokeWidth={1}
-              fill={`url(#${band2575Id})`}
-              isAnimationActive={false}
-            />
+        {/* Median line */}
+        <div
+          className="absolute top-0 bottom-0 w-0.5"
+          style={{ left: `${pct(data.p50)}%`, background: accent }}
+        />
 
-            {/* P50 Ensemble Median Line */}
-            <Line
-              type="monotone"
-              dataKey="p50"
-              stroke="#1f6056"
-              strokeWidth={2.5}
-              dot={{ r: 3, fill: '#1f6056', stroke: '#ffffff', strokeWidth: 1.5 }}
-              activeDot={{ r: 6, fill: '#ffffff', stroke: '#1f6056' }}
-              isAnimationActive={false}
+        {/* Observed marker (if available) */}
+        {data.observedNow !== undefined && (
+          <>
+            <div
+              className="absolute top-0 bottom-0 w-px bg-[#fed639]"
+              style={{ left: `${pct(data.observedNow)}%` }}
             />
-
-            {/* Observed Actual Rain Points */}
-            <Line
-              type="monotone"
-              dataKey="observed"
-              stroke="#b77817"
-              strokeWidth={2}
-              strokeDasharray="4 4"
-              dot={{ r: 3.5, fill: '#b77817', stroke: '#ffffff', strokeWidth: 1 }}
-              isAnimationActive={false}
+            <div
+              className="absolute -top-1 w-2 h-2 rotate-45 bg-[#fed639] border border-[#070d18]"
+              style={{ left: `calc(${pct(data.observedNow)}% - 4px)` }}
             />
-          </ComposedChart>
-        </ResponsiveContainer>
+          </>
+        )}
       </div>
 
-      {/* Chart Footer Legend - Fully Responsive & Truncation Safe */}
-      <div className="flex flex-wrap items-center justify-between text-[10px] font-mono-data text-[#849495] pt-2 border-t border-white/5 gap-y-1.5 gap-x-3">
-        <div className="flex items-center gap-2.5 flex-wrap">
-          <span className="flex items-center gap-1 text-[#1f6056] font-bold whitespace-nowrap">
-            <span className="w-2.5 h-0.5 bg-[#1f6056] inline-block" /> P50 (Median)
-          </span>
-          <span className="flex items-center gap-1 text-[#7df4ff] whitespace-nowrap">
-            <span className="w-2.5 h-2.5 bg-[#1f6056]/30 border border-[#1f6056]/50 inline-block rounded-xs" /> Band P25–P75
-          </span>
-          <span className="flex items-center gap-1 text-[#1f6056]/70 whitespace-nowrap">
-            <span className="w-2.5 h-2.5 bg-[#1f6056]/10 border border-[#1f6056]/30 inline-block rounded-xs" /> Band P10–P90
-          </span>
-          <span className="flex items-center gap-1 text-[#fed639] whitespace-nowrap">
-            <span className="w-2 h-2 rounded-full bg-[#fed639] inline-block" /> Observasi
-          </span>
-        </div>
-        <span className="text-[#1f6056] font-bold truncate ml-auto max-w-[180px] sm:max-w-none text-right">
-          {currentNode.locationName}
+      {/* Numeric axis ticks */}
+      <div className="flex justify-between text-[9px] font-mono-data text-[#849495] mt-1">
+        <span>{min.toFixed(1)}</span>
+        <span>
+          {observedLabel && data.observedNow !== undefined
+            ? `${observedLabel}: ${data.observedNow.toFixed(1)}`
+            : `${data.samples.length} sampel`}
         </span>
+        <span>{max.toFixed(1)}</span>
       </div>
     </div>
   );

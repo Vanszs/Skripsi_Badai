@@ -1,0 +1,71 @@
+{
+  "projectRoot": "/media/DiskE/SKRIPSI/Skripsi_Bevan",
+  "batchFiles": [
+    {
+      "path": "core/src/inference.py",
+      "language": "python",
+      "sizeLines": 301,
+      "fileCategory": "code"
+    },
+    {
+      "path": "core/src/models/gnn.py",
+      "language": "python",
+      "sizeLines": 161,
+      "fileCategory": "code"
+    },
+    {
+      "path": "core/src/retrieval/base.py",
+      "language": "python",
+      "sizeLines": 73,
+      "fileCategory": "code"
+    },
+    {
+      "path": "core/tests/test_gnn_edge_attr.py",
+      "language": "python",
+      "sizeLines": 36,
+      "fileCategory": "code"
+    },
+    {
+      "path": "core/tests/test_inference_graphs.py",
+      "language": "python",
+      "sizeLines": 40,
+      "fileCategory": "code"
+    },
+    {
+      "path": "core/tests/test_inference_smoke.py",
+      "language": "python",
+      "sizeLines": 48,
+      "fileCategory": "code"
+    },
+    {
+      "path": "core/tests/test_retrieval.py",
+      "language": "python",
+      "sizeLines": 56,
+      "fileCategory": "code"
+    }
+  ],
+  "batchImportData": {
+    "core/src/inference.py": [
+      "core/src/config.py",
+      "core/src/models/diffusion.py",
+      "core/src/models/gnn.py",
+      "core/src/retrieval/base.py"
+    ],
+    "core/src/models/gnn.py": [],
+    "core/src/retrieval/base.py": [],
+    "core/tests/test_gnn_edge_attr.py": [
+      "core/src/config.py",
+      "core/src/models/gnn.py"
+    ],
+    "core/tests/test_inference_graphs.py": [
+      "core/src/config.py",
+      "core/src/inference.py"
+    ],
+    "core/tests/test_inference_smoke.py": [
+      "core/src/inference.py"
+    ],
+    "core/tests/test_retrieval.py": [
+      "core/src/retrieval/base.py"
+    ]
+  }
+}

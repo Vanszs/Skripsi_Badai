@@ -1,0 +1,1920 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 7,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "core/src/inference.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 301,
+      "nonEmptyLines": 271,
+      "functions": [
+        {
+          "name": "_build_edge_index_from_config",
+          "startLine": 28,
+          "endLine": 43,
+          "params": [
+            "config",
+            "device"
+          ]
+        },
+        {
+          "name": "create_inference_graphs",
+          "startLine": 46,
+          "endLine": 73,
+          "params": [
+            "condition_sequence",
+            "config",
+            "device"
+          ]
+        },
+        {
+          "name": "load_model_and_stats",
+          "startLine": 95,
+          "endLine": 209,
+          "params": [
+            "checkpoint_path"
+          ]
+        },
+        {
+          "name": "run_inference_real",
+          "startLine": 212,
+          "endLine": 301,
+          "params": [
+            "features_norm",
+            "model_wrapper",
+            "stats",
+            "retrieval_db",
+            "num_samples",
+            "device"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "InferenceModelWrapper",
+          "startLine": 76,
+          "endLine": 92,
+          "methods": [
+            "__init__",
+            "eval",
+            "to"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "_build_edge_index_from_config",
+          "line": 28,
+          "isDefault": false
+        },
+        {
+          "name": "create_inference_graphs",
+          "line": 46,
+          "isDefault": false
+        },
+        {
+          "name": "InferenceModelWrapper",
+          "line": 76,
+          "isDefault": false
+        },
+        {
+          "name": "load_model_and_stats",
+          "line": 95,
+          "isDefault": false
+        },
+        {
+          "name": "run_inference_real",
+          "line": 212,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "_build_edge_index_from_config",
+          "callee": "config.get",
+          "lineNumber": 29
+        },
+        {
+          "caller": "_build_edge_index_from_config",
+          "callee": "config.get",
+          "lineNumber": 30
+        },
+        {
+          "caller": "_build_edge_index_from_config",
+          "callee": "enumerate",
+          "lineNumber": 32
+        },
+        {
+          "caller": "_build_edge_index_from_config",
+          "callee": "torch.tensor",
+          "lineNumber": 35
+        },
+        {
+          "caller": "_build_edge_index_from_config",
+          "callee": "build_star_edge_index(node_names).to",
+          "lineNumber": 37
+        },
+        {
+          "caller": "_build_edge_index_from_config",
+          "callee": "build_star_edge_index",
+          "lineNumber": 37
+        },
+        {
+          "caller": "_build_edge_index_from_config",
+          "callee": "ValueError",
+          "lineNumber": 39
+        },
+        {
+          "caller": "create_inference_graphs",
+          "callee": "isinstance",
+          "lineNumber": 50
+        },
+        {
+          "caller": "create_inference_graphs",
+          "callee": "torch.device",
+          "lineNumber": 51
+        },
+        {
+          "caller": "create_inference_graphs",
+          "callee": "int",
+          "lineNumber": 52
+        },
+        {
+          "caller": "create_inference_graphs",
+          "callee": "list",
+          "lineNumber": 53
+        },
+        {
+          "caller": "create_inference_graphs",
+          "callee": "config.get",
+          "lineNumber": 53
+        },
+        {
+          "caller": "create_inference_graphs",
+          "callee": "int",
+          "lineNumber": 54
+        },
+        {
+          "caller": "create_inference_graphs",
+          "callee": "config.get",
+          "lineNumber": 54
+        },
+        {
+          "caller": "create_inference_graphs",
+          "callee": "len",
+          "lineNumber": 54
+        },
+        {
+          "caller": "create_inference_graphs",
+          "callee": "_build_edge_index_from_config",
+          "lineNumber": 55
+        },
+        {
+          "caller": "create_inference_graphs",
+          "callee": "build_star_edge_attr(node_names).to",
+          "lineNumber": 56
+        },
+        {
+          "caller": "create_inference_graphs",
+          "callee": "build_star_edge_attr",
+          "lineNumber": 56
+        },
+        {
+          "caller": "create_inference_graphs",
+          "callee": "range",
+          "lineNumber": 59
+        },
+        {
+          "caller": "create_inference_graphs",
+          "callee": "condition_sequence.dim",
+          "lineNumber": 60
+        },
+        {
+          "caller": "create_inference_graphs",
+          "callee": "ValueError",
+          "lineNumber": 61
+        },
+        {
+          "caller": "create_inference_graphs",
+          "callee": "tuple",
+          "lineNumber": 63
+        },
+        {
+          "caller": "create_inference_graphs",
+          "callee": "ValueError",
+          "lineNumber": 67
+        },
+        {
+          "caller": "create_inference_graphs",
+          "callee": "Data",
+          "lineNumber": 70
+        },
+        {
+          "caller": "create_inference_graphs",
+          "callee": "node_features.to",
+          "lineNumber": 70
+        },
+        {
+          "caller": "create_inference_graphs",
+          "callee": "Batch.from_data_list",
+          "lineNumber": 71
+        },
+        {
+          "caller": "create_inference_graphs",
+          "callee": "graphs_sequence.append",
+          "lineNumber": 72
+        },
+        {
+          "caller": "create_inference_graphs",
+          "callee": "batch.to",
+          "lineNumber": 72
+        },
+        {
+          "caller": "eval",
+          "callee": "self.st_gnn.eval",
+          "lineNumber": 84
+        },
+        {
+          "caller": "eval",
+          "callee": "self.forecaster.model.eval",
+          "lineNumber": 85
+        },
+        {
+          "caller": "to",
+          "callee": "self.st_gnn.to",
+          "lineNumber": 89
+        },
+        {
+          "caller": "to",
+          "callee": "self.forecaster.model.to",
+          "lineNumber": 90
+        },
+        {
+          "caller": "load_model_and_stats",
+          "callee": "os.path.exists",
+          "lineNumber": 96
+        },
+        {
+          "caller": "load_model_and_stats",
+          "callee": "os.path.exists",
+          "lineNumber": 97
+        },
+        {
+          "caller": "load_model_and_stats",
+          "callee": "os.path.join",
+          "lineNumber": 97
+        },
+        {
+          "caller": "load_model_and_stats",
+          "callee": "os.path.join",
+          "lineNumber": 98
+        },
+        {
+          "caller": "load_model_and_stats",
+          "callee": "FileNotFoundError",
+          "lineNumber": 100
+        },
+        {
+          "caller": "load_model_and_stats",
+          "callee": "torch.load",
+          "lineNumber": 102
+        },
+        {
+          "caller": "load_model_and_stats",
+          "callee": "config.get",
+          "lineNumber": 105
+        },
+        {
+          "caller": "load_model_and_stats",
+          "callee": "isinstance",
+          "lineNumber": 106
+        },
+        {
+          "caller": "load_model_and_stats",
+          "callee": "bool",
+          "lineNumber": 109
+        },
+        {
+          "caller": "load_model_and_stats",
+          "callee": "rain_cfg.get",
+          "lineNumber": 109
+        },
+        {
+          "caller": "load_model_and_stats",
+          "callee": "float",
+          "lineNumber": 110
+        },
+        {
+          "caller": "load_model_and_stats",
+          "callee": "rain_cfg.get",
+          "lineNumber": 110
+        },
+        {
+          "caller": "load_model_and_stats",
+          "callee": "float",
+          "lineNumber": 111
+        },
+        {
+          "caller": "load_model_and_stats",
+          "callee": "rain_cfg.get",
+          "lineNumber": 111
+        },
+        {
+          "caller": "load_model_and_stats",
+          "callee": "float",
+          "lineNumber": 112
+        },
+        {
+          "caller": "load_model_and_stats",
+          "callee": "rain_cfg.get",
+          "lineNumber": 112
+        },
+        {
+          "caller": "load_model_and_stats",
+          "callee": "float",
+          "lineNumber": 113
+        },
+        {
+          "caller": "load_model_and_stats",
+          "callee": "rain_cfg.get",
+          "lineNumber": 113
+        },
+        {
+          "caller": "load_model_and_stats",
+          "callee": "str",
+          "lineNumber": 114
+        },
+        {
+          "caller": "load_model_and_stats",
+          "callee": "rain_cfg.get",
+          "lineNumber": 114
+        },
+        {
+          "caller": "load_model_and_stats",
+          "callee": "str",
+          "lineNumber": 115
+        },
+        {
+          "caller": "load_model_and_stats",
+          "callee": "rain_cfg.get",
+          "lineNumber": 115
+        },
+        {
+          "caller": "load_model_and_stats",
+          "callee": "ValueError",
+          "lineNumber": 131
+        },
+        {
+          "caller": "load_model_and_stats",
+          "callee": "ValueError",
+          "lineNumber": 133
+        },
+        {
+          "caller": "load_model_and_stats",
+          "callee": "ValueError",
+          "lineNumber": 135
+        },
+        {
+          "caller": "load_model_and_stats",
+          "callee": "SpatioTemporalGNN",
+          "lineNumber": 139
+        },
+        {
+          "caller": "load_model_and_stats",
+          "callee": "st_gnn.load_state_dict",
+          "lineNumber": 147
+        },
+        {
+          "caller": "load_model_and_stats",
+          "callee": "sorted",
+          "lineNumber": 149
+        },
+        {
+          "caller": "load_model_and_stats",
+          "callee": "RuntimeError",
+          "lineNumber": 151
+        },
+        {
+          "caller": "load_model_and_stats",
+          "callee": "RuntimeError",
+          "lineNumber": 153
+        },
+        {
+          "caller": "load_model_and_stats",
+          "callee": "config.get",
+          "lineNumber": 155
+        },
+        {
+          "caller": "load_model_and_stats",
+          "callee": "len",
+          "lineNumber": 155
+        },
+        {
+          "caller": "load_model_and_stats",
+          "callee": "ConditionalDiffusionModel",
+          "lineNumber": 156
+        },
+        {
+          "caller": "load_model_and_stats",
+          "callee": "diff_model.load_state_dict",
+          "lineNumber": 163
+        },
+        {
+          "caller": "load_model_and_stats",
+          "callee": "sorted",
+          "lineNumber": 164
+        },
+        {
+          "caller": "load_model_and_stats",
+          "callee": "k.startswith",
+          "lineNumber": 164
+        },
+        {
+          "caller": "load_model_and_stats",
+          "callee": "RuntimeError",
+          "lineNumber": 166
+        },
+        {
+          "caller": "load_model_and_stats",
+          "callee": "RuntimeError",
+          "lineNumber": 168
+        },
+        {
+          "caller": "load_model_and_stats",
+          "callee": "RainForecaster",
+          "lineNumber": 172
+        },
+        {
+          "caller": "load_model_and_stats",
+          "callee": "InferenceModelWrapper",
+          "lineNumber": 173
+        },
+        {
+          "caller": "load_model_and_stats",
+          "callee": "config.get",
+          "lineNumber": 176
+        },
+        {
+          "caller": "load_model_and_stats",
+          "callee": "RetrievalDatabase",
+          "lineNumber": 177
+        },
+        {
+          "caller": "load_model_and_stats",
+          "callee": "os.path.exists",
+          "lineNumber": 178
+        },
+        {
+          "caller": "load_model_and_stats",
+          "callee": "pd.read_parquet",
+          "lineNumber": 179
+        },
+        {
+          "caller": "load_model_and_stats",
+          "callee": "harmonize_weather_columns",
+          "lineNumber": 180
+        },
+        {
+          "caller": "load_model_and_stats",
+          "callee": "validate_feature_schema",
+          "lineNumber": 181
+        },
+        {
+          "caller": "load_model_and_stats",
+          "callee": "validate_feature_values",
+          "lineNumber": 182
+        },
+        {
+          "caller": "load_model_and_stats",
+          "callee": "pd.to_datetime",
+          "lineNumber": 183
+        },
+        {
+          "caller": "load_model_and_stats",
+          "callee": "df[\"date\"].dt.tz_localize",
+          "lineNumber": 185
+        },
+        {
+          "caller": "load_model_and_stats",
+          "callee": "config.get",
+          "lineNumber": 186
+        },
+        {
+          "caller": "load_model_and_stats",
+          "callee": "config.get",
+          "lineNumber": 187
+        },
+        {
+          "caller": "load_model_and_stats",
+          "callee": "df[(df[\"date\"] <= pd.to_datetime(train_end)) & (df[\"node\"] == main_name)].copy",
+          "lineNumber": 188
+        },
+        {
+          "caller": "load_model_and_stats",
+          "callee": "pd.to_datetime",
+          "lineNumber": 188
+        },
+        {
+          "caller": "load_model_and_stats",
+          "callee": "main_train.sort_values",
+          "lineNumber": 189
+        },
+        {
+          "caller": "load_model_and_stats",
+          "callee": "config.get",
+          "lineNumber": 190
+        },
+        {
+          "caller": "load_model_and_stats",
+          "callee": "config.get",
+          "lineNumber": 191
+        },
+        {
+          "caller": "load_model_and_stats",
+          "callee": "stats[\"c_mean\"].numpy",
+          "lineNumber": 193
+        },
+        {
+          "caller": "load_model_and_stats",
+          "callee": "stats[\"c_std\"].numpy",
+          "lineNumber": 194
+        },
+        {
+          "caller": "load_model_and_stats",
+          "callee": "list(target_cols).index",
+          "lineNumber": 198
+        },
+        {
+          "caller": "load_model_and_stats",
+          "callee": "list",
+          "lineNumber": 198
+        },
+        {
+          "caller": "load_model_and_stats",
+          "callee": "main_train[target_cols].values.astype",
+          "lineNumber": 199
+        },
+        {
+          "caller": "load_model_and_stats",
+          "callee": "np.log1p",
+          "lineNumber": 200
+        },
+        {
+          "caller": "load_model_and_stats",
+          "callee": "stats[\"t_mean\"].numpy",
+          "lineNumber": 201
+        },
+        {
+          "caller": "load_model_and_stats",
+          "callee": "stats[\"t_std\"].numpy",
+          "lineNumber": 202
+        },
+        {
+          "caller": "load_model_and_stats",
+          "callee": "((train_targets_g - t_mean) / (t_std + 1e-5)).astype",
+          "lineNumber": 203
+        },
+        {
+          "caller": "load_model_and_stats",
+          "callee": "retrieval_db.add_items",
+          "lineNumber": 205
+        },
+        {
+          "caller": "load_model_and_stats",
+          "callee": "train_features_norm[:-1].astype",
+          "lineNumber": 206
+        },
+        {
+          "caller": "run_inference_real",
+          "callee": "isinstance",
+          "lineNumber": 220
+        },
+        {
+          "caller": "run_inference_real",
+          "callee": "torch.device",
+          "lineNumber": 221
+        },
+        {
+          "caller": "run_inference_real",
+          "callee": "model_wrapper.to",
+          "lineNumber": 223
+        },
+        {
+          "caller": "run_inference_real",
+          "callee": "model_wrapper.eval",
+          "lineNumber": 224
+        },
+        {
+          "caller": "run_inference_real",
+          "callee": "torch.is_tensor",
+          "lineNumber": 225
+        },
+        {
+          "caller": "run_inference_real",
+          "callee": "torch.tensor",
+          "lineNumber": 226
+        },
+        {
+          "caller": "run_inference_real",
+          "callee": "features_norm.to",
+          "lineNumber": 227
+        },
+        {
+          "caller": "run_inference_real",
+          "callee": "len",
+          "lineNumber": 229
+        },
+        {
+          "caller": "run_inference_real",
+          "callee": "model_wrapper.config.get",
+          "lineNumber": 229
+        },
+        {
+          "caller": "run_inference_real",
+          "callee": "features_norm.dim",
+          "lineNumber": 230
+        },
+        {
+          "caller": "run_inference_real",
+          "callee": "features_norm.unsqueeze",
+          "lineNumber": 232
+        },
+        {
+          "caller": "run_inference_real",
+          "callee": "features_norm.dim",
+          "lineNumber": 233
+        },
+        {
+          "caller": "run_inference_real",
+          "callee": "features_norm.unsqueeze",
+          "lineNumber": 235
+        },
+        {
+          "caller": "run_inference_real",
+          "callee": "torch.cat",
+          "lineNumber": 242
+        },
+        {
+          "caller": "run_inference_real",
+          "callee": "last.repeat",
+          "lineNumber": 242
+        },
+        {
+          "caller": "run_inference_real",
+          "callee": "last.dim",
+          "lineNumber": 242
+        },
+        {
+          "caller": "run_inference_real",
+          "callee": "torch.no_grad",
+          "lineNumber": 251
+        },
+        {
+          "caller": "run_inference_real",
+          "callee": "create_inference_graphs",
+          "lineNumber": 253
+        },
+        {
+          "caller": "run_inference_real",
+          "callee": "st_gnn",
+          "lineNumber": 254
+        },
+        {
+          "caller": "run_inference_real",
+          "callee": "condition_seq.dim",
+          "lineNumber": 256
+        },
+        {
+          "caller": "run_inference_real",
+          "callee": "config[\"node_names\"].index",
+          "lineNumber": 257
+        },
+        {
+          "caller": "run_inference_real",
+          "callee": "condition_seq[-1, main_idx, :].unsqueeze",
+          "lineNumber": 258
+        },
+        {
+          "caller": "run_inference_real",
+          "callee": "condition_seq[-1].unsqueeze",
+          "lineNumber": 260
+        },
+        {
+          "caller": "run_inference_real",
+          "callee": "retrieval_db.query(context_last.cpu().numpy(), k=config[\"k_neighbors\"]).to",
+          "lineNumber": 262
+        },
+        {
+          "caller": "run_inference_real",
+          "callee": "retrieval_db.query",
+          "lineNumber": 262
+        },
+        {
+          "caller": "run_inference_real",
+          "callee": "context_last.cpu().numpy",
+          "lineNumber": 262
+        },
+        {
+          "caller": "run_inference_real",
+          "callee": "context_last.cpu",
+          "lineNumber": 262
+        },
+        {
+          "caller": "run_inference_real",
+          "callee": "forecaster.sample_fast",
+          "lineNumber": 263
+        },
+        {
+          "caller": "run_inference_real",
+          "callee": "stats[\"t_mean\"].to",
+          "lineNumber": 271
+        },
+        {
+          "caller": "run_inference_real",
+          "callee": "stats[\"t_std\"].to",
+          "lineNumber": 272
+        },
+        {
+          "caller": "run_inference_real",
+          "callee": "torch.expm1",
+          "lineNumber": 274
+        },
+        {
+          "caller": "run_inference_real",
+          "callee": "torch.clamp",
+          "lineNumber": 274
+        },
+        {
+          "caller": "run_inference_real",
+          "callee": "torch.clamp",
+          "lineNumber": 275
+        },
+        {
+          "caller": "run_inference_real",
+          "callee": "torch.clamp",
+          "lineNumber": 276
+        },
+        {
+          "caller": "run_inference_real",
+          "callee": "torch.clamp",
+          "lineNumber": 277
+        },
+        {
+          "caller": "run_inference_real",
+          "callee": "config.get",
+          "lineNumber": 278
+        },
+        {
+          "caller": "run_inference_real",
+          "callee": "float",
+          "lineNumber": 280
+        },
+        {
+          "caller": "run_inference_real",
+          "callee": "rain_cfg.get",
+          "lineNumber": 280
+        },
+        {
+          "caller": "run_inference_real",
+          "callee": "rain_cfg.get",
+          "lineNumber": 281
+        },
+        {
+          "caller": "run_inference_real",
+          "callee": "forecaster.model.compute_wet_probability",
+          "lineNumber": 282
+        },
+        {
+          "caller": "run_inference_real",
+          "callee": "float",
+          "lineNumber": 287
+        },
+        {
+          "caller": "run_inference_real",
+          "callee": "wet_prob.squeeze().item",
+          "lineNumber": 287
+        },
+        {
+          "caller": "run_inference_real",
+          "callee": "wet_prob.squeeze",
+          "lineNumber": 287
+        },
+        {
+          "caller": "run_inference_real",
+          "callee": "samples_denorm.cpu().numpy",
+          "lineNumber": 290
+        },
+        {
+          "caller": "run_inference_real",
+          "callee": "samples_denorm.cpu",
+          "lineNumber": 290
+        },
+        {
+          "caller": "run_inference_real",
+          "callee": "config.get",
+          "lineNumber": 293
+        },
+        {
+          "caller": "run_inference_real",
+          "callee": "bool",
+          "lineNumber": 297
+        },
+        {
+          "caller": "run_inference_real",
+          "callee": "rain_cfg.get",
+          "lineNumber": 297
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 5,
+        "functionCount": 4,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "core/src/models/gnn.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 161,
+      "nonEmptyLines": 131,
+      "classes": [
+        {
+          "name": "TemporalAttention",
+          "startLine": 14,
+          "endLine": 61,
+          "methods": [
+            "__init__",
+            "forward"
+          ],
+          "properties": []
+        },
+        {
+          "name": "SpatialGNN",
+          "startLine": 64,
+          "endLine": 96,
+          "methods": [
+            "__init__",
+            "forward"
+          ],
+          "properties": []
+        },
+        {
+          "name": "SpatioTemporalGNN",
+          "startLine": 99,
+          "endLine": 161,
+          "methods": [
+            "__init__",
+            "forward"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "TemporalAttention",
+          "line": 14,
+          "isDefault": false
+        },
+        {
+          "name": "SpatialGNN",
+          "line": 64,
+          "isDefault": false
+        },
+        {
+          "name": "SpatioTemporalGNN",
+          "line": 99,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "__init__",
+          "callee": "super().__init__",
+          "lineNumber": 20
+        },
+        {
+          "caller": "__init__",
+          "callee": "super",
+          "lineNumber": 20
+        },
+        {
+          "caller": "__init__",
+          "callee": "int",
+          "lineNumber": 21
+        },
+        {
+          "caller": "__init__",
+          "callee": "bool",
+          "lineNumber": 22
+        },
+        {
+          "caller": "__init__",
+          "callee": "nn.MultiheadAttention",
+          "lineNumber": 23
+        },
+        {
+          "caller": "__init__",
+          "callee": "nn.LayerNorm",
+          "lineNumber": 29
+        },
+        {
+          "caller": "__init__",
+          "callee": "nn.Dropout",
+          "lineNumber": 30
+        },
+        {
+          "caller": "__init__",
+          "callee": "nn.Parameter",
+          "lineNumber": 31
+        },
+        {
+          "caller": "__init__",
+          "callee": "torch.zeros",
+          "lineNumber": 31
+        },
+        {
+          "caller": "__init__",
+          "callee": "nn.init.normal_",
+          "lineNumber": 32
+        },
+        {
+          "caller": "forward",
+          "callee": "ValueError",
+          "lineNumber": 41
+        },
+        {
+          "caller": "forward",
+          "callee": "torch.triu",
+          "lineNumber": 51
+        },
+        {
+          "caller": "forward",
+          "callee": "torch.ones",
+          "lineNumber": 52
+        },
+        {
+          "caller": "forward",
+          "callee": "self.attention",
+          "lineNumber": 57
+        },
+        {
+          "caller": "forward",
+          "callee": "self.norm",
+          "lineNumber": 58
+        },
+        {
+          "caller": "forward",
+          "callee": "self.dropout",
+          "lineNumber": 58
+        },
+        {
+          "caller": "__init__",
+          "callee": "super().__init__",
+          "lineNumber": 70
+        },
+        {
+          "caller": "__init__",
+          "callee": "super",
+          "lineNumber": 70
+        },
+        {
+          "caller": "__init__",
+          "callee": "GATConv",
+          "lineNumber": 73
+        },
+        {
+          "caller": "__init__",
+          "callee": "GATConv",
+          "lineNumber": 74
+        },
+        {
+          "caller": "__init__",
+          "callee": "nn.ReLU",
+          "lineNumber": 76
+        },
+        {
+          "caller": "forward",
+          "callee": "self.conv1",
+          "lineNumber": 86
+        },
+        {
+          "caller": "forward",
+          "callee": "self.relu",
+          "lineNumber": 87
+        },
+        {
+          "caller": "forward",
+          "callee": "self.conv2",
+          "lineNumber": 90
+        },
+        {
+          "caller": "forward",
+          "callee": "global_mean_pool",
+          "lineNumber": 94
+        },
+        {
+          "caller": "__init__",
+          "callee": "super().__init__",
+          "lineNumber": 112
+        },
+        {
+          "caller": "__init__",
+          "callee": "super",
+          "lineNumber": 112
+        },
+        {
+          "caller": "__init__",
+          "callee": "SpatialGNN",
+          "lineNumber": 118
+        },
+        {
+          "caller": "__init__",
+          "callee": "TemporalAttention",
+          "lineNumber": 126
+        },
+        {
+          "caller": "__init__",
+          "callee": "nn.Linear",
+          "lineNumber": 134
+        },
+        {
+          "caller": "forward",
+          "callee": "getattr",
+          "lineNumber": 150
+        },
+        {
+          "caller": "forward",
+          "callee": "self.spatial_gnn",
+          "lineNumber": 151
+        },
+        {
+          "caller": "forward",
+          "callee": "spatial_outputs.append",
+          "lineNumber": 152
+        },
+        {
+          "caller": "forward",
+          "callee": "torch.stack",
+          "lineNumber": 155
+        },
+        {
+          "caller": "forward",
+          "callee": "self.temporal_attn",
+          "lineNumber": 158
+        },
+        {
+          "caller": "forward",
+          "callee": "self.output_proj",
+          "lineNumber": 161
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 3,
+        "functionCount": 0,
+        "classCount": 3
+      }
+    },
+    {
+      "path": "core/src/retrieval/base.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 73,
+      "nonEmptyLines": 59,
+      "classes": [
+        {
+          "name": "RetrievalDatabase",
+          "startLine": 5,
+          "endLine": 73,
+          "methods": [
+            "__init__",
+            "add_items",
+            "query"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "RetrievalDatabase",
+          "line": 5,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "__init__",
+          "callee": "faiss.IndexFlatL2",
+          "lineNumber": 12
+        },
+        {
+          "caller": "add_items",
+          "callee": "ValueError",
+          "lineNumber": 21
+        },
+        {
+          "caller": "add_items",
+          "callee": "self.index.train",
+          "lineNumber": 24
+        },
+        {
+          "caller": "add_items",
+          "callee": "self.index.add",
+          "lineNumber": 26
+        },
+        {
+          "caller": "add_items",
+          "callee": "self.stored_data.append",
+          "lineNumber": 27
+        },
+        {
+          "caller": "query",
+          "callee": "ValueError",
+          "lineNumber": 43
+        },
+        {
+          "caller": "query",
+          "callee": "ValueError",
+          "lineNumber": 45
+        },
+        {
+          "caller": "query",
+          "callee": "self.index.search",
+          "lineNumber": 50
+        },
+        {
+          "caller": "query",
+          "callee": "np.any",
+          "lineNumber": 52
+        },
+        {
+          "caller": "query",
+          "callee": "RuntimeError",
+          "lineNumber": 53
+        },
+        {
+          "caller": "query",
+          "callee": "hasattr",
+          "lineNumber": 59
+        },
+        {
+          "caller": "query",
+          "callee": "isinstance",
+          "lineNumber": 60
+        },
+        {
+          "caller": "query",
+          "callee": "len",
+          "lineNumber": 60
+        },
+        {
+          "caller": "query",
+          "callee": "np.concatenate(self.stored_data, axis=0).astype",
+          "lineNumber": 62
+        },
+        {
+          "caller": "query",
+          "callee": "np.concatenate",
+          "lineNumber": 62
+        },
+        {
+          "caller": "query",
+          "callee": "np.array",
+          "lineNumber": 64
+        },
+        {
+          "caller": "query",
+          "callee": "len",
+          "lineNumber": 68
+        },
+        {
+          "caller": "query",
+          "callee": "torch.tensor",
+          "lineNumber": 73
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "core/tests/test_gnn_edge_attr.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 36,
+      "nonEmptyLines": 30,
+      "classes": [
+        {
+          "name": "GNNEdgeAttrTest",
+          "startLine": 11,
+          "endLine": 36,
+          "methods": [
+            "_make_graphs",
+            "test_gnn_output_shape",
+            "test_edge_attr_is_constant"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "GNNEdgeAttrTest",
+          "line": 11,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "_make_graphs",
+          "callee": "build_star_edge_index",
+          "lineNumber": 13
+        },
+        {
+          "caller": "_make_graphs",
+          "callee": "torch.full",
+          "lineNumber": 14
+        },
+        {
+          "caller": "_make_graphs",
+          "callee": "torch.randn",
+          "lineNumber": 15
+        },
+        {
+          "caller": "_make_graphs",
+          "callee": "torch.zeros",
+          "lineNumber": 17
+        },
+        {
+          "caller": "_make_graphs",
+          "callee": "Data",
+          "lineNumber": 18
+        },
+        {
+          "caller": "_make_graphs",
+          "callee": "range",
+          "lineNumber": 18
+        },
+        {
+          "caller": "test_gnn_output_shape",
+          "callee": "SpatioTemporalGNN",
+          "lineNumber": 22
+        },
+        {
+          "caller": "test_gnn_output_shape",
+          "callee": "self._make_graphs",
+          "lineNumber": 25
+        },
+        {
+          "caller": "test_gnn_output_shape",
+          "callee": "gnn",
+          "lineNumber": 26
+        },
+        {
+          "caller": "test_gnn_output_shape",
+          "callee": "self.assertEqual",
+          "lineNumber": 27
+        },
+        {
+          "caller": "test_edge_attr_is_constant",
+          "callee": "build_star_edge_attr",
+          "lineNumber": 34
+        },
+        {
+          "caller": "test_edge_attr_is_constant",
+          "callee": "self.assertTrue",
+          "lineNumber": 35
+        },
+        {
+          "caller": "test_edge_attr_is_constant",
+          "callee": "(edge_attr == edge_attr[0]).all",
+          "lineNumber": 35
+        },
+        {
+          "caller": "test_edge_attr_is_constant",
+          "callee": "self.assertAlmostEqual",
+          "lineNumber": 36
+        },
+        {
+          "caller": "test_edge_attr_is_constant",
+          "callee": "float",
+          "lineNumber": 36
+        },
+        {
+          "caller": "test_edge_attr_is_constant",
+          "callee": "edge_attr[0].item",
+          "lineNumber": 36
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "core/tests/test_inference_graphs.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 40,
+      "nonEmptyLines": 33,
+      "classes": [
+        {
+          "name": "InferenceGraphsTest",
+          "startLine": 10,
+          "endLine": 40,
+          "methods": [
+            "_config",
+            "test_create_inference_graphs_correct_shape",
+            "test_create_inference_graphs_rejects_wrong_shape",
+            "test_create_inference_graphs_rejects_wrong_node_count"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "InferenceGraphsTest",
+          "line": 10,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "test_create_inference_graphs_correct_shape",
+          "callee": "self._config",
+          "lineNumber": 22
+        },
+        {
+          "caller": "test_create_inference_graphs_correct_shape",
+          "callee": "torch.randn",
+          "lineNumber": 23
+        },
+        {
+          "caller": "test_create_inference_graphs_correct_shape",
+          "callee": "create_inference_graphs",
+          "lineNumber": 24
+        },
+        {
+          "caller": "test_create_inference_graphs_correct_shape",
+          "callee": "self.assertEqual",
+          "lineNumber": 25
+        },
+        {
+          "caller": "test_create_inference_graphs_correct_shape",
+          "callee": "len",
+          "lineNumber": 25
+        },
+        {
+          "caller": "test_create_inference_graphs_correct_shape",
+          "callee": "self.assertEqual",
+          "lineNumber": 26
+        },
+        {
+          "caller": "test_create_inference_graphs_correct_shape",
+          "callee": "self.assertTrue",
+          "lineNumber": 27
+        },
+        {
+          "caller": "test_create_inference_graphs_correct_shape",
+          "callee": "hasattr",
+          "lineNumber": 27
+        },
+        {
+          "caller": "test_create_inference_graphs_correct_shape",
+          "callee": "self.assertEqual",
+          "lineNumber": 28
+        },
+        {
+          "caller": "test_create_inference_graphs_rejects_wrong_shape",
+          "callee": "self._config",
+          "lineNumber": 31
+        },
+        {
+          "caller": "test_create_inference_graphs_rejects_wrong_shape",
+          "callee": "torch.randn",
+          "lineNumber": 32
+        },
+        {
+          "caller": "test_create_inference_graphs_rejects_wrong_shape",
+          "callee": "self.assertRaisesRegex",
+          "lineNumber": 33
+        },
+        {
+          "caller": "test_create_inference_graphs_rejects_wrong_shape",
+          "callee": "create_inference_graphs",
+          "lineNumber": 34
+        },
+        {
+          "caller": "test_create_inference_graphs_rejects_wrong_node_count",
+          "callee": "self._config",
+          "lineNumber": 37
+        },
+        {
+          "caller": "test_create_inference_graphs_rejects_wrong_node_count",
+          "callee": "torch.randn",
+          "lineNumber": 38
+        },
+        {
+          "caller": "test_create_inference_graphs_rejects_wrong_node_count",
+          "callee": "self.assertRaisesRegex",
+          "lineNumber": 39
+        },
+        {
+          "caller": "test_create_inference_graphs_rejects_wrong_node_count",
+          "callee": "create_inference_graphs",
+          "lineNumber": 40
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "core/tests/test_inference_smoke.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 48,
+      "nonEmptyLines": 39,
+      "classes": [
+        {
+          "name": "InferenceSmokeTest",
+          "startLine": 8,
+          "endLine": 48,
+          "methods": [
+            "test_inference_smoke_main_node_output"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "InferenceSmokeTest",
+          "line": 8,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "test_inference_smoke_main_node_output",
+          "callee": "load_model_and_stats",
+          "lineNumber": 10
+        },
+        {
+          "caller": "test_inference_smoke_main_node_output",
+          "callee": "enumerate",
+          "lineNumber": 14
+        },
+        {
+          "caller": "test_inference_smoke_main_node_output",
+          "callee": "pd.read_parquet",
+          "lineNumber": 17
+        },
+        {
+          "caller": "test_inference_smoke_main_node_output",
+          "callee": "pd.to_datetime",
+          "lineNumber": 18
+        },
+        {
+          "caller": "test_inference_smoke_main_node_output",
+          "callee": "sorted",
+          "lineNumber": 19
+        },
+        {
+          "caller": "test_inference_smoke_main_node_output",
+          "callee": "df[\"date\"].unique",
+          "lineNumber": 19
+        },
+        {
+          "caller": "test_inference_smoke_main_node_output",
+          "callee": "np.zeros",
+          "lineNumber": 20
+        },
+        {
+          "caller": "test_inference_smoke_main_node_output",
+          "callee": "len",
+          "lineNumber": 20
+        },
+        {
+          "caller": "test_inference_smoke_main_node_output",
+          "callee": "len",
+          "lineNumber": 20
+        },
+        {
+          "caller": "test_inference_smoke_main_node_output",
+          "callee": "enumerate",
+          "lineNumber": 21
+        },
+        {
+          "caller": "test_inference_smoke_main_node_output",
+          "callee": "g.iterrows",
+          "lineNumber": 23
+        },
+        {
+          "caller": "test_inference_smoke_main_node_output",
+          "callee": "row[feature_cols].values.astype",
+          "lineNumber": 24
+        },
+        {
+          "caller": "test_inference_smoke_main_node_output",
+          "callee": "stats[\"c_mean\"].numpy",
+          "lineNumber": 26
+        },
+        {
+          "caller": "test_inference_smoke_main_node_output",
+          "callee": "stats[\"c_std\"].numpy",
+          "lineNumber": 26
+        },
+        {
+          "caller": "test_inference_smoke_main_node_output",
+          "callee": "torch.tensor",
+          "lineNumber": 30
+        },
+        {
+          "caller": "test_inference_smoke_main_node_output",
+          "callee": "create_inference_graphs",
+          "lineNumber": 31
+        },
+        {
+          "caller": "test_inference_smoke_main_node_output",
+          "callee": "self.assertTrue",
+          "lineNumber": 32
+        },
+        {
+          "caller": "test_inference_smoke_main_node_output",
+          "callee": "hasattr",
+          "lineNumber": 32
+        },
+        {
+          "caller": "test_inference_smoke_main_node_output",
+          "callee": "self.assertIsNotNone",
+          "lineNumber": 33
+        },
+        {
+          "caller": "test_inference_smoke_main_node_output",
+          "callee": "self.assertEqual",
+          "lineNumber": 34
+        },
+        {
+          "caller": "test_inference_smoke_main_node_output",
+          "callee": "cfg.get",
+          "lineNumber": 37
+        },
+        {
+          "caller": "test_inference_smoke_main_node_output",
+          "callee": "node_names.index",
+          "lineNumber": 38
+        },
+        {
+          "caller": "test_inference_smoke_main_node_output",
+          "callee": "cond_seq[-1, main_idx, :].unsqueeze",
+          "lineNumber": 39
+        },
+        {
+          "caller": "test_inference_smoke_main_node_output",
+          "callee": "retrieval_db.query",
+          "lineNumber": 40
+        },
+        {
+          "caller": "test_inference_smoke_main_node_output",
+          "callee": "context_last.numpy",
+          "lineNumber": 40
+        },
+        {
+          "caller": "test_inference_smoke_main_node_output",
+          "callee": "self.assertEqual",
+          "lineNumber": 41
+        },
+        {
+          "caller": "test_inference_smoke_main_node_output",
+          "callee": "tuple",
+          "lineNumber": 41
+        },
+        {
+          "caller": "test_inference_smoke_main_node_output",
+          "callee": "run_inference_real",
+          "lineNumber": 43
+        },
+        {
+          "caller": "test_inference_smoke_main_node_output",
+          "callee": "self.assertEqual",
+          "lineNumber": 45
+        },
+        {
+          "caller": "test_inference_smoke_main_node_output",
+          "callee": "self.assertEqual",
+          "lineNumber": 46
+        },
+        {
+          "caller": "test_inference_smoke_main_node_output",
+          "callee": "self.assertEqual",
+          "lineNumber": 47
+        },
+        {
+          "caller": "test_inference_smoke_main_node_output",
+          "callee": "self.assertTrue",
+          "lineNumber": 48
+        },
+        {
+          "caller": "test_inference_smoke_main_node_output",
+          "callee": "np.isfinite(out[\"raw\"]).all",
+          "lineNumber": 48
+        },
+        {
+          "caller": "test_inference_smoke_main_node_output",
+          "callee": "np.isfinite",
+          "lineNumber": 48
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "core/tests/test_retrieval.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 56,
+      "nonEmptyLines": 45,
+      "classes": [
+        {
+          "name": "RetrievalDatabaseTest",
+          "startLine": 10,
+          "endLine": 56,
+          "methods": [
+            "_make_db",
+            "test_query_shape",
+            "test_query_k_larger_than_n_raises",
+            "test_query_no_minus_one_indices",
+            "test_cache_invalidated_after_second_add",
+            "test_query_empty_database_raises"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "RetrievalDatabaseTest",
+          "line": 10,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "_make_db",
+          "callee": "RetrievalDatabase",
+          "lineNumber": 12
+        },
+        {
+          "caller": "_make_db",
+          "callee": "np.random.RandomState(42).randn(n, dim).astype",
+          "lineNumber": 13
+        },
+        {
+          "caller": "_make_db",
+          "callee": "np.random.RandomState(42).randn",
+          "lineNumber": 13
+        },
+        {
+          "caller": "_make_db",
+          "callee": "np.random.RandomState",
+          "lineNumber": 13
+        },
+        {
+          "caller": "_make_db",
+          "callee": "np.random.RandomState(43).randn(n, data_dim).astype",
+          "lineNumber": 14
+        },
+        {
+          "caller": "_make_db",
+          "callee": "np.random.RandomState(43).randn",
+          "lineNumber": 14
+        },
+        {
+          "caller": "_make_db",
+          "callee": "np.random.RandomState",
+          "lineNumber": 14
+        },
+        {
+          "caller": "_make_db",
+          "callee": "db.add_items",
+          "lineNumber": 15
+        },
+        {
+          "caller": "test_query_shape",
+          "callee": "self._make_db",
+          "lineNumber": 19
+        },
+        {
+          "caller": "test_query_shape",
+          "callee": "np.random.randn(2, 4).astype",
+          "lineNumber": 20
+        },
+        {
+          "caller": "test_query_shape",
+          "callee": "np.random.randn",
+          "lineNumber": 20
+        },
+        {
+          "caller": "test_query_shape",
+          "callee": "db.query",
+          "lineNumber": 21
+        },
+        {
+          "caller": "test_query_shape",
+          "callee": "self.assertEqual",
+          "lineNumber": 22
+        },
+        {
+          "caller": "test_query_shape",
+          "callee": "tuple",
+          "lineNumber": 22
+        },
+        {
+          "caller": "test_query_shape",
+          "callee": "self.assertEqual",
+          "lineNumber": 23
+        },
+        {
+          "caller": "test_query_k_larger_than_n_raises",
+          "callee": "self._make_db",
+          "lineNumber": 26
+        },
+        {
+          "caller": "test_query_k_larger_than_n_raises",
+          "callee": "np.random.randn(1, 4).astype",
+          "lineNumber": 27
+        },
+        {
+          "caller": "test_query_k_larger_than_n_raises",
+          "callee": "np.random.randn",
+          "lineNumber": 27
+        },
+        {
+          "caller": "test_query_k_larger_than_n_raises",
+          "callee": "self.assertRaisesRegex",
+          "lineNumber": 28
+        },
+        {
+          "caller": "test_query_k_larger_than_n_raises",
+          "callee": "db.query",
+          "lineNumber": 29
+        },
+        {
+          "caller": "test_query_no_minus_one_indices",
+          "callee": "self._make_db",
+          "lineNumber": 32
+        },
+        {
+          "caller": "test_query_no_minus_one_indices",
+          "callee": "np.random.randn(5, 4).astype",
+          "lineNumber": 33
+        },
+        {
+          "caller": "test_query_no_minus_one_indices",
+          "callee": "np.random.randn",
+          "lineNumber": 33
+        },
+        {
+          "caller": "test_query_no_minus_one_indices",
+          "callee": "db.query",
+          "lineNumber": 34
+        },
+        {
+          "caller": "test_query_no_minus_one_indices",
+          "callee": "self.assertTrue",
+          "lineNumber": 36
+        },
+        {
+          "caller": "test_query_no_minus_one_indices",
+          "callee": "torch.isfinite(out).all",
+          "lineNumber": 36
+        },
+        {
+          "caller": "test_query_no_minus_one_indices",
+          "callee": "torch.isfinite",
+          "lineNumber": 36
+        },
+        {
+          "caller": "test_cache_invalidated_after_second_add",
+          "callee": "self._make_db",
+          "lineNumber": 39
+        },
+        {
+          "caller": "test_cache_invalidated_after_second_add",
+          "callee": "np.random.randn(1, 4).astype",
+          "lineNumber": 40
+        },
+        {
+          "caller": "test_cache_invalidated_after_second_add",
+          "callee": "np.random.randn",
+          "lineNumber": 40
+        },
+        {
+          "caller": "test_cache_invalidated_after_second_add",
+          "callee": "db.query",
+          "lineNumber": 41
+        },
+        {
+          "caller": "test_cache_invalidated_after_second_add",
+          "callee": "np.random.RandomState(44).randn(5, 3).astype",
+          "lineNumber": 43
+        },
+        {
+          "caller": "test_cache_invalidated_after_second_add",
+          "callee": "np.random.RandomState(44).randn",
+          "lineNumber": 43
+        },
+        {
+          "caller": "test_cache_invalidated_after_second_add",
+          "callee": "np.random.RandomState",
+          "lineNumber": 43
+        },
+        {
+          "caller": "test_cache_invalidated_after_second_add",
+          "callee": "np.random.RandomState(45).randn(5, 4).astype",
+          "lineNumber": 44
+        },
+        {
+          "caller": "test_cache_invalidated_after_second_add",
+          "callee": "np.random.RandomState(45).randn",
+          "lineNumber": 44
+        },
+        {
+          "caller": "test_cache_invalidated_after_second_add",
+          "callee": "np.random.RandomState",
+          "lineNumber": 44
+        },
+        {
+          "caller": "test_cache_invalidated_after_second_add",
+          "callee": "db.add_items",
+          "lineNumber": 45
+        },
+        {
+          "caller": "test_cache_invalidated_after_second_add",
+          "callee": "db.query",
+          "lineNumber": 47
+        },
+        {
+          "caller": "test_cache_invalidated_after_second_add",
+          "callee": "self.assertEqual",
+          "lineNumber": 48
+        },
+        {
+          "caller": "test_cache_invalidated_after_second_add",
+          "callee": "self.assertEqual",
+          "lineNumber": 50
+        },
+        {
+          "caller": "test_cache_invalidated_after_second_add",
+          "callee": "tuple",
+          "lineNumber": 50
+        },
+        {
+          "caller": "test_query_empty_database_raises",
+          "callee": "RetrievalDatabase",
+          "lineNumber": 53
+        },
+        {
+          "caller": "test_query_empty_database_raises",
+          "callee": "np.random.randn(1, 4).astype",
+          "lineNumber": 54
+        },
+        {
+          "caller": "test_query_empty_database_raises",
+          "callee": "np.random.randn",
+          "lineNumber": 54
+        },
+        {
+          "caller": "test_query_empty_database_raises",
+          "callee": "self.assertRaisesRegex",
+          "lineNumber": 55
+        },
+        {
+          "caller": "test_query_empty_database_raises",
+          "callee": "db.query",
+          "lineNumber": 56
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    }
+  ]
+}

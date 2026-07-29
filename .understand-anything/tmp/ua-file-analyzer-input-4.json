@@ -1,0 +1,32 @@
+{
+  "projectRoot": "/media/DiskE/SKRIPSI/Skripsi_Bevan",
+  "batchFiles": [
+    {
+      "path": "api/routers/nowcast.py",
+      "language": "python",
+      "sizeLines": 122,
+      "fileCategory": "code"
+    },
+    {
+      "path": "api/routers/stations.py",
+      "language": "python",
+      "sizeLines": 39,
+      "fileCategory": "code"
+    },
+    {
+      "path": "api/schemas.py",
+      "language": "python",
+      "sizeLines": 57,
+      "fileCategory": "code"
+    }
+  ],
+  "batchImportData": {
+    "api/routers/nowcast.py": [
+      "api/schemas.py"
+    ],
+    "api/routers/stations.py": [
+      "api/schemas.py"
+    ],
+    "api/schemas.py": []
+  }
+}

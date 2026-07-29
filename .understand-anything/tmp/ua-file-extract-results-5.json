@@ -1,0 +1,44 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 3,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": ".github/hooks/rtk-hook.ps1",
+      "language": "powershell",
+      "fileCategory": "script",
+      "totalLines": 77,
+      "nonEmptyLines": 66,
+      "metrics": {}
+    },
+    {
+      "path": ".github/hooks/rtk-session.ps1",
+      "language": "powershell",
+      "fileCategory": "script",
+      "totalLines": 16,
+      "nonEmptyLines": 13,
+      "metrics": {}
+    },
+    {
+      "path": ".github/hooks/rtk.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 20,
+      "nonEmptyLines": 20,
+      "sections": [
+        {
+          "heading": "hooks",
+          "level": 1,
+          "line": 2
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 1
+      }
+    }
+  ]
+}

@@ -1,0 +1,1575 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 16,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "web/src/App.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 68,
+      "nonEmptyLines": 67,
+      "functions": [
+        {
+          "name": "App",
+          "startLine": 17,
+          "endLine": 68,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "App",
+          "line": 17,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "App",
+          "callee": "useState",
+          "lineNumber": 18
+        },
+        {
+          "caller": "App",
+          "callee": "useState",
+          "lineNumber": 19
+        },
+        {
+          "caller": "App",
+          "callee": "useState",
+          "lineNumber": 20
+        },
+        {
+          "caller": "App",
+          "callee": "useState",
+          "lineNumber": 21
+        },
+        {
+          "caller": "App",
+          "callee": "useState",
+          "lineNumber": 22
+        },
+        {
+          "caller": "App",
+          "callee": "useState",
+          "lineNumber": 23
+        },
+        {
+          "caller": "App",
+          "callee": "useState",
+          "lineNumber": 24
+        },
+        {
+          "caller": "App",
+          "callee": "useState",
+          "lineNumber": 25
+        },
+        {
+          "caller": "App",
+          "callee": "useState",
+          "lineNumber": 26
+        },
+        {
+          "caller": "App",
+          "callee": "useState",
+          "lineNumber": 27
+        },
+        {
+          "caller": "App",
+          "callee": "useEffect",
+          "lineNumber": 28
+        },
+        {
+          "caller": "refresh",
+          "callee": "controller?.abort",
+          "lineNumber": 31
+        },
+        {
+          "caller": "refresh",
+          "callee": "setLiveSnapshot",
+          "lineNumber": 33
+        },
+        {
+          "caller": "refresh",
+          "callee": "fetchDashboardLive",
+          "lineNumber": 33
+        },
+        {
+          "caller": "refresh",
+          "callee": "setLiveSnapshot",
+          "lineNumber": 34
+        },
+        {
+          "caller": "refresh",
+          "callee": "setIsLiveLoading",
+          "lineNumber": 35
+        },
+        {
+          "caller": "App",
+          "callee": "refresh",
+          "lineNumber": 37
+        },
+        {
+          "caller": "App",
+          "callee": "setInterval",
+          "lineNumber": 38
+        },
+        {
+          "caller": "App",
+          "callee": "refresh",
+          "lineNumber": 38
+        },
+        {
+          "caller": "App",
+          "callee": "controller?.abort",
+          "lineNumber": 39
+        },
+        {
+          "caller": "App",
+          "callee": "clearInterval",
+          "lineNumber": 39
+        },
+        {
+          "caller": "App",
+          "callee": "new Date(liveSnapshot.generatedAt).toLocaleTimeString",
+          "lineNumber": 44
+        },
+        {
+          "caller": "App",
+          "callee": "useMemo",
+          "lineNumber": 46
+        },
+        {
+          "caller": "App",
+          "callee": "useCallback",
+          "lineNumber": 47
+        },
+        {
+          "caller": "App",
+          "callee": "JSON.stringify",
+          "lineNumber": 48
+        },
+        {
+          "caller": "App",
+          "callee": "URL.createObjectURL",
+          "lineNumber": 49
+        },
+        {
+          "caller": "App",
+          "callee": "document.createElement",
+          "lineNumber": 49
+        },
+        {
+          "caller": "App",
+          "callee": "anchor.click",
+          "lineNumber": 49
+        },
+        {
+          "caller": "App",
+          "callee": "URL.revokeObjectURL",
+          "lineNumber": 49
+        },
+        {
+          "caller": "App",
+          "callee": "setIsTopologyModalOpen",
+          "lineNumber": 52
+        },
+        {
+          "caller": "App",
+          "callee": "setRadarVisible",
+          "lineNumber": 53
+        },
+        {
+          "caller": "App",
+          "callee": "setNodesVisible",
+          "lineNumber": 53
+        },
+        {
+          "caller": "App",
+          "callee": "setIsTopologyModalOpen",
+          "lineNumber": 53
+        },
+        {
+          "caller": "App",
+          "callee": "setIsAnalysisExpanded",
+          "lineNumber": 59
+        },
+        {
+          "caller": "App",
+          "callee": "setIsTopologyModalOpen",
+          "lineNumber": 59
+        },
+        {
+          "caller": "App",
+          "callee": "setActiveTab",
+          "lineNumber": 59
+        },
+        {
+          "caller": "App",
+          "callee": "setActiveTab",
+          "lineNumber": 59
+        },
+        {
+          "caller": "App",
+          "callee": "setIsTopologyModalOpen",
+          "lineNumber": 64
+        },
+        {
+          "caller": "App",
+          "callee": "setSelectedNodeId",
+          "lineNumber": 64
+        },
+        {
+          "caller": "App",
+          "callee": "setActiveTab",
+          "lineNumber": 64
+        },
+        {
+          "caller": "App",
+          "callee": "setActiveNodeDetailId",
+          "lineNumber": 65
+        },
+        {
+          "caller": "App",
+          "callee": "setSelectedAnalog",
+          "lineNumber": 66
+        },
+        {
+          "caller": "App",
+          "callee": "setSelectedAnalog",
+          "lineNumber": 66
+        }
+      ],
+      "metrics": {
+        "importCount": 13,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "web/src/components/ForecastChart.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 198,
+      "nonEmptyLines": 182,
+      "functions": [
+        {
+          "name": "ForecastChartComponent",
+          "startLine": 17,
+          "endLine": 101,
+          "params": [
+            "{\n  precipitation,\n  wind,\n  humidity,\n}"
+          ]
+        },
+        {
+          "name": "NowcastRow",
+          "startLine": 111,
+          "endLine": 196,
+          "params": [
+            "{ label, icon: Icon, accent, data, observedLabel }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "ForecastChart",
+          "line": 198,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "ForecastChartComponent",
+          "callee": "useMemo",
+          "lineNumber": 22
+        },
+        {
+          "caller": "ForecastChartComponent",
+          "callee": "rows.map",
+          "lineNumber": 73
+        },
+        {
+          "caller": "NowcastRow",
+          "callee": "Math.min",
+          "lineNumber": 112
+        },
+        {
+          "caller": "NowcastRow",
+          "callee": "Math.max",
+          "lineNumber": 113
+        },
+        {
+          "caller": "NowcastRow",
+          "callee": "Math.max",
+          "lineNumber": 114
+        },
+        {
+          "caller": "pct",
+          "callee": "Math.max",
+          "lineNumber": 115
+        },
+        {
+          "caller": "pct",
+          "callee": "Math.min",
+          "lineNumber": 115
+        },
+        {
+          "caller": "NowcastRow",
+          "callee": "pct",
+          "lineNumber": 145
+        },
+        {
+          "caller": "NowcastRow",
+          "callee": "pct",
+          "lineNumber": 146
+        },
+        {
+          "caller": "NowcastRow",
+          "callee": "pct",
+          "lineNumber": 146
+        },
+        {
+          "caller": "NowcastRow",
+          "callee": "pct",
+          "lineNumber": 156
+        },
+        {
+          "caller": "NowcastRow",
+          "callee": "pct",
+          "lineNumber": 157
+        },
+        {
+          "caller": "NowcastRow",
+          "callee": "pct",
+          "lineNumber": 157
+        },
+        {
+          "caller": "NowcastRow",
+          "callee": "pct",
+          "lineNumber": 166
+        },
+        {
+          "caller": "NowcastRow",
+          "callee": "pct",
+          "lineNumber": 174
+        },
+        {
+          "caller": "NowcastRow",
+          "callee": "pct",
+          "lineNumber": 178
+        },
+        {
+          "caller": "NowcastRow",
+          "callee": "min.toFixed",
+          "lineNumber": 186
+        },
+        {
+          "caller": "NowcastRow",
+          "callee": "data.observedNow.toFixed",
+          "lineNumber": 189
+        },
+        {
+          "caller": "NowcastRow",
+          "callee": "max.toFixed",
+          "lineNumber": 192
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "web/src/components/MapView.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 15,
+      "nonEmptyLines": 15,
+      "functions": [
+        {
+          "name": "MapView",
+          "startLine": 8,
+          "endLine": 15,
+          "params": [
+            "{ selectedNodeId, onSelectNode, currentFrame, radarVisible, nodesVisible, onOpenNodeDetail }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "MapView",
+          "line": 8,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "MapView",
+          "callee": "useRef",
+          "lineNumber": 9
+        },
+        {
+          "caller": "MapView",
+          "callee": "useRef",
+          "lineNumber": 9
+        },
+        {
+          "caller": "MapView",
+          "callee": "useRef",
+          "lineNumber": 9
+        },
+        {
+          "caller": "MapView",
+          "callee": "useRef",
+          "lineNumber": 9
+        },
+        {
+          "caller": "MapView",
+          "callee": "useState",
+          "lineNumber": 9
+        },
+        {
+          "caller": "MapView",
+          "callee": "useEffect",
+          "lineNumber": 10
+        },
+        {
+          "caller": "MapView",
+          "callee": "L.map",
+          "lineNumber": 10
+        },
+        {
+          "caller": "MapView",
+          "callee": "L.control.zoom({ position: 'topright' }).addTo",
+          "lineNumber": 10
+        },
+        {
+          "caller": "MapView",
+          "callee": "L.control.zoom",
+          "lineNumber": 10
+        },
+        {
+          "caller": "MapView",
+          "callee": "L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', { attribution: '&copy; CARTO &copy; OpenStreetMap' }).addTo",
+          "lineNumber": 10
+        },
+        {
+          "caller": "MapView",
+          "callee": "L.tileLayer",
+          "lineNumber": 10
+        },
+        {
+          "caller": "MapView",
+          "callee": "map.remove",
+          "lineNumber": 10
+        },
+        {
+          "caller": "MapView",
+          "callee": "useEffect",
+          "lineNumber": 11
+        },
+        {
+          "caller": "MapView",
+          "callee": "Object.values(cells.current).forEach",
+          "lineNumber": 11
+        },
+        {
+          "caller": "MapView",
+          "callee": "Object.values",
+          "lineNumber": 11
+        },
+        {
+          "caller": "MapView",
+          "callee": "cell.remove",
+          "lineNumber": 11
+        },
+        {
+          "caller": "MapView",
+          "callee": "Object.values(NODES_LIST).forEach",
+          "lineNumber": 11
+        },
+        {
+          "caller": "MapView",
+          "callee": "Object.values",
+          "lineNumber": 11
+        },
+        {
+          "caller": "MapView",
+          "callee": "existing.setStyle",
+          "lineNumber": 11
+        },
+        {
+          "caller": "MapView",
+          "callee": "existing.setBounds",
+          "lineNumber": 11
+        },
+        {
+          "caller": "MapView",
+          "callee": "L.rectangle(bounds, style).bindTooltip(`<strong>${node.id}</strong><br>${rain.toFixed(1)} mm/jam<br><small>Contoh sel ERA5</small>`).addTo",
+          "lineNumber": 11
+        },
+        {
+          "caller": "MapView",
+          "callee": "L.rectangle(bounds, style).bindTooltip",
+          "lineNumber": 11
+        },
+        {
+          "caller": "MapView",
+          "callee": "L.rectangle",
+          "lineNumber": 11
+        },
+        {
+          "caller": "MapView",
+          "callee": "rain.toFixed",
+          "lineNumber": 11
+        },
+        {
+          "caller": "MapView",
+          "callee": "useEffect",
+          "lineNumber": 12
+        },
+        {
+          "caller": "MapView",
+          "callee": "Object.values(markers.current).forEach",
+          "lineNumber": 12
+        },
+        {
+          "caller": "MapView",
+          "callee": "Object.values",
+          "lineNumber": 12
+        },
+        {
+          "caller": "MapView",
+          "callee": "marker.remove",
+          "lineNumber": 12
+        },
+        {
+          "caller": "MapView",
+          "callee": "Object.values(NODES_LIST).forEach",
+          "lineNumber": 12
+        },
+        {
+          "caller": "MapView",
+          "callee": "Object.values",
+          "lineNumber": 12
+        },
+        {
+          "caller": "MapView",
+          "callee": "L.divIcon",
+          "lineNumber": 12
+        },
+        {
+          "caller": "MapView",
+          "callee": "rain.toFixed",
+          "lineNumber": 12
+        },
+        {
+          "caller": "MapView",
+          "callee": "existing.setIcon",
+          "lineNumber": 12
+        },
+        {
+          "caller": "MapView",
+          "callee": "L.marker([node.lat, node.lng], { icon }).addTo",
+          "lineNumber": 12
+        },
+        {
+          "caller": "MapView",
+          "callee": "L.marker",
+          "lineNumber": 12
+        },
+        {
+          "caller": "MapView",
+          "callee": "marker.on",
+          "lineNumber": 12
+        },
+        {
+          "caller": "MapView",
+          "callee": "onSelectNode",
+          "lineNumber": 12
+        },
+        {
+          "caller": "MapView",
+          "callee": "marker.on",
+          "lineNumber": 12
+        },
+        {
+          "caller": "MapView",
+          "callee": "setHovered",
+          "lineNumber": 12
+        },
+        {
+          "caller": "MapView",
+          "callee": "marker.on",
+          "lineNumber": 12
+        },
+        {
+          "caller": "MapView",
+          "callee": "setHovered",
+          "lineNumber": 12
+        },
+        {
+          "caller": "MapView",
+          "callee": "onOpenNodeDetail",
+          "lineNumber": 14
+        },
+        {
+          "caller": "MapView",
+          "callee": "telemetry.rainIntensityMmH.toFixed",
+          "lineNumber": 14
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "web/src/components/ModelPerformancePanel.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 13,
+      "nonEmptyLines": 12,
+      "functions": [
+        {
+          "name": "metric",
+          "startLine": 5,
+          "endLine": 5,
+          "params": [
+            "label",
+            "value",
+            "suffix"
+          ]
+        },
+        {
+          "name": "ModelPerformancePanel",
+          "startLine": 6,
+          "endLine": 13,
+          "params": [
+            "{ metrics, onOpenEval }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "ModelPerformancePanel",
+          "line": 6,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "metric",
+          "callee": "value.toFixed",
+          "lineNumber": 5
+        },
+        {
+          "caller": "ModelPerformancePanel",
+          "callee": "metric",
+          "lineNumber": 9
+        },
+        {
+          "caller": "ModelPerformancePanel",
+          "callee": "metric",
+          "lineNumber": 9
+        },
+        {
+          "caller": "ModelPerformancePanel",
+          "callee": "metric",
+          "lineNumber": 9
+        },
+        {
+          "caller": "ModelPerformancePanel",
+          "callee": "metric",
+          "lineNumber": 10
+        },
+        {
+          "caller": "ModelPerformancePanel",
+          "callee": "metric",
+          "lineNumber": 10
+        },
+        {
+          "caller": "ModelPerformancePanel",
+          "callee": "metric",
+          "lineNumber": 11
+        },
+        {
+          "caller": "ModelPerformancePanel",
+          "callee": "metric",
+          "lineNumber": 11
+        },
+        {
+          "caller": "ModelPerformancePanel",
+          "callee": "metric",
+          "lineNumber": 11
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "web/src/components/NodeDetailModal.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 13,
+      "nonEmptyLines": 12,
+      "functions": [
+        {
+          "name": "NodeDetailModal",
+          "startLine": 7,
+          "endLine": 13,
+          "params": [
+            "{ nodeId, frame, onClose }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "NodeDetailModal",
+          "line": 7,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "NodeDetailModal",
+          "callee": "useRef",
+          "lineNumber": 8
+        },
+        {
+          "caller": "NodeDetailModal",
+          "callee": "useEffect",
+          "lineNumber": 9
+        },
+        {
+          "caller": "NodeDetailModal",
+          "callee": "modalRef.current?.focus",
+          "lineNumber": 9
+        },
+        {
+          "caller": "close",
+          "callee": "onClose",
+          "lineNumber": 9
+        },
+        {
+          "caller": "NodeDetailModal",
+          "callee": "window.addEventListener",
+          "lineNumber": 9
+        },
+        {
+          "caller": "NodeDetailModal",
+          "callee": "window.removeEventListener",
+          "lineNumber": 9
+        },
+        {
+          "caller": "NodeDetailModal",
+          "callee": "telemetry.rainIntensityMmH.toFixed",
+          "lineNumber": 11
+        },
+        {
+          "caller": "NodeDetailModal",
+          "callee": "telemetry.tempCelsius.toFixed",
+          "lineNumber": 11
+        },
+        {
+          "caller": "NodeDetailModal",
+          "callee": "node.lat.toFixed",
+          "lineNumber": 12
+        },
+        {
+          "caller": "NodeDetailModal",
+          "callee": "node.lng.toFixed",
+          "lineNumber": 12
+        },
+        {
+          "caller": "NodeDetailModal",
+          "callee": "fields.map",
+          "lineNumber": 12
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "web/src/components/RetrievalAnalogsPanel.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 10,
+      "nonEmptyLines": 9,
+      "functions": [
+        {
+          "name": "RetrievalAnalogsPanel",
+          "startLine": 7,
+          "endLine": 10,
+          "params": [
+            "{ onSelectAnalog, onOpenAll, limitK = 3 }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "RetrievalAnalogsPanel",
+          "line": 7,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "RetrievalAnalogsPanel",
+          "callee": "useMemo",
+          "lineNumber": 8
+        },
+        {
+          "caller": "RetrievalAnalogsPanel",
+          "callee": "HISTORICAL_ANALOGS.slice",
+          "lineNumber": 8
+        },
+        {
+          "caller": "RetrievalAnalogsPanel",
+          "callee": "samples.map",
+          "lineNumber": 9
+        },
+        {
+          "caller": "RetrievalAnalogsPanel",
+          "callee": "onSelectAnalog",
+          "lineNumber": 9
+        },
+        {
+          "caller": "RetrievalAnalogsPanel",
+          "callee": "sample.similarityPercent.toFixed",
+          "lineNumber": 9
+        },
+        {
+          "caller": "RetrievalAnalogsPanel",
+          "callee": "sample.distanceL2.toFixed",
+          "lineNumber": 9
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "web/src/components/RiskAssessmentPanel.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 7,
+      "nonEmptyLines": 6,
+      "functions": [
+        {
+          "name": "RiskAssessmentPanel",
+          "startLine": 4,
+          "endLine": 7,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "RiskAssessmentPanel",
+          "line": 4,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "web/src/components/SideNav.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 5,
+      "nonEmptyLines": 5,
+      "functions": [
+        {
+          "name": "SideNav",
+          "startLine": 5,
+          "endLine": 5,
+          "params": [
+            "{ activeTab, onSelectTab, onOpenTopologyModal }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "SideNav",
+          "line": 5,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "SideNav",
+          "callee": "onSelectTab",
+          "lineNumber": 5
+        },
+        {
+          "caller": "SideNav",
+          "callee": "[[Map, 'map', 'Map'], [LineChart, 'forecast', 'Fcst'], [Database, 'comparison', 'Sampel'], [Activity, 'eval', 'Eval']].map",
+          "lineNumber": 5
+        },
+        {
+          "caller": "SideNav",
+          "callee": "String",
+          "lineNumber": 5
+        },
+        {
+          "caller": "SideNav",
+          "callee": "onSelectTab",
+          "lineNumber": 5
+        },
+        {
+          "caller": "SideNav",
+          "callee": "String",
+          "lineNumber": 5
+        },
+        {
+          "caller": "SideNav",
+          "callee": "React.createElement",
+          "lineNumber": 5
+        },
+        {
+          "caller": "SideNav",
+          "callee": "String",
+          "lineNumber": 5
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "web/src/components/TimelineScrubber.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 70,
+      "nonEmptyLines": 64,
+      "functions": [
+        {
+          "name": "TimelineScrubberComponent",
+          "startLine": 16,
+          "endLine": 68,
+          "params": [
+            "{\n  nowWib,\n  validAtWib,\n  horizonLabel,\n  dataStatus,\n  isLive,\n}"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "TimelineScrubber",
+          "line": 70,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "web/src/components/TopAppBar.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 10,
+      "nonEmptyLines": 10,
+      "functions": [
+        {
+          "name": "TopAppBar",
+          "startLine": 6,
+          "endLine": 10,
+          "params": [
+            "{ activeTab, onSelectTab, radarVisible, onToggleRadar, nodesVisible, onToggleNodes, onSelectNode, onOpenTopologyModal }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "TopAppBar",
+          "line": 6,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "TopAppBar",
+          "callee": "useState",
+          "lineNumber": 7
+        },
+        {
+          "caller": "TopAppBar",
+          "callee": "useState",
+          "lineNumber": 7
+        },
+        {
+          "caller": "TopAppBar",
+          "callee": "useMemo",
+          "lineNumber": 7
+        },
+        {
+          "caller": "TopAppBar",
+          "callee": "Object.values(NODES_LIST).filter",
+          "lineNumber": 7
+        },
+        {
+          "caller": "TopAppBar",
+          "callee": "Object.values",
+          "lineNumber": 7
+        },
+        {
+          "caller": "TopAppBar",
+          "callee": "node.name.toLowerCase().includes",
+          "lineNumber": 7
+        },
+        {
+          "caller": "TopAppBar",
+          "callee": "node.name.toLowerCase",
+          "lineNumber": 7
+        },
+        {
+          "caller": "TopAppBar",
+          "callee": "query.toLowerCase",
+          "lineNumber": 7
+        },
+        {
+          "caller": "TopAppBar",
+          "callee": "node.locationName.toLowerCase().includes",
+          "lineNumber": 7
+        },
+        {
+          "caller": "TopAppBar",
+          "callee": "node.locationName.toLowerCase",
+          "lineNumber": 7
+        },
+        {
+          "caller": "TopAppBar",
+          "callee": "query.toLowerCase",
+          "lineNumber": 7
+        },
+        {
+          "caller": "choose",
+          "callee": "onSelectNode",
+          "lineNumber": 8
+        },
+        {
+          "caller": "choose",
+          "callee": "onSelectTab",
+          "lineNumber": 8
+        },
+        {
+          "caller": "choose",
+          "callee": "setQuery",
+          "lineNumber": 8
+        },
+        {
+          "caller": "TopAppBar",
+          "callee": "setMobile",
+          "lineNumber": 9
+        },
+        {
+          "caller": "TopAppBar",
+          "callee": "onSelectTab",
+          "lineNumber": 9
+        },
+        {
+          "caller": "TopAppBar",
+          "callee": "setQuery",
+          "lineNumber": 9
+        },
+        {
+          "caller": "TopAppBar",
+          "callee": "nodes.map",
+          "lineNumber": 9
+        },
+        {
+          "caller": "TopAppBar",
+          "callee": "choose",
+          "lineNumber": 9
+        },
+        {
+          "caller": "TopAppBar",
+          "callee": "onSelectTab",
+          "lineNumber": 9
+        },
+        {
+          "caller": "TopAppBar",
+          "callee": "onSelectTab",
+          "lineNumber": 9
+        },
+        {
+          "caller": "TopAppBar",
+          "callee": "onSelectTab",
+          "lineNumber": 9
+        },
+        {
+          "caller": "TopAppBar",
+          "callee": "onSelectTab",
+          "lineNumber": 9
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "web/src/components/TopologyGraphOverlay.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 13,
+      "nonEmptyLines": 12,
+      "functions": [
+        {
+          "name": "TopologyGraphOverlay",
+          "startLine": 8,
+          "endLine": 13,
+          "params": [
+            "{ isOpen, onClose, onSelectNode }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "TopologyGraphOverlay",
+          "line": 8,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "TopologyGraphOverlay",
+          "callee": "useState",
+          "lineNumber": 9
+        },
+        {
+          "caller": "TopologyGraphOverlay",
+          "callee": "useRef",
+          "lineNumber": 9
+        },
+        {
+          "caller": "TopologyGraphOverlay",
+          "callee": "useEffect",
+          "lineNumber": 10
+        },
+        {
+          "caller": "TopologyGraphOverlay",
+          "callee": "ref.current?.focus",
+          "lineNumber": 10
+        },
+        {
+          "caller": "close",
+          "callee": "onClose",
+          "lineNumber": 10
+        },
+        {
+          "caller": "TopologyGraphOverlay",
+          "callee": "window.addEventListener",
+          "lineNumber": 10
+        },
+        {
+          "caller": "TopologyGraphOverlay",
+          "callee": "window.removeEventListener",
+          "lineNumber": 10
+        },
+        {
+          "caller": "TopologyGraphOverlay",
+          "callee": "(['UP', 'DOWN', 'LEFT', 'RIGHT'] as NodeId[]).map",
+          "lineNumber": 12
+        },
+        {
+          "caller": "TopologyGraphOverlay",
+          "callee": "(Object.keys(NODES_LIST) as NodeId[]).map",
+          "lineNumber": 12
+        },
+        {
+          "caller": "TopologyGraphOverlay",
+          "callee": "Object.keys",
+          "lineNumber": 12
+        },
+        {
+          "caller": "TopologyGraphOverlay",
+          "callee": "setSelectedNode",
+          "lineNumber": 12
+        },
+        {
+          "caller": "TopologyGraphOverlay",
+          "callee": "Object.values(NODES_LIST).map",
+          "lineNumber": 12
+        },
+        {
+          "caller": "TopologyGraphOverlay",
+          "callee": "Object.values",
+          "lineNumber": 12
+        },
+        {
+          "caller": "TopologyGraphOverlay",
+          "callee": "Math.max",
+          "lineNumber": 12
+        },
+        {
+          "caller": "TopologyGraphOverlay",
+          "callee": "onSelectNode",
+          "lineNumber": 12
+        },
+        {
+          "caller": "TopologyGraphOverlay",
+          "callee": "onClose",
+          "lineNumber": 12
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "web/src/data/historicalAnalogs.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 7,
+      "nonEmptyLines": 6,
+      "exports": [
+        {
+          "name": "HISTORICAL_ANALOGS",
+          "line": 3,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "web/src/data/nodesData.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 50,
+      "nonEmptyLines": 44,
+      "functions": [
+        {
+          "name": "makeDistribution",
+          "startLine": 24,
+          "endLine": 29,
+          "params": [
+            "variable",
+            "unit",
+            "samples",
+            "observedNow"
+          ]
+        },
+        {
+          "name": "samples",
+          "startLine": 31,
+          "endLine": 33,
+          "params": [
+            "center",
+            "spread"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "NODES_LIST",
+          "line": 3,
+          "isDefault": false
+        },
+        {
+          "name": "TIMELINE_FRAMES",
+          "line": 11,
+          "isDefault": false
+        },
+        {
+          "name": "SAMPLE_NOWCAST",
+          "line": 35,
+          "isDefault": false
+        },
+        {
+          "name": "CURRENT_MODEL_METRICS",
+          "line": 41,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "makeDistribution",
+          "callee": "[...samples].sort",
+          "lineNumber": 25
+        },
+        {
+          "caller": "pick",
+          "callee": "Math.floor",
+          "lineNumber": 26
+        },
+        {
+          "caller": "makeDistribution",
+          "callee": "sorted.reduce",
+          "lineNumber": 27
+        },
+        {
+          "caller": "makeDistribution",
+          "callee": "Number",
+          "lineNumber": 28
+        },
+        {
+          "caller": "makeDistribution",
+          "callee": "mean.toFixed",
+          "lineNumber": 28
+        },
+        {
+          "caller": "makeDistribution",
+          "callee": "Number",
+          "lineNumber": 28
+        },
+        {
+          "caller": "makeDistribution",
+          "callee": "pick(.1).toFixed",
+          "lineNumber": 28
+        },
+        {
+          "caller": "makeDistribution",
+          "callee": "pick",
+          "lineNumber": 28
+        },
+        {
+          "caller": "makeDistribution",
+          "callee": "Number",
+          "lineNumber": 28
+        },
+        {
+          "caller": "makeDistribution",
+          "callee": "pick(.25).toFixed",
+          "lineNumber": 28
+        },
+        {
+          "caller": "makeDistribution",
+          "callee": "pick",
+          "lineNumber": 28
+        },
+        {
+          "caller": "makeDistribution",
+          "callee": "Number",
+          "lineNumber": 28
+        },
+        {
+          "caller": "makeDistribution",
+          "callee": "pick(.5).toFixed",
+          "lineNumber": 28
+        },
+        {
+          "caller": "makeDistribution",
+          "callee": "pick",
+          "lineNumber": 28
+        },
+        {
+          "caller": "makeDistribution",
+          "callee": "Number",
+          "lineNumber": 28
+        },
+        {
+          "caller": "makeDistribution",
+          "callee": "pick(.75).toFixed",
+          "lineNumber": 28
+        },
+        {
+          "caller": "makeDistribution",
+          "callee": "pick",
+          "lineNumber": 28
+        },
+        {
+          "caller": "makeDistribution",
+          "callee": "Number",
+          "lineNumber": 28
+        },
+        {
+          "caller": "makeDistribution",
+          "callee": "pick(.9).toFixed",
+          "lineNumber": 28
+        },
+        {
+          "caller": "makeDistribution",
+          "callee": "pick",
+          "lineNumber": 28
+        },
+        {
+          "caller": "samples",
+          "callee": "Array.from",
+          "lineNumber": 32
+        },
+        {
+          "caller": "samples",
+          "callee": "Math.max",
+          "lineNumber": 32
+        },
+        {
+          "caller": "samples",
+          "callee": "Math.sin",
+          "lineNumber": 32
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 4,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "web/src/main.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 10,
+      "nonEmptyLines": 9,
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "web/src/services/dashboardLive.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 29,
+      "nonEmptyLines": 24,
+      "functions": [
+        {
+          "name": "fetchDashboardLive",
+          "startLine": 5,
+          "endLine": 11,
+          "params": [
+            "signal"
+          ]
+        },
+        {
+          "name": "isNowcast",
+          "startLine": 13,
+          "endLine": 17,
+          "params": [
+            "value"
+          ]
+        },
+        {
+          "name": "isNowcastSet",
+          "startLine": 19,
+          "endLine": 23,
+          "params": [
+            "value"
+          ]
+        },
+        {
+          "name": "isDashboardLiveSnapshot",
+          "startLine": 25,
+          "endLine": 29,
+          "params": [
+            "value"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "fetchDashboardLive",
+          "line": 5,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "fetchDashboardLive",
+          "callee": "fetch",
+          "lineNumber": 6
+        },
+        {
+          "caller": "fetchDashboardLive",
+          "callee": "response.json",
+          "lineNumber": 8
+        },
+        {
+          "caller": "fetchDashboardLive",
+          "callee": "isDashboardLiveSnapshot",
+          "lineNumber": 9
+        },
+        {
+          "caller": "isNowcast",
+          "callee": "Array.isArray",
+          "lineNumber": 16
+        },
+        {
+          "caller": "isNowcastSet",
+          "callee": "isNowcast",
+          "lineNumber": 22
+        },
+        {
+          "caller": "isNowcastSet",
+          "callee": "isNowcast",
+          "lineNumber": 22
+        },
+        {
+          "caller": "isNowcastSet",
+          "callee": "isNowcast",
+          "lineNumber": 22
+        },
+        {
+          "caller": "isDashboardLiveSnapshot",
+          "callee": "isNowcastSet",
+          "lineNumber": 28
+        },
+        {
+          "caller": "isDashboardLiveSnapshot",
+          "callee": "Boolean",
+          "lineNumber": 28
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 4,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "web/src/types.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 88,
+      "nonEmptyLines": 80,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    }
+  ]
+}

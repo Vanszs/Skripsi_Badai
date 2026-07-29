@@ -1,0 +1,1375 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 8,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": ".kimchi/docs/ALL_IN_ONE_AUDIT_REPORT.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 504,
+      "nonEmptyLines": 337,
+      "sections": [
+        {
+          "heading": "ALL-IN-ONE AUDIT REPORT",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Draft Bepan1 (PDF) vs Implementation Code",
+          "level": 2,
+          "line": 2
+        },
+        {
+          "heading": "EXECUTIVE SUMMARY",
+          "level": 2,
+          "line": 13
+        },
+        {
+          "heading": "Issue Count",
+          "level": 3,
+          "line": 19
+        },
+        {
+          "heading": "SECTION 1: ISSUES IN PDF VS CODE",
+          "level": 2,
+          "line": 29
+        },
+        {
+          "heading": "1.1 FATAL",
+          "level": 3,
+          "line": 31
+        },
+        {
+          "heading": "1.1.1 Graph Topology: Fully-Connected vs Star",
+          "level": 4,
+          "line": 33
+        },
+        {
+          "heading": "1.2 MAJOR",
+          "level": 3,
+          "line": 59
+        },
+        {
+          "heading": "1.2.1 Abstract Horizon: 0–6 Jam",
+          "level": 4,
+          "line": 61
+        },
+        {
+          "heading": "1.2.2 Output / Deliverable: Mobile App Claim",
+          "level": 4,
+          "line": 81
+        },
+        {
+          "heading": "1.2.3 Hybrid Persistence",
+          "level": 4,
+          "line": 101
+        },
+        {
+          "heading": "1.2.4 Retrieval Metric",
+          "level": 4,
+          "line": 124
+        },
+        {
+          "heading": "1.2.5 Evaluation Subsampling (`eval_step=11`)",
+          "level": 4,
+          "line": 136
+        },
+        {
+          "heading": "Apa itu Autokorelasi?",
+          "level": 4,
+          "line": 178
+        },
+        {
+          "heading": "Mengapa Evaluasi Setiap Jam Memberikan Metrik Terlalu Optimis?",
+          "level": 4,
+          "line": 185
+        },
+        {
+          "heading": "Bagaimana eval_step=11 Membantu?",
+          "level": 4,
+          "line": 202
+        },
+        {
+          "heading": "Kenapa 11, Bukan 1 atau 100?",
+          "level": 4,
+          "line": 215
+        },
+        {
+          "heading": "Trade-off",
+          "level": 4,
+          "line": 221
+        },
+        {
+          "heading": "Mengapa Ini Penting untuk Baseline Persistence?",
+          "level": 4,
+          "line": 229
+        },
+        {
+          "heading": "Analogi Sederhana",
+          "level": 4,
+          "line": 233
+        },
+        {
+          "heading": "1.2.6 Edge Attributes",
+          "level": 4,
+          "line": 281
+        },
+        {
+          "heading": "1.2.7 Hypothermia Risk Index",
+          "level": 4,
+          "line": 293
+        },
+        {
+          "heading": "1.2.8 Optimizer Adam vs AdamW",
+          "level": 4,
+          "line": 305
+        },
+        {
+          "heading": "1.3 MINOR Issues",
+          "level": 3,
+          "line": 321
+        },
+        {
+          "heading": "SECTION 2: PROPOSED NEW LIMITATIONS (Batasan Masalah)",
+          "level": 2,
+          "line": 336
+        },
+        {
+          "heading": "2.1 Limited Extreme Precipitation Data",
+          "level": 3,
+          "line": 338
+        },
+        {
+          "heading": "2.2 ERA5 Not Real-Time",
+          "level": 3,
+          "line": 364
+        },
+        {
+          "heading": "SECTION 3: EVIDENCE OF SCENARIO TESTING",
+          "level": 2,
+          "line": 376
+        },
+        {
+          "heading": "3.1 Six Scenarios",
+          "level": 3,
+          "line": 378
+        },
+        {
+          "heading": "3.2 Evaluation Metadata",
+          "level": 3,
+          "line": 387
+        },
+        {
+          "heading": "3.3 Precipitation Metrics",
+          "level": 3,
+          "line": 396
+        },
+        {
+          "heading": "3.4 Threshold Metrics (10 mm)",
+          "level": 3,
+          "line": 411
+        },
+        {
+          "heading": "3.5 Interpretation of Counter-Intuitive Results",
+          "level": 3,
+          "line": 426
+        },
+        {
+          "heading": "SECTION 4: REVISION PRIORITY",
+          "level": 2,
+          "line": 433
+        },
+        {
+          "heading": "Priority 1 — Must Fix",
+          "level": 3,
+          "line": 435
+        },
+        {
+          "heading": "Priority 2 — Important",
+          "level": 3,
+          "line": 442
+        },
+        {
+          "heading": "Priority 3 — Polish",
+          "level": 3,
+          "line": 451
+        },
+        {
+          "heading": "SECTION 5: SINGLE SOURCE OF TRUTH",
+          "level": 2,
+          "line": 463
+        },
+        {
+          "heading": "APPENDIX: QUICK REFERENCE FOR DEFENSE",
+          "level": 2,
+          "line": 477
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 39
+      }
+    },
+    {
+      "path": ".kimchi/docs/bab2_landasan_teori_lengkap.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 529,
+      "nonEmptyLines": 345,
+      "sections": [
+        {
+          "heading": "BAB 2 — Landasan Teori (Penjelasan Lengkap)",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "2.1 Konsep Nowcasting dan Skala Waktu Prediksi Atmosfer",
+          "level": 2,
+          "line": 7
+        },
+        {
+          "heading": "2.1.1 Definisi dan Ruang Lingkup Nowcasting",
+          "level": 3,
+          "line": 9
+        },
+        {
+          "heading": "2.1.2 Karakteristik Dinamika pada Skala Waktu Per Jam di Wilayah Pegunungan",
+          "level": 3,
+          "line": 32
+        },
+        {
+          "heading": "2.1.3 Keterbatasan Pendekatan Deterministik dan Relevansi Pendekatan Probabilistik",
+          "level": 3,
+          "line": 58
+        },
+        {
+          "heading": "2.2 Dinamika Presipitasi Orografis di Pegunungan Tropis",
+          "level": 2,
+          "line": 84
+        },
+        {
+          "heading": "2.2.0 Pengantar Presipitasi Orografis",
+          "level": 3,
+          "line": 86
+        },
+        {
+          "heading": "2.2.1 Mekanisme Orographic Lifting dan Convective Initiation",
+          "level": 3,
+          "line": 104
+        },
+        {
+          "heading": "2.2.1.1 Angkat Paksa (Orographic Lifting)",
+          "level": 4,
+          "line": 106
+        },
+        {
+          "heading": "2.2.1.2 Pendinginan Adiabatik dan Kondensasi",
+          "level": 4,
+          "line": 121
+        },
+        {
+          "heading": "2.2.1.3 Convective Initiation (Pemicu Konvektif)",
+          "level": 4,
+          "line": 139
+        },
+        {
+          "heading": "2.2.1.4 Peran Cross-Slope Wind",
+          "level": 4,
+          "line": 155
+        },
+        {
+          "heading": "2.2.1.5 Forcing Mekanis dan Termal",
+          "level": 4,
+          "line": 170
+        },
+        {
+          "heading": "2.2.2 Variabilitas Spasial dan Temporal Presipitasi Orografis",
+          "level": 3,
+          "line": 188
+        },
+        {
+          "heading": "2.2.2.1 Variabilitas Spasial",
+          "level": 4,
+          "line": 190
+        },
+        {
+          "heading": "2.2.2.2 Variabilitas Temporal",
+          "level": 4,
+          "line": 210
+        },
+        {
+          "heading": "2.2.2.3 Distribusi Heavy-Tailed",
+          "level": 4,
+          "line": 228
+        },
+        {
+          "heading": "2.2.3 Relevansi dengan Nowcasting Probabilistik dan Mitigasi Risiko",
+          "level": 3,
+          "line": 244
+        },
+        {
+          "heading": "2.2.3.1 Keterbatasan Model Deterministik untuk Presipitasi Orografis",
+          "level": 4,
+          "line": 246
+        },
+        {
+          "heading": "2.2.3.2 Keunggulan Pendekatan Probabilistik",
+          "level": 4,
+          "line": 255
+        },
+        {
+          "heading": "2.2.3.3 Peran Spatio-Temporal Graph Conditioning",
+          "level": 4,
+          "line": 264
+        },
+        {
+          "heading": "2.2.3.4 Hubungan dengan Mitigasi Risiko Hipotermia",
+          "level": 4,
+          "line": 273
+        },
+        {
+          "heading": "2.3 Model Generatif Probabilistik dengan Diffusion Models",
+          "level": 2,
+          "line": 283
+        },
+        {
+          "heading": "2.3.1 Prinsip Kerja dan Keunggulan Diffusion Models untuk Nowcasting",
+          "level": 3,
+          "line": 285
+        },
+        {
+          "heading": "2.3.1.1 Dua Proses Diffusion",
+          "level": 4,
+          "line": 287
+        },
+        {
+          "heading": "2.3.1.2 Keunggulan Diffusion Model",
+          "level": 4,
+          "line": 299
+        },
+        {
+          "heading": "2.3.1.3 Diffusion untuk Nowcasting",
+          "level": 4,
+          "line": 308
+        },
+        {
+          "heading": "2.3.2 Keterbatasan Model Deterministik dan Relevansi Pendekatan Generatif",
+          "level": 3,
+          "line": 316
+        },
+        {
+          "heading": "2.3.3 Relevansi dengan Retrieval-Augmented Diffusion Model",
+          "level": 3,
+          "line": 328
+        },
+        {
+          "heading": "2.3.3.1 Masalah Pure Diffusion",
+          "level": 4,
+          "line": 330
+        },
+        {
+          "heading": "2.3.3.2 Solusi Retrieval",
+          "level": 4,
+          "line": 334
+        },
+        {
+          "heading": "2.3.3.3 Keunggulan Kombinasi",
+          "level": 4,
+          "line": 340
+        },
+        {
+          "heading": "2.4 Retrieval-Based Historical Analogs",
+          "level": 2,
+          "line": 348
+        },
+        {
+          "heading": "2.4.1 Prinsip Kerja Retrieval-Based Historical Analogs",
+          "level": 3,
+          "line": 350
+        },
+        {
+          "heading": "2.4.1.1 Konsep Dasar",
+          "level": 4,
+          "line": 352
+        },
+        {
+          "heading": "2.4.1.2 Implementasi dengan FAISS",
+          "level": 4,
+          "line": 358
+        },
+        {
+          "heading": "2.4.1.3 Cara Penggunaan dalam Model",
+          "level": 4,
+          "line": 364
+        },
+        {
+          "heading": "2.4.2 Keunggulan Retrieval-Augmented dibandingkan Pure Generative Models",
+          "level": 3,
+          "line": 375
+        },
+        {
+          "heading": "2.4.2.1 Mengatasi Data Scarcity",
+          "level": 4,
+          "line": 377
+        },
+        {
+          "heading": "2.4.2.2 Meningkatkan Kalibrasi",
+          "level": 4,
+          "line": 381
+        },
+        {
+          "heading": "2.4.2.3 Interpretabilitas",
+          "level": 4,
+          "line": 385
+        },
+        {
+          "heading": "2.5 Spatio-Temporal Graph Conditioning pada Representasi Data Elevasi",
+          "level": 2,
+          "line": 391
+        },
+        {
+          "heading": "2.5.1 Representasi Graph untuk Data Elevasi dengan Lima Node",
+          "level": 3,
+          "line": 393
+        },
+        {
+          "heading": "2.5.1.1 Lima Node",
+          "level": 4,
+          "line": 395
+        },
+        {
+          "heading": "2.5.1.2 Graph Attention Network (GAT)",
+          "level": 4,
+          "line": 405
+        },
+        {
+          "heading": "2.5.1.3 Catatan Penting tentang Topologi",
+          "level": 4,
+          "line": 411
+        },
+        {
+          "heading": "2.5.2 Keunggulan Spatio-Temporal Graph dibandingkan Pendekatan Konvensional",
+          "level": 3,
+          "line": 426
+        },
+        {
+          "heading": "2.5.2.1 Keterbatasan CNN/LSTM/Transformer Murni",
+          "level": 4,
+          "line": 428
+        },
+        {
+          "heading": "2.5.2.2 Keunggulan Graph",
+          "level": 4,
+          "line": 434
+        },
+        {
+          "heading": "2.5.2.3 Integrasi dengan Diffusion",
+          "level": 4,
+          "line": 440
+        },
+        {
+          "heading": "2.6 Risiko Hipotermia dan Mitigasi Pendakian",
+          "level": 2,
+          "line": 446
+        },
+        {
+          "heading": "2.6.1 Mekanisme Hipotermia di Lingkungan Pegunungan Tropis",
+          "level": 3,
+          "line": 448
+        },
+        {
+          "heading": "2.6.1.1 Definisi Hipotermia",
+          "level": 4,
+          "line": 450
+        },
+        {
+          "heading": "2.6.1.2 Hipotermia Basah-Dingin",
+          "level": 4,
+          "line": 454
+        },
+        {
+          "heading": "2.6.1.3 Tiga Mekanisme Kehilangan Panas",
+          "level": 4,
+          "line": 458
+        },
+        {
+          "heading": "2.6.1.4 Gejala dan Bahaya",
+          "level": 4,
+          "line": 464
+        },
+        {
+          "heading": "2.6.2 Faktor Meteorologis Pemicu Risiko Hipotermia",
+          "level": 3,
+          "line": 472
+        },
+        {
+          "heading": "2.6.2.1 Tiga Faktor Utama",
+          "level": 4,
+          "line": 474
+        },
+        {
+          "heading": "2.6.2.2 Peran Node Sekitar",
+          "level": 4,
+          "line": 480
+        },
+        {
+          "heading": "2.6.2.3 Hubungan dengan Output Model",
+          "level": 4,
+          "line": 484
+        },
+        {
+          "heading": "2.7 Analisis Celah Penelitian",
+          "level": 2,
+          "line": 493
+        },
+        {
+          "heading": "2.7.1 Celah pada Representasi Spasial dan Temporal",
+          "level": 3,
+          "line": 495
+        },
+        {
+          "heading": "2.7.2 Celah pada Penanganan Kejadian Ekstrem dan Ketidakpastian",
+          "level": 3,
+          "line": 499
+        },
+        {
+          "heading": "2.7.3 Celah pada Aplikasi Mitigasi Risiko Pendakian",
+          "level": 3,
+          "line": 503
+        },
+        {
+          "heading": "2.7.4 Kontribusi Penelitian Ini",
+          "level": 3,
+          "line": 507
+        },
+        {
+          "heading": "Ringkasan Alur Logika",
+          "level": 2,
+          "line": 513
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 66
+      }
+    },
+    {
+      "path": ".kimchi/docs/cross_slope_orographic_mechanisms.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 187,
+      "nonEmptyLines": 135,
+      "sections": [
+        {
+          "heading": "Cross-Slope Wind dan Dua Mekanisme Pembentukan Presipitasi Orografis",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "1. Cross-Slope Wind",
+          "level": 2,
+          "line": 3
+        },
+        {
+          "heading": "Apa itu Melintang?",
+          "level": 3,
+          "line": 5
+        },
+        {
+          "heading": "Analogi Sederhana",
+          "level": 3,
+          "line": 9
+        },
+        {
+          "heading": "Ilustrasi",
+          "level": 3,
+          "line": 16
+        },
+        {
+          "heading": "Definisi Formal",
+          "level": 3,
+          "line": 41
+        },
+        {
+          "heading": "Hubungan dengan Orographic Lifting",
+          "level": 3,
+          "line": 48
+        },
+        {
+          "heading": "2. Dua Mekanisme Pembentukan Presipitasi Orografis",
+          "level": 2,
+          "line": 61
+        },
+        {
+          "heading": "Mekanisme 1: Forcing Mekanis (Orografis)",
+          "level": 3,
+          "line": 65
+        },
+        {
+          "heading": "Mekanisme 2: Forcing Termal (Pemanasan Lereng)",
+          "level": 3,
+          "line": 94
+        },
+        {
+          "heading": "3. Koreksi Pemahaman \"Udara Dingin di Lereng\"",
+          "level": 2,
+          "line": 124
+        },
+        {
+          "heading": "Analogi",
+          "level": 3,
+          "line": 136
+        },
+        {
+          "heading": "4. Kedua Mekanisme Bisa Bekerja Bersamaan",
+          "level": 2,
+          "line": 150
+        },
+        {
+          "heading": "5. Ringkasan",
+          "level": 2,
+          "line": 168
+        },
+        {
+          "heading": "6. Catatan untuk Draft Skripsi",
+          "level": 2,
+          "line": 180
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 15
+      }
+    },
+    {
+      "path": ".kimchi/docs/guidance_bab2_output_architecture.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 79,
+      "nonEmptyLines": 53,
+      "sections": [
+        {
+          "heading": "Guidance: Menambahkan Output Sistem di BAB 2 Landasan Teori",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Tujuan",
+          "level": 2,
+          "line": 3
+        },
+        {
+          "heading": "1. Posisi di BAB 2",
+          "level": 2,
+          "line": 8
+        },
+        {
+          "heading": "2. Poin-poin yang Perlu Dijelaskan",
+          "level": 2,
+          "line": 16
+        },
+        {
+          "heading": "2.1 Jenis Output",
+          "level": 3,
+          "line": 18
+        },
+        {
+          "heading": "2.2 Arsitektur Umum: Vue.js + FastAPI",
+          "level": 3,
+          "line": 24
+        },
+        {
+          "heading": "2.3 Mengapa Vue.js + FastAPI?",
+          "level": 3,
+          "line": 33
+        },
+        {
+          "heading": "2.4 Perbedaan dengan Aplikasi Mobile",
+          "level": 3,
+          "line": 45
+        },
+        {
+          "heading": "3. Contoh Paragraf untuk BAB 2",
+          "level": 2,
+          "line": 54
+        },
+        {
+          "heading": "4. Catatan untuk BAB 1",
+          "level": 2,
+          "line": 60
+        },
+        {
+          "heading": "5. Keterbatasan yang Harus Dijelaskan",
+          "level": 2,
+          "line": 69
+        },
+        {
+          "heading": "6. Kesimpulan",
+          "level": 2,
+          "line": 77
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 12
+      }
+    },
+    {
+      "path": ".kimchi/docs/guidance_batasan_masalah_update.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 208,
+      "nonEmptyLines": 142,
+      "sections": [
+        {
+          "heading": "Arahan Revisi Batasan Masalah Berdasarkan Temuan PDF",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Batasan Masalah yang Perlu Ditambahkan",
+          "level": 2,
+          "line": 8
+        },
+        {
+          "heading": "1. Data Curah Hujan yang Minim / Langka (Rare Events)",
+          "level": 3,
+          "line": 10
+        },
+        {
+          "heading": "Usaha yang Sudah Dilakukan",
+          "level": 4,
+          "line": 12
+        },
+        {
+          "heading": "Kenapa Memang Tidak Bisa Dilampaui?",
+          "level": 4,
+          "line": 21
+        },
+        {
+          "heading": "Saran Penulisan untuk BAB 1 / BAB 3",
+          "level": 4,
+          "line": 25
+        },
+        {
+          "heading": "2. Edge Attributes Konstan 0.25° dan Non-Informatif",
+          "level": 3,
+          "line": 31
+        },
+        {
+          "heading": "Usaha yang Sudah Dilakukan",
+          "level": 4,
+          "line": 33
+        },
+        {
+          "heading": "Bukti di Kode",
+          "level": 4,
+          "line": 42
+        },
+        {
+          "heading": "Kenapa Memang Tidak Bisa Dilampaui?",
+          "level": 4,
+          "line": 58
+        },
+        {
+          "heading": "Saran Penulisan",
+          "level": 4,
+          "line": 62
+        },
+        {
+          "heading": "3. ERA5 Hanya Update ~1 Minggu Sekali, Tidak Real-Time",
+          "level": 3,
+          "line": 68
+        },
+        {
+          "heading": "Penjelasan",
+          "level": 4,
+          "line": 70
+        },
+        {
+          "heading": "Implikasi untuk Prototype",
+          "level": 4,
+          "line": 74
+        },
+        {
+          "heading": "Saran Penulisan",
+          "level": 4,
+          "line": 83
+        },
+        {
+          "heading": "Format Usulan Batasan Masalah (Gabungan)",
+          "level": 2,
+          "line": 89
+        },
+        {
+          "heading": "Prinsip Penulisan yang Harus Dijaga",
+          "level": 2,
+          "line": 103
+        },
+        {
+          "heading": "Bukti Kode untuk Diacu saat Sidang",
+          "level": 2,
+          "line": 113
+        },
+        {
+          "heading": "Catatan Tambahan",
+          "level": 2,
+          "line": 124
+        },
+        {
+          "heading": "Konfirmasi: Hanya Ada BAB 1–3",
+          "level": 2,
+          "line": 131
+        },
+        {
+          "heading": "Bukti Kita Sudah Tes Berbagai Skenario",
+          "level": 2,
+          "line": 137
+        },
+        {
+          "heading": "Keenam Skenario yang Diuji",
+          "level": 3,
+          "line": 146
+        },
+        {
+          "heading": "Metadata Evaluasi",
+          "level": 3,
+          "line": 155
+        },
+        {
+          "heading": "Contoh Hasil Metrik (precipitation)",
+          "level": 3,
+          "line": 167
+        },
+        {
+          "heading": "Interpretasi Hasil",
+          "level": 3,
+          "line": 178
+        },
+        {
+          "heading": "Cara Menyebutkan di BAB 3 / BAB 1",
+          "level": 3,
+          "line": 184
+        },
+        {
+          "heading": "Rekomendasi Penempatan Batasan Masalah",
+          "level": 2,
+          "line": 190
+        },
+        {
+          "heading": "Daftar File Bukti yang Bisa Ditunjukkan saat Sidang",
+          "level": 2,
+          "line": 201
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 28
+      }
+    },
+    {
+      "path": ".kimchi/docs/solusi_penelitian_penjelasan_ulang.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 286,
+      "nonEmptyLines": 206,
+      "sections": [
+        {
+          "heading": "Solusi di Penelitian Kamu — Penjelasan Ulang",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Masalah yang Dihadapi",
+          "level": 2,
+          "line": 3
+        },
+        {
+          "heading": "1. Log Transform pada Presipitasi",
+          "level": 2,
+          "line": 15
+        },
+        {
+          "heading": "Masalah",
+          "level": 3,
+          "line": 17
+        },
+        {
+          "heading": "Solusi: Log Transform",
+          "level": 3,
+          "line": 26
+        },
+        {
+          "heading": "Contoh",
+          "level": 3,
+          "line": 40
+        },
+        {
+          "heading": "Apa yang Terjadi?",
+          "level": 3,
+          "line": 51
+        },
+        {
+          "heading": "Analogi",
+          "level": 3,
+          "line": 57
+        },
+        {
+          "heading": "Di Kode",
+          "level": 3,
+          "line": 66
+        },
+        {
+          "heading": "2. Weighted Noise Loss",
+          "level": 2,
+          "line": 77
+        },
+        {
+          "heading": "Masalah",
+          "level": 3,
+          "line": 79
+        },
+        {
+          "heading": "Solusi: Weighted Noise Loss",
+          "level": 3,
+          "line": 91
+        },
+        {
+          "heading": "Contoh",
+          "level": 3,
+          "line": 101
+        },
+        {
+          "heading": "Apa yang Terjadi?",
+          "level": 3,
+          "line": 109
+        },
+        {
+          "heading": "Analogi",
+          "level": 3,
+          "line": 115
+        },
+        {
+          "heading": "Di Kode",
+          "level": 3,
+          "line": 122
+        },
+        {
+          "heading": "3. Retrieval-Augmented Historical Analogs",
+          "level": 2,
+          "line": 135
+        },
+        {
+          "heading": "Masalah",
+          "level": 3,
+          "line": 137
+        },
+        {
+          "heading": "Solusi: Retrieval",
+          "level": 3,
+          "line": 142
+        },
+        {
+          "heading": "Prosesnya",
+          "level": 3,
+          "line": 146
+        },
+        {
+          "heading": "Contoh",
+          "level": 3,
+          "line": 158
+        },
+        {
+          "heading": "Analogi",
+          "level": 3,
+          "line": 172
+        },
+        {
+          "heading": "Keunggulan",
+          "level": 3,
+          "line": 179
+        },
+        {
+          "heading": "Di Kode",
+          "level": 3,
+          "line": 185
+        },
+        {
+          "heading": "4. Diffusion Model",
+          "level": 2,
+          "line": 198
+        },
+        {
+          "heading": "Masalah",
+          "level": 3,
+          "line": 200
+        },
+        {
+          "heading": "Solusi: Diffusion Model",
+          "level": 3,
+          "line": 205
+        },
+        {
+          "heading": "Proses Singkat",
+          "level": 3,
+          "line": 209
+        },
+        {
+          "heading": "Contoh Ensemble",
+          "level": 3,
+          "line": 221
+        },
+        {
+          "heading": "Analogi",
+          "level": 3,
+          "line": 238
+        },
+        {
+          "heading": "Di Kode",
+          "level": 3,
+          "line": 246
+        },
+        {
+          "heading": "Hubungan Keempat Teknik",
+          "level": 2,
+          "line": 259
+        },
+        {
+          "heading": "Kesimpulan",
+          "level": 2,
+          "line": 277
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 33
+      }
+    },
+    {
+      "path": ".kimchi/docs/variabilitas_spasial_penjelasan.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 161,
+      "nonEmptyLines": 108,
+      "sections": [
+        {
+          "heading": "Variabilitas Spasial Presipitasi Orografis (Penjelasan Lengkap)",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Definisi Sederhana",
+          "level": 2,
+          "line": 3
+        },
+        {
+          "heading": "Mengapa Terjadi di Pegunungan?",
+          "level": 2,
+          "line": 12
+        },
+        {
+          "heading": "Fenomena Utama",
+          "level": 2,
+          "line": 23
+        },
+        {
+          "heading": "1. Windward Slope (Lereng Angin)",
+          "level": 3,
+          "line": 25
+        },
+        {
+          "heading": "2. Leeward Slope (Lereng Lindung / Rain Shadow)",
+          "level": 3,
+          "line": 40
+        },
+        {
+          "heading": "3. Zona Tengah Lereng (Maximum Precipitation Zone)",
+          "level": 3,
+          "line": 55
+        },
+        {
+          "heading": "4. Puncak",
+          "level": 3,
+          "line": 66
+        },
+        {
+          "heading": "Ilustrasi Cross-Section Gunung",
+          "level": 2,
+          "line": 77
+        },
+        {
+          "heading": "Contoh di Gunung Gede–Pangrango",
+          "level": 2,
+          "line": 109
+        },
+        {
+          "heading": "Arah Angin dan Lereng",
+          "level": 3,
+          "line": 111
+        },
+        {
+          "heading": "Konsekuensi untuk Pendaki",
+          "level": 3,
+          "line": 117
+        },
+        {
+          "heading": "Kenapa Penting untuk Model Kamu?",
+          "level": 2,
+          "line": 125
+        },
+        {
+          "heading": "Tanpa Representasi Spasial",
+          "level": 3,
+          "line": 127
+        },
+        {
+          "heading": "Dengan 5 Node",
+          "level": 3,
+          "line": 134
+        },
+        {
+          "heading": "Kesimpulan",
+          "level": 2,
+          "line": 146
+        },
+        {
+          "heading": "Jawaban Singkat untuk Sidang",
+          "level": 2,
+          "line": 159
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 17
+      }
+    },
+    {
+      "path": ".kimchi/docs/variabilitas_temporal_heavy_tailed.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 280,
+      "nonEmptyLines": 195,
+      "sections": [
+        {
+          "heading": "Variabilitas Temporal dan Distribusi Heavy-Tailed",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "1. Variabilitas Temporal Presipitasi Orografis",
+          "level": 1,
+          "line": 7
+        },
+        {
+          "heading": "Definisi Sederhana",
+          "level": 2,
+          "line": 9
+        },
+        {
+          "heading": "Siklus Diurnal",
+          "level": 2,
+          "line": 17
+        },
+        {
+          "heading": "Apa itu Siklus Diurnal?",
+          "level": 3,
+          "line": 19
+        },
+        {
+          "heading": "Kenapa Puncaknya Sore–Malam?",
+          "level": 3,
+          "line": 31
+        },
+        {
+          "heading": "Analogi Sederhana",
+          "level": 3,
+          "line": 40
+        },
+        {
+          "heading": "Gangguan Mekanis Menggantikan Siklus Diurnal",
+          "level": 2,
+          "line": 49
+        },
+        {
+          "heading": "Kapan Terjadi?",
+          "level": 3,
+          "line": 51
+        },
+        {
+          "heading": "Prosesnya",
+          "level": 3,
+          "line": 55
+        },
+        {
+          "heading": "Contoh",
+          "level": 3,
+          "line": 67
+        },
+        {
+          "heading": "Kenapa Variabilitas Temporal Penting?",
+          "level": 2,
+          "line": 75
+        },
+        {
+          "heading": "A. Nowcasting Per Jam Sangat Relevan",
+          "level": 3,
+          "line": 77
+        },
+        {
+          "heading": "B. Model Harus Tangkap Pola Jam-an",
+          "level": 3,
+          "line": 81
+        },
+        {
+          "heading": "C. Heavy-Tailed Distribution",
+          "level": 3,
+          "line": 88
+        },
+        {
+          "heading": "Ilustrasi Variabilitas Temporal",
+          "level": 2,
+          "line": 94
+        },
+        {
+          "heading": "2. Distribusi Heavy-Tailed",
+          "level": 1,
+          "line": 116
+        },
+        {
+          "heading": "Definisi Sederhana",
+          "level": 2,
+          "line": 118
+        },
+        {
+          "heading": "Ciri Utama Presipitasi:",
+          "level": 3,
+          "line": 122
+        },
+        {
+          "heading": "Perbandingan dengan Distribusi Normal",
+          "level": 2,
+          "line": 130
+        },
+        {
+          "heading": "Distribusi Normal (Bell Curve)",
+          "level": 3,
+          "line": 132
+        },
+        {
+          "heading": "Distribusi Presipitasi (Heavy-Tailed / Zero-Inflated)",
+          "level": 3,
+          "line": 147
+        },
+        {
+          "heading": "Mengapa Presipitasi Heavy-Tailed?",
+          "level": 2,
+          "line": 174
+        },
+        {
+          "heading": "1. Zero-Inflated",
+          "level": 3,
+          "line": 176
+        },
+        {
+          "heading": "2. Event Ekstrem Langka",
+          "level": 3,
+          "line": 180
+        },
+        {
+          "heading": "3. Dampak Besar",
+          "level": 3,
+          "line": 184
+        },
+        {
+          "heading": "Quasi-Stationary System",
+          "level": 2,
+          "line": 193
+        },
+        {
+          "heading": "Apa itu?",
+          "level": 3,
+          "line": 195
+        },
+        {
+          "heading": "Kenapa Penting?",
+          "level": 3,
+          "line": 202
+        },
+        {
+          "heading": "Kenapa Heavy-Tailed Penting untuk Model Kamu?",
+          "level": 2,
+          "line": 210
+        },
+        {
+          "heading": "A. Model Regresi Bias ke Nilai Rata-Rata",
+          "level": 3,
+          "line": 212
+        },
+        {
+          "heading": "B. Solusi di Penelitian Kamu",
+          "level": 3,
+          "line": 218
+        },
+        {
+          "heading": "Ilustrasi Heavy-Tailed dalam Data",
+          "level": 2,
+          "line": 227
+        },
+        {
+          "heading": "3. Hubungan Variabilitas Spasial, Temporal, dan Heavy-Tailed",
+          "level": 1,
+          "line": 240
+        },
+        {
+          "heading": "4. Kesimpulan",
+          "level": 1,
+          "line": 262
+        },
+        {
+          "heading": "Variabilitas Temporal",
+          "level": 2,
+          "line": 264
+        },
+        {
+          "heading": "Heavy-Tailed Distribution",
+          "level": 2,
+          "line": 270
+        },
+        {
+          "heading": "5. Jawaban Sidang Singkat",
+          "level": 1,
+          "line": 278
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 38
+      }
+    }
+  ]
+}

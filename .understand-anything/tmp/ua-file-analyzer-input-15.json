@@ -1,0 +1,84 @@
+{
+  "projectRoot": "/media/DiskE/SKRIPSI/Skripsi_Bevan",
+  "batchFiles": [
+    {
+      "path": "docs/ACTIVE_5NODE_STAR_MAIN.md",
+      "language": "markdown",
+      "sizeLines": 53,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/AUDIT_FIX_PLAN.md",
+      "language": "markdown",
+      "sizeLines": 216,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/AUDIT_SESSION_CONTEXT.md",
+      "language": "markdown",
+      "sizeLines": 450,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/HANDOVER_PRODUCTION_INTEGRATION_PLAN.md",
+      "language": "markdown",
+      "sizeLines": 158,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/KNOWLEDGE.md",
+      "language": "markdown",
+      "sizeLines": 446,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/METODE_PENELITIAN_PROYEK.md",
+      "language": "markdown",
+      "sizeLines": 320,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/MIGRATION_CHECKLIST_STATUS.md",
+      "language": "markdown",
+      "sizeLines": 163,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/README.md",
+      "language": "markdown",
+      "sizeLines": 13,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/dataset_sample.md",
+      "language": "markdown",
+      "sizeLines": 16,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/extracted_pdf_text.txt",
+      "language": "txt",
+      "sizeLines": 2571,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/project.md",
+      "language": "markdown",
+      "sizeLines": 152,
+      "fileCategory": "docs"
+    }
+  ],
+  "batchImportData": {
+    "docs/ACTIVE_5NODE_STAR_MAIN.md": [],
+    "docs/AUDIT_FIX_PLAN.md": [],
+    "docs/AUDIT_SESSION_CONTEXT.md": [],
+    "docs/HANDOVER_PRODUCTION_INTEGRATION_PLAN.md": [],
+    "docs/KNOWLEDGE.md": [],
+    "docs/METODE_PENELITIAN_PROYEK.md": [],
+    "docs/MIGRATION_CHECKLIST_STATUS.md": [],
+    "docs/README.md": [],
+    "docs/dataset_sample.md": [],
+    "docs/extracted_pdf_text.txt": [],
+    "docs/project.md": []
+  }
+}

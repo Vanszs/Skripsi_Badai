@@ -1,0 +1,182 @@
+{
+  "projectRoot": "/media/DiskE/SKRIPSI/Skripsi_Bevan",
+  "batchFiles": [
+    {
+      "path": "api/routers/dashboard.py",
+      "language": "python",
+      "sizeLines": 17,
+      "fileCategory": "code"
+    },
+    {
+      "path": "api/routers/metrics.py",
+      "language": "python",
+      "sizeLines": 18,
+      "fileCategory": "code"
+    },
+    {
+      "path": "core/data/raw/pangrango_era5_5node_2005_2025.parquet",
+      "language": "parquet",
+      "sizeLines": 99594,
+      "fileCategory": "code"
+    },
+    {
+      "path": "core/data/raw/pangrango_era5_5node_2024_2024.parquet",
+      "language": "parquet",
+      "sizeLines": 3817,
+      "fileCategory": "code"
+    },
+    {
+      "path": "core/data/raw/pangrango_era5_5node_grid_validation.json",
+      "language": "json",
+      "sizeLines": 68,
+      "fileCategory": "config"
+    },
+    {
+      "path": "core/data/raw/README.md",
+      "language": "markdown",
+      "sizeLines": 11,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "core/models/diffusion_chkpt.pth",
+      "language": "pth",
+      "sizeLines": 4568,
+      "fileCategory": "code"
+    },
+    {
+      "path": "core/models/mlp_baseline_chkpt.pth",
+      "language": "pth",
+      "sizeLines": 362,
+      "fileCategory": "code"
+    },
+    {
+      "path": "core/notebooks/evaluasi_model.ipynb",
+      "language": "ipynb",
+      "sizeLines": 66,
+      "fileCategory": "code"
+    },
+    {
+      "path": "core/results/baseline_results/baseline_metrics.json",
+      "language": "json",
+      "sizeLines": 29,
+      "fileCategory": "config"
+    },
+    {
+      "path": "core/results/README.md",
+      "language": "markdown",
+      "sizeLines": 12,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "core/results/result_test/comparison/comparison_summary.csv",
+      "language": "csv",
+      "sizeLines": 19,
+      "fileCategory": "data"
+    },
+    {
+      "path": "core/results/result_test/comparison/comparison_summary.json",
+      "language": "json",
+      "sizeLines": 225,
+      "fileCategory": "config"
+    },
+    {
+      "path": "core/results/result_test/diff_gnn/metrics.json",
+      "language": "json",
+      "sizeLines": 63,
+      "fileCategory": "config"
+    },
+    {
+      "path": "core/results/result_test/diff_only/metrics.json",
+      "language": "json",
+      "sizeLines": 63,
+      "fileCategory": "config"
+    },
+    {
+      "path": "core/results/result_test/diff_retrieval/metrics.json",
+      "language": "json",
+      "sizeLines": 63,
+      "fileCategory": "config"
+    },
+    {
+      "path": "core/results/result_test/EVALUATION_REPORT.md",
+      "language": "markdown",
+      "sizeLines": 90,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "core/results/result_test/full_model/metrics.json",
+      "language": "json",
+      "sizeLines": 63,
+      "fileCategory": "config"
+    },
+    {
+      "path": "core/results/result_test/mlp_baseline/metrics.json",
+      "language": "json",
+      "sizeLines": 63,
+      "fileCategory": "config"
+    },
+    {
+      "path": "core/results/result_test/persistence/metrics.json",
+      "language": "json",
+      "sizeLines": 63,
+      "fileCategory": "config"
+    },
+    {
+      "path": "core/results/result_test/README.md",
+      "language": "markdown",
+      "sizeLines": 18,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "core/scripts/plot_week_timeseries.py",
+      "language": "python",
+      "sizeLines": 58,
+      "fileCategory": "code"
+    },
+    {
+      "path": "core/src/components/HistoricalAnalogsExplorer.tsx",
+      "language": "typescript",
+      "sizeLines": 245,
+      "fileCategory": "code"
+    },
+    {
+      "path": "core/src/components/ProbabilisticNowcastChart.tsx",
+      "language": "typescript",
+      "sizeLines": 207,
+      "fileCategory": "code"
+    },
+    {
+      "path": "core/src/components/StarTopographyMap.tsx",
+      "language": "typescript",
+      "sizeLines": 313,
+      "fileCategory": "code"
+    }
+  ],
+  "batchImportData": {
+    "api/routers/dashboard.py": [],
+    "api/routers/metrics.py": [],
+    "core/data/raw/pangrango_era5_5node_2005_2025.parquet": [],
+    "core/data/raw/pangrango_era5_5node_2024_2024.parquet": [],
+    "core/data/raw/pangrango_era5_5node_grid_validation.json": [],
+    "core/data/raw/README.md": [],
+    "core/models/diffusion_chkpt.pth": [],
+    "core/models/mlp_baseline_chkpt.pth": [],
+    "core/notebooks/evaluasi_model.ipynb": [],
+    "core/results/baseline_results/baseline_metrics.json": [],
+    "core/results/README.md": [],
+    "core/results/result_test/comparison/comparison_summary.csv": [],
+    "core/results/result_test/comparison/comparison_summary.json": [],
+    "core/results/result_test/diff_gnn/metrics.json": [],
+    "core/results/result_test/diff_only/metrics.json": [],
+    "core/results/result_test/diff_retrieval/metrics.json": [],
+    "core/results/result_test/EVALUATION_REPORT.md": [],
+    "core/results/result_test/full_model/metrics.json": [],
+    "core/results/result_test/mlp_baseline/metrics.json": [],
+    "core/results/result_test/persistence/metrics.json": [],
+    "core/results/result_test/README.md": [],
+    "core/scripts/plot_week_timeseries.py": [],
+    "core/src/components/HistoricalAnalogsExplorer.tsx": [],
+    "core/src/components/ProbabilisticNowcastChart.tsx": [],
+    "core/src/components/StarTopographyMap.tsx": []
+  }
+}

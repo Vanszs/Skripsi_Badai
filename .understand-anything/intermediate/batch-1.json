@@ -1,0 +1,851 @@
+{
+  "nodes": [
+    {
+      "id": "file:web/src/App.tsx",
+      "type": "file",
+      "name": "App.tsx",
+      "filePath": "web/src/App.tsx",
+      "summary": "Source module (App.tsx) implementing 1 functions (68 lines).",
+      "tags": [
+        "code"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:web/src/App.tsx:App",
+      "type": "function",
+      "name": "App",
+      "filePath": "web/src/App.tsx",
+      "lineRange": [
+        17,
+        68
+      ],
+      "summary": "Function App defined in App.tsx.",
+      "tags": [
+        "function",
+        "code"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:web/src/components/ForecastChart.tsx",
+      "type": "file",
+      "name": "ForecastChart.tsx",
+      "filePath": "web/src/components/ForecastChart.tsx",
+      "summary": "Source module (ForecastChart.tsx) implementing 2 functions (198 lines).",
+      "tags": [
+        "code"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:web/src/components/ForecastChart.tsx:ForecastChartComponent",
+      "type": "function",
+      "name": "ForecastChartComponent",
+      "filePath": "web/src/components/ForecastChart.tsx",
+      "lineRange": [
+        17,
+        101
+      ],
+      "summary": "Function ForecastChartComponent defined in ForecastChart.tsx.",
+      "tags": [
+        "function",
+        "code"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:web/src/components/ForecastChart.tsx:NowcastRow",
+      "type": "function",
+      "name": "NowcastRow",
+      "filePath": "web/src/components/ForecastChart.tsx",
+      "lineRange": [
+        111,
+        196
+      ],
+      "summary": "Function NowcastRow defined in ForecastChart.tsx.",
+      "tags": [
+        "function",
+        "code"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:web/src/components/MapView.tsx",
+      "type": "file",
+      "name": "MapView.tsx",
+      "filePath": "web/src/components/MapView.tsx",
+      "summary": "Source module (MapView.tsx) implementing 1 functions (15 lines).",
+      "tags": [
+        "code"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:web/src/components/MapView.tsx:MapView",
+      "type": "function",
+      "name": "MapView",
+      "filePath": "web/src/components/MapView.tsx",
+      "lineRange": [
+        8,
+        15
+      ],
+      "summary": "Function MapView defined in MapView.tsx.",
+      "tags": [
+        "function",
+        "code"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:web/src/components/ModelPerformancePanel.tsx",
+      "type": "file",
+      "name": "ModelPerformancePanel.tsx",
+      "filePath": "web/src/components/ModelPerformancePanel.tsx",
+      "summary": "Source module (ModelPerformancePanel.tsx) implementing 2 functions (13 lines).",
+      "tags": [
+        "code"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:web/src/components/ModelPerformancePanel.tsx:metric",
+      "type": "function",
+      "name": "metric",
+      "filePath": "web/src/components/ModelPerformancePanel.tsx",
+      "lineRange": [
+        5,
+        5
+      ],
+      "summary": "Function metric defined in ModelPerformancePanel.tsx.",
+      "tags": [
+        "function",
+        "code"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:web/src/components/ModelPerformancePanel.tsx:ModelPerformancePanel",
+      "type": "function",
+      "name": "ModelPerformancePanel",
+      "filePath": "web/src/components/ModelPerformancePanel.tsx",
+      "lineRange": [
+        6,
+        13
+      ],
+      "summary": "Function ModelPerformancePanel defined in ModelPerformancePanel.tsx.",
+      "tags": [
+        "function",
+        "code"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:web/src/components/NodeDetailModal.tsx",
+      "type": "file",
+      "name": "NodeDetailModal.tsx",
+      "filePath": "web/src/components/NodeDetailModal.tsx",
+      "summary": "Source module (NodeDetailModal.tsx) implementing 1 functions (13 lines).",
+      "tags": [
+        "code"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:web/src/components/NodeDetailModal.tsx:NodeDetailModal",
+      "type": "function",
+      "name": "NodeDetailModal",
+      "filePath": "web/src/components/NodeDetailModal.tsx",
+      "lineRange": [
+        7,
+        13
+      ],
+      "summary": "Function NodeDetailModal defined in NodeDetailModal.tsx.",
+      "tags": [
+        "function",
+        "code"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:web/src/components/RetrievalAnalogsPanel.tsx",
+      "type": "file",
+      "name": "RetrievalAnalogsPanel.tsx",
+      "filePath": "web/src/components/RetrievalAnalogsPanel.tsx",
+      "summary": "Source module (RetrievalAnalogsPanel.tsx) implementing 1 functions (10 lines).",
+      "tags": [
+        "code"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:web/src/components/RetrievalAnalogsPanel.tsx:RetrievalAnalogsPanel",
+      "type": "function",
+      "name": "RetrievalAnalogsPanel",
+      "filePath": "web/src/components/RetrievalAnalogsPanel.tsx",
+      "lineRange": [
+        7,
+        10
+      ],
+      "summary": "Function RetrievalAnalogsPanel defined in RetrievalAnalogsPanel.tsx.",
+      "tags": [
+        "function",
+        "code"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:web/src/components/RiskAssessmentPanel.tsx",
+      "type": "file",
+      "name": "RiskAssessmentPanel.tsx",
+      "filePath": "web/src/components/RiskAssessmentPanel.tsx",
+      "summary": "Source module (RiskAssessmentPanel.tsx) implementing 1 functions (7 lines).",
+      "tags": [
+        "code"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:web/src/components/RiskAssessmentPanel.tsx:RiskAssessmentPanel",
+      "type": "function",
+      "name": "RiskAssessmentPanel",
+      "filePath": "web/src/components/RiskAssessmentPanel.tsx",
+      "lineRange": [
+        4,
+        7
+      ],
+      "summary": "Function RiskAssessmentPanel defined in RiskAssessmentPanel.tsx.",
+      "tags": [
+        "function",
+        "code"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:web/src/components/SideNav.tsx",
+      "type": "file",
+      "name": "SideNav.tsx",
+      "filePath": "web/src/components/SideNav.tsx",
+      "summary": "Source module (SideNav.tsx) implementing 1 functions (5 lines).",
+      "tags": [
+        "code"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:web/src/components/SideNav.tsx:SideNav",
+      "type": "function",
+      "name": "SideNav",
+      "filePath": "web/src/components/SideNav.tsx",
+      "lineRange": [
+        5,
+        5
+      ],
+      "summary": "Function SideNav defined in SideNav.tsx.",
+      "tags": [
+        "function",
+        "code"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:web/src/components/TimelineScrubber.tsx",
+      "type": "file",
+      "name": "TimelineScrubber.tsx",
+      "filePath": "web/src/components/TimelineScrubber.tsx",
+      "summary": "Source module (TimelineScrubber.tsx) implementing 1 functions (70 lines).",
+      "tags": [
+        "code"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:web/src/components/TimelineScrubber.tsx:TimelineScrubberComponent",
+      "type": "function",
+      "name": "TimelineScrubberComponent",
+      "filePath": "web/src/components/TimelineScrubber.tsx",
+      "lineRange": [
+        16,
+        68
+      ],
+      "summary": "Function TimelineScrubberComponent defined in TimelineScrubber.tsx.",
+      "tags": [
+        "function",
+        "code"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:web/src/components/TopAppBar.tsx",
+      "type": "file",
+      "name": "TopAppBar.tsx",
+      "filePath": "web/src/components/TopAppBar.tsx",
+      "summary": "Source module (TopAppBar.tsx) implementing 1 functions (10 lines).",
+      "tags": [
+        "code"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:web/src/components/TopAppBar.tsx:TopAppBar",
+      "type": "function",
+      "name": "TopAppBar",
+      "filePath": "web/src/components/TopAppBar.tsx",
+      "lineRange": [
+        6,
+        10
+      ],
+      "summary": "Function TopAppBar defined in TopAppBar.tsx.",
+      "tags": [
+        "function",
+        "code"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:web/src/components/TopologyGraphOverlay.tsx",
+      "type": "file",
+      "name": "TopologyGraphOverlay.tsx",
+      "filePath": "web/src/components/TopologyGraphOverlay.tsx",
+      "summary": "Source module (TopologyGraphOverlay.tsx) implementing 1 functions (13 lines).",
+      "tags": [
+        "code"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:web/src/components/TopologyGraphOverlay.tsx:TopologyGraphOverlay",
+      "type": "function",
+      "name": "TopologyGraphOverlay",
+      "filePath": "web/src/components/TopologyGraphOverlay.tsx",
+      "lineRange": [
+        8,
+        13
+      ],
+      "summary": "Function TopologyGraphOverlay defined in TopologyGraphOverlay.tsx.",
+      "tags": [
+        "function",
+        "code"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:web/src/data/historicalAnalogs.ts",
+      "type": "file",
+      "name": "historicalAnalogs.ts",
+      "filePath": "web/src/data/historicalAnalogs.ts",
+      "summary": "Source module (historicalAnalogs.ts) implementing helper logic (7 lines).",
+      "tags": [
+        "code",
+        "loader",
+        "data-pipeline"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:web/src/data/nodesData.ts",
+      "type": "file",
+      "name": "nodesData.ts",
+      "filePath": "web/src/data/nodesData.ts",
+      "summary": "Source module (nodesData.ts) implementing 2 functions (50 lines).",
+      "tags": [
+        "code",
+        "loader",
+        "data-pipeline"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:web/src/data/nodesData.ts:makeDistribution",
+      "type": "function",
+      "name": "makeDistribution",
+      "filePath": "web/src/data/nodesData.ts",
+      "lineRange": [
+        24,
+        29
+      ],
+      "summary": "Function makeDistribution defined in nodesData.ts.",
+      "tags": [
+        "function",
+        "code",
+        "loader",
+        "data-pipeline"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:web/src/data/nodesData.ts:samples",
+      "type": "function",
+      "name": "samples",
+      "filePath": "web/src/data/nodesData.ts",
+      "lineRange": [
+        31,
+        33
+      ],
+      "summary": "Function samples defined in nodesData.ts.",
+      "tags": [
+        "function",
+        "code",
+        "loader",
+        "data-pipeline"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:web/src/main.tsx",
+      "type": "file",
+      "name": "main.tsx",
+      "filePath": "web/src/main.tsx",
+      "summary": "Source module (main.tsx) implementing helper logic (10 lines).",
+      "tags": [
+        "code"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:web/src/services/dashboardLive.ts",
+      "type": "file",
+      "name": "dashboardLive.ts",
+      "filePath": "web/src/services/dashboardLive.ts",
+      "summary": "Source module (dashboardLive.ts) implementing 4 functions (29 lines).",
+      "tags": [
+        "code"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:web/src/services/dashboardLive.ts:fetchDashboardLive",
+      "type": "function",
+      "name": "fetchDashboardLive",
+      "filePath": "web/src/services/dashboardLive.ts",
+      "lineRange": [
+        5,
+        11
+      ],
+      "summary": "Function fetchDashboardLive defined in dashboardLive.ts.",
+      "tags": [
+        "function",
+        "code"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:web/src/services/dashboardLive.ts:isNowcast",
+      "type": "function",
+      "name": "isNowcast",
+      "filePath": "web/src/services/dashboardLive.ts",
+      "lineRange": [
+        13,
+        17
+      ],
+      "summary": "Function isNowcast defined in dashboardLive.ts.",
+      "tags": [
+        "function",
+        "code"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:web/src/services/dashboardLive.ts:isNowcastSet",
+      "type": "function",
+      "name": "isNowcastSet",
+      "filePath": "web/src/services/dashboardLive.ts",
+      "lineRange": [
+        19,
+        23
+      ],
+      "summary": "Function isNowcastSet defined in dashboardLive.ts.",
+      "tags": [
+        "function",
+        "code"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:web/src/services/dashboardLive.ts:isDashboardLiveSnapshot",
+      "type": "function",
+      "name": "isDashboardLiveSnapshot",
+      "filePath": "web/src/services/dashboardLive.ts",
+      "lineRange": [
+        25,
+        29
+      ],
+      "summary": "Function isDashboardLiveSnapshot defined in dashboardLive.ts.",
+      "tags": [
+        "function",
+        "code"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:web/src/types.ts",
+      "type": "file",
+      "name": "types.ts",
+      "filePath": "web/src/types.ts",
+      "summary": "Source module (types.ts) implementing helper logic (88 lines).",
+      "tags": [
+        "code"
+      ],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:web/src/App.tsx",
+      "target": "function:web/src/App.tsx:App",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:web/src/App.tsx",
+      "target": "file:web/src/components/ForecastChart.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:web/src/App.tsx",
+      "target": "file:web/src/components/MapView.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:web/src/App.tsx",
+      "target": "file:web/src/components/ModelPerformancePanel.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:web/src/App.tsx",
+      "target": "file:web/src/components/NodeDetailModal.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:web/src/App.tsx",
+      "target": "file:web/src/components/RetrievalAnalogsPanel.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:web/src/App.tsx",
+      "target": "file:web/src/components/RiskAssessmentPanel.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:web/src/App.tsx",
+      "target": "file:web/src/components/SideNav.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:web/src/App.tsx",
+      "target": "file:web/src/components/TimelineScrubber.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:web/src/App.tsx",
+      "target": "file:web/src/components/TopAppBar.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:web/src/App.tsx",
+      "target": "file:web/src/components/TopologyGraphOverlay.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:web/src/App.tsx",
+      "target": "file:web/src/data/nodesData.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:web/src/App.tsx",
+      "target": "file:web/src/services/dashboardLive.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:web/src/App.tsx",
+      "target": "file:web/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:web/src/components/ForecastChart.tsx",
+      "target": "function:web/src/components/ForecastChart.tsx:ForecastChartComponent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:web/src/components/ForecastChart.tsx",
+      "target": "function:web/src/components/ForecastChart.tsx:NowcastRow",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:web/src/components/ForecastChart.tsx",
+      "target": "file:web/src/data/nodesData.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:web/src/components/ForecastChart.tsx",
+      "target": "file:web/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:web/src/components/MapView.tsx",
+      "target": "function:web/src/components/MapView.tsx:MapView",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:web/src/components/MapView.tsx",
+      "target": "file:web/src/data/nodesData.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:web/src/components/MapView.tsx",
+      "target": "file:web/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:web/src/components/ModelPerformancePanel.tsx",
+      "target": "function:web/src/components/ModelPerformancePanel.tsx:metric",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:web/src/components/ModelPerformancePanel.tsx",
+      "target": "function:web/src/components/ModelPerformancePanel.tsx:ModelPerformancePanel",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:web/src/components/ModelPerformancePanel.tsx",
+      "target": "file:web/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:web/src/components/NodeDetailModal.tsx",
+      "target": "function:web/src/components/NodeDetailModal.tsx:NodeDetailModal",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:web/src/components/NodeDetailModal.tsx",
+      "target": "file:web/src/data/nodesData.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:web/src/components/NodeDetailModal.tsx",
+      "target": "file:web/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:web/src/components/RetrievalAnalogsPanel.tsx",
+      "target": "function:web/src/components/RetrievalAnalogsPanel.tsx:RetrievalAnalogsPanel",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:web/src/components/RetrievalAnalogsPanel.tsx",
+      "target": "file:web/src/data/historicalAnalogs.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:web/src/components/RetrievalAnalogsPanel.tsx",
+      "target": "file:web/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:web/src/components/RiskAssessmentPanel.tsx",
+      "target": "function:web/src/components/RiskAssessmentPanel.tsx:RiskAssessmentPanel",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:web/src/components/SideNav.tsx",
+      "target": "function:web/src/components/SideNav.tsx:SideNav",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:web/src/components/SideNav.tsx",
+      "target": "file:web/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:web/src/components/TimelineScrubber.tsx",
+      "target": "function:web/src/components/TimelineScrubber.tsx:TimelineScrubberComponent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:web/src/components/TopAppBar.tsx",
+      "target": "function:web/src/components/TopAppBar.tsx:TopAppBar",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:web/src/components/TopAppBar.tsx",
+      "target": "file:web/src/data/nodesData.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:web/src/components/TopAppBar.tsx",
+      "target": "file:web/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:web/src/components/TopologyGraphOverlay.tsx",
+      "target": "function:web/src/components/TopologyGraphOverlay.tsx:TopologyGraphOverlay",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:web/src/components/TopologyGraphOverlay.tsx",
+      "target": "file:web/src/data/nodesData.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:web/src/components/TopologyGraphOverlay.tsx",
+      "target": "file:web/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:web/src/data/historicalAnalogs.ts",
+      "target": "file:web/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:web/src/data/nodesData.ts",
+      "target": "function:web/src/data/nodesData.ts:makeDistribution",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:web/src/data/nodesData.ts",
+      "target": "function:web/src/data/nodesData.ts:samples",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:web/src/data/nodesData.ts",
+      "target": "file:web/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:web/src/main.tsx",
+      "target": "file:web/src/App.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:web/src/main.tsx",
+      "target": "file:web/src/index.css",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:web/src/services/dashboardLive.ts",
+      "target": "function:web/src/services/dashboardLive.ts:fetchDashboardLive",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:web/src/services/dashboardLive.ts",
+      "target": "function:web/src/services/dashboardLive.ts:isNowcast",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:web/src/services/dashboardLive.ts",
+      "target": "function:web/src/services/dashboardLive.ts:isNowcastSet",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:web/src/services/dashboardLive.ts",
+      "target": "function:web/src/services/dashboardLive.ts:isDashboardLiveSnapshot",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:web/src/services/dashboardLive.ts",
+      "target": "file:web/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    }
+  ]
+}

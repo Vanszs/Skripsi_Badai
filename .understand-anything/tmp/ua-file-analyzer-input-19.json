@@ -1,0 +1,63 @@
+{
+  "projectRoot": "/media/DiskE/SKRIPSI/Skripsi_Bevan",
+  "batchFiles": [
+    {
+      "path": "core/src/evaluation/__init__.py",
+      "language": "python",
+      "sizeLines": 3,
+      "fileCategory": "code"
+    },
+    {
+      "path": "core/src/services/api.ts",
+      "language": "typescript",
+      "sizeLines": 189,
+      "fileCategory": "code"
+    },
+    {
+      "path": "core/tests/test_checkpoint_contract.py",
+      "language": "python",
+      "sizeLines": 33,
+      "fileCategory": "code"
+    },
+    {
+      "path": "docs/private.note",
+      "language": "note",
+      "sizeLines": 164,
+      "fileCategory": "code"
+    },
+    {
+      "path": "main.py",
+      "language": "python",
+      "sizeLines": 59,
+      "fileCategory": "code"
+    },
+    {
+      "path": "web/src/index.css",
+      "language": "css",
+      "sizeLines": 232,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "web/src/vite-env.d.ts",
+      "language": "typescript",
+      "sizeLines": 1,
+      "fileCategory": "code"
+    },
+    {
+      "path": "web/vite.config.ts",
+      "language": "typescript",
+      "sizeLines": 53,
+      "fileCategory": "code"
+    }
+  ],
+  "batchImportData": {
+    "core/src/evaluation/__init__.py": [],
+    "core/src/services/api.ts": [],
+    "core/tests/test_checkpoint_contract.py": [],
+    "docs/private.note": [],
+    "main.py": [],
+    "web/src/index.css": [],
+    "web/src/vite-env.d.ts": [],
+    "web/vite.config.ts": []
+  }
+}

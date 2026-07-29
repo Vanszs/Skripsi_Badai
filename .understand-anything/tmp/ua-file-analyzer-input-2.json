@@ -1,0 +1,130 @@
+{
+  "projectRoot": "/media/DiskE/SKRIPSI/Skripsi_Bevan",
+  "batchFiles": [
+    {
+      "path": "core/scripts/eval_rain_robust.py",
+      "language": "python",
+      "sizeLines": 373,
+      "fileCategory": "code"
+    },
+    {
+      "path": "core/scripts/run_eval_final.py",
+      "language": "python",
+      "sizeLines": 628,
+      "fileCategory": "code"
+    },
+    {
+      "path": "core/src/config.py",
+      "language": "python",
+      "sizeLines": 224,
+      "fileCategory": "code"
+    },
+    {
+      "path": "core/src/data/ingest.py",
+      "language": "python",
+      "sizeLines": 270,
+      "fileCategory": "code"
+    },
+    {
+      "path": "core/src/data/temporal_loader.py",
+      "language": "python",
+      "sizeLines": 317,
+      "fileCategory": "code"
+    },
+    {
+      "path": "core/src/evaluation/probabilistic_metrics.py",
+      "language": "python",
+      "sizeLines": 344,
+      "fileCategory": "code"
+    },
+    {
+      "path": "core/src/models/diffusion.py",
+      "language": "python",
+      "sizeLines": 271,
+      "fileCategory": "code"
+    },
+    {
+      "path": "core/src/models/mlp_baseline.py",
+      "language": "python",
+      "sizeLines": 61,
+      "fileCategory": "code"
+    },
+    {
+      "path": "core/src/train.py",
+      "language": "python",
+      "sizeLines": 922,
+      "fileCategory": "code"
+    },
+    {
+      "path": "core/src/train_baseline.py",
+      "language": "python",
+      "sizeLines": 301,
+      "fileCategory": "code"
+    },
+    {
+      "path": "core/tests/test_config_topology.py",
+      "language": "python",
+      "sizeLines": 53,
+      "fileCategory": "code"
+    },
+    {
+      "path": "core/tests/test_loader_contract.py",
+      "language": "python",
+      "sizeLines": 50,
+      "fileCategory": "code"
+    }
+  ],
+  "batchImportData": {
+    "core/scripts/eval_rain_robust.py": [
+      "core/src/config.py",
+      "core/src/data/ingest.py",
+      "core/src/inference.py",
+      "core/src/models/mlp_baseline.py",
+      "core/src/train.py"
+    ],
+    "core/scripts/run_eval_final.py": [
+      "core/src/config.py",
+      "core/src/data/ingest.py",
+      "core/src/evaluation/probabilistic_metrics.py",
+      "core/src/inference.py",
+      "core/src/models/mlp_baseline.py",
+      "core/src/train.py"
+    ],
+    "core/src/config.py": [],
+    "core/src/data/ingest.py": [
+      "core/src/config.py"
+    ],
+    "core/src/data/temporal_loader.py": [
+      "core/src/config.py"
+    ],
+    "core/src/evaluation/probabilistic_metrics.py": [],
+    "core/src/models/diffusion.py": [
+      "core/src/config.py"
+    ],
+    "core/src/models/mlp_baseline.py": [
+      "core/src/config.py"
+    ],
+    "core/src/train.py": [
+      "core/src/config.py",
+      "core/src/data/ingest.py",
+      "core/src/data/temporal_loader.py",
+      "core/src/models/diffusion.py",
+      "core/src/models/gnn.py",
+      "core/src/retrieval/base.py"
+    ],
+    "core/src/train_baseline.py": [
+      "core/src/config.py",
+      "core/src/data/ingest.py",
+      "core/src/models/mlp_baseline.py",
+      "core/src/train.py"
+    ],
+    "core/tests/test_config_topology.py": [
+      "core/src/config.py",
+      "core/src/evaluation/probabilistic_metrics.py"
+    ],
+    "core/tests/test_loader_contract.py": [
+      "core/src/config.py",
+      "core/src/data/temporal_loader.py"
+    ]
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "approved": true,
+  "issues": [],
+  "warnings": [],
+  "stats": {
+    "totalNodes": 346,
+    "totalEdges": 209,
+    "totalLayers": 8,
+    "tourSteps": 5,
+    "nodeTypes": {
+      "file": 63,
+      "function": 108,
+      "class": 28,
+      "config": 97,
+      "document": 45,
+      "schema": 5
+    },
+    "edgeTypes": {
+      "contains": 136,
+      "imports": 73
+    }
+  }
+}

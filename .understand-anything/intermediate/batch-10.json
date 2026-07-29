@@ -1,0 +1,209 @@
+{
+  "nodes": [
+    {
+      "id": "config:.understand-anything/intermediate/assembled-graph.json",
+      "type": "config",
+      "name": "assembled-graph.json",
+      "filePath": ".understand-anything/intermediate/assembled-graph.json",
+      "summary": "Configuration file (assembled-graph.json) specifying project settings, environment, or build properties.",
+      "tags": [
+        "configuration",
+        "build-system"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "config:.understand-anything/intermediate/batch-1.json",
+      "type": "config",
+      "name": "batch-1.json",
+      "filePath": ".understand-anything/intermediate/batch-1.json",
+      "summary": "Configuration file (batch-1.json) specifying project settings, environment, or build properties.",
+      "tags": [
+        "configuration",
+        "build-system"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "config:.understand-anything/intermediate/batch-10.json",
+      "type": "config",
+      "name": "batch-10.json",
+      "filePath": ".understand-anything/intermediate/batch-10.json",
+      "summary": "Configuration file (batch-10.json) specifying project settings, environment, or build properties.",
+      "tags": [
+        "configuration",
+        "build-system"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "config:.understand-anything/intermediate/batch-11.json",
+      "type": "config",
+      "name": "batch-11.json",
+      "filePath": ".understand-anything/intermediate/batch-11.json",
+      "summary": "Configuration file (batch-11.json) specifying project settings, environment, or build properties.",
+      "tags": [
+        "configuration",
+        "build-system"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "config:.understand-anything/intermediate/batch-12.json",
+      "type": "config",
+      "name": "batch-12.json",
+      "filePath": ".understand-anything/intermediate/batch-12.json",
+      "summary": "Configuration file (batch-12.json) specifying project settings, environment, or build properties.",
+      "tags": [
+        "configuration",
+        "build-system"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "config:.understand-anything/intermediate/batch-13.json",
+      "type": "config",
+      "name": "batch-13.json",
+      "filePath": ".understand-anything/intermediate/batch-13.json",
+      "summary": "Configuration file (batch-13.json) specifying project settings, environment, or build properties.",
+      "tags": [
+        "configuration",
+        "build-system"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "config:.understand-anything/intermediate/batch-14.json",
+      "type": "config",
+      "name": "batch-14.json",
+      "filePath": ".understand-anything/intermediate/batch-14.json",
+      "summary": "Configuration file (batch-14.json) specifying project settings, environment, or build properties.",
+      "tags": [
+        "configuration",
+        "build-system"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "config:.understand-anything/intermediate/batch-2.json",
+      "type": "config",
+      "name": "batch-2.json",
+      "filePath": ".understand-anything/intermediate/batch-2.json",
+      "summary": "Configuration file (batch-2.json) specifying project settings, environment, or build properties.",
+      "tags": [
+        "configuration",
+        "build-system"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "config:.understand-anything/intermediate/batch-3.json",
+      "type": "config",
+      "name": "batch-3.json",
+      "filePath": ".understand-anything/intermediate/batch-3.json",
+      "summary": "Configuration file (batch-3.json) specifying project settings, environment, or build properties.",
+      "tags": [
+        "configuration",
+        "build-system"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "config:.understand-anything/intermediate/batch-4.json",
+      "type": "config",
+      "name": "batch-4.json",
+      "filePath": ".understand-anything/intermediate/batch-4.json",
+      "summary": "Configuration file (batch-4.json) specifying project settings, environment, or build properties.",
+      "tags": [
+        "configuration",
+        "build-system"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "config:.understand-anything/intermediate/batch-5.json",
+      "type": "config",
+      "name": "batch-5.json",
+      "filePath": ".understand-anything/intermediate/batch-5.json",
+      "summary": "Configuration file (batch-5.json) specifying project settings, environment, or build properties.",
+      "tags": [
+        "configuration",
+        "build-system"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:.understand-anything/intermediate/batch-6.json",
+      "type": "config",
+      "name": "batch-6.json",
+      "filePath": ".understand-anything/intermediate/batch-6.json",
+      "summary": "Configuration file (batch-6.json) specifying project settings, environment, or build properties.",
+      "tags": [
+        "configuration",
+        "build-system"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "config:.understand-anything/intermediate/batch-7.json",
+      "type": "config",
+      "name": "batch-7.json",
+      "filePath": ".understand-anything/intermediate/batch-7.json",
+      "summary": "Configuration file (batch-7.json) specifying project settings, environment, or build properties.",
+      "tags": [
+        "configuration",
+        "build-system"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "config:.understand-anything/intermediate/batch-8.json",
+      "type": "config",
+      "name": "batch-8.json",
+      "filePath": ".understand-anything/intermediate/batch-8.json",
+      "summary": "Configuration file (batch-8.json) specifying project settings, environment, or build properties.",
+      "tags": [
+        "configuration",
+        "build-system"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "config:.understand-anything/intermediate/batch-9.json",
+      "type": "config",
+      "name": "batch-9.json",
+      "filePath": ".understand-anything/intermediate/batch-9.json",
+      "summary": "Configuration file (batch-9.json) specifying project settings, environment, or build properties.",
+      "tags": [
+        "configuration",
+        "build-system"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "config:.understand-anything/intermediate/batches.json",
+      "type": "config",
+      "name": "batches.json",
+      "filePath": ".understand-anything/intermediate/batches.json",
+      "summary": "Configuration file (batches.json) specifying project settings, environment, or build properties.",
+      "tags": [
+        "configuration",
+        "build-system"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "config:.understand-anything/intermediate/scan-result.json",
+      "type": "config",
+      "name": "scan-result.json",
+      "filePath": ".understand-anything/intermediate/scan-result.json",
+      "summary": "Configuration file (scan-result.json) specifying project settings, environment, or build properties.",
+      "tags": [
+        "configuration",
+        "build-system"
+      ],
+      "complexity": "complex"
+    }
+  ],
+  "edges": []
+}
