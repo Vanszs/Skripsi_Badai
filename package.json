@@ -9,5 +9,8 @@
     "build:web": "npm --prefix web run build",
     "test:api": "python -c \"import main; print('Root FastAPI check OK')\"",
     "test:eval": "python core/scripts/run_eval_final.py --help"
+  },
+  "devDependencies": {
+    "@mermaid-js/mermaid-cli": "^11.16.0"
   }
 }
